@@ -1,0 +1,25 @@
+{
+    "name": "hemio/edentata",
+    "type": "library",
+    "description": "Toothless web frontend for carnivora",
+    "keywords": ["html"],
+    "homepage": "http://github.com/qua-bla/edentata",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Michael Herold",
+            "email": "quabla@hemio.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.5.0",
+        "hemio/form": "dev-master",
+        "phpunit/phpunit": "~4.6@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "hemio\\edentata\\": "src/class/"
+        }
+    }
+}
