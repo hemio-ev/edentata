@@ -51,7 +51,7 @@ class Request {
             return '';
     }
 
-    public function deriveArray($action = null, $subject = null, $item = null) {
+    protected function deriveArray($action = null, $subject = null, $item = null) {
         $get = [];
 
         $get['module'] = $this->module;
@@ -68,10 +68,19 @@ class Request {
     public function derive($action = null, $subject = null, $item = null) {
         $get = $this->deriveArray($action, $subject, $item);
 
-        $exprs = [];
-        foreach ($get as $key => $value)
-            $exprs[] = $key . '=' . $value;
+        return new Request($get);
+    }
 
+    public function deriveModule($moduleId) {
+        $get = ['module' => $moduleId];
+
+        return new Request($get);
+    }
+
+    public function getUrl() {
+        $exprs = [];
+        foreach ($this->get as $key => $value)
+            $exprs[] = $key . '=' . $value;
 
         return '?' . implode('&', $exprs);
     }

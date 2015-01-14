@@ -17,34 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\gui;
-
-use hemio\html;
+namespace hemio\edentata\exception;
 
 /**
- * Description of Listbox
+ * Description of UnknownOperation
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Listbox extends html\Ul {
+class UnknownOperation extends Error {
 
-    public function __construct() {
-        $this->addCssClass('listbox');
-        $this->addCssClass('scroll');
-    }
-    
-    /**
-     * 
-     * @param mixed $url
-     * @param string $text
-     * @return html\Li
-     */
-    public function addLink(\hemio\edentata\Request $url, $text) {
-        $a = new html\A();
-        $a->setAttribute('href', $url->getUrl());
-        $a->addChild(new html\String($text));
-                
-        return $this->addLine($a);
+    public static function unknownAction($action) {
+        $msg = sprintf(_('Unkown module action "%s".'), $action);
+        return new UnknownOperation($msg, 90404);
     }
 
 }

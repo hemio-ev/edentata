@@ -29,25 +29,30 @@ use hemio\edentata\gui;
  */
 class Overview extends \hemio\edentata\Window {
 
-    public function overview() {
-        $window = new \hemio\edentata\gui\Window(_('Email Accounts'));
-        $window->addButton(
+    public function content() {
+        $window = new \hemio\edentata\gui\Window(_('Email'));
+        $window->addButtonRight(
                 new gui\LinkButton(
-                $this->module->request->deriveArray('create'), _('New Email Address')
-                )
+                $this->module->request->derive('create'), _('New Email Address')
+                ), true
         );
 
-        $stmt = new sql\QuerySelectFunction($this->module->pdo, 'email.frontend_account');
-        $res = $stmt->execute();
-
+        $fieldset = new gui\Fieldset(_('Email Accounts'));
         $accounts = new gui\Listbox();
+
+        $window
+                ->addChild($fieldset)
+                ->addChild($accounts);
+
+
+        $res = Db::getMailAccounts($this->module->pdo);
+
         while ($arr = $res->fetch(\PDO::FETCH_ASSOC)) {
             $address = $arr['local_part'] . '@' . $arr['domain'];
             $url = $this->module->request->derive('edit_account', $address);
+
             $accounts->addLink($url, $address);
         }
-
-        $window->addChild($accounts);
 
         return $window;
     }

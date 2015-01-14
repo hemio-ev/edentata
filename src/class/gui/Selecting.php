@@ -19,32 +19,29 @@
 
 namespace hemio\edentata\gui;
 
-use hemio\html;
-
 /**
- * Description of Listbox
+ * Description of Selecting
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Listbox extends html\Ul {
+class Selecting extends \hemio\form\Container {
 
-    public function __construct() {
-        $this->addCssClass('listbox');
-        $this->addCssClass('scroll');
+    public function __construct($title = null) {
+        $this['fieldset'] = new Fieldset($title);
+        $this['fieldset']->addCssClass('selecting');
     }
-    
+
     /**
      * 
-     * @param mixed $url
+     * @param \hemio\edentata\Request $request
      * @param string $text
-     * @return html\Li
+     * @return LinkButton
      */
-    public function addLink(\hemio\edentata\Request $url, $text) {
-        $a = new html\A();
-        $a->setAttribute('href', $url->getUrl());
-        $a->addChild(new html\String($text));
-                
-        return $this->addLine($a);
+    public function addLink(\hemio\edentata\Request $request, $text) {
+        $button = new LinkButton($request, $text);
+        $this['fieldset']->addChild($button);
+
+        return $button;
     }
 
 }

@@ -22,29 +22,17 @@ namespace hemio\edentata\gui;
 use hemio\html;
 
 /**
- * Description of Listbox
+ * Description of Fieldset
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Listbox extends html\Ul {
+class Fieldset extends html\Fieldset {
 
-    public function __construct() {
-        $this->addCssClass('listbox');
-        $this->addCssClass('scroll');
-    }
-    
-    /**
-     * 
-     * @param mixed $url
-     * @param string $text
-     * @return html\Li
-     */
-    public function addLink(\hemio\edentata\Request $url, $text) {
-        $a = new html\A();
-        $a->setAttribute('href', $url->getUrl());
-        $a->addChild(new html\String($text));
-                
-        return $this->addLine($a);
+    public function __construct($legend = null) {
+        if ($legend) {
+            $this['legend'] = new html\Legend();
+            $this['legend']->addChild(new html\String($legend));
+        }
     }
 
 }

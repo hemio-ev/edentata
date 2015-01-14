@@ -19,40 +19,34 @@
 
 namespace hemio\edentata\module\email;
 
-use hemio\edentata;
-use hemio\edentata\exception\UnknownOperation;
+use hemio\edentata\sql;
 
 /**
- * Description of Module
+ * Description of DbQueries
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ModuleEmail extends edentata\Module {
+class Db {
 
-    public static function getName() {
-        return _('Email');
+    /**
+     * 
+     * @param \PDO $pdo
+     * @return \PDOStatement
+     */
+    public static function getMailAccounts(\PDO $pdo) {
+        $stmt = new sql\QuerySelectFunction($pdo, 'email.frontend_account');
+        return $stmt->execute();
     }
 
-    public function getContent() {
-
-        switch ($this->request->action) {
-            case '':
-                $content = (new Overview($this))->content();
-                break;
-
-            case 'edit_account':
-                $content = (new EditAccount($this))->content($this->request->subject);
-                break;
-
-            case 'create':
-                $content = (new Create($this))->content();
-                break;
-
-            default:
-                throw UnknownOperation::unknownAction($this->request->action);
-        }
-
-        return $content;
+    /**
+     * 
+     * @param \PDO $pdo
+     * @return \PDOStatement
+     */
+    public function getPossibleDomains(\PDO $pdo) {
+        $stmt = new sql\QuerySelectFunction($pdo, 'dns.fs_service_domain');
+        $stmt->options('WHERE service = :service');
+        return $stmt->execute(['service' => 'email']);
     }
 
 }

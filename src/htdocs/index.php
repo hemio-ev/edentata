@@ -27,11 +27,24 @@ require_once 'vendor/autoload.php';
 
 # external data
 $request = new Request($_GET);
-$modulesNavi = ['email2', 'email', '.'];
+$modulesNavi = ['email'];
 
 $activeModuleName = $request->module;
 
 try {
+    # doc
+    $doc = new html\Document(new html\String('Title'));
+    $doc->getHtml()->getHead()->addCssFile('style.css');
+
+    $body = $doc->getHtml()->getBody();
+
+    $body['main_nav'] = new html\Div();
+    $body['main_nav']->setId('main_nav');
+
+    $body['main_content'] = new html\Div();
+    $body['main_content']->setId('main_content');
+    $body['main_content']['messages'] = new \hemio\form\Container;
+
 # db connect
     $pdo = new sql\Connection('pgsql:dbname=test1', 'postgres');
     $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -44,34 +57,28 @@ try {
     $qryAuth = new sql\QuerySelectFunction($pdo, 'user.login', $usrData);
     $qryAuth->execute();
 
-# doc
-    $doc = new html\Document(new html\String('Title'));
-    $doc->getHtml()->getHead()->addCssFile('style.css');
-
-    $body = $doc->getHtml()->getBody();
-    $body['messages'] = new html\Div();
-
 # navi
     $nav = (new ContentNav($modulesNavi))->getNav();
     while ($nav->unhandledEvents()) {
         try {
             $nav->handleEvent();
         } catch (exception\Printable $event) {
-            $body['messages'][] = new gui\Message($event);
+            $body['main_content']['messages'][] = new gui\Message($event);
         }
     }
-    $body->addChild($nav->getContent());
+    $body['main_nav'][] = $nav->getContent();
 
 # module
     $loadedModule = new LoadModule($activeModuleName, $pdo);
 
 #generate content 
     $content = $loadedModule->getContent($request);
-    $body->addChild($content);
+    $body['main_content']->addChild($content);
 } catch (\PDOException $e) {
-    $body->addChild(new gui\Message(new exception\Error('DB operation failed' . $e->getMessage())));
+    $body['main_content']['messages']
+            ->addChild(new gui\Message(new exception\Error('DB operation failed' . $e->getMessage())));
 } catch (exception\Printable $e) {
-    $body->addChild(new gui\Message($e));
+    $body['main_content']['messages']->addChild(new gui\Message($e));
 }
 
 

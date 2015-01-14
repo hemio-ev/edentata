@@ -20,7 +20,7 @@
 namespace hemio\edentata\gui;
 
 use hemio\html;
-use \hemio\form;
+use hemio\form;
 
 /**
  * Description of LinkButton
@@ -29,10 +29,10 @@ use \hemio\form;
  */
 class LinkButton extends form\Container {
 
-    public function __construct(array $url, $text) {
+    public function __construct(\hemio\edentata\Request $url, $text) {
         $this['form'] = new html\Form();
 
-        foreach ($url as $key => $value) {
+        foreach ($url->get as $key => $value) {
             $input = new html\Input('hidden');
             $input->setAttribute('name', $key);
             $input->setAttribute('value', $value);
@@ -41,6 +41,20 @@ class LinkButton extends form\Container {
 
         $this['form']['button'] = new html\Button();
         $this['form']['button']['text'] = new html\String($text);
+    }
+
+    public function setSuggested($suggested = true) {
+        if ($suggested)
+            $this['form']['button']->addCssClass('suggested');
+        else
+            $this['form']['button']->removeCssClass('suggested');
+    }
+
+    public function setDisabled($disabled = true) {
+        if ($disabled)
+            $this['form']['button']->setAttribute('disabled', true);
+        else
+            $this['form']['button']->setAttribute('disabled', null);
     }
 
 }

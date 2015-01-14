@@ -43,17 +43,26 @@ class ContentNav {
      * @return ContentEvents
      */
     public function getNav() {
-        $ul = new html\Ul();
-        $ul->addCssClass('listbox');
-        $contentEvents = new ContentEvents($ul);
+        $nav = new html\Nav();
+        $nav
+                ->addChild(new html\Header())
+                ->addChild(new html\H1())
+                ->addChild(new html\String(_('Services')));
 
-        foreach ($this->modules as $moduleName) {
+        $contentEvents = new ContentEvents($nav);
+
+        $ul = new html\Ul();
+        $nav->addChild($ul);
+        $ul->addCssClass('listbox');
+
+        foreach ($this->modules as $moduleId) {
             try {
-                $module = new LoadModule($moduleName);
+                $module = new LoadModule($moduleId);
 
                 $str = new html\String($module->getName());
                 $a = new html\A();
-                $a->setAttribute('href', '?module=' . $moduleName);
+                $url= (new Request())->deriveModule($moduleId)->getUrl();
+                $a->setAttribute('href', $url);
                 $a->addChild($str);
                 $ul->addLine($a);
             } catch (exception\Event $event) {

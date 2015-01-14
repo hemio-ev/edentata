@@ -32,22 +32,30 @@ class Window extends html\Article {
     public function __construct($title = null, $subtitle = null) {
         if ($title) {
             $this['header'] = new html\Header();
-            $this['header']['div'] = new html\Div();
-            $this['header']['div']['title'] = new html\H1();
-            $this['header']['div']['title'][] = new html\String($title);
+            $this['header']['button_right'] = new html\Div();
+            $this['header']['button_left'] = new html\Div();
+            $this['header']['title'] = new html\H1();
+            $this['header']['title'][] = new html\String($title);
             $this->addInheritableAppendage(
                     form\FormPost::FORM_FIELD_TEMPLATE, new form\template\FormPlainControl
             );
         }
         if ($title && $subtitle) {
-            $this['header']['div']['title']['br'] = new html\Br();
-            $this['header']['div']['title']['subtitle'] = new html\Span();
-            $this['header']['div']['title']['subtitle'][] = new html\String($subtitle);
+            $this['header']['title']['br'] = new html\Br();
+            $this['header']['title']['subtitle'] = new html\Span();
+            $this['header']['title']['subtitle'][] = new html\String($subtitle);
         }
     }
 
-    public function addButton(html\Interface_\HtmlCode $button) {
-        $this['header']->addChild($button);
+    public function addButtonLeft(html\Interface_\HtmlCode $button) {
+        $this['header']['button_left']->addChild($button);
+    }
+
+    public function addButtonRight(html\Interface_\HtmlCode $button, $suggested = false) {
+        $this['header']['button_right']->addChild($button);
+
+        if ($button instanceof LinkButton)
+            $button->setSuggested($suggested);
     }
 
 }

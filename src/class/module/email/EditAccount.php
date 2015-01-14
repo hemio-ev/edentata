@@ -30,7 +30,7 @@ use hemio\edentata\sql;
  */
 class EditAccount extends \hemio\edentata\Window {
 
-    public function edit($address) {
+    public function content($address) {
         $xs = explode('@', $address, 2);
         $params = [
             'local_part' => $xs[0],
@@ -38,7 +38,7 @@ class EditAccount extends \hemio\edentata\Window {
         ];
 
         $window = new gui\Window($address, _('Email Account'));
-        $window->addButton(new gui\LinkButton($this->module->request->deriveArray(), _('Back')));
+        $window->addButtonLeft(new gui\LinkButton($this->module->request->derive(), _('Back')));
 
         $stmt = new sql\QuerySelectFunction($this->module->pdo, 'email.frontend_account');
         $stmt->options('WHERE local_part = :local_part AND domain = :domain');
