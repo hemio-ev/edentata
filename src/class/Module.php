@@ -30,8 +30,15 @@ abstract class Module {
      *
      * @var Request
      */
-    protected $request;
+    public $request;
 
+    /**
+     * Database connection
+     * 
+     * @var sql\Connection
+     */
+    public $pdo;
+    
     /**
      * @return string Localized module name
      */
@@ -42,8 +49,9 @@ abstract class Module {
      */
     abstract public function getContent();
 
-    public function __construct(Request $request) {
+    public function __construct(Request $request, sql\Connection $pdo) {
         $this->request = $request;
+        $this->pdo = $pdo;
     }
 
 }

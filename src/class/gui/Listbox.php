@@ -32,5 +32,19 @@ class Listbox extends html\Ul {
         $this->addCssClass('listbox');
         $this->addCssClass('scroll');
     }
+    
+    /**
+     * 
+     * @param mixed $url
+     * @param string $text
+     * @return html\Li
+     */
+    public function addLink($url, $text) {
+        $a = new html\A();
+        $a->setAttribute('href', $url);
+        $a->addChild(new html\String($text));
+                
+        return $this->addLine($a);
+    }
 
 }

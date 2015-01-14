@@ -44,12 +44,18 @@ class ContentNav {
      */
     public function getNav() {
         $ul = new html\Ul();
+        $ul->addCssClass('listbox');
         $contentEvents = new ContentEvents($ul);
 
         foreach ($this->modules as $moduleName) {
             try {
                 $module = new LoadModule($moduleName);
-                $ul->addLine(new html\String($module->getName()));
+
+                $str = new html\String($module->getName());
+                $a = new html\A();
+                $a->setAttribute('href', '?module=' . $moduleName);
+                $a->addChild($str);
+                $ul->addLine($a);
             } catch (exception\Event $event) {
                 $contentEvents->addEvent($event);
             }

@@ -19,35 +19,35 @@
 
 namespace hemio\edentata\module\email;
 
-use hemio\edentata\sql;
 use hemio\edentata\gui;
+use hemio\form;
+use hemio\edentata\sql;
 
 /**
- * Description of Overview
+ * Description of EditAccount
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Overview extends \hemio\edentata\Window {
+class EditAccount extends \hemio\edentata\Window {
 
-    public function overview() {
-        $window = new \hemio\edentata\gui\Window(_('Email Accounts'));
-        $window->addButton(
-                new gui\LinkButton(
-                $this->module->request->deriveArray('create'), _('New Email Address')
-                )
-        );
+    public function edit($address) {
+        $xs = explode('@', $address, 2);
+        $params = [
+            'local_part' => $xs[0],
+            'domain' => $xs[1]
+        ];
+
+        $window = new gui\Window($address, _('Email Account'));
+        $window->addButton(new gui\LinkButton($this->module->request->deriveArray(), _('Back')));
 
         $stmt = new sql\QuerySelectFunction($this->module->pdo, 'email.frontend_account');
-        $res = $stmt->execute();
+        $stmt->options('WHERE local_part = :local_part AND domain = :domain');
+        $res = $stmt->execute($params);
 
-        $accounts = new gui\Listbox();
-        while ($arr = $res->fetch(\PDO::FETCH_ASSOC)) {
-            $address = $arr['local_part'] . '@' . $arr['domain'];
-            $url = $this->module->request->derive('edit_account', $address);
-            $accounts->addLink($url, $address);
-        }
+        $account = $res->fetch(\PDO::FETCH_ASSOC);
+        $address = $account['local_part'] . '@' . $account['domain'];
 
-        $window->addChild($accounts);
+        #$window->addChild($accounts);
 
         return $window;
     }

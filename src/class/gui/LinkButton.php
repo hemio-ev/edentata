@@ -17,16 +17,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\exception;
+namespace hemio\edentata\gui;
+
+use hemio\html;
+use \hemio\form;
 
 /**
+ * Description of LinkButton
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-abstract class Printable extends \Exception implements Event {
+class LinkButton extends form\Container {
 
-    /**
-     * @return string Localized title
-     */
-    abstract public static function title();
+    public function __construct(array $url, $text) {
+        $this['form'] = new html\Form();
+
+        foreach ($url as $key => $value) {
+            $input = new html\Input('hidden');
+            $input->setAttribute('name', $key);
+            $input->setAttribute('value', $value);
+            $this['form']->addChild($input);
+        }
+
+        $this['form']['button'] = new html\Button();
+        $this['form']['button']['text'] = new html\String($text);
+    }
+
 }

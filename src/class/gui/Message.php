@@ -16,19 +16,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace hemio\edentata;
+
+namespace hemio\edentata\gui;
 
 use hemio\html;
 use hemio\form;
+use hemio\edentata\exception;
+
 /**
  * Description of ContentMessage
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ContentMessage extends form\Container {
+class Message extends form\Container {
+
     public function __construct(exception\Printable $event) {
-        $this['DIV'] = new html\Div;
-        $this['DIV']->setAttribute('role', 'alert');
-        $this['DIV'][] = new html\String($event->getMessage());
+        $this['article'] = new html\Article;
+        $this['article']->addCssClass('message');
+
+        if ($event instanceof exception\Error) {
+            $this['article']->setAttribute('role', 'alert');
+        }
+
+        $this['article']['h2'] = new html\H2();
+        $this['article']['h2'][] = new html\String($event::title());
+
+        $this['article']['p'] = new html\P();
+        $this['article']['p'][] = new html\String($event->getMessage());
     }
+
 }

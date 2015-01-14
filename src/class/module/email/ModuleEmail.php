@@ -39,9 +39,16 @@ class ModuleEmail extends edentata\Module {
                 $content = (new Overview($this))->overview();
                 break;
 
-            default:
-                $content = \hemio\html\Nothing;
+            case 'edit_account':
+                $content = (new EditAccount($this))->edit($this->request->subject);
                 break;
+
+            default:
+                throw new edentata\exception\Error(
+                sprintf(
+                        _('Unknown action "%s". This message should be centralized.'), $this->request->action
+                )
+                );
         }
 
         return $content;

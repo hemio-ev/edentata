@@ -20,13 +20,14 @@
 namespace hemio\edentata\exception;
 
 /**
+ * Description of Error
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-abstract class Printable extends \Exception implements Event {
+class Error extends Printable {
 
-    /**
-     * @return string Localized title
-     */
-    abstract public static function title();
+    public static function title() {
+        return _('Error');
+    }
+
 }

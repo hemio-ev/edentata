@@ -26,7 +26,23 @@ namespace hemio\edentata;
  */
 class LoadModule {
 
+    /**
+     *
+     * @var string
+     */
     protected $moduleClass;
+
+    /**
+     *
+     * @var string
+     */
+    protected $moduleId;
+
+    /**
+     *
+     * @var sql\Connection 
+     */
+    protected $pdo;
 
     /**
      * Returns true if the given string is a valid module name. Module names
@@ -53,12 +69,15 @@ class LoadModule {
      * 
      * @param string $moduleId
      */
-    public function __construct($moduleId) {
+    public function __construct($moduleId, sql\Connection $pdo = null) {
+        $this->moduleId = $moduleId;
+        $this->pdo = $pdo;
+
         if (!self::validName($moduleId)) {
             $msg = sprintf(
                     _('Failed to load module "%s". The module id is invalid.'), $moduleId
             );
-            throw new exception\Warning($msg);
+            throw new exception\Error($msg);
         }
 
         // construct absolute path to module class
@@ -68,7 +87,7 @@ class LoadModule {
             $msg = sprintf(
                     _('Failed to load module "%s". Module not found.'), $moduleId
             );
-            throw new exception\Warning($msg);
+            throw new exception\Error($msg);
         }
 
         $this->moduleClass = $moduleClassPath;
@@ -86,7 +105,7 @@ class LoadModule {
      */
     public function getInstance(Request $request) {
         $moduleClass = $this->moduleClass;
-        return new $moduleClass($request);
+        return new $moduleClass($request, $this->pdo);
     }
 
     public function getContent(Request $request) {

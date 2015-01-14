@@ -17,16 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\exception;
+namespace hemio\edentata\sql;
 
 /**
+ * Description of Connection
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-abstract class Printable extends \Exception implements Event {
+class Connection extends \PDO {
 
-    /**
-     * @return string Localized title
-     */
-    abstract public static function title();
+    public function __construct(
+    $dsn, $username = null, $passwd = null, $options = null
+    ) {
+        parent::__construct($dsn, $username, $passwd, $options);
+    }
+
 }

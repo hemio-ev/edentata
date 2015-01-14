@@ -26,32 +26,55 @@ chdir(__DIR__ . '/../../');
 require_once 'vendor/autoload.php';
 
 # external data
-$request = new Request();
+$request = new Request($_GET);
 $modulesNavi = ['email2', 'email', '.'];
 
-# ensure that module name only contains small letters and _ 
-$activeModuleName = 'email';
+$activeModuleName = $request->module;
+
+try {
+# db connect
+    $pdo = new sql\Connection('pgsql:dbname=test1', 'postgres');
+    $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+# db auth
+    $usrData = [
+        'p_name' => 'user1',
+        'p_password' => 'pw'
+    ];
+    $qryAuth = new sql\QuerySelectFunction($pdo, 'user.login', $usrData);
+    $qryAuth->execute();
 
 # doc
-$doc = new html\Document(new html\String('Title'));
-$body = $doc->getHtml()->getBody();
-$body['messages'] = new html\Div();
-        
-# navi
-$nav = (new ContentNav($modulesNavi))->getNav();
-while ($nav->unhandledEvents()) {
-    try {
-        $nav->handleEvent();
-    } catch (exception\Printable $event) {
-        $body['messages'][] = new ContentMessage($event);
-    }
-}
-$body->addChild($nav->getContent());
+    $doc = new html\Document(new html\String('Title'));
+    $doc->getHtml()->getHead()->addCssFile('style.css');
 
+    $body = $doc->getHtml()->getBody();
+    $body['messages'] = new html\Div();
+
+# navi
+    $nav = (new ContentNav($modulesNavi))->getNav();
+    while ($nav->unhandledEvents()) {
+        try {
+            $nav->handleEvent();
+        } catch (exception\Printable $event) {
+            $body['messages'][] = new gui\Message($event);
+        }
+    }
+    $body->addChild($nav->getContent());
 
 # module
-$loadedModule = new LoadModule($activeModuleName);
-$body->addChild($loadedModule->getContent($request));
+    $loadedModule = new LoadModule($activeModuleName, $pdo);
+
+#generate content 
+    $content = $loadedModule->getContent($request);
+    $body->addChild($content);
+} catch (\PDOException $e) {
+    $body->addChild(new gui\Message(new exception\Error('DB operation failed' . $e->getMessage())));
+} catch (exception\Printable $e) {
+    $body->addChild(new gui\Message($e));
+}
 
 
-echo $doc;
+
+
+echo $doc->__toString();

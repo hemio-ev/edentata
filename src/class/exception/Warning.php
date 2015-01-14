@@ -26,10 +26,8 @@ namespace hemio\edentata\exception;
  */
 class Warning extends Printable {
 
-    /**
-     *
-     * @var string
-     */
-    public $title = null;
+    public static function title() {
+        return _('Warning');
+    }
 
 }

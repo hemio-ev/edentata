@@ -17,16 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\exception;
+namespace hemio\edentata\sql;
 
 /**
+ * Description of QuerySelect
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-abstract class Printable extends \Exception implements Event {
+abstract class QuerySelect {
 
     /**
-     * @return string Localized title
+     *
+     * @var type 
      */
-    abstract public static function title();
+    public $params = [];
+
 }
