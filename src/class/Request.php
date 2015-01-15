@@ -26,8 +26,9 @@ namespace hemio\edentata;
  */
 class Request {
 
-    public function __construct(array $get = []) {
+    public function __construct(array $get = [], array $post = []) {
         $this->get = $get;
+        $this->post = $post;
 
         $this->module = self::filter('module', $this->get('module'));
         $this->action = self::filter('action', $this->get('action'));

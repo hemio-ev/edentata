@@ -45,7 +45,7 @@ class Overview extends \hemio\edentata\Window {
                 ->addChild($accounts);
 
 
-        $res = Db::getMailAccounts($this->module->pdo);
+        $res = $this->db()->getMailAccounts();
 
         while ($arr = $res->fetch(\PDO::FETCH_ASSOC)) {
             $address = $arr['local_part'] . '@' . $arr['domain'];

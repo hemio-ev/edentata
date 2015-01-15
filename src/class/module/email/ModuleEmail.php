@@ -20,6 +20,7 @@
 namespace hemio\edentata\module\email;
 
 use hemio\edentata;
+use hemio\edentata\exception;
 use hemio\edentata\exception\UnknownOperation;
 
 /**
@@ -46,6 +47,16 @@ class ModuleEmail extends edentata\Module {
 
             case 'create':
                 $content = (new Create($this))->content();
+                break;
+
+            case 'create_account':
+                try {
+                    $content = (new CreateAccount($this))->content();
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
+
+
                 break;
 
             default:

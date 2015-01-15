@@ -33,11 +33,26 @@ class Window {
     public $module;
 
     /**
+     *
+     * @var ModuleDb
+     */
+    protected $db;
+
+    /**
      * 
      * @param \hemio\edentata\Module $module
      */
     public function __construct(Module $module) {
         $this->module = $module;
+        $this->db = new module\email\Db($module->pdo);
+    }
+
+    /**
+     * 
+     * @return ModuleDb
+     */
+    public function db() {
+        return $this->db;
     }
 
 }

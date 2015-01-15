@@ -17,41 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\email;
-
-use hemio\edentata\sql;
+namespace hemio\edentata;
 
 /**
- * Description of DbQueries
+ * Description of Utils
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Db extends \hemio\edentata\ModuleDb {
+class Utils {
 
-
-    /**
-     * 
-     * @return \PDOStatement
-     */
-    public function getMailAccounts() {
-        $stmt = new sql\QuerySelectFunction(
-                $this->pdo, 'email.frontend_account'
+    public static function htmlRedirect(Request $request) {
+        header(
+                sprintf('Location: %s', $request->getUrl())
+                , true
+                , 303
         );
-
-        return $stmt->execute();
-    }
-
-    /**
-     * 
-     * @return \PDOStatement
-     */
-    public function getPossibleDomains() {
-        $stmt = new sql\QuerySelectFunction(
-                $this->pdo, 'dns.fs_service_domain'
-        );
-        $stmt->options('WHERE service = :service');
-
-        return $stmt->execute(['service' => 'email']);
+        exit(0);
     }
 
 }

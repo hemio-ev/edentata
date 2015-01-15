@@ -50,6 +50,13 @@ class LinkButton extends form\Container {
             $this['form']['button']->removeCssClass('suggested');
     }
 
+    public function setBack($suggested = true) {
+        if ($suggested)
+            $this['form']['button']->addCssClass('back');
+        else
+            $this['form']['button']->removeCssClass('back');
+    }
+    
     public function setDisabled($disabled = true) {
         if ($disabled)
             $this['form']['button']->setAttribute('disabled', true);
