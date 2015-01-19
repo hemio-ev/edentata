@@ -71,12 +71,12 @@ try {
 # module
     $loadedModule = new LoadModule($activeModuleName, $pdo);
 
-#generate content 
+# generate content
     $content = $loadedModule->getContent($request);
     $body['main_content']->addChild($content);
 } catch (\PDOException $e) {
     $body['main_content']['messages']
-            ->addChild(new gui\Message(new exception\Error('DB operation failed' . $e->getMessage())));
+            ->addChild(new gui\Message(new exception\Error('*DB operation failed* ' . $e->getMessage())));
 } catch (exception\Printable $e) {
     $body['main_content']['messages']->addChild(new gui\Message($e));
 }

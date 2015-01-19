@@ -93,7 +93,18 @@ class QuerySelectFunction extends QuerySelect {
      */
     public function execute($params = []) {
         $stmt = $this->pdo->prepare('SELECT * FROM ' . $this->getFunctionCall() . ' ' . $this->options);
-        $stmt->execute($this->funcParams + $params);
+        try {
+            $stmt->execute($this->funcParams + $params);
+        } catch (\PDOException $e) {
+            $errMessage = $e->errorInfo[2];
+            $reg = '/DETAIL:\s+\$CARNIVORA:(.*)\$/';
+            $matches = [];
+            if (preg_match($reg, $errMessage, $matches)) {
+                $carnivoraKey = $matches[1];
+
+                ExceptionMapping::throwMapped(new \hemio\edentata\exception\SqlSpecific($carnivoraKey, 0, $e));
+            }
+        }
 
         return $stmt;
     }

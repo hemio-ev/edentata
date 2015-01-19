@@ -31,17 +31,14 @@ use \hemio\edentata\exception;
 class CreateAccount extends \hemio\edentata\Window {
 
     public function content() {
-
-        $window = new gui\Window(_('New Email Postbox'));
-        $form = new gui\FormPost('create_account', $this->module->request->post);
+        $window = $this->newFormWindow(
+                'create_account'
+                , 'New Email Postbox'
+                , null
+                , _('Create')
+        );
         
-        $button = new form\FieldSubmit('create', _('Create'));
-        $button->setForm($form);
-        $window->addButtonRight($button);
-        
-        $back = new gui\LinkButton($this->module->request->derive(), _('Overview'));
-        $back->setBack();
-        $window->addButtonLeft($back);
+        $form = $window->getForm();
 
         $fieldsetEmail = new gui\Fieldset(_('New Email Address'));
         $email = new gui\FieldEmailWithSelect();
@@ -53,8 +50,7 @@ class CreateAccount extends \hemio\edentata\Window {
 
         $passwordRepeat = new form\FieldPassword('password_repeat', _('Repeat Password'));
 
-        $window
-                ->addChild($form)
+        $form
                 ->addChild($fieldsetEmail)
                 ->addChild($email);
 

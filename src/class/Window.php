@@ -55,4 +55,39 @@ class Window {
         return $this->db;
     }
 
+    public function newWindow(
+    $title = null
+    , $subtitle = null
+    , $addOverviewButton = true
+    ) {
+        $window = new gui\WindowModule($title, $subtitle);
+        $window->setModule($this->module);
+        $window->addOverviewButton($addOverviewButton);
+        return $window;
+    }
+
+    public function newFormWindow(
+    $formName
+    , $title = null
+    , $subtitle = null
+    , $submitText = null
+    , $addOverviewButton = true
+    ) {
+        $window = new gui\WindowModuleWithForm($title, $subtitle);
+        $window->setModule($this->module);
+
+        $form = new gui\FormPost($formName, $this->module->request->post);
+        $window->setForm($form);
+
+        if ($submitText) {
+            $submitButton = new \hemio\form\FieldSubmit('submit', $submitText);
+            $submitButton->setForm($form);
+            $window->addButtonRight($submitButton);
+        }
+
+        $window->addOverviewButton($addOverviewButton);
+
+        return $window;
+    }
+
 }

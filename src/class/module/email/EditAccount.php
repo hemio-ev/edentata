@@ -37,8 +37,11 @@ class EditAccount extends \hemio\edentata\Window {
             'domain' => $xs[1]
         ];
 
-        $window = new gui\Window($address, _('Email Account'));
-        $window->addButtonLeft(new gui\LinkButton($this->module->request->derive(), _('Back')));
+        $window = $this->newFormWindow(
+                'edit_account'
+                , _('Email Account')
+                , $address
+        );
 
         $stmt = new sql\QuerySelectFunction($this->module->pdo, 'email.frontend_account');
         $stmt->options('WHERE local_part = :local_part AND domain = :domain');
@@ -46,8 +49,6 @@ class EditAccount extends \hemio\edentata\Window {
 
         $account = $res->fetch(\PDO::FETCH_ASSOC);
         $address = $account['local_part'] . '@' . $account['domain'];
-
-        #$window->addChild($accounts);
 
         return $window;
     }

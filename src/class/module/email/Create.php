@@ -29,7 +29,7 @@ use hemio\edentata\gui;
 class Create extends \hemio\edentata\Window {
 
     public function content() {
-        $window = new gui\Window(_('Create Email Address'));
+        $window = $this->newWindow(_('Create Email Address'));
 
         $selecting = new gui\Selecting(_('Where should new emails go'));
 
