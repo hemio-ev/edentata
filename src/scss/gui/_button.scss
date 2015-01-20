@@ -1,0 +1,62 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:19:51 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+.button {
+    @extend .input_style;
+    @extend .input_position;
+
+    width: auto;
+    @include button-background($button-color);
+    padding-right: 1em;
+    padding-left: 1em;
+    min-width: 6.5em;
+}
+
+.button:enabled:hover, span.select:hover, button:focus {
+    @include button-background-hover($button-color);
+}
+
+.button:enabled:active {
+    @include button-background-active($button-color);
+}
+
+button {
+    @extend .button;
+}
+
+button.suggested {
+    border-color: $button-suggested-border-color;
+    @include button-background($button-suggested-color);
+    color: white;
+    text-shadow: 1px 1px rgb(50,50,50);
+}
+
+button.suggested:hover, button.suggested:focus {
+    @include button-background-hover($button-suggested-color);
+}
+
+button.suggested:active {
+    @include button-background-active($button-suggested-color);
+}
+
+form[method="post"] button:default, button[form]:default {
+    @extend button.suggested;
+}

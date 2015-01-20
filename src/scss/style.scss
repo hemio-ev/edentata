@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+$label-width: 35%;
+$control-width: 65%;
+
+$button-color: rgb(224, 224, 224);
+
+$button-suggested-color: rgb(54, 131, 213);
+$button-suggested-border-color: rgb(28, 81, 135);
+
+$article-color: rgb(237,237,237);
+$article-border-color: rgb(142, 142, 142);
+$article-radius-top: 0.5em;
+
+
+$article-radius-bottom: 0;
+
+$control-color: rgb(217,217,217);
+$control-border-color: rgb(161,161,161);
+$control-height: 2.4em;
+
+$switch-color-checked: rgb(74,144,217);
+$switch-color-notchecked: rgb(206,206,206);
+
+$select-focus-color: rgb(255, 255, 255);
+
+$header-color: $article-color;
+$header-border-color: rgb(217,217,217);
+
+$list-entry-height: 3.5em;
+
+@import "_functions.scss";
+@import "_basics.scss";
+@import "_content_transition.scss";
+
+@import "gui/_window.scss";
+@import "gui/_headerbar.scss";
+@import "gui/_message.scss";
+
+@import "_pile.scss";
+@import "gui/_multiple_controls.scss";
+@import "_scroll.scss";
+
+@import "gui/_button.scss";
+@import "gui/_button_back.scss";
+@import "gui/_select.scss";
+@import "gui/_switch.scss";
+@import "gui/_textarea.scss";
+@import "gui/_checkbox.scss";
+
+@import "gui/_fieldset.scss";
+
+
+@import "gui/_listbox.scss";
+@import "gui/_selectbox.scss";
+
+@import "gui/_selecting.scss";
+
+@import '_l10n.scss';

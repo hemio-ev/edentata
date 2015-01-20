@@ -1,0 +1,42 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:30:16 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+.back_attr {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left 0.7em top 0, left 0 top 0;
+    padding-left: 1.7em;
+}
+
+button.back {
+    background-image: url('back.svg'), button-background-value($button-color);
+    @extend .back_attr;
+}
+
+button.back:hover {
+    background-image: url('back.svg'), button-background-hover-value($button-color);
+    @extend .back_attr;
+}
+
+button.back:active {
+    background-image: url('back.svg'), button-background-active-value($button-color);
+    @extend .back_attr;
+}

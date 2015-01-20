@@ -34,7 +34,7 @@ $activeModuleName = $request->module;
 try {
     # doc
     $doc = new html\Document(new html\String('Title'));
-    $doc->getHtml()->getHead()->addCssFile('style.css');
+    $doc->getHtml()->getHead()->addCssFile('static/design/style.css');
 
     $body = $doc->getHtml()->getBody();
 

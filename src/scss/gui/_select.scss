@@ -1,0 +1,48 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:20:23 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+span.select {
+    @extend .input_position;
+    @extend .input_style;
+
+    overflow: hidden;
+    padding: 0;
+    @include button-background($button-color);
+}
+
+select {
+    @extend .input_text_style;
+
+    background: transparent;
+    border: none;
+
+    width: calc(100% + 2.7em);
+    padding-right: 3.5em;
+
+    background-image: url("select.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right 3.3em top 0;
+}
+
+select:focus {
+    background-color: $select-focus-color;
+}

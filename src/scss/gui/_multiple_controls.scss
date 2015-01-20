@@ -1,0 +1,46 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:28:29 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+.multiple > *:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    text-align: right;
+}
+
+.multiple > *:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.multiple > *:not(:first-child):not(:last-child) {
+    border-radius: 0;
+    border-right: none;
+    border-left: none;    
+}
+
+.multiple .between {
+    @extend .input_style;
+    color: #555;
+    background: transparent;
+    width: auto;
+    order: 2;
+    flex-shrink: 0;
+}

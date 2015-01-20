@@ -1,0 +1,123 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:18:57 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+article {
+    @extend .window;
+}
+
+nav {
+    @extend .window;
+}
+
+/*** label and input basics ***/
+
+form p {
+    margin: 1em 1.5em;
+}
+
+fieldset {
+    margin: 1.7em 1.5em 1em 1.5em;
+}
+
+form p, fieldset.buttons {
+    sline-height: $control-height;
+}
+
+.input_row {
+    display: flex;
+    min-height: 2.4em;
+    align-items: center;
+}
+
+form p {
+    @extend .input_row;
+}
+
+.input_label {
+    width: $label-width;
+    margin-right: 1.5em;
+    display: inline-block;
+    text-align: right;
+    order: 1;
+}
+
+label {
+    @extend .input_label;
+}
+
+.input_text_style {
+    font-family: inherit;
+    font-size: 1em;
+    color: inherit;
+    text-shadow: inherit;
+
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: $control-height;
+
+    padding: 0 0.5em;
+    text-overflow: ellipsis;
+}
+
+.input_style {
+    @extend .input_text_style;
+
+    background-color: lighten($control-color, 12.5%);
+    background: linear-gradient(
+        $control-color 0%, 
+        lighten($control-color, 12.5%) 10%,
+        lighten($control-color, 30%) 100%
+        );
+
+    width: $control-width;
+
+    border: 1px solid $control-border-color;
+    border-radius: 3px;
+
+    transition-property: border-color;
+    transition-duration: 200ms;
+}
+
+.input_style:focus {
+    border-color: $button-suggested-color;
+}
+
+input, textarea {
+    @extend .input_style;
+}
+
+.input_position {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0;
+    min-height: $control-height;
+    order: 2;
+}
+
+input, textarea {
+    @extend .input_position;
+}
+
+::-moz-focus-inner { 
+    border: 0;
+    padding: 0;
+}

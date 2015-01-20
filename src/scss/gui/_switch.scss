@@ -1,0 +1,119 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:22:32 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+input.switch {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+    left: -2em;
+}
+
+input.switch ~ p label {
+    @extend .input_row;   
+    width: 100%;
+
+}
+
+input.switch ~ p label span:first-child {
+    @extend .input_label;
+}
+
+// not checked
+span.switch {
+    @extend .input_position;
+    @extend .input_style;
+
+    padding: 0;
+    width: 6em;
+    box-sizing: border-box;
+    display: flex;
+    align-elements: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+        to left, 
+        $switch-color-notchecked 49%, 
+        $control-border-color 51%, 
+        transparent 52%
+        ),
+        button-background-value($button-color);
+}
+
+span.switch:hover {
+    background:
+        linear-gradient(
+        to left, 
+        $switch-color-notchecked 49%, 
+        $control-border-color 51%, 
+        transparent 52%
+        ),
+        button-background-hover-value($button-color);
+}
+
+span.switch::before {
+    display: block;
+    text-align: center;
+    width: 50%;
+    margin-left: 50%;
+
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    content: 'Off';
+
+    font-size: 0.85em;
+
+    transition-property: margin, color;
+    transition-duration: 200ms;
+}
+
+// checked
+input.switch:checked ~ p span.switch {
+    background: 
+        linear-gradient(
+        to right, 
+        $switch-color-checked 49%, 
+        $control-border-color 51%, 
+        transparent 52%
+        ),
+        button-background-value($button-color);
+}
+
+input.switch:checked ~ p span.switch:hover {
+    background: 
+        linear-gradient(
+        to right, 
+        $switch-color-checked 49%, 
+        $control-border-color 51%, 
+        transparent 52%
+        ),
+        button-background-hover-value($button-color);
+}
+
+input.switch:checked ~ p span.switch::before {
+    margin: 0;
+    margin-right: 50%;
+    color: white;
+    content: 'On';
+}

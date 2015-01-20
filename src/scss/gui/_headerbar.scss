@@ -1,0 +1,67 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:16:31 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+.window header {
+    @include button-background($header-color);
+    border-bottom: 1px solid $header-border-color;
+    box-shadow: 0 1px 0 $control-border-color;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+
+    display: flex;
+    min-height: 3.1em;
+    align-items: center;
+    justify-content: center;
+}
+
+.window header h1 {
+    font-size: 1.05em;
+    padding-top: 0.2em;
+    line-height: 0.9em;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.window header h1 span {
+    color: gray;
+    font-size: 0.8em;
+    font-weight: normal;
+    display: inline-block;
+}
+
+.window header > div {
+    order: -1;
+    margin-right: auto;
+    padding: 0 0.3em;
+
+    width: 40%;
+    flex-shrink: 5;
+}
+
+.window header > div:first-of-type {
+    order: 1;
+    margin: 0;
+    margin-left: auto;
+
+    text-align: right;
+}

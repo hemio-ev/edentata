@@ -1,0 +1,995 @@
+@charset "UTF-8";
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:16:31 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:16:31 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+body {
+  font-family: Cantarell, sans-serif;
+  font-size: 0.9em;
+  hyphens: auto;
+  text-align: justify;
+  color: #2e3436;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: center; }
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0; }
+
+h1 {
+  font-size: 1.1em; }
+
+h2 {
+  font-size: 1.05em; }
+
+h3 {
+  font-size: 1em; }
+
+#main_nav {
+  width: 12em;
+  margin: 0 1em; }
+
+#main_content {
+  width: 30em;
+  margin: 0 1em; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:31:06 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+#main_content header ~ * {
+  animation-name: content-transition;
+  animation-duration: 800ms; }
+
+@keyframes content-transition {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:16:31 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.window, .message, article, nav {
+  background-color: #ededed;
+  border-radius: 0.5em 0.5em 0 0;
+  border: 1px solid #8e8e8e;
+  box-shadow: 0 0 0.5em #a8a8a8;
+  padding: 0;
+  margin: 1.5em auto 2.5em auto;
+  display: block;
+  box-sizing: border-box; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:16:31 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.window header, .message header, article header, nav header {
+  background-color: #ededed;
+  background: linear-gradient(white, #ededed);
+  border-bottom: 1px solid #d9d9d9;
+  box-shadow: 0 1px 0 #a1a1a1;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  display: flex;
+  min-height: 3.1em;
+  align-items: center;
+  justify-content: center; }
+
+.window header h1, .message header h1, article header h1, nav header h1 {
+  font-size: 1.05em;
+  padding-top: 0.2em;
+  line-height: 0.9em;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  flex-shrink: 0; }
+
+.window header h1 span, .message header h1 span, article header h1 span, nav header h1 span {
+  color: gray;
+  font-size: 0.8em;
+  font-weight: normal;
+  display: inline-block; }
+
+.window header > div, .message header > div, article header > div, nav header > div {
+  order: -1;
+  margin-right: auto;
+  padding: 0 0.3em;
+  width: 40%;
+  flex-shrink: 5; }
+
+.window header > div:first-of-type, .message header > div:first-of-type, article header > div:first-of-type, nav header > div:first-of-type {
+  order: 1;
+  margin: 0;
+  margin-left: auto;
+  text-align: right; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:17:40 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.message {
+  border-radius: 0.5em;
+  padding: 0.5em 1em; }
+
+.message[role="alert"] {
+  background: #ff975f; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:18:57 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+/*** label and input basics ***/
+form p {
+  margin: 1em 1.5em; }
+
+fieldset {
+  margin: 1.7em 1.5em 1em 1.5em; }
+
+form p, fieldset.buttons {
+  sline-height: 2.4em; }
+
+.input_row, form p, input.switch ~ p label {
+  display: flex;
+  min-height: 2.4em;
+  align-items: center; }
+
+.input_label, label, input.switch ~ p label span:first-child {
+  width: 35%;
+  margin-right: 1.5em;
+  display: inline-block;
+  text-align: right;
+  order: 1; }
+
+.input_text_style, .input_style, input, textarea, .multiple .between, .button, button, span.select, span.switch, select {
+  font-family: inherit;
+  font-size: 1em;
+  color: inherit;
+  text-shadow: inherit;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 2.4em;
+  padding: 0 0.5em;
+  text-overflow: ellipsis; }
+
+.input_style, input, textarea, .multiple .between, .button, button, span.select, span.switch {
+  background-color: #f9f9f9;
+  background: linear-gradient(#d9d9d9 0%, #f9f9f9 10%, white 100%);
+  width: 65%;
+  border: 1px solid #a1a1a1;
+  border-radius: 3px;
+  transition-property: border-color;
+  transition-duration: 200ms; }
+
+.input_style:focus, input:focus, textarea:focus, .multiple .between:focus, .button:focus, button:focus, span.select:focus, span.switch:focus {
+  border-color: #3683d5; }
+
+.input_position, input, textarea, .button, button, span.select, span.switch {
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 0;
+  min-height: 2.4em;
+  order: 2; }
+
+::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:28:29 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.multiple > *:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  text-align: right; }
+
+.multiple > *:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0; }
+
+.multiple > *:not(:first-child):not(:last-child) {
+  border-radius: 0;
+  border-right: none;
+  border-left: none; }
+
+.multiple .between {
+  color: #555;
+  background: transparent;
+  width: auto;
+  order: 2;
+  flex-shrink: 0; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:29:19 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.scroll {
+  overflow: auto; }
+
+@media (min-height: 0em) and (max-height: 20em) {
+  .scroll {
+    max-height: calc(20em - 15em); } }
+@media (min-height: 20em) and (max-height: 21em) {
+  .scroll {
+    max-height: calc(21em - 15em); } }
+@media (min-height: 21em) and (max-height: 22em) {
+  .scroll {
+    max-height: calc(22em - 15em); } }
+@media (min-height: 22em) and (max-height: 23em) {
+  .scroll {
+    max-height: calc(23em - 15em); } }
+@media (min-height: 23em) and (max-height: 24em) {
+  .scroll {
+    max-height: calc(24em - 15em); } }
+@media (min-height: 24em) and (max-height: 25em) {
+  .scroll {
+    max-height: calc(25em - 15em); } }
+@media (min-height: 25em) and (max-height: 26em) {
+  .scroll {
+    max-height: calc(26em - 15em); } }
+@media (min-height: 26em) and (max-height: 27em) {
+  .scroll {
+    max-height: calc(27em - 15em); } }
+@media (min-height: 27em) and (max-height: 28em) {
+  .scroll {
+    max-height: calc(28em - 15em); } }
+@media (min-height: 28em) and (max-height: 29em) {
+  .scroll {
+    max-height: calc(29em - 15em); } }
+@media (min-height: 29em) and (max-height: 30em) {
+  .scroll {
+    max-height: calc(30em - 15em); } }
+@media (min-height: 30em) and (max-height: 31em) {
+  .scroll {
+    max-height: calc(31em - 15em); } }
+@media (min-height: 31em) and (max-height: 32em) {
+  .scroll {
+    max-height: calc(32em - 15em); } }
+@media (min-height: 32em) and (max-height: 33em) {
+  .scroll {
+    max-height: calc(33em - 15em); } }
+@media (min-height: 33em) and (max-height: 34em) {
+  .scroll {
+    max-height: calc(34em - 15em); } }
+@media (min-height: 34em) and (max-height: 35em) {
+  .scroll {
+    max-height: calc(35em - 15em); } }
+@media (min-height: 35em) and (max-height: 36em) {
+  .scroll {
+    max-height: calc(36em - 15em); } }
+@media (min-height: 36em) and (max-height: 37em) {
+  .scroll {
+    max-height: calc(37em - 15em); } }
+@media (min-height: 37em) and (max-height: 38em) {
+  .scroll {
+    max-height: calc(38em - 15em); } }
+@media (min-height: 38em) and (max-height: 39em) {
+  .scroll {
+    max-height: calc(39em - 15em); } }
+@media (min-height: 39em) and (max-height: 40em) {
+  .scroll {
+    max-height: calc(40em - 15em); } }
+@media (min-height: 40em) and (max-height: 41em) {
+  .scroll {
+    max-height: calc(41em - 15em); } }
+@media (min-height: 41em) and (max-height: 42em) {
+  .scroll {
+    max-height: calc(42em - 15em); } }
+@media (min-height: 42em) and (max-height: 43em) {
+  .scroll {
+    max-height: calc(43em - 15em); } }
+@media (min-height: 43em) and (max-height: 44em) {
+  .scroll {
+    max-height: calc(44em - 15em); } }
+@media (min-height: 44em) and (max-height: 45em) {
+  .scroll {
+    max-height: calc(45em - 15em); } }
+@media (min-height: 45em) and (max-height: 46em) {
+  .scroll {
+    max-height: calc(46em - 15em); } }
+@media (min-height: 46em) and (max-height: 47em) {
+  .scroll {
+    max-height: calc(47em - 15em); } }
+@media (min-height: 47em) and (max-height: 48em) {
+  .scroll {
+    max-height: calc(48em - 15em); } }
+@media (min-height: 48em) and (max-height: 49em) {
+  .scroll {
+    max-height: calc(49em - 15em); } }
+@media (min-height: 49em) and (max-height: 50em) {
+  .scroll {
+    max-height: calc(50em - 15em); } }
+@media (min-height: 50em) and (max-height: 51em) {
+  .scroll {
+    max-height: calc(51em - 15em); } }
+@media (min-height: 51em) and (max-height: 52em) {
+  .scroll {
+    max-height: calc(52em - 15em); } }
+@media (min-height: 52em) and (max-height: 53em) {
+  .scroll {
+    max-height: calc(53em - 15em); } }
+@media (min-height: 53em) and (max-height: 54em) {
+  .scroll {
+    max-height: calc(54em - 15em); } }
+@media (min-height: 54em) and (max-height: 55em) {
+  .scroll {
+    max-height: calc(55em - 15em); } }
+@media (min-height: 55em) and (max-height: 56em) {
+  .scroll {
+    max-height: calc(56em - 15em); } }
+@media (min-height: 56em) and (max-height: 57em) {
+  .scroll {
+    max-height: calc(57em - 15em); } }
+@media (min-height: 57em) and (max-height: 58em) {
+  .scroll {
+    max-height: calc(58em - 15em); } }
+@media (min-height: 58em) and (max-height: 59em) {
+  .scroll {
+    max-height: calc(59em - 15em); } }
+@media (min-height: 59em) and (max-height: 60em) {
+  .scroll {
+    max-height: calc(60em - 15em); } }
+@media (min-height: 60em) and (max-height: 61em) {
+  .scroll {
+    max-height: calc(61em - 15em); } }
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:19:51 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.button, button {
+  width: auto;
+  background-color: #e0e0e0;
+  background: linear-gradient(#fafafa, #e0e0e0);
+  padding-right: 1em;
+  padding-left: 1em;
+  min-width: 6.5em; }
+
+.button:enabled:hover, button:enabled:hover, span.select:hover, button:focus {
+  background-color: white;
+  background: linear-gradient(white, #ededed); }
+
+.button:enabled:active, button:enabled:active {
+  background-color: lightgray;
+  background: linear-gradient(lightgray, #e0e0e0); }
+
+button.suggested, form[method="post"] button:default, button[form]:default, input:checked ~ input:checked ~ .options button {
+  border-color: #1c5187;
+  background-color: #3683d5;
+  background: linear-gradient(#609dde, #3683d5);
+  color: white;
+  text-shadow: 1px 1px #323232; }
+
+button.suggested:hover, form[method="post"] button:hover:default, button[form]:hover:default, input:checked ~ input:checked ~ .options button:hover, button.suggested:focus, form[method="post"] button:focus:default, button[form]:focus:default, input:checked ~ input:checked ~ .options button:focus {
+  background-color: #75aae2;
+  background: linear-gradient(#75aae2, #4b90d9); }
+
+button.suggested:active, form[method="post"] button:active:default, button[form]:active:default, input:checked ~ input:checked ~ .options button:active {
+  background-color: #2a76c8;
+  background: linear-gradient(#2a76c8, #3683d5); }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:30:16 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.back_attr, button.back, button.back:hover, button.back:active {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left 0.7em top 0, left 0 top 0;
+  padding-left: 1.7em; }
+
+button.back {
+  background-image: url("back.svg"), linear-gradient(#fafafa, #e0e0e0); }
+
+button.back:hover {
+  background-image: url("back.svg"), linear-gradient(white, #ededed); }
+
+button.back:active {
+  background-image: url("back.svg"), linear-gradient(lightgray, #e0e0e0); }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:20:23 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+span.select {
+  overflow: hidden;
+  padding: 0;
+  background-color: #e0e0e0;
+  background: linear-gradient(#fafafa, #e0e0e0); }
+
+select {
+  background: transparent;
+  border: none;
+  width: calc(100% + 2.7em);
+  padding-right: 3.5em;
+  background-image: url("select.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right 3.3em top 0; }
+
+select:focus {
+  background-color: white; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:22:32 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+input.switch {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
+  left: -2em; }
+
+input.switch ~ p label {
+  width: 100%; }
+
+span.switch {
+  padding: 0;
+  width: 6em;
+  box-sizing: border-box;
+  display: flex;
+  align-elements: center;
+  justify-content: center;
+  background: linear-gradient(to left, #cecece 49%, #a1a1a1 51%, transparent 52%), linear-gradient(#fafafa, #e0e0e0); }
+
+span.switch:hover {
+  background: linear-gradient(to left, #cecece 49%, #a1a1a1 51%, transparent 52%), linear-gradient(white, #ededed); }
+
+span.switch::before {
+  display: block;
+  text-align: center;
+  width: 50%;
+  margin-left: 50%;
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+  content: 'Off';
+  font-size: 0.85em;
+  transition-property: margin, color;
+  transition-duration: 200ms; }
+
+input.switch:checked ~ p span.switch {
+  background: linear-gradient(to right, #4a90d9 49%, #a1a1a1 51%, transparent 52%), linear-gradient(#fafafa, #e0e0e0); }
+
+input.switch:checked ~ p span.switch:hover {
+  background: linear-gradient(to right, #4a90d9 49%, #a1a1a1 51%, transparent 52%), linear-gradient(white, #ededed); }
+
+input.switch:checked ~ p span.switch::before {
+  margin: 0;
+  margin-right: 50%;
+  color: white;
+  content: 'On'; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:24:24 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+textarea {
+  height: 8em;
+  font-family: inherit;
+  line-height: 1.5em;
+  padding-top: 0.4em; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:27:15 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+span.checkbox {
+  width: 100%;
+  display: flex;
+  margin: 0;
+  height: 3.5em;
+  align-items: center; }
+
+span.checkbox::before {
+  margin-right: 1em;
+  display: inline-block;
+  font-size: 1.8em;
+  vertical-align: middle;
+  border-radius: 0.15em;
+  width: 0.75em;
+  height: 0.75em;
+  background-color: #e0e0e0;
+  background: linear-gradient(#fafafa, #e0e0e0);
+  line-height: 0.7em;
+  border: 1px solid #a1a1a1;
+  color: lightgray;
+  text-shadow: 1px 1px #a0a0a0;
+  content: ''; }
+
+span.checkbox:hover::before {
+  content: '✔'; }
+
+input:checked + p span.checkbox::before {
+  color: white;
+  text-shadow: 1px 1px #1c5187;
+  background-color: #3683d5;
+  background: linear-gradient(#609dde, #3683d5);
+  border-color: #1c5187;
+  content: '✔'; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:23:09 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+article fieldset {
+  padding: 0;
+  border: 0; }
+
+article fieldset legend {
+  font-weight: bold;
+  font-size: 1.05em;
+  margin: 0;
+  padding: 0; }
+
+article fieldset.buttons {
+  text-align: center; }
+
+article fieldset.buttons button:first-of-type {
+  float: right; }
+
+article fieldset.buttons button:last-of-type {
+  float: left; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:25:13 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.listbox_frame, ul.listbox, .selectbox .scroll {
+  margin: 1em;
+  border: 1px #a1a1a1 solid;
+  padding: 0;
+  background-color: white; }
+
+.listbox_entry, ul.listbox li, .selectbox p:not(.options) {
+  display: block;
+  border-bottom: 1px solid #d4d4d4;
+  min-height: 3.5em;
+  display: flex;
+  align-items: center;
+  margin: 0; }
+
+ul.listbox button {
+  margin-right: 0.75em; }
+
+ul.listbox button:first-of-type {
+  margin-left: auto; }
+
+ul.listbox li:last-child {
+  border-bottom: none; }
+
+ul.listbox span, ul.listbox a {
+  padding: 0 1em; }
+
+.listbox_link, ul.listbox a, .selectbox label {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  min-height: 3.5em;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  transition-property: background-color;
+  transition-duration: 400ms; }
+
+.listbox_link:hover, ul.listbox a:hover, .selectbox label:hover {
+  background-color: #f3f3f3; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:25:52 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.selectbox {
+  background: transparent;
+  margin: 0em;
+  overflow: hidden;
+  padding-bottom: 3.4em;
+  transform: translateZ(0); }
+
+.selectbox .scroll {
+  margin-bottom: 0; }
+
+.selectbox input[type="checkbox"] {
+  position: absolute;
+  left: -2em;
+  width: 0; }
+
+.selectbox p:not(.options) {
+  font-size: 0.85em; }
+
+.selectbox label span {
+  margin: 0 1em; }
+
+.selectbox input:checked + p label {
+  background: #8ab7e7; }
+
+.selectbox input:checked + p label:hover {
+  background: #b5d1ef; }
+
+.selectbox .options {
+  position: fixed;
+  bottom: 3.4em;
+  left: 1em;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: calc(100% - 2px - 2em);
+  background-color: #e0e0e0;
+  background-color: #ededed;
+  background: linear-gradient(white, #ededed);
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  height: 0;
+  min-height: 0 !important;
+  transition-property: height, bottom, border-color;
+  transition-duration: 400ms; }
+
+.selectbox .options button:first-of-type {
+  margin-left: auto; }
+
+.selectbox .options button {
+  margin-right: 0.75em; }
+
+input:checked ~ .options {
+  height: 3.4em;
+  bottom: 0;
+  margin: calc(inherit);
+  padding: 0;
+  border: 1px solid #a1a1a1;
+  border-top: 1px solid #d9d9d9;
+  transition-property: height, opacity, bottom;
+  transition-duration: 400ms; }
+
+input:checked ~ input:checked ~ .options {
+  background-color: #3683d5;
+  background-color: #4b90d9;
+  background: linear-gradient(#75aae2, #4b90d9);
+  border-top: 1px solid #1c5187; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:21:49 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.selecting {
+  padding: 1em; }
+
+.selecting button {
+  padding: 1em;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0.5em 0;
+  height: auto; }
+
+:lang(de) input.switch:checked ~ label span:last-of-type::before {
+  content: "An" !important; }
+
+:lang(de) input.switch ~ label span:last-of-type::before {
+  content: "Aus" !important; }
+
+:lang(en) input.switch:checked ~ label span:last-of-type::before {
+  content: "On" !important; }
+
+:lang(en) input.switch ~ label span:last-of-type::before {
+  content: "Off" !important; }
+
+/*# sourceMappingURL=style.css.map */

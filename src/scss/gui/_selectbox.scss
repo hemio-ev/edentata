@@ -1,0 +1,129 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Jan 20, 2015, 1:25:52 AM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+.selectbox {
+    background: transparent;
+    margin: 0em;
+    overflow: hidden;
+    padding-bottom: $control-height + 1em;
+    // sets new orientation for position: fixed
+    transform: translateZ(0);
+}
+
+.selectbox .scroll {
+    @extend .listbox_frame;
+    // do not confuse the .options
+    margin-bottom: 0;
+}
+
+// hide checkbox
+.selectbox input[type="checkbox"] {
+    position: absolute;
+    left: -2em;
+    width: 0;
+}
+
+// entries
+.selectbox p:not(.options) {
+    @extend .listbox_entry;
+    font-size: 0.85em;
+}
+
+// clickable entry part
+.selectbox label {
+    @extend .listbox_link;
+}
+
+// text (and checkbox)
+.selectbox label span {
+    margin: 0 1em;
+}
+
+// selected (clickable part)
+.selectbox input:checked + p label {
+    background: lighten($button-suggested-color, 20%);
+}
+
+// selected and hover
+.selectbox input:checked + p label:hover {
+    background: lighten($button-suggested-color, 30%);
+}
+
+// options (buttons below the scroll area)
+.selectbox .options {
+    position: fixed;
+    bottom: $control-height + 1em;
+    left: 1em;    
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    width: calc(100% - 2px - 2em);
+    background-color: $button-color;
+    @include button-background(lighten($button-color, 5%));
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid transparent;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    height: 0;
+    min-height: 0 !important;
+    transition-property: height, bottom, border-color;
+    transition-duration: 400ms;
+}
+
+// align buttons right
+.selectbox .options button:first-of-type {
+    margin-left: auto;
+}
+
+// space between buttons
+.selectbox .options button {
+    margin-right: 0.75em;
+}
+
+// show if at least one element is selected
+input:checked ~ .options {
+    height: $control-height + 1em;
+    bottom: 0;
+    margin: calc(inherit);
+    padding: 0;
+
+    border: 1px solid $control-border-color;
+    border-top: 1px solid $header-border-color;
+
+    transition-property: height, opacity, bottom;
+    transition-duration: 400ms;
+}
+
+// suggest if more then one element is selected
+input:checked ~ input:checked ~ .options {
+    background-color: $button-suggested-color;
+    @include button-background(lighten($button-suggested-color, 5%));
+    border-top: 1px solid $button-suggested-border-color;
+}
+
+// also suggest the buttons
+input:checked ~ input:checked ~ .options button {
+    @extend button.suggested
+}
