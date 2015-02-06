@@ -45,7 +45,7 @@ class Create extends \hemio\edentata\Window {
         $strRedirect = _('Redirect mails to an external mail account');
         $selecting->addLink($reqRedirect, $strRedirect);
 
-        if ($this->db()->getMailAccounts()->fetch()) {
+        if ($this->db()->getMailboxes()->fetch()) {
             $linkAlias->setSuggested();
         } else {
             $linkAccount->setSuggested();

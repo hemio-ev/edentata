@@ -39,7 +39,7 @@ class QuerySelectFunctionTest extends \Helpers {
         $qryAuth->execute();
 
         $params = [
-            'p_local_part' => 'hasi82',
+            'p_localpart' => 'hasi82',
             'p_domain' => 'my.example.com.'
         ];
 

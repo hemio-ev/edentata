@@ -28,7 +28,7 @@ use \hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class CreateAccount extends \hemio\edentata\Window {
+class CreateMailbox extends \hemio\edentata\Window {
 
     public function content() {
         $window = $this->newFormWindow(
@@ -37,7 +37,7 @@ class CreateAccount extends \hemio\edentata\Window {
                 , null
                 , _('Create')
         );
-        
+
         $form = $window->getForm();
 
         $fieldsetEmail = new gui\Fieldset(_('New Email Address'));
@@ -76,6 +76,9 @@ class CreateAccount extends \hemio\edentata\Window {
 
         if ($form->submitted()) {
             if ($form->dataValid()) {
+                $this->db()->createMailbox(
+                        $form->getVal(['localpart', 'domain', 'password'])
+                );
                 throw new exception\Successful();
             } else {
                 // find error?

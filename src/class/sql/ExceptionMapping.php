@@ -30,9 +30,17 @@ class ExceptionMapping {
 
     public static function throwMapped(exception\SqlSpecific $e) {
         switch ($e->getMessage()) {
-            case 'LOGIN_INVALID':
+            case 'login_invalid':
                 throw new exception\Error(
                 _('Invalid unser login.')
+                , 1001
+                , $e
+                );
+
+            case 'contingent_exceeded':
+                throw new exception\Error(
+                _('The operation you want to perform would exceed your current contingent.'
+                        . ' Please contact the support to extend your contingent.')
                 , 1001
                 , $e
                 );

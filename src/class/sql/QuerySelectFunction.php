@@ -97,13 +97,16 @@ class QuerySelectFunction extends QuerySelect {
             $stmt->execute($this->funcParams + $params);
         } catch (\PDOException $e) {
             $errMessage = $e->errorInfo[2];
-            $reg = '/DETAIL:\s+\$CARNIVORA:(.*)\$/';
+            $reg = '/DETAIL:\s+\$carnivora:(.*):(.*)\$/';
             $matches = [];
             if (preg_match($reg, $errMessage, $matches)) {
-                $carnivoraKey = $matches[1];
+                $carnivoraKey = $matches[2];
 
                 ExceptionMapping::throwMapped(new \hemio\edentata\exception\SqlSpecific($carnivoraKey, 0, $e));
+            } else {
+                throw $e;
             }
+                
         }
 
         return $stmt;

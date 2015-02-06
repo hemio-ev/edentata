@@ -22,6 +22,7 @@ namespace hemio\edentata\gui;
 use hemio\form;
 use hemio\html;
 use hemio\form\Abstract_\TemplateFormField;
+use hemio\form\Abstract_\FormElement;
 
 /**
  * Description of FormPost
@@ -41,7 +42,6 @@ class FormPost extends form\FormPost {
         $this->addInheritableAppendage(
                 FormPost::FORM_FIELD_TEMPLATE . '_SELECT', $templateSelect
         );
-
     }
 
     protected function patchTemplateForSelect($templateSelect) {
@@ -56,6 +56,22 @@ class FormPost extends form\FormPost {
         return $templateSelect;
     }
 
+    public function getVal(array $keys) {
+        $arr = [];
 
+        $filter = function ($child) {
+            return $child instanceof FormElement;
+        };
+
+        foreach ($this->getRecursiveIterator($filter) as $elem) {
+            if (in_array($elem->getName(), $keys)) {
+                $arr['p_' . $elem->getName()] = $elem->getValueUser();
+            }
+        }
+
+        var_dump($arr);
+        var_dump($_POST);
+        return $arr;
+    }
 
 }

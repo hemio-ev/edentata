@@ -51,7 +51,7 @@ class ModuleEmail extends edentata\Module {
 
             case 'create_account':
                 try {
-                    $content = (new CreateAccount($this))->content();
+                    $content = (new CreateMailbox($this))->content();
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($this->request->derive());
                 }

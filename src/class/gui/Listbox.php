@@ -39,10 +39,10 @@ class Listbox extends html\Ul {
      * @param string $text
      * @return html\Li
      */
-    public function addLink(\hemio\edentata\Request $url, $text) {
+    public function addLink(\hemio\edentata\Request $url, html\Interface_\HtmlCode $text) {
         $a = new html\A();
         $a->setAttribute('href', $url->getUrl());
-        $a->addChild(new html\String($text));
+        $a->addChild($text);
                 
         return $this->addLine($a);
     }

@@ -28,17 +28,36 @@ use hemio\edentata\sql;
  */
 class Db extends \hemio\edentata\ModuleDb {
 
-
     /**
      * 
      * @return \PDOStatement
      */
-    public function getMailAccounts() {
+    public function getMailboxes() {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo, 'email.frontend_account'
+                $this->pdo, 'email.sel_mailbox'
         );
 
         return $stmt->execute();
+    }
+
+    public function createMailbox(array $params) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.ins_mailbox'
+                , $params
+        );
+
+        return $stmt->execute();
+    }
+
+    public function getAliases($mailboxLocalpart, $mailboxDomain) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.sel_alias'
+        );
+        $stmt->options('WHERE mailbox_localpart = :localpart AND mailbox_domain = :domain');
+
+        return $stmt->execute(['localpart' => $mailboxLocalpart, 'domain' => $mailboxDomain]);
     }
 
     /**
@@ -47,7 +66,7 @@ class Db extends \hemio\edentata\ModuleDb {
      */
     public function getPossibleDomains() {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo, 'dns.fs_service_domain'
+                $this->pdo, 'dns.sel_available_service'
         );
         $stmt->options('WHERE service = :service');
 

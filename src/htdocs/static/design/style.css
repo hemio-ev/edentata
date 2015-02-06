@@ -824,7 +824,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   padding: 0;
   background-color: white; }
 
-.listbox_entry, ul.listbox li, .selectbox p:not(.options) {
+.listbox_entry, ul.listbox > li, .selectbox p:not(.options) {
   display: block;
   border-bottom: 1px solid #d4d4d4;
   min-height: 3.5em;
@@ -853,11 +853,23 @@ ul.listbox span, ul.listbox a {
   align-items: center;
   width: 100%;
   margin: 0;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  box-sizing: border-box;
   transition-property: background-color;
   transition-duration: 400ms; }
 
 .listbox_link:hover, ul.listbox a:hover, .selectbox label:hover {
   background-color: #f3f3f3; }
+
+ul.listbox a div {
+  font-weight: bold; }
+
+ul.listbox ul {
+  font-size: 0.9em;
+  padding-left: 2em;
+  list-style-type: square;
+  font-weight: normal; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>

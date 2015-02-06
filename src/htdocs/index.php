@@ -48,13 +48,14 @@ try {
 # db connect
     $pdo = new sql\Connection('pgsql:dbname=test1', 'postgres');
     $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
 
 # db auth
     $usrData = [
         'p_name' => 'user1',
         'p_password' => 'pw'
     ];
-    $qryAuth = new sql\QuerySelectFunction($pdo, 'user.login', $usrData);
+    $qryAuth = new sql\QuerySelectFunction($pdo, 'user.ins_login', $usrData);
     $qryAuth->execute();
 
 # navi

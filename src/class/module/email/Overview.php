@@ -21,6 +21,7 @@ namespace hemio\edentata\module\email;
 
 use hemio\edentata\sql;
 use hemio\edentata\gui;
+use hemio\html\String;
 
 /**
  * Description of Overview
@@ -37,7 +38,7 @@ class Overview extends \hemio\edentata\Window {
                 ), true
         );
 
-        $fieldset = new gui\Fieldset(_('Email Accounts'));
+        $fieldset = new gui\Fieldset(_('Mailboxes'));
         $accounts = new gui\Listbox();
 
         $window
@@ -45,13 +46,25 @@ class Overview extends \hemio\edentata\Window {
                 ->addChild($accounts);
 
 
-        $res = $this->db()->getMailAccounts();
+        $mailboxes = $this->db()->getMailboxes();
 
-        while ($arr = $res->fetch(\PDO::FETCH_ASSOC)) {
-            $address = $arr['local_part'] . '@' . $arr['domain'];
+        while ($mailbox = $mailboxes->fetch()) {
+            $address = $mailbox['localpart'] . '@' . $mailbox['domain'];
             $url = $this->module->request->derive('edit_account', $address);
 
-            $accounts->addLink($url, $address);
+            $container = new \hemio\form\Container();
+            $container['div'] = new \hemio\html\Div;
+            $container['div'][] = new String($address);
+
+            // get aliases
+            $aliases = $this->db()->getAliases($mailbox['localpart'], $mailbox['domain']);
+            $ul = new \hemio\html\Ul();
+            $container['div'][] = $ul;
+            while ($alias = $aliases->fetch()) {
+                $ul->addLine(new String($alias['localpart'].'@'.$alias['domain']));
+            }
+
+            $accounts->addLink($url, $container);
         }
 
         return $window;

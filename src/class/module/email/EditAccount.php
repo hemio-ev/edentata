@@ -33,22 +33,22 @@ class EditAccount extends \hemio\edentata\Window {
     public function content($address) {
         $xs = explode('@', $address, 2);
         $params = [
-            'local_part' => $xs[0],
+            'localpart' => $xs[0],
             'domain' => $xs[1]
         ];
 
         $window = $this->newFormWindow(
                 'edit_account'
-                , _('Email Account')
+                , _('Email Mailbox')
                 , $address
         );
 
-        $stmt = new sql\QuerySelectFunction($this->module->pdo, 'email.frontend_account');
-        $stmt->options('WHERE local_part = :local_part AND domain = :domain');
+        $stmt = new sql\QuerySelectFunction($this->module->pdo, 'email.sel_mailbox');
+        $stmt->options('WHERE localpart = :localpart AND domain = :domain');
         $res = $stmt->execute($params);
 
-        $account = $res->fetch(\PDO::FETCH_ASSOC);
-        $address = $account['local_part'] . '@' . $account['domain'];
+        $account = $res->fetch();
+        $address = $account['localpart'] . '@' . $account['domain'];
 
         return $window;
     }

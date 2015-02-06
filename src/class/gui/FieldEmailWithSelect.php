@@ -50,7 +50,7 @@ class FieldEmailWithSelect extends \hemio\form\Container {
         $p->addCssClass('multiple');
         $this['p'] = $p;
 
-        $p['text'] = new form\FieldText('local_part', _('Local Part'));
+        $p['text'] = new form\FieldText('localpart', _('Local Part'));
         $p['text']->setRequired(true);
         $p['text']->getControlElement()->setAttribute('autofocus', true);
         $p['text']->addInheritableAppendage(

@@ -39,7 +39,7 @@ ul.listbox {
     margin: 0;
 }
 
-ul.listbox li {
+ul.listbox > li {
     @extend .listbox_entry;
 }
 
@@ -68,6 +68,9 @@ ul.listbox span, ul.listbox a {
     align-items: center;
     width: 100%;
     margin: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    box-sizing: border-box;
 
     transition-property: background-color;
     transition-duration: 400ms;
@@ -79,4 +82,15 @@ ul.listbox span, ul.listbox a {
 
 ul.listbox a {
     @extend .listbox_link;
+}
+
+ul.listbox a div {
+    font-weight: bold;
+}
+
+ul.listbox ul {
+    font-size: 0.9em;
+    padding-left: 2em;
+    list-style-type: square;
+    font-weight: normal;
 }
