@@ -28,7 +28,7 @@ use \hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class CreateMailbox extends \hemio\edentata\Window {
+class MailboxCreate extends \hemio\edentata\Window {
 
     public function content() {
         $window = $this->newFormWindow(
@@ -38,47 +38,37 @@ class CreateMailbox extends \hemio\edentata\Window {
                 , _('Create')
         );
 
-        $form = $window->getForm();
-
         $fieldsetEmail = new gui\Fieldset(_('New Email Address'));
         $email = new gui\FieldEmailWithSelect();
 
         $fieldsetPassword = new gui\Fieldset(_('Password'));
-        $password = new form\FieldPassword('password', _('New Password'));
-        $password->addValidityCheck(new form\CheckMinLength(8));
-        $password->getControlElement()->setAttribute('required', true);
+        $password = new gui\FieldNewPassword('password');
 
-        $passwordRepeat = new form\FieldPassword('password_repeat', _('Repeat Password'));
-
-        $form
+        $window->getForm()
                 ->addChild($fieldsetEmail)
                 ->addChild($email);
 
-        $form
+        $window->getForm()
                 ->addChild($fieldsetPassword)
                 ->addChild($password);
-
-        $fieldsetPassword->addChild($passwordRepeat);
 
         $domains = $this->db()->getPossibleDomains();
         while ($domain = $domains->fetch()) {
             $email->getDomain()->addOption($domain['domain'], $domain['domain']);
         }
 
-        $this->handleSubmit($form, $email);
+        $this->handleSubmit($window->getForm());
 
         return $window;
     }
 
-    protected function handleSubmit(
-    gui\FormPost $form
-    , gui\FieldEmailWithSelect $address) {
-
+    protected function handleSubmit(gui\FormPost $form) {
         if ($form->submitted()) {
             if ($form->dataValid()) {
                 $this->db()->createMailbox(
                         $form->getVal(['localpart', 'domain', 'password'])
                 );
+                
                 throw new exception\Successful();
             } else {
                 // find error?

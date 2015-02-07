@@ -69,8 +69,6 @@ class FormPost extends form\FormPost {
             }
         }
 
-        var_dump($arr);
-        var_dump($_POST);
         return $arr;
     }
 

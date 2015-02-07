@@ -20,37 +20,41 @@
 namespace hemio\edentata\module\email;
 
 use hemio\edentata\gui;
-use hemio\form;
-use hemio\edentata\sql;
 
 /**
- * Description of EditAccount
+ * Description of MailboxDelete
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class EditAccount extends \hemio\edentata\Window {
+class MailboxDelete extends \hemio\edentata\Window {
 
     public function content($address) {
-        $xs = explode('@', $address, 2);
-        $params = [
-            'localpart' => $xs[0],
-            'domain' => $xs[1]
-        ];
-
         $window = $this->newFormWindow(
-                'edit_account'
-                , _('Email Mailbox')
+                'mailbox_delete'
+                , 'Delete Mailbox'
                 , $address
+                , null
+                , false
         );
 
-        $stmt = new sql\QuerySelectFunction($this->module->pdo, 'email.sel_mailbox');
-        $stmt->options('WHERE localpart = :localpart AND domain = :domain');
-        $res = $stmt->execute($params);
-
-        $account = $res->fetch();
-        $address = $account['localpart'] . '@' . $account['domain'];
+        $window->getForm()->addChild(
+                new gui\FieldSwitch('enable_delete', _('Enable Deletion'))
+        );
 
         return $window;
+    }
+
+    protected function handleSubmit(gui\FormPost $form, $address) {
+
+        if ($form->submitted()) {
+            if ($form->dataValid()) {
+                $args = Db::emailAddressToArgs($address);
+
+                $this->db()->mailboxPassword($args);
+
+                throw new exception\Successful();
+            }
+        }
     }
 
 }

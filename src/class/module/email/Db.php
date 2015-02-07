@@ -28,6 +28,14 @@ use hemio\edentata\sql;
  */
 class Db extends \hemio\edentata\ModuleDb {
 
+    public static function emailAddressToArgs($address, $prefix = '') {
+        $arg = [];
+        $arg['p_' . $prefix . 'localpart'] = explode('@', $address)[0];
+        $arg['p_' . $prefix . 'domain'] = explode('@', $address)[1];
+
+        return $arg;
+    }
+
     /**
      * 
      * @return \PDOStatement
@@ -50,6 +58,16 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute();
     }
 
+    public function mailboxPassword(array $params) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.upd_mailbox'
+                , $params
+        );
+
+        return $stmt->execute();
+    }
+
     public function getAliases($mailboxLocalpart, $mailboxDomain) {
         $stmt = new sql\QuerySelectFunction(
                 $this->pdo
@@ -58,6 +76,16 @@ class Db extends \hemio\edentata\ModuleDb {
         $stmt->options('WHERE mailbox_localpart = :localpart AND mailbox_domain = :domain');
 
         return $stmt->execute(['localpart' => $mailboxLocalpart, 'domain' => $mailboxDomain]);
+    }
+
+    public function createAlias(array $params) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.ins_alias'
+                , $params
+        );
+
+        return $stmt->execute();
     }
 
     /**

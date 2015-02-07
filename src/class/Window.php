@@ -85,7 +85,8 @@ class Window {
             $window->addButtonRight($submitButton);
         }
 
-        $window->addOverviewButton($addOverviewButton);
+        if ($addOverviewButton)
+            $window->addOverviewButton($addOverviewButton);
 
         return $window;
     }

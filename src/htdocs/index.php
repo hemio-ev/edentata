@@ -33,7 +33,7 @@ $activeModuleName = $request->module;
 
 try {
     # doc
-    $doc = new html\Document(new html\String('Title'));
+    $doc = new html\Document(new html\String('Edentata Dev.'));
     $doc->getHtml()->getHead()->addCssFile('static/design/style.css');
 
     $body = $doc->getHtml()->getBody();
@@ -53,7 +53,7 @@ try {
 # db auth
     $usrData = [
         'p_name' => 'user1',
-        'p_password' => 'pw'
+        'p_password' => 'testtest'
     ];
     $qryAuth = new sql\QuerySelectFunction($pdo, 'user.ins_login', $usrData);
     $qryAuth->execute();

@@ -41,21 +41,37 @@ class ModuleEmail extends edentata\Module {
                 $content = (new Overview($this))->content();
                 break;
 
-            case 'edit_account':
-                $content = (new EditAccount($this))->content($this->request->subject);
+            case 'edit_mailbox':
+                $content = (new MailboxDetails($this))->content($this->request->subject);
+                break;
+
+            case 'mailbox_password':
+                $content = (new MailboxPassword($this))->content($this->request->subject);
+                break;
+
+            case 'mailbox_delete':
+                $content = (new MailboxDelete($this))->content($this->request->subject);
                 break;
 
             case 'create':
                 $content = (new Create($this))->content();
                 break;
 
-            case 'create_account':
+            case 'create_mailbox':
                 try {
-                    $content = (new CreateMailbox($this))->content();
+                    $content = (new MailboxCreate($this))->content();
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($this->request->derive());
                 }
 
+                break;
+
+            case 'create_alias':
+                try {
+                    $content = (new AliasCreate($this))->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
 
                 break;
 

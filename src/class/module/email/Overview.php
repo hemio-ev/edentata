@@ -34,7 +34,7 @@ class Overview extends \hemio\edentata\Window {
         $window = new \hemio\edentata\gui\Window(_('Email'));
         $window->addButtonRight(
                 new gui\LinkButton(
-                $this->module->request->derive('create'), _('New Email Address')
+                $this->module->request->derive('create'), _('New Address')
                 ), true
         );
 
@@ -50,7 +50,7 @@ class Overview extends \hemio\edentata\Window {
 
         while ($mailbox = $mailboxes->fetch()) {
             $address = $mailbox['localpart'] . '@' . $mailbox['domain'];
-            $url = $this->module->request->derive('edit_account', $address);
+            $url = $this->module->request->derive('edit_mailbox', $address);
 
             $container = new \hemio\form\Container();
             $container['div'] = new \hemio\html\Div;
