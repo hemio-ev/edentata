@@ -35,6 +35,7 @@ try {
     # doc
     $doc = new html\Document(new html\String('Edentata Dev.'));
     $doc->getHtml()->getHead()->addCssFile('static/design/style.css');
+    $doc->getHtml()->setAttribute('lang', 'en');
 
     $body = $doc->getHtml()->getBody();
 

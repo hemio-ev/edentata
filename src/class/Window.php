@@ -19,6 +19,10 @@
 
 namespace hemio\edentata;
 
+use hemio\edentata\gui;
+use hemio\form;
+use hemio\html;
+
 /**
  * Description of Window
  *
@@ -87,6 +91,53 @@ class Window {
 
         if ($addOverviewButton)
             $window->addOverviewButton($addOverviewButton);
+
+        return $window;
+    }
+
+    public function newDeleteWindow(
+    $formName
+    , $title
+    , $subtitle
+    , $message
+    , $deleteText
+    ) {
+        $window = new gui\WindowModuleWithForm($title, $subtitle);
+        $window->setModule($this->module);
+        $window->addCssClass('delete_dialog');
+
+        $form = new gui\FormPost($formName, $this->module->request->post);
+        $window->setForm($form);
+
+        $msg = new html\P();
+        $msg->addCssClass('text');
+        $msg->addChild(new html\String($message));
+
+        $switch = new gui\FieldSwitch('enable_delete', _('Permit Deletion'));
+        $switch->setForm($form);
+        $switch->getControlElement()->addCssClass('delete_perimition');
+        $switch->setRequired();
+
+        $hint = new html\P;
+        $hint->addCssClass('hint');
+        $hint->addChild(new html\String(_('You must activate the switch before you can submit')));
+
+        $cancelButton = new gui\LinkButton(
+                $this->module->request->derive()
+                , _('Cancel')
+        );
+
+        $deleteButton = new form\FieldSubmit('delete', $deleteText);
+        $deleteButton->setForm($form);
+
+        $buttonGroup = new gui\ButtonGroup();
+        $buttonGroup->addChild($deleteButton);
+        $buttonGroup->addChild($cancelButton);
+
+        $window->addChild($msg);
+        $window->addChild($switch);
+        $window->addChild($hint);
+        $window->addChild($buttonGroup);
 
         return $window;
     }

@@ -44,6 +44,7 @@ class Db extends \hemio\edentata\ModuleDb {
         $stmt = new sql\QuerySelectFunction(
                 $this->pdo, 'email.sel_mailbox'
         );
+        $stmt->options('ORDER BY backend_status, localpart, domain');
 
         return $stmt->execute();
     }
@@ -68,12 +69,25 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute();
     }
 
+    public function mailboxDelete(array $params) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.del_mailbox'
+                , $params
+        );
+
+        return $stmt->execute();
+    }
+
     public function getAliases($mailboxLocalpart, $mailboxDomain) {
         $stmt = new sql\QuerySelectFunction(
                 $this->pdo
                 , 'email.sel_alias'
         );
-        $stmt->options('WHERE mailbox_localpart = :localpart AND mailbox_domain = :domain');
+        $stmt->options(
+                'WHERE mailbox_localpart = :localpart AND mailbox_domain = :domain' .
+                ' ORDER BY localpart, domain'
+        );
 
         return $stmt->execute(['localpart' => $mailboxLocalpart, 'domain' => $mailboxDomain]);
     }

@@ -43,6 +43,7 @@ body {
   font-family: Cantarell, sans-serif;
   font-size: 0.9em;
   hyphens: auto;
+  -moz-hyphens: auto;
   text-align: justify;
   color: #2e3436;
   padding: 0;
@@ -537,6 +538,22 @@ button.suggested:active, form[method="post"] button:active:default, button[form]
   background-color: #2a76c8;
   background: linear-gradient(#2a76c8, #3683d5); }
 
+.delete_dialog button.suggested, .delete_dialog form[method="post"] button:default, form[method="post"] .delete_dialog button:default, .delete_dialog button[form]:default, .delete_dialog input:checked ~ input:checked ~ .options button, input:checked ~ input:checked ~ .options .delete_dialog button {
+  border-color: #8f0000;
+  background-color: #c30f0f;
+  background: linear-gradient(#ed1818, #c30f0f); }
+
+.delete_dialog button.suggested:hover, .delete_dialog form[method="post"] button:hover:default, form[method="post"] .delete_dialog button:hover:default, .delete_dialog button[form]:hover:default, .delete_dialog input:checked ~ input:checked ~ .options button:hover, input:checked ~ input:checked ~ .options .delete_dialog button:hover, .delete_dialog button.suggested:focus, .delete_dialog form[method="post"] button:focus:default, form[method="post"] .delete_dialog button:focus:default, .delete_dialog button[form]:focus:default, .delete_dialog input:checked ~ input:checked ~ .options button:focus, input:checked ~ input:checked ~ .options .delete_dialog button:focus {
+  background-color: #ef2f2f;
+  background: linear-gradient(#ef2f2f, #db1111); }
+
+.delete_dialog button.suggested:active, .delete_dialog form[method="post"] button:active:default, form[method="post"] .delete_dialog button:active:default, .delete_dialog button[form]:active:default, .delete_dialog input:checked ~ input:checked ~ .options button:active, input:checked ~ input:checked ~ .options .delete_dialog button:active {
+  background-color: #ab0d0d;
+  background: linear-gradient(#ab0d0d, #c30f0f); }
+
+.delete_dialog .delete_perimition:not(:checked) ~ fieldset button.suggested, .delete_dialog .delete_perimition:not(:checked) ~ fieldset form[method="post"] button:default, form[method="post"] .delete_dialog .delete_perimition:not(:checked) ~ fieldset button:default, .delete_dialog .delete_perimition:not(:checked) ~ fieldset button[form]:default, .delete_dialog .delete_perimition:not(:checked) ~ fieldset input:checked ~ input:checked ~ .options button, input:checked ~ input:checked ~ .options .delete_dialog .delete_perimition:not(:checked) ~ fieldset button {
+  display: none; }
+
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
 
@@ -792,11 +809,14 @@ article fieldset legend {
 article fieldset.buttons {
   text-align: center; }
 
-article fieldset.buttons button:first-of-type {
+article fieldset.buttons :first-child {
   float: right; }
 
-article fieldset.buttons button:last-of-type {
+article fieldset.buttons :last-child {
   float: left; }
+
+article fieldset.buttons form {
+  display: inline-block; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -1003,5 +1023,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 :lang(en) input.switch ~ label span:last-of-type::before {
   content: "Off" !important; }
+
+article p.text {
+  font-size: 1.1em;
+  padding: 0.5em 1em; }
+
+article p.hint {
+  font-size: 1.1em;
+  padding: 0.5em 1em;
+  color: gray;
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

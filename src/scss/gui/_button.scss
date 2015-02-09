@@ -60,3 +60,22 @@ button.suggested:active {
 form[method="post"] button:default, button[form]:default {
     @extend button.suggested;
 }
+
+// delete dialogs
+
+.delete_dialog button.suggested {
+    border-color: $button-delete-border-color;
+    @include button-background($button-delete-color);
+}
+
+.delete_dialog button.suggested:hover, .delete_dialog button.suggested:focus {
+    @include button-background-hover($button-delete-color);
+}
+
+.delete_dialog button.suggested:active {
+    @include button-background-active($button-delete-color);
+}
+
+.delete_dialog .delete_perimition:not(:checked) ~ fieldset button.suggested {
+    display: none;
+}

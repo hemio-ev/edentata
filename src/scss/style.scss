@@ -8,6 +8,9 @@ $button-color: rgb(224, 224, 224);
 $button-suggested-color: rgb(54, 131, 213);
 $button-suggested-border-color: rgb(28, 81, 135);
 
+$button-delete-color: rgb(195, 15, 15);
+$button-delete-border-color: rgb(143, 0, 0);
+
 $article-color: rgb(237,237,237);
 $article-border-color: rgb(142, 142, 142);
 $article-radius-top: 0.5em;
@@ -57,3 +60,15 @@ $list-entry-height: 3.5em;
 @import "gui/_selecting.scss";
 
 @import '_l10n.scss';
+
+article p.text {
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+}
+
+article p.hint {
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+    color: gray;
+    text-align: center;
+}

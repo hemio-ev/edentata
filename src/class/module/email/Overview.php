@@ -54,7 +54,7 @@ class Overview extends \hemio\edentata\Window {
 
             $container = new \hemio\form\Container();
             $container['div'] = new \hemio\html\Div;
-            $container['div'][] = new String($address);
+            $container['div'][] = new String($address.$mailbox['backend_status']);
 
             // get aliases
             $aliases = $this->db()->getAliases($mailbox['localpart'], $mailbox['domain']);

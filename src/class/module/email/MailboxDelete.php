@@ -20,6 +20,7 @@
 namespace hemio\edentata\module\email;
 
 use hemio\edentata\gui;
+use hemio\edentata\exception;
 
 /**
  * Description of MailboxDelete
@@ -29,17 +30,22 @@ use hemio\edentata\gui;
 class MailboxDelete extends \hemio\edentata\Window {
 
     public function content($address) {
-        $window = $this->newFormWindow(
+        $msg = _(
+                'Are you sure you want to permanently delete the'
+                . ' mailbox "%1$s"? If you delete a mailbox, all stored '
+                . ' emails will be permanently lost and you will no'
+                . ' longer be reachable via "%1$s".'
+        );
+
+        $window = $this->newDeleteWindow(
                 'mailbox_delete'
                 , 'Delete Mailbox'
                 , $address
-                , null
-                , false
+                , sprintf($msg, $address)
+                , _('Delete Mailbox')
         );
 
-        $window->getForm()->addChild(
-                new gui\FieldSwitch('enable_delete', _('Enable Deletion'))
-        );
+        $this->handleSubmit($window->getForm(), $address);
 
         return $window;
     }
@@ -50,7 +56,7 @@ class MailboxDelete extends \hemio\edentata\Window {
             if ($form->dataValid()) {
                 $args = Db::emailAddressToArgs($address);
 
-                $this->db()->mailboxPassword($args);
+                $this->db()->mailboxDelete($args);
 
                 throw new exception\Successful();
             }

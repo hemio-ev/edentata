@@ -35,10 +35,14 @@ article fieldset.buttons {
     text-align: center;
 }
 
-article fieldset.buttons button:first-of-type {
+article fieldset.buttons :first-child {
     float: right;
 }
 
-article fieldset.buttons button:last-of-type {
+article fieldset.buttons :last-child {
     float: left;
+}
+
+article fieldset.buttons form {
+    display: inline-block;
 }

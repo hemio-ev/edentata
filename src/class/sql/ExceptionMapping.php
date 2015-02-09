@@ -41,7 +41,14 @@ class ExceptionMapping {
                 throw new exception\Error(
                 _('The operation you want to perform would exceed your current contingent.'
                         . ' Please contact the support to extend your contingent.')
-                , 1001
+                , 1002
+                , $e
+                );
+
+            case 'inaccessible_or_missing':
+                throw new exception\Error(
+                _('The object you tried to change is inaccessible or missing.')
+                , 1003
                 , $e
                 );
 
