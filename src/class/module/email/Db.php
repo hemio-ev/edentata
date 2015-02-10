@@ -40,11 +40,17 @@ class Db extends \hemio\edentata\ModuleDb {
      * 
      * @return \PDOStatement
      */
-    public function getMailboxes() {
+    public function getMailboxes($activeOnly = true) {
         $stmt = new sql\QuerySelectFunction(
                 $this->pdo, 'email.sel_mailbox'
         );
-        $stmt->options('ORDER BY backend_status, localpart, domain');
+
+        $where = '';
+        if ($activeOnly) {
+            $where = 'WHERE backend_status IS NULL OR backend_status <> \'del\' ';
+        }
+
+        $stmt->options($where . 'ORDER BY backend_status, localpart, domain');
 
         return $stmt->execute();
     }

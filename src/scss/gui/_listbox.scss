@@ -86,6 +86,7 @@ ul.listbox a {
 
 ul.listbox a div {
     font-weight: bold;
+    width: 100%;
 }
 
 ul.listbox ul {
@@ -93,4 +94,16 @@ ul.listbox ul {
     padding-left: 2em;
     list-style-type: square;
     font-weight: normal;
+}
+
+.listbox .progress {
+    font-size: 0.9em;
+    background-image: url('progress.gif');
+    background-position: right;
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: right;
+    color: gray;
+    font-weight: normal;
+    padding-right: 2em;
 }

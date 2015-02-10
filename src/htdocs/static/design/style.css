@@ -513,7 +513,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   background: linear-gradient(#fafafa, #e0e0e0);
   padding-right: 1em;
   padding-left: 1em;
-  min-width: 6.5em; }
+  min-width: 6.5em;
+  transition-property: opacity;
+  transition-duration: 400ms; }
 
 .button:enabled:hover, button:enabled:hover, span.select:hover, button:focus {
   background-color: white;
@@ -522,6 +524,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .button:enabled:active, button:enabled:active {
   background-color: lightgray;
   background: linear-gradient(lightgray, #e0e0e0); }
+
+button:disabled {
+  opacity: 0.4; }
 
 button.suggested, form[method="post"] button:default, button[form]:default, input:checked ~ input:checked ~ .options button {
   border-color: #1c5187;
@@ -552,7 +557,7 @@ button.suggested:active, form[method="post"] button:active:default, button[form]
   background: linear-gradient(#ab0d0d, #c30f0f); }
 
 .delete_dialog .delete_perimition:not(:checked) ~ fieldset button.suggested, .delete_dialog .delete_perimition:not(:checked) ~ fieldset form[method="post"] button:default, form[method="post"] .delete_dialog .delete_perimition:not(:checked) ~ fieldset button:default, .delete_dialog .delete_perimition:not(:checked) ~ fieldset button[form]:default, .delete_dialog .delete_perimition:not(:checked) ~ fieldset input:checked ~ input:checked ~ .options button, input:checked ~ input:checked ~ .options .delete_dialog .delete_perimition:not(:checked) ~ fieldset button {
-  display: none; }
+  opacity: 0.3; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -883,13 +888,25 @@ ul.listbox span, ul.listbox a {
   background-color: #f3f3f3; }
 
 ul.listbox a div {
-  font-weight: bold; }
+  font-weight: bold;
+  width: 100%; }
 
 ul.listbox ul {
   font-size: 0.9em;
   padding-left: 2em;
   list-style-type: square;
   font-weight: normal; }
+
+.listbox .progress {
+  font-size: 0.9em;
+  background-image: url("progress.gif");
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+  float: right;
+  color: gray;
+  font-weight: normal;
+  padding-right: 2em; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>

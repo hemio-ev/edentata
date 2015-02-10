@@ -28,6 +28,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     padding-right: 1em;
     padding-left: 1em;
     min-width: 6.5em;
+    transition-property: opacity;
+        transition-duration: 400ms;
+
 }
 
 .button:enabled:hover, span.select:hover, button:focus {
@@ -40,6 +43,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 button {
     @extend .button;
+}
+
+button:disabled {
+    opacity: 0.4;
 }
 
 button.suggested {
@@ -77,5 +84,5 @@ form[method="post"] button:default, button[form]:default {
 }
 
 .delete_dialog .delete_perimition:not(:checked) ~ fieldset button.suggested {
-    display: none;
+    opacity: 0.3;
 }

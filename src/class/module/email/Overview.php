@@ -46,25 +46,26 @@ class Overview extends \hemio\edentata\Window {
                 ->addChild($accounts);
 
 
-        $mailboxes = $this->db()->getMailboxes();
+        $mailboxes = $this->db()->getMailboxes(false);
 
         while ($mailbox = $mailboxes->fetch()) {
             $address = $mailbox['localpart'] . '@' . $mailbox['domain'];
             $url = $this->module->request->derive('edit_mailbox', $address);
 
-            $container = new \hemio\form\Container();
-            $container['div'] = new \hemio\html\Div;
-            $container['div'][] = new String($address.$mailbox['backend_status']);
+            $mailboxLi = $accounts->addLink($url, new String($address));
 
+            #$container['div']['span'] = new \hemio\html\Span;
+            #$container['div']['span'][] = new String('to be deleted');
+            #$container['div']['span']->addCssClass('progress');
             // get aliases
             $aliases = $this->db()->getAliases($mailbox['localpart'], $mailbox['domain']);
-            $ul = new \hemio\html\Ul();
-            $container['div'][] = $ul;
+
+            $ul = $mailboxLi->addList();
             while ($alias = $aliases->fetch()) {
-                $ul->addLine(new String($alias['localpart'].'@'.$alias['domain']));
+                $ul->addLine(new String($alias['localpart'] . '@' . $alias['domain']));
             }
 
-            $accounts->addLink($url, $container);
+            $mailboxLi->setPending($mailbox['backend_status']);
         }
 
         return $window;

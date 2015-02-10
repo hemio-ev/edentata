@@ -19,28 +19,14 @@
 
 namespace hemio\edentata\gui;
 
-use hemio\html;
-
 /**
- * Description of Listbox
+ * Description of ButtonGroup
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Listbox extends html\Ul {
-
-    public function __construct() {
-        $this->addCssClass('listbox');
-        $this->addCssClass('scroll');
+class ButtonGroup extends \hemio\form\ButtonGroup {
+    public function __construct(array $buttons = array()) {
+        parent::__construct($buttons);
+        $this->addCssClass('buttons');
     }
-
-    /**
-     * 
-     * @param mixed $url
-     * @param string $text
-     * @return html\Li
-     */
-    public function addLink(\hemio\edentata\Request $url, html\Interface_\HtmlCode $text) {
-        return $this->addChild(new ListboxLink($text, $url));
-    }
-
 }
