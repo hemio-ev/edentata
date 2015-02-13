@@ -50,7 +50,11 @@ class ModuleEmail extends edentata\Module {
                 break;
 
             case 'mailbox_delete':
-                $content = (new MailboxDelete($this))->content($this->request->subject);
+                try {
+                    $content = (new MailboxDelete($this))->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
                 break;
 
             case 'create':

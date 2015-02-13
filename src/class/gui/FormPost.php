@@ -33,6 +33,7 @@ class FormPost extends form\FormPost {
 
     public function __construct($name, array $post = null, array $get = null, array $stored = array()) {
         parent::__construct($name, $post, $get, $stored);
+        $this->setAttribute('autocomplete', 'off');
 
         // default template to patch
         $template = $this->getSingleControlTemplate();

@@ -41,7 +41,7 @@ class AliasCreate extends \hemio\edentata\Window {
         $fieldsetEmail = new gui\Fieldset(_('New Email Address'));
         $email = new gui\FieldEmailWithSelect();
 
-        $fieldsetMailbox = new gui\Fieldset(_('Mailbox to deliver the emails'));
+        $fieldsetMailbox = new gui\Fieldset(_('Deliver emails to'));
         $mailbox = new form\FieldSelect('mailbox', _('Mailbox'));
         $mailbox->setDefaultValue($mailboxName);
 

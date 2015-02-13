@@ -131,7 +131,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   padding: 0;
   margin: 1.5em auto 2.5em auto;
   display: block;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>

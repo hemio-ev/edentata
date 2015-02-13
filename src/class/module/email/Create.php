@@ -31,18 +31,18 @@ class Create extends \hemio\edentata\Window {
     public function content() {
         $window = $this->newWindow(_('Create Email Address'));
 
-        $selecting = new gui\Selecting(_('Where should new emails go'));
+        $selecting = new gui\Selecting(_('Delivery for new Address'));
 
         $reqAccount = $this->module->request->derive('create_mailbox');
-        $strAccount = _('Create new mailbox for incoming mails');
+        $strAccount = _('Create new mailbox for incoming emails');
         $linkAccount = $selecting->addLink($reqAccount, $strAccount);
 
         $reqAlias = $this->module->request->derive('create_alias');
-        $strAlias = _('Deliver mails to existing postbox');
+        $strAlias = _('Deliver emails to existing mailbox (alias)');
         $linkAlias = $selecting->addLink($reqAlias, $strAlias);
 
         $reqRedirect = $this->module->request->derive('create_redirect');
-        $strRedirect = _('Redirect mails to external mail account');
+        $strRedirect = _('Deliver emails to external mailbox (redirection)');
         $selecting->addLink($reqRedirect, $strRedirect);
 
         if ($this->db()->getMailboxes()->fetch()) {
