@@ -21,7 +21,8 @@ namespace hemio\edentata\module\email;
 
 use hemio\edentata\gui;
 use hemio\form;
-use hemio\edentata\sql;
+use hemio\html;
+use hemio\html\String;
 
 /**
  * Description of EditAccount
@@ -55,9 +56,36 @@ class MailboxDetails extends \hemio\edentata\Window {
           $address = $account['localpart'] . '@' . $account['domain'];
          */
 
+        $resAliases = $this->db()->aliasSelect(
+                Utils::addrLocalpart($address)
+                , Utils::addrDomain($address)
+        );
 
+        $aliases = $resAliases->fetchAll();
+
+        $list = new gui\Listbox();
+
+        foreach ($aliases as $alias) {
+            $div = new html\Span();
+            $div->addChild(new String($alias['localpart'] . '@' . $alias['domain']));
+            $button = $div->addChild(new gui\LinkButton($this->module->request->derive(), _('Delete')));
+            #$button['form']['button']->addCssClass('progress');
+            $list->addLine($div);
+            #print_r($alias);
+        }
+
+        if (count($aliases) > 0) {
+            $window
+                    ->addChild(new gui\Fieldset(_('Aliases')))
+                    ->addChild($list);
+        }
+        $window->addChild($this->actions($address));
+
+        return $window;
+    }
+
+    public function actions($address) {
         $selecting = new gui\Selecting(_('Possible Actions'));
-
 
         $selecting->addLink(
                 $this->module->request->derive('mailbox_password', $address)
@@ -65,7 +93,7 @@ class MailboxDetails extends \hemio\edentata\Window {
         );
 
         $selecting->addLink(
-                $this->module->request->derive('create_alias', $address)
+                $this->module->request->derive('alias_create', $address)
                 , _('Create alias for this mailbox')
         );
 
@@ -74,9 +102,7 @@ class MailboxDetails extends \hemio\edentata\Window {
                 , _('Delete entire mailbox')
         );
 
-        $window->addChild($selecting);
-
-        return $window;
+        return $selecting;
     }
 
 }

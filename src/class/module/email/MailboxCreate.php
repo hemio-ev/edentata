@@ -65,7 +65,7 @@ class MailboxCreate extends \hemio\edentata\Window {
     protected function handleSubmit(gui\FormPost $form) {
         if ($form->submitted()) {
             if ($form->dataValid()) {
-                $this->db()->createMailbox(
+                $this->db()->mailboxCreate(
                         $form->getVal(['localpart', 'domain', 'password'])
                 );
                 

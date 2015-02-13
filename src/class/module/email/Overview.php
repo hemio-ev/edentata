@@ -34,7 +34,7 @@ class Overview extends \hemio\edentata\Window {
         $window = new \hemio\edentata\gui\Window(_('Email'));
         $window->addButtonRight(
                 new gui\LinkButton(
-                $this->module->request->derive('create'), _('New Address')
+                $this->module->request->derive('address_create'), _('New Address')
                 ), true
         );
 
@@ -46,11 +46,11 @@ class Overview extends \hemio\edentata\Window {
                 ->addChild($accounts);
 
 
-        $mailboxes = $this->db()->getMailboxes(false);
+        $mailboxes = $this->db()->mailboxSelect(false);
 
         while ($mailbox = $mailboxes->fetch()) {
             $address = $mailbox['localpart'] . '@' . $mailbox['domain'];
-            $url = $this->module->request->derive('edit_mailbox', $address);
+            $url = $this->module->request->derive('mailbox_edit', $address);
 
             $mailboxLi = $accounts->addLink($url, new String($address));
 
@@ -58,7 +58,7 @@ class Overview extends \hemio\edentata\Window {
             #$container['div']['span'][] = new String('to be deleted');
             #$container['div']['span']->addCssClass('progress');
             // get aliases
-            $aliases = $this->db()->getAliases($mailbox['localpart'], $mailbox['domain']);
+            $aliases = $this->db()->aliasSelect($mailbox['localpart'], $mailbox['domain']);
 
             $ul = $mailboxLi->addList();
             while ($alias = $aliases->fetch()) {

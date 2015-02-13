@@ -25,5 +25,13 @@ namespace hemio\edentata\module\email;
  * @author Michael Herold <quabla@hemio.de>
  */
 class Utils {
-    
+
+    public static function addrLocalpart($address) {
+        return explode('@', $address)[0];
+    }
+
+    public static function addrDomain($address) {
+        return explode('@', $address)[1];
+    }
+
 }

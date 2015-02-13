@@ -871,10 +871,8 @@ ul.listbox li:last-child {
 ul.listbox span, ul.listbox a {
   padding: 0 1em; }
 
-.listbox_link, ul.listbox a, .selectbox label {
+.listbox_content, .listbox_link, ul.listbox a, .selectbox label {
   display: block;
-  text-decoration: none;
-  color: inherit;
   min-height: 3.5em;
   display: flex;
   align-items: center;
@@ -882,7 +880,11 @@ ul.listbox span, ul.listbox a {
   margin: 0;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  box-sizing: border-box;
+  box-sizing: border-box; }
+
+.listbox_link, ul.listbox a, .selectbox label {
+  text-decoration: none;
+  color: inherit;
   transition-property: background-color;
   transition-duration: 400ms; }
 

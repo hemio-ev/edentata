@@ -59,10 +59,8 @@ ul.listbox span, ul.listbox a {
     padding: 0 1em;
 }
 
-.listbox_link {
+.listbox_content {
     display: block;
-    text-decoration: none;
-    color: inherit;
     min-height: $list-entry-height;
     display: flex;
     align-items: center;
@@ -71,6 +69,12 @@ ul.listbox span, ul.listbox a {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     box-sizing: border-box;
+}
+
+.listbox_link {
+    @extend .listbox_content;
+    text-decoration: none;
+    color: inherit;
 
     transition-property: background-color;
     transition-duration: 400ms;

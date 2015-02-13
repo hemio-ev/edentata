@@ -26,26 +26,26 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Create extends \hemio\edentata\Window {
+class AddressCreate extends \hemio\edentata\Window {
 
     public function content() {
         $window = $this->newWindow(_('Create Email Address'));
 
         $selecting = new gui\Selecting(_('Delivery for new Address'));
 
-        $reqAccount = $this->module->request->derive('create_mailbox');
+        $reqAccount = $this->module->request->derive('mailbox_create');
         $strAccount = _('Create new mailbox for incoming emails');
         $linkAccount = $selecting->addLink($reqAccount, $strAccount);
 
-        $reqAlias = $this->module->request->derive('create_alias');
+        $reqAlias = $this->module->request->derive('alias_create');
         $strAlias = _('Deliver emails to existing mailbox (alias)');
         $linkAlias = $selecting->addLink($reqAlias, $strAlias);
 
-        $reqRedirect = $this->module->request->derive('create_redirect');
+        $reqRedirect = $this->module->request->derive('redirect_create');
         $strRedirect = _('Deliver emails to external mailbox (redirection)');
         $selecting->addLink($reqRedirect, $strRedirect);
 
-        if ($this->db()->getMailboxes()->fetch()) {
+        if ($this->db()->mailboxSelect()->fetch()) {
             $linkAlias->setSuggested();
         } else {
             $linkAccount->setSuggested();

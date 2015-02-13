@@ -58,7 +58,7 @@ class AliasCreate extends \hemio\edentata\Window {
             $email->getDomain()->addOption($domain['domain'], $domain['domain']);
         }
 
-        $mailboxes = $this->db()->getMailboxes();
+        $mailboxes = $this->db()->mailboxSelect();
         while ($mbox = $mailboxes->fetch()) {
             $addr = $mbox['localpart'] . '@' . $mbox['domain'];
             $mailbox->addOption($addr, $addr);
@@ -81,7 +81,7 @@ class AliasCreate extends \hemio\edentata\Window {
                                 , 'mailbox_'
                         );
 
-                $this->db()->createAlias($args);
+                $this->db()->aliasCreate($args);
 
                 throw new exception\Successful();
             } else {

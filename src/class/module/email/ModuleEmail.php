@@ -41,7 +41,7 @@ class ModuleEmail extends edentata\Module {
                 $content = (new Overview($this))->content();
                 break;
 
-            case 'edit_mailbox':
+            case 'mailbox_edit':
                 $content = (new MailboxDetails($this))->content($this->request->subject);
                 break;
 
@@ -57,11 +57,11 @@ class ModuleEmail extends edentata\Module {
                 }
                 break;
 
-            case 'create':
-                $content = (new Create($this))->content();
+            case 'address_create':
+                $content = (new AddressCreate($this))->content();
                 break;
 
-            case 'create_mailbox':
+            case 'mailbox_create':
                 try {
                     $content = (new MailboxCreate($this))->content();
                 } catch (exception\Successful $e) {
@@ -70,7 +70,7 @@ class ModuleEmail extends edentata\Module {
 
                 break;
 
-            case 'create_alias':
+            case 'alias_create':
                 try {
                     $content = (new AliasCreate($this))->content($this->request->subject);
                 } catch (exception\Successful $e) {

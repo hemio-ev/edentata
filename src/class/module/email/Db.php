@@ -40,7 +40,7 @@ class Db extends \hemio\edentata\ModuleDb {
      * 
      * @return \PDOStatement
      */
-    public function getMailboxes($activeOnly = true) {
+    public function mailboxSelect($activeOnly = true) {
         $stmt = new sql\QuerySelectFunction(
                 $this->pdo, 'email.sel_mailbox'
         );
@@ -55,7 +55,7 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute();
     }
 
-    public function createMailbox(array $params) {
+    public function mailboxCreate(array $params) {
         $stmt = new sql\QuerySelectFunction(
                 $this->pdo
                 , 'email.ins_mailbox'
@@ -85,7 +85,7 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute();
     }
 
-    public function getAliases($mailboxLocalpart, $mailboxDomain) {
+    public function aliasSelect($mailboxLocalpart, $mailboxDomain) {
         $stmt = new sql\QuerySelectFunction(
                 $this->pdo
                 , 'email.sel_alias'
@@ -98,7 +98,7 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute(['localpart' => $mailboxLocalpart, 'domain' => $mailboxDomain]);
     }
 
-    public function createAlias(array $params) {
+    public function aliasCreate(array $params) {
         $stmt = new sql\QuerySelectFunction(
                 $this->pdo
                 , 'email.ins_alias'
