@@ -17,47 +17,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata;
+namespace hemio\edentata\module\email_list;
+
+use hemio\edentata\gui;
+use hemio\html\String;
 
 /**
- * Description of Module
+ * Description of Overview
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-abstract class Module {
+class Overview extends \hemio\edentata\Window {
 
-    /**
-     *
-     * @var Request
-     */
-    public $request;
+    public function content() {
+        $window = $this->newWindow(_('Mailing Lists'), null, false);
 
-    /**
-     * Database connection
-     * 
-     * @var sql\Connection
-     */
-    public $pdo;
-    
-    /**
-     *
-     * @var ModuleDb
-     */
-    public $db;
-    
-    /**
-     * @return string Localized module name
-     */
-    abstract public static function getName();
+        $lists = $this->db->listSelect(false)->fetchAll();
 
-    /**
-     * @return \hemio\html\Interface_\HtmlCode HTML code for module
-     */
-    abstract public function getContent();
+        $listbox = new gui\Listbox;
+        foreach ($lists as $list) {
+            $addr = $list['localpart'].'@'.$list['domain'];
+            $listbox->addLink(
+                    $this->module->request->derive('list_details', $addr)
+                    , new String($addr)
+            );
+        }
 
-    public function __construct(Request $request, sql\Connection $pdo) {
-        $this->request = $request;
-        $this->pdo = $pdo;
+        $window->addChild($listbox);
+
+        return $window;
     }
 
 }

@@ -28,7 +28,7 @@ use hemio\html;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Window {
+abstract class Window {
 
     /**
      *
@@ -48,7 +48,7 @@ class Window {
      */
     public function __construct(Module $module) {
         $this->module = $module;
-        $this->db = new module\email\Db($module->pdo);
+        $this->db = $module->db;
     }
 
     /**
@@ -66,8 +66,15 @@ class Window {
     ) {
         $window = new gui\WindowModule($title, $subtitle);
         $window->setModule($this->module);
-        $window->addOverviewButton($addOverviewButton);
+
+        if ($addOverviewButton)
+            $window->addOverviewButton();
+
         return $window;
+    }
+
+    public function newForm($formName) {
+        return new gui\FormPost($formName, $this->module->request->post);
     }
 
     public function newFormWindow(
@@ -80,7 +87,7 @@ class Window {
         $window = new gui\WindowModuleWithForm($title, $subtitle);
         $window->setModule($this->module);
 
-        $form = new gui\FormPost($formName, $this->module->request->post);
+        $form = $this->newForm($formName);
         $window->setForm($form);
 
         if ($submitText) {
@@ -101,26 +108,30 @@ class Window {
     , $subtitle
     , $message
     , $deleteText
+    , $protectedDelete = false
     ) {
         $window = new gui\WindowModuleWithForm($title, $subtitle);
         $window->setModule($this->module);
         $window->addCssClass('delete_dialog');
 
-        $form = new gui\FormPost($formName, $this->module->request->post);
+        $form = $this->newForm($formName);
         $window->setForm($form);
 
         $msg = new html\P();
         $msg->addCssClass('text');
         $msg->addChild(new html\String($message));
 
-        $switch = new gui\FieldSwitch('enable_delete', _('Permit Deletion'));
-        $switch->setForm($form);
-        $switch->getControlElement()->addCssClass('delete_perimition');
-        $switch->setRequired();
+        if ($protectedDelete) {
+            $switch = new gui\FieldSwitch('enable_delete', _('Permit Deletion'));
+            $switch->setForm($form);
+            $switch->getControlElement()->addCssClass('delete_perimition');
+            $switch->setRequired();
 
-        $hint = new html\P;
-        $hint->addCssClass('hint');
-        $hint->addChild(new html\String(_('You must activate the switch before you can submit')));
+
+            $hint = new html\P;
+            $hint->addCssClass('hint');
+            $hint->addChild(new html\String(_('You must activate the switch before you can submit')));
+        }
 
         $cancelButton = new gui\LinkButton(
                 $this->module->request->derive()
@@ -135,8 +146,11 @@ class Window {
         $buttonGroup->addChild($cancelButton);
 
         $window->addChild($msg);
-        $window->addChild($switch);
-        $window->addChild($hint);
+        if ($protectedDelete) {
+            $window->addChild($switch);
+            $window->addChild($hint);
+        }
+        $window['mid'] = new form\Container();
         $window->addChild($buttonGroup);
 
         return $window;

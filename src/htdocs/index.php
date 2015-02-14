@@ -27,7 +27,7 @@ require_once 'vendor/autoload.php';
 
 # external data
 $request = new Request($_GET, $_POST);
-$modulesNavi = ['email'];
+$modulesNavi = ['email', 'email_list'];
 
 $activeModuleName = $request->module;
 

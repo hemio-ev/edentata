@@ -50,8 +50,8 @@ class LoadModule {
      * lowercase letter, number or underscore. It must not contain more then
      * 50 characters.
      * 
-     * @param type $name
-     * @return type
+     * @param string $moduleId
+     * @return boolean
      */
     public static function validName($moduleId) {
         $match = preg_match('/^[a-z][a-z0-9_]+$/', $moduleId);

@@ -66,9 +66,10 @@ class MailboxDetails extends \hemio\edentata\Window {
         $list = new gui\Listbox();
 
         foreach ($aliases as $alias) {
+            $aliasAddr = $alias['localpart'] . '@' . $alias['domain'];
             $div = new html\Span();
-            $div->addChild(new String($alias['localpart'] . '@' . $alias['domain']));
-            $button = $div->addChild(new gui\LinkButton($this->module->request->derive(), _('Delete')));
+            $div->addChild(new String($aliasAddr));
+            $button = $div->addChild(new gui\LinkButton($this->module->request->derive('alias_delete', $aliasAddr), _('Delete')));
             #$button['form']['button']->addCssClass('progress');
             $list->addLine($div);
             #print_r($alias);

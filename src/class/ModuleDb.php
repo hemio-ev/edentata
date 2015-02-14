@@ -36,4 +36,12 @@ class ModuleDb {
         $this->pdo = $pdo;
     }
 
+    public function beginTransaction() {
+        $this->pdo->beginTransaction();
+    }
+
+    public function commit() {
+        $this->pdo->commit();
+    }
+
 }

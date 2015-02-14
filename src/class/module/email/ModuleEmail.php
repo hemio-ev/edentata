@@ -35,6 +35,7 @@ class ModuleEmail extends edentata\Module {
     }
 
     public function getContent() {
+        $this->db = new Db($this->pdo);
 
         switch ($this->request->action) {
             case '':

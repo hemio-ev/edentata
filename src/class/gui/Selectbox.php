@@ -56,11 +56,18 @@ class Selectbox extends html\Div {
         );
     }
 
-    public function addItem($name, $title, $buttons = []) {
+    /**
+     * 
+     * @param string $name
+     * @param string $title
+     * @param array $buttons
+     */
+    public function addItem($name, $title, array $buttons = []) {
         $item = new form\Container;
         $this->items->addChild($item);
 
         $item['checkbox'] = new form\FieldCheckbox($name, $title);
+        $item['checkbox']->setDefaultValue($title);
 
         $item['p'] = new html\P();
         $item['p']['label'] = new html\Label();
@@ -77,6 +84,19 @@ class Selectbox extends html\Div {
         $this->main['options'] = new html\P();
         $this->main['options']->addCssClass('options');
         $this->main['options']->addChild($options);
+    }
+
+    /**
+     * 
+     * @return array
+     */
+    public function getItemCheckboxFields() {
+        $fields = [];
+        foreach ($this->items as $item) {
+            $fields[] = $item['checkbox'];
+        }
+
+        return $fields;
     }
 
 }
