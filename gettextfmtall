@@ -1,0 +1,40 @@
+#!/usr/bin/python3
+
+import argparse
+import os
+import sys
+import subprocess
+
+parser = argparse.ArgumentParser(
+    prog = "gettextfmtall"
+)
+
+parser.add_argument("dir", metavar="<dir>", type=str)
+parser.add_argument("main_dir", metavar="<./locale>", type=str)
+parser.add_argument("main_domain", metavar="<edentata.po>", type=str)
+
+args = parser.parse_args()
+
+if (not os.path.isdir(args.dir)):
+    print("Directory does not exist")
+    sys.exit(1)
+
+for root,x,files in os.walk(args.dir):
+    valid_dir = True
+    for d in root.split("/"):
+        if len(d)>1 and d[0] == ".":
+            valid_dir = False
+            break
+
+    if valid_dir:
+        for f in files:
+            ext = os.path.splitext(f)
+            if ext[1] == ".po":
+                path = os.path.abspath(os.path.join(root, f))
+                newpath = os.path.abspath(os.path.join(root, ext[0] + '.mo'))
+                locale = path.split('/')[-3]
+                mainpath = os.path.abspath(os.path.join(args.main_dir,locale,'LC_MESSAGES',args.main_domain + '.po'))
+                if path != mainpath:
+                    ps = subprocess.Popen(['msgcat','--use-first',path,mainpath], stdout=subprocess.PIPE)
+                    output = subprocess.check_output(["msgfmt", "-o", newpath, "-"], stdin=ps.stdout)
+
