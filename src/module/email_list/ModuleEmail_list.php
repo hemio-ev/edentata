@@ -30,6 +30,14 @@ use hemio\edentata\exception\UnknownOperation;
  */
 class ModuleEmail_list extends \hemio\edentata\Module {
 
+    public static function getName() {
+        return _('Mailing Lists');
+    }
+
+    public static function getDir() {
+        return __DIR__;
+    }
+
     public function getContent() {
         $this->db = new Db($this->pdo);
 
@@ -51,10 +59,6 @@ class ModuleEmail_list extends \hemio\edentata\Module {
         }
 
         return $content;
-    }
-
-    public static function getName() {
-        return _('Mailing Lists');
     }
 
 }

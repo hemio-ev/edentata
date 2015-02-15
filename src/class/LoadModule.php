@@ -98,6 +98,15 @@ class LoadModule {
         return $moduleClass::getName();
     }
 
+    public function getDir() {
+        $moduleClass = $this->moduleClass;
+        return $moduleClass::getDir();
+    }
+    
+    public function getId() {
+        return $this->moduleId;
+    }
+
     /**
      * 
      * @param Request $request

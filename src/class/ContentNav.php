@@ -29,13 +29,20 @@ use hemio\html;
 class ContentNav {
 
     public $modules = [];
+    
+    /**
+     *
+     * @var I10n
+     */
+    protected $i10n;
 
     /**
      * 
      * @param array $modules
      */
-    public function __construct(array $modules) {
+    public function __construct(array $modules, I10n $i10) {
         $this->modules = $modules;
+        $this->i10n = $i10;
     }
 
     /**
@@ -58,10 +65,12 @@ class ContentNav {
         foreach ($this->modules as $moduleId) {
             try {
                 $module = new LoadModule($moduleId);
-
+                $this->i10n->setDomainModule($module);
                 $str = new html\String($module->getName());
+                $this->i10n->setDomainMain();
+
                 $a = new html\A();
-                $url= (new Request())->deriveModule($moduleId)->getUrl();
+                $url = (new Request())->deriveModule($moduleId)->getUrl();
                 $a->setAttribute('href', $url);
                 $a->addChild($str);
                 $ul->addLine($a);

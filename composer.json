@@ -19,7 +19,8 @@
     },
     "autoload": {
         "psr-4": {
-            "hemio\\edentata\\": "src/class/"
+            "hemio\\edentata\\": "src/class/",
+            "hemio\\edentata\\module\\": "src/module/"
         }
     }
 }

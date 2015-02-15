@@ -29,6 +29,8 @@ require_once 'vendor/autoload.php';
 $request = new Request($_GET, $_POST);
 $modulesNavi = ['email', 'email_list'];
 
+$i10 = new I10n();
+
 $activeModuleName = $request->module;
 
 try {
@@ -60,7 +62,7 @@ try {
     $qryAuth->execute();
 
 # navi
-    $nav = (new ContentNav($modulesNavi))->getNav();
+    $nav = (new ContentNav($modulesNavi, $i10))->getNav();
     while ($nav->unhandledEvents()) {
         try {
             $nav->handleEvent();
@@ -72,6 +74,7 @@ try {
 
 # module
     $loadedModule = new LoadModule($activeModuleName, $pdo);
+    $i10->setDomainModule($loadedModule);
 
 # generate content
     $content = $loadedModule->getContent($request);

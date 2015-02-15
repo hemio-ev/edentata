@@ -34,6 +34,10 @@ class ModuleEmail extends edentata\Module {
         return _('Email');
     }
 
+    public static function getDir() {
+        return __DIR__;
+    }
+
     public function getContent() {
         $this->db = new Db($this->pdo);
 

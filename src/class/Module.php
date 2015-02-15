@@ -49,7 +49,12 @@ abstract class Module {
      * @return string Localized module name
      */
     abstract public static function getName();
-
+    
+    /**
+     * @return string Module directory
+     */
+    abstract public static function getDir();
+    
     /**
      * @return \hemio\html\Interface_\HtmlCode HTML code for module
      */

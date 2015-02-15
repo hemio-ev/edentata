@@ -1,0 +1,42 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: edentata email lists\n"
+"POT-Creation-Date: 2015-02-15 19:59+0100\n"
+"PO-Revision-Date: 2015-02-15 19:59+0100\n"
+"Last-Translator: Michael Herold <quabla@hemio.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ListDetails.php:33
+msgid "Email List"
+msgstr "Mailingliste"
+
+#: ListDetails.php:49
+msgid "Move …"
+msgstr "Verschieben …"
+
+#: ListDetails.php:51 SubscribersUnsubscribe.php:43
+msgid "Unsubscribe"
+msgstr "Austragen"
+
+#: ModuleEmail_list.php:34 Overview.php:33
+msgid "Mailing Lists"
+msgstr "Mailinglisten"
+
+#: SubscribersUnsubscribe.php:40
+msgid "Unsubscribe from List"
+msgstr ""
+
+#~ msgid "Email"
+#~ msgstr "Mailinglistes"
+
+#~ msgid "Services"
+#~ msgstr "bla"

@@ -1,0 +1,115 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: edentata email\n"
+"POT-Creation-Date: 2015-02-15 19:41+0100\n"
+"PO-Revision-Date: 2015-02-15 19:45+0100\n"
+"Last-Translator: Michael Herold <quabla@hemio.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: AddressCreate.php:32
+msgid "Create Email Address"
+msgstr "E-Mail-Adresse Erstellen"
+
+#: AddressCreate.php:34
+msgid "Delivery for new Address"
+msgstr ""
+
+#: AddressCreate.php:37
+msgid "Create new mailbox for incoming emails"
+msgstr "Neues Postfach für eingegende E-Mails erstellen"
+
+#: AddressCreate.php:41
+msgid "Deliver emails to existing mailbox (alias)"
+msgstr ""
+
+#: AddressCreate.php:45
+msgid "Deliver emails to external mailbox (redirection)"
+msgstr ""
+
+#: AliasCreate.php:36
+msgid "Create Email Alias"
+msgstr ""
+
+#: AliasCreate.php:38 MailboxCreate.php:38
+msgid "Create"
+msgstr "Erstellen"
+
+#: AliasCreate.php:41 MailboxCreate.php:41
+msgid "New Email Address"
+msgstr "Neues E-Mail-Addresse"
+
+#: AliasCreate.php:44
+msgid "Deliver emails to"
+msgstr ""
+
+#: AliasCreate.php:45
+msgid "Mailbox"
+msgstr "Postfach"
+
+#: MailboxCreate.php:44
+msgid "Password"
+msgstr "Passwort"
+
+#: MailboxDelete.php:34
+#, php-format
+msgid ""
+"Are you sure you want to permanently delete the mailbox \"%1$s\"? If you "
+"delete a mailbox, all stored  emails will be permanently lost and you will "
+"no longer be reachable via \"%1$s\"."
+msgstr ""
+
+#: MailboxDelete.php:45
+msgid "Delete Mailbox"
+msgstr "Postfach Löschen"
+
+#: MailboxDetails.php:46
+msgid "Email Mailbox"
+msgstr "E-Mail Postfach"
+
+#: MailboxDetails.php:72
+msgid "Delete"
+msgstr "Löschen"
+
+#: MailboxDetails.php:80
+msgid "Aliases"
+msgstr ""
+
+#: MailboxDetails.php:89
+msgid "Possible Actions"
+msgstr "Mögliche Aktionen"
+
+#: MailboxDetails.php:93
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: MailboxDetails.php:98
+msgid "Create alias for this mailbox"
+msgstr ""
+
+#: MailboxDetails.php:103
+msgid "Delete entire mailbox"
+msgstr ""
+
+#: MailboxPassword.php:37
+msgid "Change Password"
+msgstr "Passwort Ändern"
+
+#: ModuleEmail.php:34 Overview.php:34
+msgid "Email"
+msgstr "E-Mail"
+
+#: Overview.php:37
+msgid "New Address"
+msgstr "Neue Adresse"
+
+#: Overview.php:41
+msgid "Mailboxes"
+msgstr "Postfächer"
