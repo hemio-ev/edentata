@@ -48,20 +48,33 @@ try {
     $body['main_content']->setId('main_content');
     $body['main_content']['messages'] = new \hemio\form\Container;
 
-# db connect
+    # db connect
     $pdo = new sql\Connection('pgsql:dbname=test1', 'postgres');
     $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
 
-# db auth
-    $usrData = [
-        'p_name' => 'user1',
-        'p_password' => 'testtest'
-    ];
-    $qryAuth = new sql\QuerySelectFunction($pdo, 'user.ins_login', $usrData);
-    $qryAuth->execute();
+    # db auth
+    if (!isset($_SERVER['PHP_AUTH_USER']) && !isset($_SERVER['PHP_AUTH_PW'])) {
+        header('WWW-Authenticate: Basic realm="Edentata"');
+        header('HTTP/1.1 401 Unauthorized');
+        throw new exception\Error(_('Login failed'));
+    }
 
-# navi
+    $usrData = [
+        'p_name' => $_SERVER['PHP_AUTH_USER'],
+        'p_password' => $_SERVER['PHP_AUTH_PW']
+    ];
+
+    try {
+        $qryAuth = new sql\QuerySelectFunction($pdo, 'user.ins_login', $usrData);
+        $qryAuth->execute();
+    } catch (\Exception $e) {
+        header('WWW-Authenticate: Basic realm="Edentata"');
+        header('HTTP/1.1 401 Unauthorized');
+        throw new exception\Error(_('Login failed'));
+    }
+
+    # navi
     $nav = (new ContentNav($modulesNavi, $i10))->getNav();
     while ($nav->unhandledEvents()) {
         try {
@@ -72,11 +85,11 @@ try {
     }
     $body['main_nav'][] = $nav->getContent();
 
-# module
+    # module
     $loadedModule = new LoadModule($activeModuleName, $pdo);
     $i10->setDomainModule($loadedModule);
 
-# generate content
+    # generate content
     $content = $loadedModule->getContent($request);
     $body['main_content']->addChild($content);
 } catch (\PDOException $e) {
@@ -85,8 +98,5 @@ try {
 } catch (exception\Printable $e) {
     $body['main_content']['messages']->addChild(new gui\Message($e));
 }
-
-
-
 
 echo $doc->__toString();

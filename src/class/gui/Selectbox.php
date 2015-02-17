@@ -67,7 +67,7 @@ class Selectbox extends html\Div {
         $this->items->addChild($item);
 
         $item['checkbox'] = new form\FieldCheckbox($name, $title);
-        $item['checkbox']->setDefaultValue($title);
+        $item['checkbox']->setDefaultValue($name);
 
         $item['p'] = new html\P();
         $item['p']['label'] = new html\Label();
