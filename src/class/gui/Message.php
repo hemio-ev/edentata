@@ -43,6 +43,15 @@ class Message extends form\Container {
 
         $this['article']['p'] = new html\P();
         $this['article']['p'][] = new html\String($event->getMessage());
+
+        if ($event->backTo !== null)
+            $backUrl = $event->backTo;
+        else
+            $backUrl = new \hemio\edentata\Request();
+
+        $this['article']
+                ->addChild(new ButtonGroup())
+                ->addChild(new LinkButton($backUrl, _('OK')));
     }
 
 }

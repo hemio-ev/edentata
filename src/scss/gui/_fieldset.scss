@@ -43,6 +43,10 @@ article fieldset.buttons :last-child {
     float: left;
 }
 
+article fieldset.buttons :only-child {
+    float: right;
+}
+
 article fieldset.buttons form {
     display: inline-block;
 }

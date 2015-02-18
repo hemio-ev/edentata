@@ -43,6 +43,7 @@ class MailboxDelete extends \hemio\edentata\Window {
                 , $address
                 , sprintf($msg, $address)
                 , _('Delete Mailbox')
+                , true
         );
 
         $this->handleSubmit($window->getForm(), $address);

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata email\n"
-"POT-Creation-Date: 2015-02-15 19:41+0100\n"
-"PO-Revision-Date: 2015-02-15 19:45+0100\n"
+"POT-Creation-Date: 2015-02-18 01:15+0100\n"
+"PO-Revision-Date: 2015-02-18 01:16+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -38,13 +38,13 @@ msgstr ""
 msgid "Create Email Alias"
 msgstr ""
 
-#: AliasCreate.php:38 MailboxCreate.php:38
+#: AliasCreate.php:38 MailboxCreate.php:38 RedirectionCreate.php:36
 msgid "Create"
 msgstr "Erstellen"
 
 #: AliasCreate.php:41 MailboxCreate.php:41
 msgid "New Email Address"
-msgstr "Neues E-Mail-Addresse"
+msgstr "Neues E-Mail-Adresse"
 
 #: AliasCreate.php:44
 msgid "Deliver emails to"
@@ -53,6 +53,21 @@ msgstr ""
 #: AliasCreate.php:45
 msgid "Mailbox"
 msgstr "Postfach"
+
+#: AliasDelete.php:33
+#, php-format
+msgid ""
+"Do you really want to delete the alias \"%1$s\"? After deleting the alias "
+"you will no longer be reachable via \"%1$s\"."
+msgstr ""
+
+#: AliasDelete.php:39
+msgid "Deleta Alias"
+msgstr ""
+
+#: AliasDelete.php:42
+msgid "Delete Alias"
+msgstr "Alias Löschen"
 
 #: MailboxCreate.php:44
 msgid "Password"
@@ -102,14 +117,46 @@ msgstr ""
 msgid "Change Password"
 msgstr "Passwort Ändern"
 
+#: MailboxPassword.php:59
+msgid "The password of your mailbox has been changed successfully."
+msgstr ""
+
 #: ModuleEmail.php:34 Overview.php:34
 msgid "Email"
 msgstr "E-Mail"
 
-#: Overview.php:37
+#: Overview.php:38
 msgid "New Address"
 msgstr "Neue Adresse"
 
-#: Overview.php:41
+#: Overview.php:49
 msgid "Mailboxes"
 msgstr "Postfächer"
+
+#: Overview.php:77
+msgid "Redirections"
+msgstr "Umleitungen"
+
+#: RedirectionCreate.php:35
+msgid "New Redirection"
+msgstr "Neue Umleitung"
+
+#: RedirectionCreate.php:39
+msgid "Redirection from"
+msgstr ""
+
+#: RedirectionCreate.php:42
+msgid "Redirection to"
+msgstr ""
+
+#: RedirectionCreate.php:43
+msgid "Email Address"
+msgstr "E-Mail-Adresse"
+
+#: RedirectionDelete.php:30
+msgid "Do you really want to delete this redirection?"
+msgstr ""
+
+#: RedirectionDelete.php:34 RedirectionDelete.php:37
+msgid "Delete Redirection"
+msgstr "Umleitung Löschen"

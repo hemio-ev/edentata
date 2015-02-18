@@ -41,7 +41,7 @@ class AddressCreate extends \hemio\edentata\Window {
         $strAlias = _('Deliver emails to existing mailbox (alias)');
         $linkAlias = $selecting->addLink($reqAlias, $strAlias);
 
-        $reqRedirect = $this->module->request->derive('redirect_create');
+        $reqRedirect = $this->module->request->derive('redirection_create');
         $strRedirect = _('Deliver emails to external mailbox (redirection)');
         $selecting->addLink($reqRedirect, $strRedirect);
 

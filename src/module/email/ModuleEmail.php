@@ -46,12 +46,33 @@ class ModuleEmail extends edentata\Module {
                 $content = (new Overview($this))->content();
                 break;
 
-            case 'mailbox_edit':
-                $content = (new MailboxDetails($this))->content($this->request->subject);
+
+            case 'address_create':
+                $content = (new AddressCreate($this))->content();
                 break;
 
-            case 'mailbox_password':
-                $content = (new MailboxPassword($this))->content($this->request->subject);
+            case 'alias_create':
+                try {
+                    $content = (new AliasCreate($this))->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
+                break;
+
+            case 'alias_delete':
+                try {
+                    $content = (new AliasDelete($this))->content($this->request->subject, $this->request->item);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive('mailbox_details', true));
+                }
+                break;
+
+            case 'mailbox_create':
+                try {
+                    $content = (new MailboxCreate($this))->content();
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
                 break;
 
             case 'mailbox_delete':
@@ -62,26 +83,28 @@ class ModuleEmail extends edentata\Module {
                 }
                 break;
 
-            case 'address_create':
-                $content = (new AddressCreate($this))->content();
+            case 'mailbox_details':
+                $content = (new MailboxDetails($this))->content($this->request->subject);
                 break;
 
-            case 'mailbox_create':
+            case 'mailbox_password':
+                $content = (new MailboxPassword($this))->content($this->request->subject);
+                break;
+
+            case 'redirection_create':
                 try {
-                    $content = (new MailboxCreate($this))->content();
+                    $content = (new RedirectionCreate($this))->content();
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($this->request->derive());
                 }
-
                 break;
 
-            case 'alias_create':
+            case 'redirection_delete':
                 try {
-                    $content = (new AliasCreate($this))->content($this->request->subject);
+                    $content = (new RedirectionDelete($this))->content($this->request->subject);
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($this->request->derive());
                 }
-
                 break;
 
             default:

@@ -23,8 +23,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     @extend .window;
     border-radius: $article-radius-top;
     padding: 0.5em 1em;
+    background-image: url('success.svg');
+    min-height: 10em;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.message h2 {
+    margin-top: 0.4em;
+    font-size: 1.1em;
 }
 
 .message[role="alert"] {
-    background: #ff975f;
+    background-image: url('error.svg');
+}
+
+.message[role="alert"] h2 {
+    color: $button-delete-color;
 }

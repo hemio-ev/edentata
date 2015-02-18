@@ -47,8 +47,10 @@ body {
   text-align: justify;
   color: #2e3436;
   padding: 0;
-  margin: 0;
-  background-color: white;
+  margin: 0 auto;
+  background-color: white; }
+
+div.main {
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: center; }
@@ -73,6 +75,20 @@ h3 {
 #main_content {
   width: 32em;
   margin: 0 1em; }
+
+body > header {
+  background-color: #333;
+  padding: 0 1.5em;
+  line-height: 2em;
+  color: #EEE;
+  font-weight: bold;
+  text-align: center;
+  width: 30em;
+  display: block;
+  margin: auto;
+  border-radius: 0 0 1em 1em;
+  box-shadow: #333 0 0 3px;
+  margin-bottom: 1em; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -217,10 +233,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 .message {
   border-radius: 0.5em;
-  padding: 0.5em 1em; }
+  padding: 0.5em 1em;
+  background-image: url("success.svg");
+  min-height: 10em;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; }
+
+.message h2 {
+  margin-top: 0.4em;
+  font-size: 1.1em; }
 
 .message[role="alert"] {
-  background: #ff975f; }
+  background-image: url("error.svg"); }
+
+.message[role="alert"] h2 {
+  color: #c30f0f; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -821,6 +849,9 @@ article fieldset.buttons :first-child {
 
 article fieldset.buttons :last-child {
   float: left; }
+
+article fieldset.buttons :only-child {
+  float: right; }
 
 article fieldset.buttons form {
   display: inline-block; }

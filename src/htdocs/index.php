@@ -41,12 +41,20 @@ try {
 
     $body = $doc->getHtml()->getBody();
 
-    $body['main_nav'] = new html\Div();
-    $body['main_nav']->setId('main_nav');
+    $header = new html\Header();
+    $body['header'] = $header;
 
-    $body['main_content'] = new html\Div();
-    $body['main_content']->setId('main_content');
-    $body['main_content']['messages'] = new \hemio\form\Container;
+    $body['main'] = new html\Div();
+    $body['main']->addCssClass('main');
+
+    $mainNav = new html\Div();
+    $body['main']['main_nav'] = $mainNav;
+    $mainNav->setId('main_nav');
+
+    $mainContent = new html\Div();
+    $body['main']['main_content'] = $mainContent;
+    $mainContent->setId('main_content');
+    $mainContent['messages'] = new \hemio\form\Container;
 
     # db connect
     $pdo = new sql\Connection('pgsql:dbname=test1', 'postgres');
@@ -74,16 +82,18 @@ try {
         throw new exception\Error(_('Login failed'));
     }
 
+    $header->addChild(new html\String('Edentata – User: ' . $_SERVER['PHP_AUTH_USER']));
+
     # navi
     $nav = (new ContentNav($modulesNavi, $i10))->getNav();
     while ($nav->unhandledEvents()) {
         try {
             $nav->handleEvent();
         } catch (exception\Printable $event) {
-            $body['main_content']['messages'][] = new gui\Message($event);
+            $mainContent['messages'][] = new gui\Message($event);
         }
     }
-    $body['main_nav'][] = $nav->getContent();
+    $mainNav[] = $nav->getContent();
 
     # module
     $loadedModule = new LoadModule($activeModuleName, $pdo);
@@ -91,12 +101,12 @@ try {
 
     # generate content
     $content = $loadedModule->getContent($request);
-    $body['main_content']->addChild($content);
+    $mainContent->addChild($content);
 } catch (\PDOException $e) {
-    $body['main_content']['messages']
+    $mainContent['messages']
             ->addChild(new gui\Message(new exception\Error('*DB operation failed* ' . $e->getMessage())));
 } catch (exception\Printable $e) {
-    $body['main_content']['messages']->addChild(new gui\Message($e));
+    $mainContent['messages']->addChild(new gui\Message($e));
 }
 
 echo $doc->__toString();

@@ -108,6 +108,45 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute();
     }
 
+    public function aliasDelete(array $params) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.del_alias'
+                , $params
+        );
+
+        return $stmt->execute();
+    }
+
+    public function redirectionCreate(array $params) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.ins_redirection'
+                , $params
+        );
+
+        return $stmt->execute();
+    }
+
+    public function redirectionDelete(array $params) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.del_redirection'
+                , $params
+        );
+
+        return $stmt->execute();
+    }
+
+    public function redirectionSelect() {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.sel_redirection'
+        );
+
+        return $stmt->execute();
+    }
+
     /**
      * 
      * @return \PDOStatement

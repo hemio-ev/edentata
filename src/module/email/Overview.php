@@ -31,32 +31,34 @@ use hemio\html\String;
 class Overview extends \hemio\edentata\Window {
 
     public function content() {
-        $window = new \hemio\edentata\gui\Window(_('Email'));
+        $window = $this->newWindow(_('Email'), null, false);
+
         $window->addButtonRight(
                 new gui\LinkButton(
                 $this->module->request->derive('address_create'), _('New Address')
                 ), true
         );
 
+        $window->addChild($this->mailboxes());
+        $window->addChild($this->redirections());
+
+        return $window;
+    }
+
+    protected function mailboxes() {
         $fieldset = new gui\Fieldset(_('Mailboxes'));
         $accounts = new gui\Listbox();
 
-        $window
-                ->addChild($fieldset)
-                ->addChild($accounts);
-
+        $fieldset->addChild($accounts);
 
         $mailboxes = $this->db()->mailboxSelect(false);
 
         while ($mailbox = $mailboxes->fetch()) {
             $address = $mailbox['localpart'] . '@' . $mailbox['domain'];
-            $url = $this->module->request->derive('mailbox_edit', $address);
+            $url = $this->module->request->derive('mailbox_details', $address);
 
             $mailboxLi = $accounts->addLink($url, new String($address));
 
-            #$container['div']['span'] = new \hemio\html\Span;
-            #$container['div']['span'][] = new String('to be deleted');
-            #$container['div']['span']->addCssClass('progress');
             // get aliases
             $aliases = $this->db()->aliasSelect($mailbox['localpart'], $mailbox['domain']);
 
@@ -68,7 +70,29 @@ class Overview extends \hemio\edentata\Window {
             $mailboxLi->setPending($mailbox['backend_status']);
         }
 
-        return $window;
+        return $fieldset;
+    }
+
+    protected function redirections() {
+        $fieldset = new gui\Fieldset(_('Redirections'));
+        $redirections = new gui\Listbox();
+
+        $fieldset->addChild($redirections);
+
+        $redirectionData = $this->db()->redirectionSelect()->fetchAll();
+
+        foreach ($redirectionData as $redirection) {
+            $address = $redirection['localpart'] . '@' . $redirection['domain'];
+            $url = $this->module->request->derive('redirection_delete', $address);
+
+            $li = $redirections->addLink($url, new String($address));
+            $li->setPending($redirection['backend_status']);
+            
+            $subUl = $li->addList();
+            $subUl->addLine(new String($redirection['destination']));
+        }
+
+        return $fieldset;
     }
 
 }

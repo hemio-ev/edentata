@@ -27,9 +27,11 @@ body {
     text-align: justify;
     color: #2e3436;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     background-color: white;
+}
 
+div.main {
     display: flex;
     flex-wrap: wrap-reverse;
     justify-content: center;
@@ -60,4 +62,19 @@ h3 {
 #main_content {
     width: 32em;
     margin:  0 1em;
+}
+
+body > header {
+    background-color: $outer-color;
+    padding: 0 1.5em;
+    line-height: 2em;
+    color: #EEE;
+    font-weight: bold;
+    text-align: center;
+    width: 30em;
+    display: block;
+    margin: auto;
+    border-radius: 0 0 1em 1em;
+    box-shadow: $outer-color 0 0 3px;
+    margin-bottom: 1em;
 }

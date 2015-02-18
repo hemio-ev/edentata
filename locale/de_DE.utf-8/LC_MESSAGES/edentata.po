@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata\n"
-"POT-Creation-Date: 2015-02-15 00:39+0100\n"
-"PO-Revision-Date: 2015-02-15 00:43+0100\n"
+"POT-Creation-Date: 2015-02-18 01:17+0100\n"
+"PO-Revision-Date: 2015-02-18 01:17+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: src/class\n"
 
-#: src/class/ContentNav.php:50
+#: src/class/ContentNav.php:57
 msgid "Services"
 msgstr "Dienste"
 
@@ -93,6 +93,10 @@ msgstr "Ausstehende Einrichtung"
 #: src/class/gui/ListboxLink.php:61
 msgid "unknown status"
 msgstr "Unbekannter Status"
+
+#: src/class/gui/Message.php:54
+msgid "OK"
+msgstr ""
 
 #: src/class/gui/WindowModule.php:44
 msgid "Overview"

@@ -26,6 +26,12 @@ namespace hemio\edentata\exception;
 abstract class Printable extends \Exception implements Event {
 
     /**
+     *
+     * @var \hemio\edentata\Request
+     */
+    public $backTo = null;
+    
+    /**
      * @return string Localized title
      */
     abstract public static function title();

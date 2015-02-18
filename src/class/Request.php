@@ -56,10 +56,19 @@ class Request {
         $get = [];
 
         $get['module'] = $this->module;
-        if ($action)
+
+        if ($action === true)
+            $get['action'] = $this->action;
+        elseif ($action)
             $get['action'] = $action;
-        if ($subject)
+
+        if ($subject === true)
+            $get['subject'] = $this->subject;
+        elseif ($subject)
             $get['subject'] = $subject;
+
+        if ($item === true)
+            $get['item'] = $this->item;
         if ($item)
             $get['item'] = $item;
 
