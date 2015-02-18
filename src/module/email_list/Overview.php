@@ -37,9 +37,10 @@ class Overview extends \hemio\edentata\Window {
         $listbox = new gui\Listbox;
         foreach ($lists as $list) {
             $addr = $list['localpart'].'@'.$list['domain'];
-            $listbox->addLink(
+            $listbox->addLinkEntry(
                     $this->module->request->derive('list_details', $addr)
                     , new String($addr)
+                    , $list['backend_status']
             );
         }
 

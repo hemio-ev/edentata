@@ -20,12 +20,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 .selectbox {
+    @extend .listbox;
     background: transparent;
     margin: 0em;
     overflow: hidden;
     padding-bottom: $control-height + 1em;
     // sets new orientation for position: fixed
     transform: translateZ(0);
+    margin-bottom: 0.7em;
 }
 
 .selectbox .scroll {
@@ -44,7 +46,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // entries
 .selectbox p:not(.options) {
     @extend .listbox_entry;
-    font-size: 0.85em;
 }
 
 // clickable entry part
@@ -55,6 +56,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // text (and checkbox)
 .selectbox label span {
     margin: 0 1em;
+    height: auto;
+    width: auto;
 }
 
 // selected (clickable part)

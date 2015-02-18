@@ -20,6 +20,7 @@
 namespace hemio\edentata\gui;
 
 use hemio\html;
+use hemio\html\Interface_\HtmlCode;
 
 /**
  * Description of Listbox
@@ -35,12 +36,52 @@ class Listbox extends html\Ul {
 
     /**
      * 
-     * @param mixed $url
-     * @param string $text
-     * @return html\Li
+     * @param \hemio\edentata\Request $url
+     * @param HtmlCode $content
+     * @param type $backendStatus
+     * @return \hemio\edentata\gui\A
      */
-    public function addLink(\hemio\edentata\Request $url, html\Interface_\HtmlCode $text) {
-        return $this->addChild(new ListboxLink($text, $url));
+    public function addLinkEntry(
+    \hemio\edentata\Request $url
+    , HtmlCode $content
+    , $backendStatus = null
+    ) {
+
+        $a = new html\A;
+        $a->setAttribute('href', $url->getUrl());
+
+        $a->addChild(new html\Span)->addChild($content);
+        $a->addChild(new Progress($backendStatus));
+
+        $this->addChild(new html\Li)->addChild($a);
+        
+        return $a;
+    }
+
+    /**
+     * 
+     * @param HtmlCode $content
+     * @param type $backendStatus
+     * @param HtmlCode $buttons
+     * @return \hemio\html\Li
+     */
+    public function addEntry(
+    HtmlCode $content
+    , $backendStatus = null
+    , HtmlCode $buttons = null
+    ) {
+
+        $li = new html\Li();
+        $this->addChild($li);
+
+        $li->addChild(new html\Span)->addChild($content);
+        $li->addChild(new Progress($backendStatus));
+        if ($buttons !== null)
+            $li->addChild($buttons);
+
+        $li->addCssClass('listbox_content');
+
+        return $li;
     }
 
 }

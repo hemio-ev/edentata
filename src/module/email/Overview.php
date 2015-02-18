@@ -19,9 +19,10 @@
 
 namespace hemio\edentata\module\email;
 
-use hemio\edentata\sql;
 use hemio\edentata\gui;
 use hemio\html\String;
+use hemio\html;
+use hemio\form;
 
 /**
  * Description of Overview
@@ -57,17 +58,20 @@ class Overview extends \hemio\edentata\Window {
             $address = $mailbox['localpart'] . '@' . $mailbox['domain'];
             $url = $this->module->request->derive('mailbox_details', $address);
 
-            $mailboxLi = $accounts->addLink($url, new String($address));
+            $mailboxEntry = $accounts->addLinkEntry(
+                    $url
+                    , new String($address)
+                    , $mailbox['backend_status']
+            );
 
             // get aliases
             $aliases = $this->db()->aliasSelect($mailbox['localpart'], $mailbox['domain']);
 
-            $ul = $mailboxLi->addList();
+            $ul = $mailboxEntry->addChild(new html\Ul);
             while ($alias = $aliases->fetch()) {
-                $ul->addLine(new String($alias['localpart'] . '@' . $alias['domain']));
+                $li = $ul->addLine(new String($alias['localpart'] . '@' . $alias['domain']));
+                $li->addChild(new gui\Progress($alias['backend_status']));
             }
-
-            $mailboxLi->setPending($mailbox['backend_status']);
         }
 
         return $fieldset;
@@ -84,12 +88,18 @@ class Overview extends \hemio\edentata\Window {
         foreach ($redirectionData as $redirection) {
             $address = $redirection['localpart'] . '@' . $redirection['domain'];
             $url = $this->module->request->derive('redirection_delete', $address);
+            $button = new gui\LinkButton($url, _('Delete'));
 
-            $li = $redirections->addLink($url, new String($address));
-            $li->setPending($redirection['backend_status']);
-            
-            $subUl = $li->addList();
-            $subUl->addLine(new String($redirection['destination']));
+            $span = new form\Container;
+            $span[] = new String($address);
+            $span['ul'] = new html\Ul;
+            $span['ul']->addLine(new String($redirection['destination']));
+
+            $redirections->addEntry(
+                    $span
+                    , $redirection['backend_status']
+                    , $button
+            );
         }
 
         return $fieldset;

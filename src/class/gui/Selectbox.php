@@ -62,7 +62,7 @@ class Selectbox extends html\Div {
      * @param string $title
      * @param array $buttons
      */
-    public function addItem($name, $title, array $buttons = []) {
+    public function addItem($name, $title, $backendStatus = null) {
         $item = new form\Container;
         $this->items->addChild($item);
 
@@ -78,6 +78,8 @@ class Selectbox extends html\Div {
         $item['p']['label']->setAttribute(
                 'for', $item['checkbox']->getHtmlName()
         );
+
+        $item['p']['label'][] = new Progress($backendStatus);
     }
 
     public function setOptions(html\Interface_\HtmlCode $options) {

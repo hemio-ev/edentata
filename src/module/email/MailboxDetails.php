@@ -32,29 +32,11 @@ use hemio\html\String;
 class MailboxDetails extends \hemio\edentata\Window {
 
     public function content($address) {
-        /*
-          $xs = explode('@', $address, 2);
-          $params = [
-          'localpart' => $xs[0],
-          'domain' => $xs[1]
-          ];
-         * 
-         */
-
         $window = $this->newFormWindow(
                 'edit_account'
                 , _('Email Mailbox')
                 , $address
         );
-
-        /*
-          $stmt = new sql\QuerySelectFunction($this->module->pdo, 'email.sel_mailbox');
-          $stmt->options('WHERE localpart = :localpart AND domain = :domain');
-          $res = $stmt->execute($params);
-
-          $account = $res->fetch();
-          $address = $account['localpart'] . '@' . $account['domain'];
-         */
 
         $resAliases = $this->db()->aliasSelect(
                 Utils::addrLocalpart($address)
@@ -67,12 +49,21 @@ class MailboxDetails extends \hemio\edentata\Window {
 
         foreach ($aliases as $alias) {
             $aliasAddr = $alias['localpart'] . '@' . $alias['domain'];
-            $div = new html\Span();
-            $div->addChild(new String($aliasAddr.' '.$alias['backend_status']));
-            $button = $div->addChild(new gui\LinkButton($this->module->request->derive('alias_delete', $address,  $aliasAddr), _('Delete')));
-            #$button['form']['button']->addCssClass('progress');
-            $list->addLine($div);
-            #print_r($alias);
+            $button = new gui\LinkButton(
+                    $this->module->request->derive(
+                            'alias_delete'
+                            , $address
+                            , $aliasAddr
+                    )
+                    , _('Delete')
+            );
+
+
+            $list->addEntry(
+                    new String($aliasAddr)
+                    , $alias['backend_status']
+                    , $button
+            );
         }
 
         if (count($aliases) > 0) {

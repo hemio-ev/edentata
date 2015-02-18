@@ -41,7 +41,8 @@ class ListDetails extends \hemio\edentata\Window {
             //todo add extra prefix outside of name logic
             $selectbox->addItem(
                     $subscriber['address']
-                    , $subscriber['address'].$subscriber['backend_status']
+                    , $subscriber['address']
+                    , $subscriber['backend_status']
             );
         }
         $options = new \hemio\form\Container();
@@ -55,15 +56,6 @@ class ListDetails extends \hemio\edentata\Window {
         $selectbox->setOptions($options);
 
         return $window;
-    }
-
-    public function handleUnsubscribe(gui\FormPost $form) {
-        $x = $form->getValueUser($form->getHtmlName() . '_subscriber');
-        var_dump($x);
-    }
-
-    public function handleMove(gui\FormPost $form) {
-        echo 'clicked move';
     }
 
 }

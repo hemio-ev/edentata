@@ -543,7 +543,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   background: linear-gradient(#fafafa, #e0e0e0);
   padding-right: 1em;
   padding-left: 1em;
-  min-width: 6.5em;
+  min-width: 7.5em;
   transition-property: opacity;
   transition-duration: 400ms; }
 
@@ -876,13 +876,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Created on : Jan 20, 2015, 1:25:13 AM
     Author     : Michael Herold <quabla@hemio.de>
 */
-.listbox_frame, ul.listbox, .selectbox .scroll {
+.listbox_frame, ul.listbox, ul.selectbox, .selectbox .scroll {
   margin: 1em;
   border: 1px #a1a1a1 solid;
   padding: 0;
   background-color: white; }
 
-.listbox_entry, ul.listbox > li, .selectbox p:not(.options) {
+.listbox_entry, ul.listbox > li, ul.selectbox > li, .selectbox p:not(.options) {
   display: block;
   border-bottom: 1px solid #d4d4d4;
   min-height: 3.5em;
@@ -890,20 +890,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   align-items: center;
   margin: 0; }
 
-ul.listbox button {
-  margin-right: 0.75em; }
-
-ul.listbox button:first-of-type {
-  margin-left: auto; }
-
-ul.listbox li:last-child {
+ul.listbox li:last-child, ul.selectbox li:last-child {
   border-bottom: none; }
 
-ul.listbox span, ul.listbox a {
-  padding: 0 1em; }
-
-.listbox_content, .listbox_link, ul.listbox a, .selectbox label {
+.listbox_content, .listbox_link, .listbox .listbox_entry > a, .selectbox .listbox_entry > a, ul.listbox > li > a, .selectbox ul.listbox > li > a, .listbox ul.selectbox > li > a, ul.selectbox > li > a, .selectbox p:not(.options) > a, .selectbox label {
   display: block;
+  padding: 0 1em;
   min-height: 3.5em;
   display: flex;
   align-items: center;
@@ -911,37 +903,46 @@ ul.listbox span, ul.listbox a {
   margin: 0;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  justify-content: flex-end; }
 
-.listbox_link, ul.listbox a, .selectbox label {
+.listbox_content > :nth-child(1), .listbox_link > :nth-child(1), .listbox .listbox_entry > a > :nth-child(1), .selectbox .listbox_entry > a > :nth-child(1), ul.listbox > li > a > :nth-child(1), ul.selectbox > li > a > :nth-child(1), .selectbox p:not(.options) > a > :nth-child(1), .selectbox label > :nth-child(1) {
+  margin-right: auto; }
+
+.listbox_content button, .listbox_link button, .listbox .listbox_entry > a button, .selectbox .listbox_entry > a button, ul.listbox > li > a button, .selectbox ul.listbox > li > a button, .listbox ul.selectbox > li > a button, ul.selectbox > li > a button, .selectbox p:not(.options) > a button, .selectbox label button {
+  margin-left: 0.75em;
+  font-size: 0.95em;
+  min-width: 6em; }
+
+.listbox_content ul, .listbox_link ul, .listbox .listbox_entry > a ul, .selectbox .listbox_entry > a ul, ul.listbox > li > a ul, .selectbox ul.listbox > li > a ul, .listbox ul.selectbox > li > a ul, ul.selectbox > li > a ul, .selectbox p:not(.options) > a ul, .selectbox label ul {
+  flex-basis: 100%; }
+
+.listbox_link, .listbox .listbox_entry > a, .selectbox .listbox_entry > a, ul.listbox > li > a, .selectbox ul.listbox > li > a, .listbox ul.selectbox > li > a, ul.selectbox > li > a, .selectbox p:not(.options) > a, .selectbox label {
   text-decoration: none;
   color: inherit;
   transition-property: background-color;
   transition-duration: 400ms; }
 
-.listbox_link:hover, ul.listbox a:hover, .selectbox label:hover {
+.listbox_link:hover, .listbox .listbox_entry > a:hover, .selectbox .listbox_entry > a:hover, ul.listbox > li > a:hover, ul.selectbox > li > a:hover, .selectbox p:not(.options) > a:hover, .selectbox label:hover {
   background-color: #f3f3f3; }
 
-ul.listbox a div {
-  font-weight: bold;
-  width: 100%; }
-
-ul.listbox ul {
+.listbox ul, .selectbox ul {
   font-size: 0.9em;
   padding-left: 2em;
   list-style-type: square;
   font-weight: normal; }
 
-.listbox .progress {
+.listbox .progress, .selectbox .progress {
   font-size: 0.9em;
   background-image: url("progress.gif");
   background-position: right;
   background-size: contain;
   background-repeat: no-repeat;
-  float: right;
   color: gray;
-  font-weight: normal;
-  padding-right: 2em; }
+  padding-right: 2em;
+  padding-left: 0.5em;
+  white-space: nowrap; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -968,7 +969,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   margin: 0em;
   overflow: hidden;
   padding-bottom: 3.4em;
-  transform: translateZ(0); }
+  transform: translateZ(0);
+  margin-bottom: 0.7em; }
 
 .selectbox .scroll {
   margin-bottom: 0; }
@@ -978,11 +980,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   left: -2em;
   width: 0; }
 
-.selectbox p:not(.options) {
-  font-size: 0.85em; }
-
 .selectbox label span {
-  margin: 0 1em; }
+  margin: 0 1em;
+  height: auto;
+  width: auto; }
 
 .selectbox input:checked + p label {
   background: #8ab7e7; }
