@@ -17,25 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\email;
+namespace hemio\edentata\gui;
+
+use hemio\form;
+use hemio\html;
 
 /**
- * Description of Utils
+ * Description of Hint
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Utils {
+class Hint extends form\Container {
 
-    public static function addrLocalpart($address) {
-        return explode('@', $address)[0];
-    }
-
-    public static function addrDomain($address) {
-        return explode('@', $address)[1];
-    }
-
-    public static function toAddr(array $param) {
-        return $param['localpart'] . '@' . $param['domain'];
+    public function __construct($text) {
+        $this['p'] = new html\P();
+        $this['p']->addCssClass('hint');
+        $this['p'][] = new html\String($text);
     }
 
 }

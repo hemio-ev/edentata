@@ -29,10 +29,30 @@ use hemio\edentata\module\email;
  */
 class Db extends \hemio\edentata\ModuleDb {
 
+    public function listCreate($args) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.ins_list'
+                , $args
+        );
+
+        return $stmt->execute();
+    }
+
     public function listSelect($activeOnly = true) {
         $stmt = new sql\QuerySelectFunction(
                 $this->pdo
                 , 'email.sel_list'
+        );
+
+        return $stmt->execute();
+    }
+
+    public function subscriberCreate(array $params) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.ins_list_subscriber'
+                , $params
         );
 
         return $stmt->execute();
@@ -44,9 +64,10 @@ class Db extends \hemio\edentata\ModuleDb {
                 , 'email.sel_list_subscriber'
         );
 
-        #$stmt->options('WHERE list_localpart = l')
+        $params = email\Db::emailAddressToArgs($list, 'list_');
+        $stmt->options('WHERE list_localpart = :p_list_localpart AND list_domain = :p_list_domain');
 
-        return $stmt->execute();
+        return $stmt->execute($params);
     }
 
     public function subscriberDelete($list, $subscriberAddr) {
@@ -60,6 +81,15 @@ class Db extends \hemio\edentata\ModuleDb {
         );
 
         return $stmt->execute();
+    }
+
+    public function availableDomains() {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo, 'dns.sel_available_service'
+        );
+        $stmt->options('WHERE service = :service');
+
+        return $stmt->execute(['service' => 'email__list']);
     }
 
 }

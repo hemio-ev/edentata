@@ -40,69 +40,99 @@ class Overview extends \hemio\edentata\Window {
                 ), true
         );
 
-        $window->addChild($this->mailboxes());
-        $window->addChild($this->redirections());
+        $mailboxes = $window->addChild($this->mailboxes());
+        $redirections = $window->addChild($this->redirections());
+
+        if (
+                $mailboxes instanceof html\Nothing &&
+                $redirections instanceof html\Nothing
+        ) {
+            $window->addChild($this->start());
+        }
 
         return $window;
     }
 
+    protected function start() {
+        $p1 = new html\P();
+        $p1->addCssClass('hint');
+        $p1[] = new String(_('You do not own any email addresses yet.'));
+
+        $p2 = new html\P();
+        $p2->addCssClass('hint');
+        $p2[] = new String(_('Start by creating a new one.'));
+
+        $c = new form\Container();
+        $c[] = $p1;
+        $c[] = $p2;
+
+        return $c;
+    }
+
     protected function mailboxes() {
-        $fieldset = new gui\Fieldset(_('Mailboxes'));
-        $accounts = new gui\Listbox();
+        $mailboxes = $this->db()->mailboxSelect(false)->fetchAll();
 
-        $fieldset->addChild($accounts);
+        if (!count($mailboxes)) {
+            return new html\Nothing();
+        } else {
+            $fieldset = new gui\Fieldset(_('Mailboxes'));
+            $accounts = new gui\Listbox();
+            $fieldset->addChild($accounts);
 
-        $mailboxes = $this->db()->mailboxSelect(false);
+            foreach ($mailboxes as $mailbox) {
+                $address = $mailbox['localpart'] . '@' . $mailbox['domain'];
+                $url = $this->module->request->derive('mailbox_details', $address);
 
-        while ($mailbox = $mailboxes->fetch()) {
-            $address = $mailbox['localpart'] . '@' . $mailbox['domain'];
-            $url = $this->module->request->derive('mailbox_details', $address);
+                $mailboxEntry = $accounts->addLinkEntry(
+                        $url
+                        , new String($address)
+                        , $mailbox['backend_status']
+                );
 
-            $mailboxEntry = $accounts->addLinkEntry(
-                    $url
-                    , new String($address)
-                    , $mailbox['backend_status']
-            );
+                // get aliases
+                $aliases = $this->db()->aliasSelect($mailbox['localpart'], $mailbox['domain']);
 
-            // get aliases
-            $aliases = $this->db()->aliasSelect($mailbox['localpart'], $mailbox['domain']);
-
-            $ul = $mailboxEntry->addChild(new html\Ul);
-            while ($alias = $aliases->fetch()) {
-                $li = $ul->addLine(new String($alias['localpart'] . '@' . $alias['domain']));
-                $li->addChild(new gui\Progress($alias['backend_status']));
+                $ul = $mailboxEntry->addChild(new html\Ul);
+                while ($alias = $aliases->fetch()) {
+                    $li = $ul->addLine(new String($alias['localpart'] . '@' . $alias['domain']));
+                    $li->addChild(new gui\Progress($alias['backend_status']));
+                }
             }
-        }
 
-        return $fieldset;
+            return $fieldset;
+        }
     }
 
     protected function redirections() {
-        $fieldset = new gui\Fieldset(_('Redirections'));
-        $redirections = new gui\Listbox();
-
-        $fieldset->addChild($redirections);
-
         $redirectionData = $this->db()->redirectionSelect()->fetchAll();
 
-        foreach ($redirectionData as $redirection) {
-            $address = $redirection['localpart'] . '@' . $redirection['domain'];
-            $url = $this->module->request->derive('redirection_delete', $address);
-            $button = new gui\LinkButton($url, _('Delete'));
+        if (!count($redirectionData)) {
+            return new html\Nothing();
+        } else {
+            $fieldset = new gui\Fieldset(_('Redirections'));
+            $redirections = new gui\Listbox();
+            $fieldset->addChild($redirections);
 
-            $span = new form\Container;
-            $span[] = new String($address);
-            $span['ul'] = new html\Ul;
-            $span['ul']->addLine(new String($redirection['destination']));
+            foreach ($redirectionData as $redirection) {
+                $address = Utils::toAddr($redirection);
+                $url = $this->module->request->derive('redirection_delete', $address);
+                $button = new gui\LinkButton($url, _('Delete'));
 
-            $redirections->addEntry(
-                    $span
-                    , $redirection['backend_status']
-                    , $button
-            );
+                $span = new form\Container;
+                $span->addChild(new String($address));
+                $span
+                        ->addChild(new html\Ul)
+                        ->addLine(new String($redirection['destination']));
+
+                $redirections->addEntry(
+                        $span
+                        , $redirection['backend_status']
+                        , $button
+                );
+            }
+
+            return $fieldset;
         }
-
-        return $fieldset;
     }
 
 }

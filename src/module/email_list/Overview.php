@@ -32,11 +32,18 @@ class Overview extends \hemio\edentata\Window {
     public function content() {
         $window = $this->newWindow(_('Mailing Lists'), null, false);
 
+        $window->addButtonRight(
+                new gui\LinkButton(
+                $this->module->request->derive('list_create')
+                , _('New List')
+                )
+                , true);
+
         $lists = $this->db->listSelect(false)->fetchAll();
 
         $listbox = new gui\Listbox;
         foreach ($lists as $list) {
-            $addr = $list['localpart'].'@'.$list['domain'];
+            $addr = $list['localpart'] . '@' . $list['domain'];
             $listbox->addLinkEntry(
                     $this->module->request->derive('list_details', $addr)
                     , new String($addr)

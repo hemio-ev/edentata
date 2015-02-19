@@ -32,10 +32,29 @@ class ListDetails extends \hemio\edentata\Window {
     public function content($list) {
         $window = $this->newFormWindow('select_subscribers', _('Email List'), $list);
 
+        $window->addButtonRight(
+                new gui\LinkButton(
+                $this->module->request->derive('subscribers_create', true)
+                , _('Add Subscriber')
+                )
+                , true);
+
+        $this->subscribers($window, $list);
+
+        return $window;
+    }
+
+    protected function subscribers(gui\WindowModuleWithForm $window, $list) {
         $subscribers = $this->db->subscriberSelect($list)->fetchAll();
 
+        $fieldset = new gui\Fieldset(_('Subscribers'));
         $selectbox = new gui\Selectbox();
-        $window->getForm()['selectbox'] = $selectbox;
+
+        $window->getForm()->addInheritableAppendage(
+                'selected_subscribers', $selectbox
+        );
+
+        $window->getForm()->addChild($fieldset)->addChild($selectbox);
 
         foreach ($subscribers as $subscriber) {
             //todo add extra prefix outside of name logic
@@ -54,8 +73,6 @@ class ListDetails extends \hemio\edentata\Window {
         $options[] = $unsubscribe;
 
         $selectbox->setOptions($options);
-
-        return $window;
     }
 
 }

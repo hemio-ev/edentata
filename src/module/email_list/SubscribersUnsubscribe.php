@@ -45,7 +45,8 @@ class SubscribersUnsubscribe extends \hemio\edentata\Window {
 
         $selectedSubscribers = (new ListDetails($this->module))
                 ->content($list)
-                ->getForm()['selectbox']
+                ->getForm()
+                ->getInheritableAppendage('selected_subscribers')
                 ->getItemCheckboxFields();
 
         $ul = new html\Ul;
@@ -79,6 +80,8 @@ class SubscribersUnsubscribe extends \hemio\edentata\Window {
                 }
             }
             $this->db->commit();
+            
+            throw new \hemio\edentata\exception\Successful;
         }
     }
 

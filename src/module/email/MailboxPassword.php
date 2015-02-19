@@ -58,7 +58,7 @@ class MailboxPassword extends \hemio\edentata\Window {
                 $e = new exception\Successful(
                         _('The password of your mailbox has been changed successfully.')
                 );
-                $e->backTo = $this->module->request->derive('mailbox_edit', true);
+                $e->backTo = $this->module->request->derive('mailbox_details', true);
 
                 throw $e;
             }
