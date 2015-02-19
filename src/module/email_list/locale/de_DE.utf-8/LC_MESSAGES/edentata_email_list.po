@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata email lists\n"
-"POT-Creation-Date: 2015-02-15 19:59+0100\n"
-"PO-Revision-Date: 2015-02-15 19:59+0100\n"
+"POT-Creation-Date: 2015-02-19 15:49+0100\n"
+"PO-Revision-Date: 2015-02-19 15:53+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -15,21 +15,57 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
+#: ListCreate.php:35
+msgid "New Mailing List"
+msgstr "Neue Mailingliste"
+
+#: ListCreate.php:37
+msgid "Create"
+msgstr "Erstellen"
+
+#: ListCreate.php:41
+msgid "List Owner"
+msgstr "Listeninhaber"
+
+#: ListCreate.php:47
+msgid "The address of the list owner is used for unsubscriber requests."
+msgstr ""
+
 #: ListDetails.php:33
 msgid "Email List"
 msgstr "Mailingliste"
 
-#: ListDetails.php:49
+#: ListDetails.php:38 SubscriberCreate.php:35
+msgid "Add Subscriber"
+msgstr "Neuer Abonnent"
+
+#: ListDetails.php:50
+msgid "Subscribers"
+msgstr "Abonnenten"
+
+#: ListDetails.php:69
 msgid "Move …"
 msgstr "Verschieben …"
 
-#: ListDetails.php:51 SubscribersUnsubscribe.php:43
+#: ListDetails.php:72 SubscribersUnsubscribe.php:43
 msgid "Unsubscribe"
 msgstr "Austragen"
 
 #: ModuleEmail_list.php:34 Overview.php:33
 msgid "Mailing Lists"
 msgstr "Mailinglisten"
+
+#: Overview.php:38
+msgid "New List"
+msgstr "Neue Liste"
+
+#: SubscriberCreate.php:37
+msgid "Subscribe"
+msgstr "Eintragen"
+
+#: SubscriberCreate.php:40
+msgid "Subscriber"
+msgstr "Abonnent"
 
 #: SubscribersUnsubscribe.php:40
 msgid "Unsubscribe from List"

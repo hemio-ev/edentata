@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata email\n"
-"POT-Creation-Date: 2015-02-18 01:15+0100\n"
-"PO-Revision-Date: 2015-02-18 01:16+0100\n"
+"POT-Creation-Date: 2015-02-19 15:48+0100\n"
+"PO-Revision-Date: 2015-02-19 15:49+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -61,11 +61,7 @@ msgid ""
 "you will no longer be reachable via \"%1$s\"."
 msgstr ""
 
-#: AliasDelete.php:39
-msgid "Deleta Alias"
-msgstr ""
-
-#: AliasDelete.php:42
+#: AliasDelete.php:39 AliasDelete.php:42
 msgid "Delete Alias"
 msgstr "Alias Löschen"
 
@@ -85,31 +81,31 @@ msgstr ""
 msgid "Delete Mailbox"
 msgstr "Postfach Löschen"
 
-#: MailboxDetails.php:46
+#: MailboxDetails.php:37
 msgid "Email Mailbox"
 msgstr "E-Mail Postfach"
 
-#: MailboxDetails.php:72
+#: MailboxDetails.php:58 Overview.php:119
 msgid "Delete"
 msgstr "Löschen"
 
-#: MailboxDetails.php:80
+#: MailboxDetails.php:71
 msgid "Aliases"
 msgstr ""
 
-#: MailboxDetails.php:89
+#: MailboxDetails.php:80
 msgid "Possible Actions"
 msgstr "Mögliche Aktionen"
 
-#: MailboxDetails.php:93
+#: MailboxDetails.php:84
 msgid "Change password"
 msgstr "Passwort ändern"
 
-#: MailboxDetails.php:98
+#: MailboxDetails.php:89
 msgid "Create alias for this mailbox"
 msgstr ""
 
-#: MailboxDetails.php:103
+#: MailboxDetails.php:94
 msgid "Delete entire mailbox"
 msgstr ""
 
@@ -121,19 +117,27 @@ msgstr "Passwort Ändern"
 msgid "The password of your mailbox has been changed successfully."
 msgstr ""
 
-#: ModuleEmail.php:34 Overview.php:34
+#: ModuleEmail.php:34 Overview.php:35
 msgid "Email"
 msgstr "E-Mail"
 
-#: Overview.php:38
+#: Overview.php:39
 msgid "New Address"
 msgstr "Neue Adresse"
 
-#: Overview.php:49
+#: Overview.php:59
+msgid "You do not own any email addresses yet."
+msgstr ""
+
+#: Overview.php:63
+msgid "Start by creating a new one."
+msgstr ""
+
+#: Overview.php:78
 msgid "Mailboxes"
 msgstr "Postfächer"
 
-#: Overview.php:77
+#: Overview.php:112
 msgid "Redirections"
 msgstr "Umleitungen"
 

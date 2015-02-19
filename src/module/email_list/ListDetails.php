@@ -67,7 +67,8 @@ class ListDetails extends \hemio\edentata\Window {
         $options = new \hemio\form\Container();
 
         $move = new \hemio\form\FieldSubmit('move', _('Move …'));
-        $options[] = $move;
+        #$options[] = $move;
+        
         $unsubscribe = new \hemio\form\FieldSubmit('unsubscribe', _('Unsubscribe'));
         $unsubscribe->getControlElement()->setAttribute('formaction', $this->module->request->derive('subscribers_unsubscribe', $list)->getUrl());
         $options[] = $unsubscribe;

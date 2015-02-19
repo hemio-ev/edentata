@@ -36,7 +36,7 @@ class AliasDelete extends \hemio\edentata\Window {
 
         $window = $this->newDeleteWindow(
                 'alias_delete'
-                , _('Deleta Alias')
+                , _('Delete Alias')
                 , $alias
                 , sprintf($message, $alias)
                 , _('Delete Alias')
