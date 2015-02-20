@@ -48,6 +48,7 @@ class QuerySelectFunction extends QuerySelect {
      * @var string 
      */
     protected $options = '';
+    protected $select = null;
 
     /**
      *
@@ -87,12 +88,29 @@ class QuerySelectFunction extends QuerySelect {
         $this->options = $options;
     }
 
+    public function select(array $select) {
+        $this->select = $select;
+    }
+
     /**
      * 
      * @return \PDOStatement
      */
     public function execute($params = []) {
-        $stmt = $this->pdo->prepare('SELECT * FROM ' . $this->getFunctionCall() . ' ' . $this->options);
+        if ($this->select === null) {
+            $selectString = '*';
+        } else {
+            $selectParts = [];
+            foreach ($this->select as $key => $value) {
+                if (is_int($key))
+                    $selectParts[] = $value;
+                else
+                    $selectParts[] = $key . ' AS ' . $value;
+            }
+            $selectString = implode(', ', $selectParts);
+        }
+
+        $stmt = $this->pdo->prepare('SELECT ' . $selectString . ' FROM ' . $this->getFunctionCall() . ' ' . $this->options);
         try {
             $stmt->execute($this->funcParams + $params);
         } catch (\PDOException $e) {
@@ -106,7 +124,6 @@ class QuerySelectFunction extends QuerySelect {
             } else {
                 throw $e;
             }
-                
         }
 
         return $stmt;

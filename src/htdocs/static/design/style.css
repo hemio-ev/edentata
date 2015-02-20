@@ -280,12 +280,12 @@ fieldset {
 form p, fieldset.buttons {
   sline-height: 2.4em; }
 
-.input_row, form p, input.switch ~ p label {
+.input_row, form p, input.switch + p label {
   display: flex;
   min-height: 2.4em;
   align-items: center; }
 
-.input_label, label, input.switch ~ p label span:first-child {
+.input_label, label, input.switch + p label span:first-child {
   width: 35%;
   margin-right: 1.5em;
   display: inline-block;
@@ -691,7 +691,7 @@ input.switch {
   height: 0;
   left: -2em; }
 
-input.switch ~ p label {
+input.switch + p label {
   width: 100%; }
 
 span.switch {
@@ -719,17 +719,20 @@ span.switch::before {
   transition-property: margin, color;
   transition-duration: 200ms; }
 
-input.switch:checked ~ p span.switch {
+input.switch:checked + p span.switch {
   background: linear-gradient(to right, #4a90d9 49%, #a1a1a1 51%, transparent 52%), linear-gradient(#fafafa, #e0e0e0); }
 
-input.switch:checked ~ p span.switch:hover {
+input.switch:checked + p span.switch:hover {
   background: linear-gradient(to right, #4a90d9 49%, #a1a1a1 51%, transparent 52%), linear-gradient(white, #ededed); }
 
-input.switch:checked ~ p span.switch::before {
+input.switch:checked + p span.switch::before {
   margin: 0;
   margin-right: 50%;
   color: white;
   content: 'On'; }
+
+.display_control:not(:checked) + * + * {
+  display: none; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -1065,16 +1068,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   margin: 0.5em 0;
   height: auto; }
 
-:lang(de) input.switch:checked ~ label span:last-of-type::before {
+:lang(de) input.switch:checked + label span:last-of-type::before {
   content: "An" !important; }
 
-:lang(de) input.switch ~ label span:last-of-type::before {
+:lang(de) input.switch + label span:last-of-type::before {
   content: "Aus" !important; }
 
-:lang(en) input.switch:checked ~ label span:last-of-type::before {
+:lang(en) input.switch:checked + label span:last-of-type::before {
   content: "On" !important; }
 
-:lang(en) input.switch ~ label span:last-of-type::before {
+:lang(en) input.switch + label span:last-of-type::before {
   content: "Off" !important; }
 
 article p.text {

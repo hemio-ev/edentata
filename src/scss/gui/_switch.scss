@@ -28,13 +28,13 @@ input.switch {
     left: -2em;
 }
 
-input.switch ~ p label {
+input.switch + p label {
     @extend .input_row;   
     width: 100%;
 
 }
 
-input.switch ~ p label span:first-child {
+input.switch + p label span:first-child {
     @extend .input_label;
 }
 
@@ -89,7 +89,7 @@ span.switch::before {
 }
 
 // checked
-input.switch:checked ~ p span.switch {
+input.switch:checked + p span.switch {
     background: 
         linear-gradient(
         to right, 
@@ -100,7 +100,7 @@ input.switch:checked ~ p span.switch {
         button-background-value($button-color);
 }
 
-input.switch:checked ~ p span.switch:hover {
+input.switch:checked + p span.switch:hover {
     background: 
         linear-gradient(
         to right, 
@@ -111,9 +111,13 @@ input.switch:checked ~ p span.switch:hover {
         button-background-hover-value($button-color);
 }
 
-input.switch:checked ~ p span.switch::before {
+input.switch:checked + p span.switch::before {
     margin: 0;
     margin-right: 50%;
     color: white;
     content: 'On';
+}
+
+.display_control:not(:checked) + * + * {
+    display: none;
 }

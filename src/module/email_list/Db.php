@@ -69,6 +69,8 @@ class Db extends \hemio\edentata\ModuleDb {
         if ($list) {
             $stmt->options('WHERE localpart=:p_localpart AND domain=:p_domain');
             $args = email\Db::emailAddressToArgs($list);
+        } else {
+            $stmt->options('ORDER BY backend_status, localpart, domain');
         }
 
         return $stmt->execute($args);
@@ -91,8 +93,8 @@ class Db extends \hemio\edentata\ModuleDb {
         );
 
         $params = email\Db::emailAddressToArgs($list, 'list_');
-        $stmt->options('WHERE list_localpart = :p_list_localpart AND list_domain = :p_list_domain');
-
+        $stmt->options('WHERE list_localpart = :p_list_localpart AND list_domain = :p_list_domain ORDER BY backend_status, address');
+       
         return $stmt->execute($params);
     }
 

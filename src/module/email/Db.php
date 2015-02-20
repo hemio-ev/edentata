@@ -143,6 +143,8 @@ class Db extends \hemio\edentata\ModuleDb {
                 $this->pdo
                 , 'email.sel_redirection'
         );
+        
+        $stmt->options('ORDER BY backend_status, localpart, domain');
 
         return $stmt->execute();
     }
