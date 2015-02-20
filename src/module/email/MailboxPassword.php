@@ -27,7 +27,7 @@ use hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class MailboxPassword extends \hemio\edentata\Window {
+class MailboxPassword extends Window {
 
     public function content($address) {
         $window = $this->newFormWindow(
@@ -53,7 +53,7 @@ class MailboxPassword extends \hemio\edentata\Window {
                 $args = $form->getVal(['password']) +
                         Db::emailAddressToArgs($address);
 
-                $this->db()->mailboxPassword($args);
+                $this->db->mailboxPassword($args);
 
                 $e = new exception\Successful(
                         _('The password of your mailbox has been changed successfully.')

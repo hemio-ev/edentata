@@ -27,7 +27,7 @@ use hemio\html\String;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Overview extends \hemio\edentata\Window {
+class Overview extends Window {
 
     public function content() {
         $window = $this->newWindow(_('Mailing Lists'), null, false);
@@ -46,7 +46,7 @@ class Overview extends \hemio\edentata\Window {
     }
 
     protected function lists() {
-        $lists = $this->db()->listSelect()->fetchAll();
+        $lists = $this->db->listSelect()->fetchAll();
 
         if (!count($lists)) {
             return new gui\Hint(_('You do not own any mailing lists.'));

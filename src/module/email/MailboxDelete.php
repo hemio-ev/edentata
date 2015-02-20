@@ -27,7 +27,7 @@ use hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class MailboxDelete extends \hemio\edentata\Window {
+class MailboxDelete extends Window {
 
     public function content($address) {
         $msg = _(
@@ -57,7 +57,7 @@ class MailboxDelete extends \hemio\edentata\Window {
             if ($form->dataValid()) {
                 $args = Db::emailAddressToArgs($address);
 
-                $this->db()->mailboxDelete($args);
+                $this->db->mailboxDelete($args);
 
                 throw new exception\Successful();
             }

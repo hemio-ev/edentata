@@ -38,9 +38,11 @@ class ModuleEmail extends edentata\Module {
         return __DIR__;
     }
 
-    public function getContent() {
+    protected function constructHook() {
         $this->db = new Db($this->pdo);
+    }
 
+    public function getContent() {
         switch ($this->request->action) {
             case '':
                 $content = (new Overview($this))->content();

@@ -28,7 +28,7 @@ use \hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class MailboxCreate extends \hemio\edentata\Window {
+class MailboxCreate extends Window {
 
     public function content() {
         $window = $this->newFormWindow(
@@ -52,7 +52,7 @@ class MailboxCreate extends \hemio\edentata\Window {
                 ->addChild($fieldsetPassword)
                 ->addChild($password);
 
-        $domains = $this->db()->getPossibleDomains();
+        $domains = $this->db->getPossibleDomains();
         while ($domain = $domains->fetch()) {
             $email->getDomain()->addOption($domain['domain'], $domain['domain']);
         }
@@ -65,7 +65,7 @@ class MailboxCreate extends \hemio\edentata\Window {
     protected function handleSubmit(gui\FormPost $form) {
         if ($form->submitted()) {
             if ($form->dataValid()) {
-                $this->db()->mailboxCreate(
+                $this->db->mailboxCreate(
                         $form->getVal(['localpart', 'domain', 'password'])
                 );
                 

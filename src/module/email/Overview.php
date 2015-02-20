@@ -29,7 +29,7 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Overview extends \hemio\edentata\Window {
+class Overview extends Window {
 
     public function content() {
         $window = $this->newWindow(_('Email'), null, false);
@@ -62,7 +62,7 @@ class Overview extends \hemio\edentata\Window {
     }
 
     protected function mailboxes() {
-        $mailboxes = $this->db()->mailboxSelect(false)->fetchAll();
+        $mailboxes = $this->db->mailboxSelect(false)->fetchAll();
 
         if (!count($mailboxes)) {
             return new html\Nothing();
@@ -82,7 +82,7 @@ class Overview extends \hemio\edentata\Window {
                 );
 
                 // get aliases
-                $aliases = $this->db()->aliasSelect($mailbox['localpart'], $mailbox['domain']);
+                $aliases = $this->db->aliasSelect($mailbox['localpart'], $mailbox['domain']);
 
                 $ul = $mailboxEntry->addChild(new html\Ul);
                 while ($alias = $aliases->fetch()) {
@@ -96,7 +96,7 @@ class Overview extends \hemio\edentata\Window {
     }
 
     protected function redirections() {
-        $redirectionData = $this->db()->redirectionSelect()->fetchAll();
+        $redirectionData = $this->db->redirectionSelect()->fetchAll();
 
         if (!count($redirectionData)) {
             return new html\Nothing();

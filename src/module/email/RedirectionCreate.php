@@ -27,7 +27,7 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class RedirectionCreate extends \hemio\edentata\Window {
+class RedirectionCreate extends Window {
 
     public function content() {
         $window = $this->newFormWindow(
@@ -50,7 +50,7 @@ class RedirectionCreate extends \hemio\edentata\Window {
                 ->addChild($fieldsetTo)
                 ->addChild($to);
 
-        $domains = $this->db()->getPossibleDomains();
+        $domains = $this->db->getPossibleDomains();
         while ($domain = $domains->fetch()) {
             $from->getDomain()->addOption($domain['domain'], $domain['domain']);
         }
@@ -65,7 +65,7 @@ class RedirectionCreate extends \hemio\edentata\Window {
             $args = $form->getVal(['localpart', 'domain']);
             $args['p_destination'] = $to->getValueUser();
 
-            $this->db()->redirectionCreate($args);
+            $this->db->redirectionCreate($args);
 
             throw new \hemio\edentata\exception\Successful();
         }

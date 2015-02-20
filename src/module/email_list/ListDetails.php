@@ -27,7 +27,7 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ListDetails extends \hemio\edentata\Window {
+class ListDetails extends Window {
 
     public function content($list) {
         $window = $this->newFormWindow('select_subscribers', _('Email List'), $list);

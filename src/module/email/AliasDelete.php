@@ -26,7 +26,7 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class AliasDelete extends \hemio\edentata\Window {
+class AliasDelete extends Window {
 
     public function content($mailbox, $alias) {
         $message = _(
@@ -51,7 +51,7 @@ class AliasDelete extends \hemio\edentata\Window {
         if ($form->correctSubmitted()) {
             $params = Db::emailAddressToArgs($alias);
             $params += Db::emailAddressToArgs($mailbox, 'mailbox_');
-            $this->db()->aliasDelete($params);
+            $this->db->aliasDelete($params);
             
             throw new \hemio\edentata\exception\Successful;
         }

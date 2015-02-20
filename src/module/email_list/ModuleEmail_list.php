@@ -36,11 +36,13 @@ class ModuleEmail_list extends \hemio\edentata\Module {
 
     public static function getDir() {
         return __DIR__;
+    } 
+    
+    protected function constructHook() {
+        $this->db = new Db($this->pdo);
     }
 
     public function getContent() {
-        $this->db = new Db($this->pdo);
-
         switch ($this->request->action) {
             case '':
                 $content = (new Overview($this))->content();

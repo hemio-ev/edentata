@@ -17,49 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata;
+namespace hemio\edentata\module\email;
 
 /**
- * Description of Module
+ * Description of Window
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-abstract class Module {
+class Window extends \hemio\edentata\Window {
 
     /**
      *
-     * @var Request
+     * @var ModuleEmail
      */
-    public $request;
+    protected $module;
 
     /**
-     * Database connection
-     * 
-     * @var sql\Connection
+     *
+     * @var Db
      */
-    public $pdo;
-
-    /**
-     * @return string Localized module name
-     */
-    abstract public static function getName();
-
-    /**
-     * @return string Module directory
-     */
-    abstract public static function getDir();
-
-    /**
-     * @return \hemio\html\Interface_\HtmlCode HTML code for module
-     */
-    abstract public function getContent();
-
-    abstract protected function constructHook();
-
-    public function __construct(Request $request, sql\Connection $pdo) {
-        $this->request = $request;
-        $this->pdo = $pdo;
-        $this->constructHook();
-    }
+    protected $db;
 
 }

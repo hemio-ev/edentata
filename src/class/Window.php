@@ -32,15 +32,9 @@ abstract class Window {
 
     /**
      *
-     * @var Module
+     * @var Request
      */
-    public $module;
-
-    /**
-     *
-     * @var ModuleDb
-     */
-    protected $db;
+    protected $request;
 
     /**
      * 
@@ -49,14 +43,7 @@ abstract class Window {
     public function __construct(Module $module) {
         $this->module = $module;
         $this->db = $module->db;
-    }
-
-    /**
-     * 
-     * @return ModuleDb
-     */
-    public function db() {
-        return $this->db;
+        $this->request = $module->request;
     }
 
     public function newWindow(

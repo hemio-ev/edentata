@@ -27,7 +27,7 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ListCreate extends \hemio\edentata\Window {
+class ListCreate extends Window {
 
     public function content() {
         $window = $this->newFormWindow(
@@ -48,7 +48,7 @@ class ListCreate extends \hemio\edentata\Window {
         $window->getForm()->addChild(new gui\Hint($hint));
 
 
-        foreach ($this->db()->availableDomains() as $domain) {
+        foreach ($this->db->availableDomains() as $domain) {
             $address->getDomain()->addOption($domain['domain']);
         }
 
@@ -68,10 +68,10 @@ class ListCreate extends \hemio\edentata\Window {
 
             var_dump($listParams);
 
-            $this->db()->beginTransaction();
-            $this->db()->listCreate($listParams);
-            $this->db()->subscriberCreate($memeberParams);
-            $this->db()->commit();
+            $this->db->beginTransaction();
+            $this->db->listCreate($listParams);
+            $this->db->subscriberCreate($memeberParams);
+            $this->db->commit();
 
             throw new \hemio\edentata\exception\Successful;
         }

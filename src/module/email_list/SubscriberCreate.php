@@ -27,7 +27,7 @@ use hemio\edentata\module\email;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class SubscriberCreate extends \hemio\edentata\Window {
+class SubscriberCreate extends Window {
 
     public function content($list) {
         $window = $this->newFormWindow(
@@ -53,8 +53,8 @@ class SubscriberCreate extends \hemio\edentata\Window {
             $params = email\Db::emailAddressToArgs($list, 'list_');
             $params += $form->getVal(['address']);
 
-            $this->db()->subscriberCreate($params);
-            
+            $this->db->subscriberCreate($params);
+
             throw new \hemio\edentata\exception\Successful;
         }
     }

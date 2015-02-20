@@ -29,7 +29,7 @@ use hemio\html\String;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class MailboxDetails extends \hemio\edentata\Window {
+class MailboxDetails extends Window {
 
     public function content($address) {
         $window = $this->newFormWindow(
@@ -38,7 +38,7 @@ class MailboxDetails extends \hemio\edentata\Window {
                 , $address
         );
 
-        $resAliases = $this->db()->aliasSelect(
+        $resAliases = $this->db->aliasSelect(
                 Utils::addrLocalpart($address)
                 , Utils::addrDomain($address)
         );

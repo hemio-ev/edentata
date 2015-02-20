@@ -29,7 +29,7 @@ use hemio\edentata\module\email;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ListUpdate extends \hemio\edentata\Window {
+class ListUpdate extends Window {
 
     public function content($list) {
         $window = $this->newFormWindow(
@@ -42,7 +42,7 @@ class ListUpdate extends \hemio\edentata\Window {
         $admin = new form\FieldEmail('admin', _('List Owner'));
         $window->getForm()->addChild($admin);
 
-        $listData = $this->db()->listSelect($list)->fetch();
+        $listData = $this->db->listSelect($list)->fetch();
         if (!$listData) {
             throw new exception\Error(_('List not found.'));
         }
@@ -58,7 +58,7 @@ class ListUpdate extends \hemio\edentata\Window {
             $params = email\Db::emailAddressToArgs($list);
             $params += $form->getVal(['admin']);
 
-            $this->db()->listUpdate($params);
+            $this->db->listUpdate($params);
 
             throw new exception\Successful;
         }

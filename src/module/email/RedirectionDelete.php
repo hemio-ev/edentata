@@ -24,7 +24,7 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class RedirectionDelete extends \hemio\edentata\Window {
+class RedirectionDelete extends Window {
 
     public function content($redirection) {
         $message = _('Do you really want to delete this redirection?');
@@ -46,7 +46,7 @@ class RedirectionDelete extends \hemio\edentata\Window {
         if ($form->correctSubmitted()) {
             $params = Db::emailAddressToArgs($redirection);
             
-            $this->db()->redirectionDelete($params);
+            $this->db->redirectionDelete($params);
             
             throw new \hemio\edentata\exception\Successful;
         }

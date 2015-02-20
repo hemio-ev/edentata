@@ -28,7 +28,7 @@ use hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class AliasCreate extends \hemio\edentata\Window {
+class AliasCreate extends Window {
 
     public function content($mailboxName = '') {
         $window = $this->newFormWindow(
@@ -53,12 +53,12 @@ class AliasCreate extends \hemio\edentata\Window {
                 ->addChild($fieldsetMailbox)
                 ->addChild($mailbox);
 
-        $domains = $this->db()->getPossibleDomains();
+        $domains = $this->db->getPossibleDomains();
         while ($domain = $domains->fetch()) {
             $email->getDomain()->addOption($domain['domain'], $domain['domain']);
         }
 
-        $mailboxes = $this->db()->mailboxSelect();
+        $mailboxes = $this->db->mailboxSelect();
         while ($mbox = $mailboxes->fetch()) {
             $addr = $mbox['localpart'] . '@' . $mbox['domain'];
             $mailbox->addOption($addr, $addr);
@@ -81,7 +81,7 @@ class AliasCreate extends \hemio\edentata\Window {
                                 , 'mailbox_'
                         );
 
-                $this->db()->aliasCreate($args);
+                $this->db->aliasCreate($args);
 
                 throw new exception\Successful();
             } else {

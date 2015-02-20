@@ -26,7 +26,7 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class AddressCreate extends \hemio\edentata\Window {
+class AddressCreate extends Window {
 
     public function content() {
         $window = $this->newWindow(_('Create Email Address'));
@@ -45,7 +45,7 @@ class AddressCreate extends \hemio\edentata\Window {
         $strRedirect = _('Deliver emails to external mailbox (redirection)');
         $selecting->addLink($reqRedirect, $strRedirect);
 
-        if ($this->db()->mailboxSelect()->fetch()) {
+        if ($this->db->mailboxSelect()->fetch()) {
             $linkAlias->setSuggested();
         } else {
             $linkAccount->setSuggested();

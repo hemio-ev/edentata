@@ -27,7 +27,7 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class SubscribersUnsubscribe extends \hemio\edentata\Window {
+class SubscribersUnsubscribe extends Window {
 
     public function content($list) {
         $msg = _(sprintf(

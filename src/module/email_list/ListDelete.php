@@ -27,7 +27,7 @@ use hemio\edentata\module\email;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ListDelete extends \hemio\edentata\Window {
+class ListDelete extends Window {
 
     public function content($list) {
         $message = _('Do you really want to delete this list?');
@@ -50,7 +50,7 @@ class ListDelete extends \hemio\edentata\Window {
         if ($form->correctSubmitted()) {
             $params = email\Db::emailAddressToArgs($list);
 
-            $this->db()->listDelete($params);
+            $this->db->listDelete($params);
 
             throw new \hemio\edentata\exception\Successful;
         }
