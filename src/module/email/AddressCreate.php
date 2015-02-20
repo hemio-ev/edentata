@@ -33,9 +33,9 @@ class AddressCreate extends Window {
 
         $selecting = new gui\Selecting(_('Delivery for new Address'));
 
-        $reqAccount = $this->module->request->derive('mailbox_create');
-        $strAccount = _('Create new mailbox for incoming emails');
-        $linkAccount = $selecting->addLink($reqAccount, $strAccount);
+        $reqMailbox = $this->module->request->derive('mailbox_create');
+        $strMailbox = _('Create new mailbox for incoming emails');
+        $linkMailbox = $selecting->addLink($reqMailbox, $strMailbox);
 
         $reqAlias = $this->module->request->derive('alias_create');
         $strAlias = _('Deliver emails to existing mailbox (alias)');
@@ -47,8 +47,10 @@ class AddressCreate extends Window {
 
         if ($this->db->mailboxSelect()->fetch()) {
             $linkAlias->setSuggested();
+            $linkAlias->getButton()->setAttribute('autofocus', true);
         } else {
-            $linkAccount->setSuggested();
+            $linkMailbox->setSuggested();
+            $linkMailbox->getButton()->setAttribute('autofocus', true);
             $linkAlias->setDisabled();
         }
         

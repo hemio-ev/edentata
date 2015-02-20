@@ -20,22 +20,29 @@
 namespace hemio\edentata\module\jabber;
 
 /**
- * Description of Window
+ * Description of AccountDetails
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Window extends \hemio\edentata\Window {
+class AccountDetails extends Window {
 
-    /**
-     *
-     * @var ModuleJabber
-     */
-    protected $module;
+    public function content($account) {
+        $window = $this->newWindow(_('Jabber Account'), $account);
 
-    /**
-     *
-     * @var Db
-     */
-    protected $db;
+        $selecting = new \hemio\edentata\gui\Selecting(_('Possible Actions'));
+        
+        $selecting->addLink(
+                $this->request->derive('password', $account)
+                , _('Change password')
+        );
+        
+        $selecting->addLink($this->request->derive('delete', $account)
+                , _('Delete account')
+        );
+
+        $window->addChild($selecting);
+
+        return $window;
+    }
 
 }

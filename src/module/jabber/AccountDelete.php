@@ -19,23 +19,39 @@
 
 namespace hemio\edentata\module\jabber;
 
+use hemio\edentata\gui;
+
 /**
- * Description of Window
+ * Description of AccountDelete
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Window extends \hemio\edentata\Window {
+class AccountDelete extends Window {
 
-    /**
-     *
-     * @var ModuleJabber
-     */
-    protected $module;
+    public function content($account) {
+        $message = _('Do you really want to delete this jabber account?');
 
-    /**
-     *
-     * @var Db
-     */
-    protected $db;
+        $window = $this->newDeleteWindow(
+                'account_delete'
+                , _('Delete Account')
+                , $account
+                , $message
+                , _('Delete Account')
+        );
+
+        $this->handleSubmit($window->getForm(), $account);
+
+        return $window;
+    }
+
+    protected function handleSubmit(gui\FormPost $form, $account) {
+        if ($form->correctSubmitted()) {
+            $params = Db::accountToArgs($account);
+
+            $this->db->accountDelete($params);
+
+            throw new \hemio\edentata\exception\Successful;
+        }
+    }
 
 }

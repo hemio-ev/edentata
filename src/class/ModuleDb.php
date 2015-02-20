@@ -44,4 +44,16 @@ class ModuleDb {
         $this->pdo->commit();
     }
 
+    public function availableDomains(array $services) {
+        if (count($services) > 1)
+            throw new exception\Error('Multiple services not implemented.');
+
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo, 'dns.sel_available_service'
+        );
+        $stmt->options('WHERE service = :service');
+
+        return $stmt->execute(['service' => $services[0]]);
+    }
+
 }

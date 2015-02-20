@@ -42,6 +42,14 @@ class LinkButton extends form\Container {
         $this['form']['button'] = new html\Button();
         $this['form']['button']['text'] = new html\String($text);
     }
+    
+    /**
+     * 
+     * @return html\Button
+     */
+    public function getButton() {
+        return $this['form']['button'];
+    }
 
     public function setSuggested($suggested = true) {
         if ($suggested)

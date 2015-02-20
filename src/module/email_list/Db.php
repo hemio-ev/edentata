@@ -109,13 +109,4 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute();
     }
 
-    public function availableDomains() {
-        $stmt = new sql\QuerySelectFunction(
-                $this->pdo, 'dns.sel_available_service'
-        );
-        $stmt->options('WHERE service = :service');
-
-        return $stmt->execute(['service' => 'email__list']);
-    }
-
 }

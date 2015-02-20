@@ -48,7 +48,7 @@ class ListCreate extends Window {
         $window->getForm()->addChild(new gui\Hint($hint));
 
 
-        foreach ($this->db->availableDomains() as $domain) {
+        foreach ($this->db->availableDomains(['email__list']) as $domain) {
             $address->getDomain()->addOption($domain['domain']);
         }
 

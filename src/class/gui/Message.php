@@ -49,9 +49,12 @@ class Message extends form\Container {
         else
             $backUrl = new \hemio\edentata\Request();
 
+        $button = new LinkButton($backUrl, _('OK'));
+        $button->getButton()->setAttribute('autofocus', true);
+        $button->setSuggested();
         $this['article']
                 ->addChild(new ButtonGroup())
-                ->addChild(new LinkButton($backUrl, _('OK')));
+                ->addChild($button);
     }
 
 }

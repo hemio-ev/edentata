@@ -45,12 +45,18 @@ class FieldEmailWithSelect extends \hemio\form\Container {
         return $this['p']['text'];
     }
 
-    public function __construct() {
+    public function __construct($name1 = 'localpart', $name2 = 'domain', $title1 = null, $title2 = null) {
+        if ($title1 === null)
+            $title1 = _('Local Part');
+
+        if ($title2 === null)
+            $title2 = _('Domain');
+
         $p = new html\P();
         $p->addCssClass('multiple');
         $this['p'] = $p;
 
-        $p['text'] = new form\FieldText('localpart', _('Local Part'));
+        $p['text'] = new form\FieldText($name1, $title1);
         $p['text']->setRequired(true);
         $p['text']->getControlElement()->setAttribute('autofocus', true);
         $p['text']->addInheritableAppendage(
@@ -63,7 +69,7 @@ class FieldEmailWithSelect extends \hemio\form\Container {
 
         $p['select'] = new html\Span();
         $p['select']->addCssClass('select');
-        $p['select']['select'] = new form\FieldSelect('domain', _('Domain'));
+        $p['select']['select'] = new form\FieldSelect($name2, $title2);
         $p['select']['select']->addInheritableAppendage(
                 form\FormPost::FORM_FIELD_TEMPLATE . '_SELECT', new form\template\FormPlainControl
         );

@@ -27,7 +27,7 @@ require_once 'vendor/autoload.php';
 
 # external data
 $request = new Request($_GET, $_POST);
-$modulesNavi = ['email', 'email_list'];
+$modulesNavi = ['email', 'email_list', 'jabber'];
 
 $i10 = new I10n();
 
