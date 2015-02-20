@@ -39,21 +39,30 @@ class Overview extends \hemio\edentata\Window {
                 )
                 , true);
 
-        $lists = $this->db->listSelect(false)->fetchAll();
 
-        $listbox = new gui\Listbox;
-        foreach ($lists as $list) {
-            $addr = $list['localpart'] . '@' . $list['domain'];
-            $listbox->addLinkEntry(
-                    $this->module->request->derive('list_details', $addr)
-                    , new String($addr)
-                    , $list['backend_status']
-            );
-        }
-
-        $window->addChild($listbox);
+        $window->addChild($this->lists());
 
         return $window;
+    }
+
+    protected function lists() {
+        $lists = $this->db()->listSelect()->fetchAll();
+
+        if (!count($lists)) {
+            return new gui\Hint(_('You do not own any mailing lists.'));
+        } else {
+            $listbox = new gui\Listbox;
+            foreach ($lists as $list) {
+                $addr = $list['localpart'] . '@' . $list['domain'];
+                $listbox->addLinkEntry(
+                        $this->module->request->derive('list_details', $addr)
+                        , new String($addr)
+                        , $list['backend_status']
+                );
+            }
+
+            return $listbox;
+        }
     }
 
 }

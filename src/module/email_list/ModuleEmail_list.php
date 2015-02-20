@@ -54,8 +54,24 @@ class ModuleEmail_list extends \hemio\edentata\Module {
                 }
                 break;
 
+            case 'list_delete':
+                try {
+                    $content = (new ListDelete($this))->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
+                break;
+
             case 'list_details':
                 $content = (new ListDetails($this))->content($this->request->subject);
+                break;
+
+            case 'list_update':
+                try {
+                    $content = (new ListUpdate($this))->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive('list_details', true));
+                }
                 break;
 
             case 'subscribers_create':

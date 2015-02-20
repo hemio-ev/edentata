@@ -39,9 +39,26 @@ class ListDetails extends \hemio\edentata\Window {
                 )
                 , true);
 
+        $window->addChild($this->details());
         $this->subscribers($window, $list);
 
         return $window;
+    }
+
+    protected function details() {
+        $selecting = new gui\Selecting(_('Email List'));
+
+        $selecting->addLink(
+                $this->module->request->derive('list_update', true)
+                , _('Change list owner')
+        );
+
+        $selecting->addLink(
+                $this->module->request->derive('list_delete', true)
+                , _('Delete list')
+        );
+        
+        return $selecting;
     }
 
     protected function subscribers(gui\WindowModuleWithForm $window, $list) {
@@ -68,7 +85,7 @@ class ListDetails extends \hemio\edentata\Window {
 
         $move = new \hemio\form\FieldSubmit('move', _('Move …'));
         #$options[] = $move;
-        
+
         $unsubscribe = new \hemio\form\FieldSubmit('unsubscribe', _('Unsubscribe'));
         $unsubscribe->getControlElement()->setAttribute('formaction', $this->module->request->derive('subscribers_unsubscribe', $list)->getUrl());
         $options[] = $unsubscribe;

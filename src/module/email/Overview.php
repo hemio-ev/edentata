@@ -54,17 +54,9 @@ class Overview extends \hemio\edentata\Window {
     }
 
     protected function start() {
-        $p1 = new html\P();
-        $p1->addCssClass('hint');
-        $p1[] = new String(_('You do not own any email addresses yet.'));
-
-        $p2 = new html\P();
-        $p2->addCssClass('hint');
-        $p2[] = new String(_('Start by creating a new one.'));
-
         $c = new form\Container();
-        $c[] = $p1;
-        $c[] = $p2;
+        $c[] = new gui\Hint(_('You do not own any email addresses yet.'));
+        $c[] = new gui\Hint(_('Start by creating a new one.'));
 
         return $c;
     }

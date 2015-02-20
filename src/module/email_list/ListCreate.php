@@ -51,18 +51,28 @@ class ListCreate extends \hemio\edentata\Window {
         foreach ($this->db()->availableDomains() as $domain) {
             $address->getDomain()->addOption($domain['domain']);
         }
-        
+
         $this->handleSubmit($window->getForm());
 
         return $window;
     }
-    
+
     public function handleSubmit(gui\FormPost $form) {
         if ($form->correctSubmitted()) {
-            $args = $form->getVal(['localpart','domain', 'admin']);
-            
-            $this->db()->listCreate($args);
-            
+            $listParams = $form->getVal(['localpart', 'domain', 'admin']);
+
+            // Add the list admin as initial subscriber
+            $memeberParams['p_list_localpart'] = $listParams['p_localpart'];
+            $memeberParams['p_list_domain'] = $listParams['p_domain'];
+            $memeberParams['p_address'] = $listParams['p_admin'];
+
+            var_dump($listParams);
+
+            $this->db()->beginTransaction();
+            $this->db()->listCreate($listParams);
+            $this->db()->subscriberCreate($memeberParams);
+            $this->db()->commit();
+
             throw new \hemio\edentata\exception\Successful;
         }
     }

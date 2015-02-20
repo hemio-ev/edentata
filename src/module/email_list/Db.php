@@ -39,13 +39,39 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute();
     }
 
-    public function listSelect($activeOnly = true) {
+    public function listDelete($params) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.del_list'
+                , $params
+        );
+
+        return $stmt->execute();
+    }
+
+    public function listUpdate($params) {
+        $stmt = new sql\QuerySelectFunction(
+                $this->pdo
+                , 'email.upd_list'
+                , $params
+        );
+
+        return $stmt->execute();
+    }
+
+    public function listSelect($list = null) {
         $stmt = new sql\QuerySelectFunction(
                 $this->pdo
                 , 'email.sel_list'
         );
+        $args = [];
 
-        return $stmt->execute();
+        if ($list) {
+            $stmt->options('WHERE localpart=:p_localpart AND domain=:p_domain');
+            $args = email\Db::emailAddressToArgs($list);
+        }
+
+        return $stmt->execute($args);
     }
 
     public function subscriberCreate(array $params) {
