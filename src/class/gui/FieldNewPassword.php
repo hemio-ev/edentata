@@ -47,16 +47,19 @@ class FieldNewPassword extends form\Container {
                 , $titleRepeat
         );
 
-        $eqCheck = new form\CheckCustom('eq'
+        $eqCheck = new form\CheckCustom(
+                'eq'
                 , function ($pw) use ($password) {
             return $pw === $password->getValueUser();
         }
+                , _('The repeated password does not match the original one.')
         );
 
         $password->setRequired();
         $repeat->setRequired();
         $repeat->addValidityCheck($eqCheck);
         $password->addValidityCheck(new form\CheckMinLength(8));
+        $password->addValidityCheck(new \hemio\edentata\checks\Password());
 
         $this['password'] = $password;
         $this['password_repeat'] = $repeat;

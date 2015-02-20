@@ -35,4 +35,40 @@ class Utils {
         exit(0);
     }
 
+    public static function sysExec($command, $pipe = '') {
+        $descriptorspec = [
+            0 => ['pipe', 'r'], // STDIN
+            1 => ['pipe', 'w'] // STDOUT
+        ];
+
+        $pipes = [];
+        $process = proc_open($command, $descriptorspec, $pipes);
+
+        if (!is_resource($process))
+            throw new exception\Error('Failed to proc_open().');
+
+        $status = proc_get_status($process);
+        if (
+                $status === false ||
+                $status['running'] === false
+        )
+            throw new exception\Error('Process is not running.');
+
+        fwrite($pipes[0], $pipe);
+        fclose($pipes[0]);
+
+        $stdout = stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+
+        $returnStatus = proc_close($process);
+
+        if ($returnStatus === -1) {
+            throw new exception\Error('Internal error on proc_close().');
+        } elseif ($returnStatus !== 0) {
+            throw new exception\Error('External error on proc_close().');
+        }
+
+        return $stdout;
+    }
+
 }
