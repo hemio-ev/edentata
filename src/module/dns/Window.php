@@ -28,7 +28,7 @@ class Window extends \hemio\edentata\Window {
 
     /**
      *
-     * @var ModuleDns
+     * @var Module
      */
     protected $module;
 

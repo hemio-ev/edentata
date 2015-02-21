@@ -81,4 +81,8 @@ class FieldNewPassword extends form\Container {
         return $this['password_repeat'];
     }
 
+    public function dataValid() {
+        return $this->getPassword()->dataValid() && $this->getPasswordRepeat()->dataValid();
+    }
+
 }

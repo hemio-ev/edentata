@@ -61,7 +61,7 @@ class LoadModule {
 
     public static function absolutePathToClass($moduleId) {
         return sprintf(
-                '\hemio\edentata\module\%s\Module%s', $moduleId, ucfirst($moduleId)
+                '\hemio\edentata\module\%s\Module', $moduleId
         );
     }
 
@@ -102,7 +102,7 @@ class LoadModule {
         $moduleClass = $this->moduleClass;
         return $moduleClass::getDir();
     }
-    
+
     public function getId() {
         return $this->moduleId;
     }

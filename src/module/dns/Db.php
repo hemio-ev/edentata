@@ -28,6 +28,15 @@ use hemio\edentata\sql;
  */
 class Db extends \hemio\edentata\ModuleDb {
 
+    public function registeredCreate(array $params) {
+        return (new sql\QuerySelectFunction(
+                $this->pdo
+                , 'dns.ins_registered'
+                , $params
+                )
+                )->execute();
+    }
+
     public function registeredSelect() {
         return (new sql\QuerySelectFunction(
                 $this->pdo

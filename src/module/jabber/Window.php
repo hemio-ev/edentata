@@ -28,7 +28,7 @@ class Window extends \hemio\edentata\Window {
 
     /**
      *
-     * @var ModuleJabber
+     * @var Module
      */
     protected $module;
 

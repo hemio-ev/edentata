@@ -17,27 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\email_list;
+namespace hemio\edentata\module\email;
 
 use hemio\edentata;
 use hemio\edentata\exception;
 use hemio\edentata\exception\UnknownOperation;
 
 /**
- * Description of ModuleEmail_list
+ * Description of Module
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ModuleEmail_list extends \hemio\edentata\Module {
+class Module extends edentata\Module {
 
     public static function getName() {
-        return _('Mailing Lists');
+        return _('Email');
     }
 
     public static function getDir() {
         return __DIR__;
-    } 
-    
+    }
+
     protected function constructHook() {
         $this->db = new Db($this->pdo);
     }
@@ -48,47 +48,64 @@ class ModuleEmail_list extends \hemio\edentata\Module {
                 $content = (new Overview($this))->content();
                 break;
 
-            case 'list_create':
+
+            case 'address_create':
+                $content = (new AddressCreate($this))->content();
+                break;
+
+            case 'alias_create':
                 try {
-                    $content = (new ListCreate($this))->content();
+                    $content = (new AliasCreate($this))->content($this->request->subject);
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($this->request->derive());
                 }
                 break;
 
-            case 'list_delete':
+            case 'alias_delete':
                 try {
-                    $content = (new ListDelete($this))->content($this->request->subject);
+                    $content = (new AliasDelete($this))->content($this->request->subject, $this->request->item);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive('mailbox_details', true));
+                }
+                break;
+
+            case 'mailbox_create':
+                try {
+                    $content = (new MailboxCreate($this))->content();
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($this->request->derive());
                 }
                 break;
 
-            case 'list_details':
-                $content = (new ListDetails($this))->content($this->request->subject);
-                break;
-
-            case 'list_update':
+            case 'mailbox_delete':
                 try {
-                    $content = (new ListUpdate($this))->content($this->request->subject);
+                    $content = (new MailboxDelete($this))->content($this->request->subject);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('list_details', true));
+                    edentata\Utils::htmlRedirect($this->request->derive());
                 }
                 break;
 
-            case 'subscribers_create':
+            case 'mailbox_details':
+                $content = (new MailboxDetails($this))->content($this->request->subject);
+                break;
+
+            case 'mailbox_password':
+                $content = (new MailboxPassword($this))->content($this->request->subject);
+                break;
+
+            case 'redirection_create':
                 try {
-                    $content = (new SubscriberCreate($this))->content($this->request->subject);
+                    $content = (new RedirectionCreate($this))->content();
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('list_details', true));
+                    edentata\Utils::htmlRedirect($this->request->derive());
                 }
                 break;
 
-            case 'subscribers_unsubscribe':
+            case 'redirection_delete':
                 try {
-                    $content = (new SubscribersUnsubscribe($this))->content($this->request->subject);
+                    $content = (new RedirectionDelete($this))->content($this->request->subject);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('list_details', true));
+                    edentata\Utils::htmlRedirect($this->request->derive());
                 }
                 break;
 

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\email_list;
+namespace hemio\edentata\module\server_access;
 
 /**
  * Description of Window

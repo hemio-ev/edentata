@@ -28,7 +28,7 @@ class Window extends \hemio\edentata\Window {
 
     /**
      *
-     * @var ModuleEmail
+     * @var Module
      */
     protected $module;
 

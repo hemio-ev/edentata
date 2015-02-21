@@ -17,24 +17,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\jabber;
+namespace hemio\edentata\module\dns;
 
-use hemio\edentata\exception;
 use hemio\edentata\exception\UnknownOperation;
+use hemio\edentata\exception;
 use hemio\edentata;
 
 /**
- * Description of ModuleJabber
+ * Description of ModuleDns
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ModuleJabber extends \hemio\edentata\Module {
-
-    /**
-     *
-     * @var Db
-     */
-    public $db;
+class Module extends \hemio\edentata\Module {
 
     protected function constructHook() {
         $this->db = new Db($this->pdo);
@@ -46,30 +40,33 @@ class ModuleJabber extends \hemio\edentata\Module {
                 $content = (new Overview($this))->content();
                 break;
 
-            case 'create':
+            case 'registered_create':
                 try {
-                    $content = (new AccountCreate($this))->content();
+                    $content = (new RegisteredCreate($this))->content();
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($this->request->derive());
                 }
                 break;
 
-            case 'delete':
+            case 'registered_details':
+                $content = (new RegisteredDetails($this))->content($this->request->subject);
+                break;
+
+            case 'service_details':
                 try {
-                    $content = (new AccountDelete($this))->content($this->request->subject);
+                    $content = (new ServiceDetails($this))->content($this->request->subject, $this->request->item);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive());
+                    edentata\Utils::htmlRedirect($this->request->derive('registered_details', true));
                 }
                 break;
 
-            case 'details':
-                $content = (new AccountDetails($this))->content($this->request->subject);
+            case 'service_create':
+                try {
+                    $content = (new ServiceCreate($this))->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($e->backTo);
+                }
                 break;
-
-            case 'password':
-                $content = (new AccountPassword($this))->content($this->request->subject);
-                break;
-
 
             default:
                 throw UnknownOperation::unknownAction($this->request->action);
@@ -83,7 +80,7 @@ class ModuleJabber extends \hemio\edentata\Module {
     }
 
     public static function getName() {
-        return _('Jabber');
+        return _('Domain');
     }
 
 }

@@ -69,7 +69,7 @@ class Request {
 
         if ($item === true)
             $get['item'] = $this->item;
-        if ($item)
+        elseif ($item)
             $get['item'] = $item;
 
         return $get;

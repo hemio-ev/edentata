@@ -734,6 +734,9 @@ input.switch:checked + p span.switch::before {
 .display_control:not(:checked) + * + * {
   display: none; }
 
+.display_control_2:not(:checked) + * + * + * {
+  display: none; }
+
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
 

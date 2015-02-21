@@ -19,41 +19,37 @@
 
 namespace hemio\edentata\module\dns;
 
-use hemio\edentata\gui;
-
 /**
- * Description of Overview
+ * Description of RegisteredCreate
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Overview extends Window {
+class RegisteredCreate extends Window {
 
     public function content() {
-        $window = $this->newWindow(_('Domains'), null, false);
+        $window = $this->newFormWindow('registered_create', _('New Domain'), null, _('Register'));
 
-        $window->addButtonRight(
-                new \hemio\edentata\gui\LinkButton(
-                $this->request->derive('registered_create')
-                , _('Register Domain')
-                )
-        );
+        $domain = new \hemio\form\FieldText('domain', _('Domain'));
+        $domain->setRequired();
 
-        $registered = $this->db->registeredSelect()->fetchAll();
+        $window->getForm()->addChild($domain);
 
-        $list = new gui\Listbox();
-        foreach ($registered as $domain) {
-            $list->addLinkEntry(
-                    $this->request->derive(
-                            'registered_details'
-                            , $domain['domain']
-                    )
-                    , new \hemio\html\String($domain['domain'])
-            );
-        }
-        
-        $window->addChild($list);
+        $this->handleSubmit($window->getForm());
 
         return $window;
+    }
+
+    protected function handleSubmit(\hemio\edentata\gui\FormPost $form) {
+        if ($form->correctSubmitted()) {
+            $params = $form->getVal(['domain']);
+            $split = explode('.', $params['p_domain']);
+
+            $params['p_public_suffix'] = array_pop($split);
+
+            $this->db->registeredCreate($params);
+
+            throw new \hemio\edentata\exception\Successful;
+        }
     }
 
 }

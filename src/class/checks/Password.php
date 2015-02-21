@@ -40,7 +40,7 @@ class Password extends \hemio\form\Check {
             );
 
         $msg = trim(array_pop($split));
-        $this->message = sprintf('The chosen password is weak: %s.', $msg);
+        $this->message = sprintf(_('The chosen password is too weak: %s.'), $msg);
 
         return $msg === 'OK';
     }

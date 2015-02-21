@@ -17,18 +17,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\dns;
+namespace hemio\edentata\module\server_access;
 
-use hemio\edentata\exception\UnknownOperation;
 use hemio\edentata\exception;
 use hemio\edentata;
 
 /**
- * Description of ModuleDns
+ * Description of ModuleUnixuser
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ModuleDns extends \hemio\edentata\Module {
+class Module extends \hemio\edentata\Module {
+
+    /**
+     *
+     * @var Db
+     */
+    public $db;
 
     protected function constructHook() {
         $this->db = new Db($this->pdo);
@@ -40,24 +45,32 @@ class ModuleDns extends \hemio\edentata\Module {
                 $content = (new Overview($this))->content();
                 break;
 
-            case 'registered_details':
-                $content = (new RegisteredDetails($this))->content($this->request->subject);
-                break;
-
-            case 'service_details':
+            case 'create':
                 try {
-                    $content = (new ServiceDetails($this))->content($this->request->subject, $this->request->item);
+                    $content = (new UserCreate($this))->content($this->request->subject);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('registered_details', true));
+                    edentata\Utils::htmlRedirect($this->request->derive());
                 }
                 break;
 
-            case 'service_create':
+            case 'delete':
                 try {
-                    $content = (new ServiceCreate($this))->content($this->request->subject);
+                    $content = (new UserDelete($this))->content($this->request->subject, $this->request->item);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($e->backTo);
+                    edentata\Utils::htmlRedirect($this->request->derive());
                 }
+                break;
+
+            case 'details':
+                $content = (new UserDetails($this))->content($this->request->subject, $this->request->item);
+                break;
+
+            case 'password':
+                $content = (new UserPassword($this))->content($this->request->subject, $this->request->item);
+                break;
+
+            case 'service':
+                $content = (new UserService($this))->content();
                 break;
 
             default:
@@ -72,7 +85,7 @@ class ModuleDns extends \hemio\edentata\Module {
     }
 
     public static function getName() {
-        return _('Domain');
+        return _('Server Access');
     }
 
 }

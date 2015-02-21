@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata\n"
-"POT-Creation-Date: 2015-02-19 15:47+0100\n"
-"PO-Revision-Date: 2015-02-19 15:48+0100\n"
+"POT-Creation-Date: 2015-02-21 00:36+0100\n"
+"PO-Revision-Date: 2015-02-21 00:37+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -33,17 +33,22 @@ msgstr ""
 msgid "Invalid input with key \"%s\"."
 msgstr ""
 
-#: src/class/Window.php:125
+#: src/class/Window.php:112
 msgid "Permit Deletion"
 msgstr "Löschen zulassen"
 
-#: src/class/Window.php:133
+#: src/class/Window.php:120
 msgid "You must activate the switch before you can submit"
 msgstr "Sie müssen den Schalter vor dem Absenden aktivieren"
 
-#: src/class/Window.php:138
+#: src/class/Window.php:125
 msgid "Cancel"
 msgstr "Abbrechen"
+
+#: src/class/checks/Password.php:43
+#, php-format
+msgid "The chosen password is too weak: %s."
+msgstr "Das gewählte Passwort ist zu schwach: %s."
 
 #: src/class/exception/Error.php:30
 msgid "Error"
@@ -62,11 +67,11 @@ msgstr "Unbekannte Modul-Aktion \"%s\"."
 msgid "Warning"
 msgstr "Warnung"
 
-#: src/class/gui/FieldEmailWithSelect.php:53
+#: src/class/gui/FieldEmailWithSelect.php:50
 msgid "Local Part"
 msgstr "Lokalteil"
 
-#: src/class/gui/FieldEmailWithSelect.php:66
+#: src/class/gui/FieldEmailWithSelect.php:53
 msgid "Domain"
 msgstr "Domain"
 
@@ -78,7 +83,11 @@ msgstr "Neues Passwort"
 msgid "Repeat Password"
 msgstr "Password Wiederholen"
 
-#: src/class/gui/Message.php:54
+#: src/class/gui/FieldNewPassword.php:55
+msgid "The repeated password does not match the original one."
+msgstr ""
+
+#: src/class/gui/Message.php:52
 msgid "OK"
 msgstr ""
 

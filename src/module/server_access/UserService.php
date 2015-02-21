@@ -17,25 +17,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\email_list;
+namespace hemio\edentata\module\server_access;
 
 /**
- * Description of Window
+ * Description of UserService
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Window extends \hemio\edentata\Window {
+class UserService extends Window {
 
-    /**
-     *
-     * @var Module
-     */
-    protected $module;
+    public function content() {
+        $window = $this->newWindow(_('Create User'));
 
-    /**
-     *
-     * @var Db
-     */
-    protected $db;
+        $selecting = new \hemio\edentata\gui\Selecting(
+                _('Choose Access Type')
+        );
+
+        $selecting->addLink(
+                $this->request->derive('create', 'sftp')
+                , _('SFTP: File transfer via SSH')
+        )->setSuggested();
+
+        $selecting->addLink(
+                $this->request->derive('create', 'ssh')
+                , _('SSH: Full shell access')
+        );
+        
+        $window->addChild($selecting);
+
+        return $window;
+    }
 
 }
