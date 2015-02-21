@@ -89,6 +89,11 @@ try {
     }
 
     $header->addChild(new html\String('Edentata – User: ' . $_SERVER['PHP_AUTH_USER']));
+    $aSettings = new html\A;
+    $aSettings[] = new html\String(_('Settings'));
+    $settings = new Request(['module' => 'user']);
+    $aSettings->setAttribute('href', $settings->getUrl());
+    $header[] = $aSettings;
 
     # navi
     $nav = (new ContentNav($modulesNavi, $i10))->getNav();
