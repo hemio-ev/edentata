@@ -21,6 +21,7 @@ namespace hemio\edentata\module\server_access;
 
 use hemio\edentata\exception;
 use hemio\edentata;
+use hemio\edentata\exception\UnknownOperation;
 
 /**
  * Description of ModuleUnixuser

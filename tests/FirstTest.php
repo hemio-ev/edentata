@@ -35,8 +35,7 @@ class FirstTest extends \Helpers {
 
         $window = new \hemio\edentata\gui\Window('Abc', 'Subtitle');
         $form->addChild($window);
-        $window->addButton(new form\FieldSubmit('submit', _('Submit')));
-        //$window->addButton(new form\FieldSubmit('submit', _('Submit')));
+        $window->addButtonRight(new form\FieldSubmit('submit', _('Submit')));
 
         $selectbox = new \hemio\edentata\gui\Selectbox();
         $window->addChild($selectbox);
