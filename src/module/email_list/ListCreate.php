@@ -62,11 +62,11 @@ class ListCreate extends Window {
             $listParams = $form->getVal(['localpart', 'domain', 'admin']);
 
             // Add the list admin as initial subscriber
-            $memeberParams['p_list_localpart'] = $listParams['p_localpart'];
-            $memeberParams['p_list_domain'] = $listParams['p_domain'];
-            $memeberParams['p_address'] = $listParams['p_admin'];
-
-            var_dump($listParams);
+            $memeberParams = [
+                'p_list_localpart' => $listParams['p_localpart'],
+                'p_list_domain' => $listParams['p_domain'],
+                'p_address' => $listParams['p_admin']
+            ];
 
             $this->db->beginTransaction();
             $this->db->listCreate($listParams);

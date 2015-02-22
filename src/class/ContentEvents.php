@@ -43,7 +43,6 @@ class ContentEvents {
     /**
      * 
      * @param HtmlCode $content
-     * @param array $events
      */
     public function __construct(HtmlCode $content) {
         $this->content = $content;

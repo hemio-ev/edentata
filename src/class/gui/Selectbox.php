@@ -60,7 +60,6 @@ class Selectbox extends html\Div {
      * 
      * @param string $name
      * @param string $title
-     * @param array $buttons
      */
     public function addItem($name, $title, $backendStatus = null) {
         $item = new form\Container;
