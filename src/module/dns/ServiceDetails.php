@@ -51,7 +51,7 @@ class ServiceDetails extends Window {
 
             $names = $this->db->activatableServiceNameSelect($srv);
 
-            $select = new form\FieldSelect('service_name_' . $srv, 'Horst');
+            $select = new form\FieldSelect('service_name_' . $srv, _('Host/Server'));
             foreach ($names as $name) {
                 $select->addOption($name['service_name']);
             }
