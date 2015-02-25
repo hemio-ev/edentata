@@ -41,31 +41,38 @@ class SiteDetails extends Window
         if ($data['https'] === null) {
             $https->addChild(new gui\Hint(_('HTTPS disabled')));
         } else {
+            $identifier = $data['https'];
 
-            $https->addChild(new gui\Hint(sprintf(_('HTTPS identifier: %s'),
-                                                    $data['https'])));
-            $cert = $this->db->httpsSelect($domain)->fetch();
+            //$https->addChild(new gui\Hint(sprintf(_('HTTPS identifier: %s'),
+            //                                        $data['https'])));
+            $cert = $this->db->httpsSelect($domain, $identifier)->fetch();
 
             if ($cert['x509_request'] === null) {
-                $https->addChild(new gui\Hint(_('Waiting for Request …')));
+                $status = new gui\StatusList();
+
+                $status->addEntry(_('Waiting for certificate request of the webserver'),
+                                    'error');
+
+                $https->addChild($status);
             } elseif ($cert['x509_certificate'] === null) {
-                #$https->addChild();
-                $https->addChild(new gui\Hint(_('Waiting for Cert …')));
-                $selecting = new gui\Selecting();
-                $selecting->addLink($this->request->derive(
-                        'https_cert', $domain, $data['https']),
-                        _('Supply certificate'));
-                $https->addChild($selecting);
-            } else {
-                $identifier = $data['https'];
+                $status = new gui\StatusList();
+
+                $status->addEntry(_('Certificate request available'), 'ok');
+                $status->addEntry(_('Waiting for HTTPS certificate'), 'error');
 
                 $selecting = new gui\Selecting();
-                $selecting->addLink($this->request->derive(
+                $link      = $selecting->addLink($this->request->derive(
                         'https_cert', $domain, $data['https']),
-                        _('Change certificate'));
-                $selecting->addLink($this->request->derive(
-                        'intermediate_create', $domain, $data['https']),
-                        _('Add intermediates'));
+                        _('Request certificate / supply HTTPS certificate'));
+                $link->setSuggested();
+
+                $https->addChild($status);
+                $https->addChild($selecting);
+            } else {
+                $status = new gui\StatusList();
+
+                $status->addEntry(_('Certificate request available'), 'ok');
+                $status->addEntry(_('HTTPS certificate supplied'), 'ok');
 
                 $certData = new Cert($cert['x509_certificate']);
 
@@ -76,7 +83,6 @@ class SiteDetails extends Window
                     'p_domain' => $domain,
                     'p_identifier' => $identifier
                 ]);
-
                 foreach ($newChain as $subjectKeyIdentifier) {
                     $params = [
                         'p_domain' => $domain,
@@ -94,16 +100,56 @@ class SiteDetails extends Window
                     $certChain[] = new Cert($intCert['x509_certificate']);
                 }
 
-                if ($certData->trusted($certChain))
-                    $https->addChild(new gui\Hint(_('TRUSTED')));
-                else
-                    $https->addChild(new gui\Hint(_('UNTRUSTED')));
 
-                $https->addChild(new gui\Hint(_('We have a cert')));
+
+                $https->addChild($status);
+                $suggestIntermediate = false;
+                if (!$certData->trusted($certChain)) {
+                    $status->addEntry(
+                        _('Certificate could NOT be verified to be trusted. Try adding the intermediate certificates of your trust authority.')
+                        , 'error'
+                    );
+                    $suggestIntermediate = true;
+                } else {
+                    $status->addEntry(
+                        _('Certificate is trusted (valid chain of trust)')
+                        , 'ok'
+                    );
+
+                    $remaining = (new \DateTime())->diff($certData->validTo());
+
+                    if ($remaining->invert)
+                        $status->addEntry(
+                            sprintf(_('Certificate has expired since %s days'),
+                                      $remaining->days)
+                            , 'error'
+                        );
+
+                    elseif ($remaining->days < 20)
+                        $status->addEntry(
+                            sprintf(_('Certificate is only valid for %s more days'),
+                                      $remaining->days)
+                            , 'warning'
+                        );
+                    else
+                        $status->addEntry(
+                            sprintf(_('Certificate is valid for another %s days'),
+                                      $remaining->days)
+                            , 'ok'
+                        );
+                }
+
+                $selecting = new gui\Selecting();
+                $selecting->addLink($this->request->derive(
+                            'intermediate_create', $domain, $data['https']),
+                            _('Add intermediate certificates'))
+                    ->setSuggested($suggestIntermediate);
+
+                $selecting->addLink($this->request->derive(
+                        'https_cert', $domain, $data['https']),
+                        _('Change HTTPS certificate'));
+
                 $https->addChild($selecting);
-                $https
-                    ->addChild(new html\Pre)
-                    ->addChild(new \hemio\html\String($certData->formatted()));
             }
         }
 
@@ -112,7 +158,8 @@ class SiteDetails extends Window
         return $window;
     }
 
-    protected function handleSubmit(
+    protected
+        function handleSubmit(
     gui\FormPost $form
     , $user
     , $serviceName

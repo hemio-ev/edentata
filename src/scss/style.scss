@@ -36,16 +36,21 @@ $list-entry-height: 3.5em;
 
 @import "_functions.scss";
 @import "_basics.scss";
+@import "_header.scss";
 @import "_content_transition.scss";
 
 @import "gui/_window.scss";
 @import "gui/_headerbar.scss";
 @import "gui/_message.scss";
+@import "gui/_statuslist.scss";
+
+@import "gui/_pre.scss";
 
 @import "_pile.scss";
 @import "gui/_multiple_controls.scss";
 @import "_scroll.scss";
 
+// Form
 @import "gui/_button.scss";
 @import "gui/_button_back.scss";
 @import "gui/_select.scss";

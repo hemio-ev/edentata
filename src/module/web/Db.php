@@ -94,16 +94,16 @@ class Db extends \hemio\edentata\ModuleDb
         ))->execute();
     }
 
-    public function httpsSelect($domain)
+    public function httpsSelect($domain, $identifier)
     {
         $stmt = new sql\QuerySelectFunction(
             $this->pdo
             , 'web.sel_https'
         );
 
-        $stmt->options('WHERE domain = :domain');
+        $stmt->options('WHERE domain = :domain  AND identifier = :identifier');
 
-        return $stmt->execute(['domain' => $domain]);
+        return $stmt->execute(['domain' => $domain, 'identifier' => $identifier]);
     }
 
     public function intermediateCertSelect($subjectKeyIdentifier)

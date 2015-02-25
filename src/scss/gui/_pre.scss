@@ -15,55 +15,17 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 /* 
-    Created on : Jan 20, 2015, 1:16:31 AM
+    Created on : Feb 25, 2015, 8:21:00 PM
     Author     : Michael Herold <quabla@hemio.de>
 */
 
-body {
-    font-family: Cantarell, sans-serif;
+pre.pre {
+    display: block;
     font-size: 0.9em;
-    hyphens: auto;
-    -moz-hyphens: auto;
-    text-align: justify;
-    color: #2e3436;
-    padding: 0;
-    margin: 0 auto;
     background-color: white;
-}
-
-div.main {
-    display: flex;
-    flex-wrap: wrap-reverse;
-    justify-content: center;
-}
-
-h1, h2, h3 {
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    font-size: 1.1em;
-}
-
-h2 {
-    font-size: 1.05em;
-}
-
-h3 {
-    font-size: 1em;
-}
-
-#main_nav {
-    width: 12em;
-    margin: 0 1em;
-}
-
-#main_content {
-    width: 32em;
-    margin:  0 1em;
-}
-
-pre {
-    font-size: 0.9em;
+    border: 1px solid $control-border-color;
+    color: gray;
+    padding: 1em;
+    overflow: auto;
+    max-width: 40em;
 }

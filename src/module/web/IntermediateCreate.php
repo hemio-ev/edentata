@@ -55,18 +55,21 @@ class IntermediateCreate extends Window
     {
         if ($form->correctSubmitted()) {
             $certs = Cert::extract($cert->getValueUser());
-            if (count($certs) !== 1)
-                throw new exception\Error('Expecting exactly one cert');
 
-            $crt = array_pop($certs);
+            $this->db->beginTransaction();
+            foreach ($certs as $crt) {
+                $params = [
+                    'p_authority_key_identifier' => $crt->authorityKeyIdentifier(),
+                    'p_subject_key_identifier' => $crt->subjectKeyIdentifier(),
+                    'p_x509_certificate' => $crt->raw()
+                ];
 
-            $params = [
-                'p_authority_key_identifier' => $crt->authorityKeyIdentifier(),
-                'p_subject_key_identifier' => $crt->subjectKeyIdentifier(),
-                'p_x509_certificate' => $crt->raw()
-            ];
+                $this->db->intermediateCertCreate($params);
+            }
+            $this->db->commit();
 
-            $this->db->intermediateCertCreate($params);
+            throw new exception\Successful(sprintf(_('Added %s intermediate certificate(s)',
+                                                     count($certs))));
         }
     }
 }

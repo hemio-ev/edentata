@@ -39,10 +39,31 @@ class HttpsCert extends Window
             , _('Update')
         );
 
-        $cert = new form\FieldTextarea('x509_certificate', _('Certificate'));
+        $certData = $this->db->httpsSelect($domain, $identifier)->fetch();
 
+        if (!$certData['x509_request'])
+            throw new Error(_('Waiting for certificate request'));
 
-        $window->getForm()->addChild($cert);
+        $requestObj = new CertRequest($certData['x509_request']);
+
+        $request = new gui\Fieldset(_('Certificate request')
+        );
+
+        $request->addChild(new gui\Hint($requestObj->commonName()));
+        $pre = new gui\Pre($requestObj->formatted());
+        $request->addChild($pre);
+
+        $certFieldset = new gui\Fieldset(_('Certificate'));
+        $cert         = new form\FieldTextarea('x509_certificate',
+                                               _('Certificate'));
+
+        if ($certData['x509_certificate']) {
+            $certObj = new Cert($cert['x509_certificate']);
+            $cert->setDefaultValue($certObj->formatted());
+        }
+
+        $window->getForm()->addChild($request);
+        $window->getForm()->addChild($certFieldset)->addChild($cert);
 
         $this->handleSubmit($window->getForm(), $cert, $domain, $identifier);
 

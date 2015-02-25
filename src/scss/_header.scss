@@ -1,0 +1,77 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Feb 22, 2015, 9:10:37 PM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+.header {
+    background-color: $outer-color;
+    padding: 0 1.5em;
+    line-height: 2em;
+    color: #EEE;
+    font-weight: bold;
+    //text-align: center;
+    width: 30em;
+    display: flex;
+    margin: auto;
+    border-radius: 0 0 1em 1em;
+    box-shadow: $outer-color 0 0 3px;
+    margin-bottom: 1em;
+}
+
+.header .link {
+    @include button-background(lighten($outer-color, 10%));
+    display: inline-block;
+    padding: 0 1em;
+    text-decoration: none;
+    color: inherit;
+    border-right: 1px solid #222;
+}
+
+body > header {
+    @extend .header;
+}
+
+body > header a {
+    @extend .link;
+}
+
+body > header a:first-of-type {
+    border-left: 1px solid #222;
+    margin-left: auto;
+}
+
+.dropdown + * {
+    display: none;
+    position: absolute;
+    background-color: $outer-color;
+    padding: 1.5em;
+    line-height: 2em;
+    color: #EEE;
+    z-index: 10;
+    margin: 0;
+    border-radius: 3px;
+}
+
+.header .link:focus {
+    @include button-background-active(lighten($outer-color, 10%));
+}
+
+.dropdown:focus + * {
+    display: block;
+}

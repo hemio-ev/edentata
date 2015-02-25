@@ -1,10 +1,10 @@
 
 @mixin add-l10n($lang, $on, $off) {
-:lang(#{$lang}) input.switch:checked + label span:last-of-type::before {
+:lang(#{$lang}) input.switch:checked + p span.switch::before {
   content: $on !important;
 }
 
-:lang(#{$lang}) input.switch + label span:last-of-type::before {
+:lang(#{$lang}) input.switch + p span.switch::before {
   content: $off !important;
 }
 }

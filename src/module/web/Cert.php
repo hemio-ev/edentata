@@ -70,6 +70,31 @@ class Cert
             throw new \hemio\edentata\exception\Error('Invalid Cert');
         }
     }
+    /**
+     *
+     *         var_dump($parse['subject']['CN']);
+      @var_dump($parse['extensions']['subjectAltName']);
+      var_dump(extractKeyid($parse['extensions']['authorityKeyIdentifier']));
+      var_dump($parse['extensions']['subjectKeyIdentifier']);
+      var_dump($parse['validFrom_time_t']);
+      var_dump($parse['validTo_time_t']);
+      $fp = [
+      'md5' => formatFp(openssl_x509_fingerprint($cert, 'md5', false)),
+      'sha1' => formatFp(openssl_x509_fingerprint($cert, 'sha1', false)),
+      'sha256' => formatFp(openssl_x509_fingerprint($cert, 'sha256', false)),
+      'sha512' => formatFp(openssl_x509_fingerprint($cert, 'sha512', false))
+      ];
+
+     */
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function validTo()
+    {
+        return new \DateTime('@'.$this->parsed['validTo_time_t']);
+    }
 
     public function trusted(array $intermediate)
     {

@@ -32,6 +32,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 }
 
 @include media-height(0em, 20em);
-@for $i from 20 through 60 {
+@for $i from 20 through 160 {
     @include media-height(#{$i}em, #{$i + 1}em);
 }

@@ -15,55 +15,41 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 /* 
-    Created on : Jan 20, 2015, 1:16:31 AM
+    Created on : Feb 25, 2015, 6:45:43 PM
     Author     : Michael Herold <quabla@hemio.de>
 */
 
-body {
-    font-family: Cantarell, sans-serif;
-    font-size: 0.9em;
-    hyphens: auto;
-    -moz-hyphens: auto;
-    text-align: justify;
-    color: #2e3436;
-    padding: 0;
-    margin: 0 auto;
-    background-color: white;
+ul.status li {
+    list-style-type: none;
 }
 
-div.main {
-    display: flex;
-    flex-wrap: wrap-reverse;
-    justify-content: center;
-}
-
-h1, h2, h3 {
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
+ul.status li::before {
+    display: inline-block;
+    border-radius: 1em;
+    width: 1.2em;
+    text-align: center;
+    line-height: 1.2em;
+    color: #EEE;
     font-size: 1.1em;
+    box-shadow: black 0 0 2px;
+    margin: 0.25em 0.4em 0.25em 0;
 }
 
-h2 {
-    font-size: 1.05em;
+li.ok {
+    color: gray;
 }
 
-h3 {
-    font-size: 1em;
+li.ok::before {
+    content: '✔';
+    background-color: #0AB007;
 }
 
-#main_nav {
-    width: 12em;
-    margin: 0 1em;
+li.error::before {
+    content: '✘';
+    background-color: $button-delete-color;
 }
 
-#main_content {
-    width: 32em;
-    margin:  0 1em;
-}
-
-pre {
-    font-size: 0.9em;
+li.warning::before {
+    content: '❢';
+    background-color: darkorange;
 }
