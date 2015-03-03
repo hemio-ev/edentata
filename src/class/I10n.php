@@ -70,4 +70,9 @@ class I10n {
         textdomain('edentata');
     }
 
+    public function getLang()
+    {
+        return substr($this->locale,0,2);
+    }
+
 }

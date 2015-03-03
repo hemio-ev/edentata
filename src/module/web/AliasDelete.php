@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\email;
+namespace hemio\edentata\module\web;
 
 use hemio\edentata\gui;
 
@@ -28,32 +28,27 @@ use hemio\edentata\gui;
 class AliasDelete extends Window
 {
 
-    public function content($mailbox, $alias)
+    public function content($alias)
     {
-        $message = _(
-            'Do you really want to delete the alias "%1$s"? After'.
-            ' deleting the alias you will no longer be reachable via "%1$s".'
-        );
+        $message = _('Are you sure you want to delete this website alias?');
 
         $window = $this->newDeleteWindow(
             'alias_delete'
             , _('Delete Alias')
             , $alias
-            , sprintf($message, $alias)
+            , $message
             , _('Delete Alias')
         );
 
-        $this->handleSubmit($window->getForm(), $mailbox, $alias);
+        $this->handleSubmit($window->getForm(), $alias);
 
         return $window;
     }
 
-    public function handleSubmit(gui\FormPost $form, $mailbox, $alias)
+    protected function handleSubmit(gui\FormPost $form, $alias)
     {
         if ($form->correctSubmitted()) {
-            $params = Db::emailAddressToArgs($alias);
-            $params += Db::emailAddressToArgs($mailbox, 'mailbox_');
-            $this->db->aliasDelete($params);
+            $this->db->aliasDelete(['p_domain' => $alias]);
 
             throw new \hemio\edentata\exception\Successful;
         }

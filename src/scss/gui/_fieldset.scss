@@ -50,3 +50,7 @@ article fieldset.buttons :only-child {
 article fieldset.buttons form {
     display: inline-block;
 }
+
+fieldset fieldset {
+    margin: 0;
+}

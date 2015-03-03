@@ -76,19 +76,72 @@ h3 {
   width: 32em;
   margin: 0 1em; }
 
-body > header {
+pre {
+  font-size: 0.9em; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Feb 22, 2015, 9:10:37 PM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+.header, body > header {
   background-color: #333;
   padding: 0 1.5em;
   line-height: 2em;
   color: #EEE;
   font-weight: bold;
-  text-align: center;
   width: 30em;
-  display: block;
+  display: flex;
   margin: auto;
   border-radius: 0 0 1em 1em;
   box-shadow: #333 0 0 3px;
   margin-bottom: 1em; }
+
+.header .link, body > header .link, .header body > header a, body > header .header a, body > header a {
+  background-color: #4d4d4d;
+  background: linear-gradient(#666666, #4d4d4d);
+  display: inline-block;
+  padding: 0 1em;
+  text-decoration: none;
+  color: inherit;
+  border-right: 1px solid #222; }
+
+body > header a:first-of-type {
+  border-left: 1px solid #222;
+  margin-left: auto; }
+
+.dropdown + * {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  padding: 1.5em;
+  line-height: 2em;
+  color: #EEE;
+  z-index: 10;
+  margin: 0;
+  border-radius: 3px; }
+
+.header .link:focus, body > header .link:focus, .header body > header a:focus, body > header .header a:focus, body > header a:focus {
+  background-color: #404040;
+  background: linear-gradient(#404040, #4d4d4d); }
+
+.dropdown:focus + * {
+  display: block; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -249,6 +302,85 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 .message[role="alert"] h2 {
   color: #c30f0f; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Feb 25, 2015, 6:45:43 PM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+ul.status li {
+  list-style-type: none; }
+
+ul.status li::before {
+  display: inline-block;
+  border-radius: 1em;
+  width: 1.2em;
+  text-align: center;
+  line-height: 1.2em;
+  color: #EEE;
+  font-size: 1.1em;
+  box-shadow: black 0 0 2px;
+  margin: 0.25em 0.4em 0.25em 0; }
+
+li.ok {
+  color: gray; }
+
+li.ok::before {
+  content: '✔';
+  background-color: #0AB007; }
+
+li.error::before {
+  content: '✘';
+  background-color: #c30f0f; }
+
+li.warning::before {
+  content: '❢';
+  background-color: darkorange; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Feb 25, 2015, 8:21:00 PM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+pre.pre {
+  display: block;
+  font-size: 0.9em;
+  background-color: white;
+  border: 1px solid #a1a1a1;
+  color: gray;
+  padding: 1em;
+  overflow: auto;
+  max-width: 40em; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -517,6 +649,306 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 @media (min-height: 60em) and (max-height: 61em) {
   .scroll {
     max-height: calc(61em - 15em); } }
+@media (min-height: 61em) and (max-height: 62em) {
+  .scroll {
+    max-height: calc(62em - 15em); } }
+@media (min-height: 62em) and (max-height: 63em) {
+  .scroll {
+    max-height: calc(63em - 15em); } }
+@media (min-height: 63em) and (max-height: 64em) {
+  .scroll {
+    max-height: calc(64em - 15em); } }
+@media (min-height: 64em) and (max-height: 65em) {
+  .scroll {
+    max-height: calc(65em - 15em); } }
+@media (min-height: 65em) and (max-height: 66em) {
+  .scroll {
+    max-height: calc(66em - 15em); } }
+@media (min-height: 66em) and (max-height: 67em) {
+  .scroll {
+    max-height: calc(67em - 15em); } }
+@media (min-height: 67em) and (max-height: 68em) {
+  .scroll {
+    max-height: calc(68em - 15em); } }
+@media (min-height: 68em) and (max-height: 69em) {
+  .scroll {
+    max-height: calc(69em - 15em); } }
+@media (min-height: 69em) and (max-height: 70em) {
+  .scroll {
+    max-height: calc(70em - 15em); } }
+@media (min-height: 70em) and (max-height: 71em) {
+  .scroll {
+    max-height: calc(71em - 15em); } }
+@media (min-height: 71em) and (max-height: 72em) {
+  .scroll {
+    max-height: calc(72em - 15em); } }
+@media (min-height: 72em) and (max-height: 73em) {
+  .scroll {
+    max-height: calc(73em - 15em); } }
+@media (min-height: 73em) and (max-height: 74em) {
+  .scroll {
+    max-height: calc(74em - 15em); } }
+@media (min-height: 74em) and (max-height: 75em) {
+  .scroll {
+    max-height: calc(75em - 15em); } }
+@media (min-height: 75em) and (max-height: 76em) {
+  .scroll {
+    max-height: calc(76em - 15em); } }
+@media (min-height: 76em) and (max-height: 77em) {
+  .scroll {
+    max-height: calc(77em - 15em); } }
+@media (min-height: 77em) and (max-height: 78em) {
+  .scroll {
+    max-height: calc(78em - 15em); } }
+@media (min-height: 78em) and (max-height: 79em) {
+  .scroll {
+    max-height: calc(79em - 15em); } }
+@media (min-height: 79em) and (max-height: 80em) {
+  .scroll {
+    max-height: calc(80em - 15em); } }
+@media (min-height: 80em) and (max-height: 81em) {
+  .scroll {
+    max-height: calc(81em - 15em); } }
+@media (min-height: 81em) and (max-height: 82em) {
+  .scroll {
+    max-height: calc(82em - 15em); } }
+@media (min-height: 82em) and (max-height: 83em) {
+  .scroll {
+    max-height: calc(83em - 15em); } }
+@media (min-height: 83em) and (max-height: 84em) {
+  .scroll {
+    max-height: calc(84em - 15em); } }
+@media (min-height: 84em) and (max-height: 85em) {
+  .scroll {
+    max-height: calc(85em - 15em); } }
+@media (min-height: 85em) and (max-height: 86em) {
+  .scroll {
+    max-height: calc(86em - 15em); } }
+@media (min-height: 86em) and (max-height: 87em) {
+  .scroll {
+    max-height: calc(87em - 15em); } }
+@media (min-height: 87em) and (max-height: 88em) {
+  .scroll {
+    max-height: calc(88em - 15em); } }
+@media (min-height: 88em) and (max-height: 89em) {
+  .scroll {
+    max-height: calc(89em - 15em); } }
+@media (min-height: 89em) and (max-height: 90em) {
+  .scroll {
+    max-height: calc(90em - 15em); } }
+@media (min-height: 90em) and (max-height: 91em) {
+  .scroll {
+    max-height: calc(91em - 15em); } }
+@media (min-height: 91em) and (max-height: 92em) {
+  .scroll {
+    max-height: calc(92em - 15em); } }
+@media (min-height: 92em) and (max-height: 93em) {
+  .scroll {
+    max-height: calc(93em - 15em); } }
+@media (min-height: 93em) and (max-height: 94em) {
+  .scroll {
+    max-height: calc(94em - 15em); } }
+@media (min-height: 94em) and (max-height: 95em) {
+  .scroll {
+    max-height: calc(95em - 15em); } }
+@media (min-height: 95em) and (max-height: 96em) {
+  .scroll {
+    max-height: calc(96em - 15em); } }
+@media (min-height: 96em) and (max-height: 97em) {
+  .scroll {
+    max-height: calc(97em - 15em); } }
+@media (min-height: 97em) and (max-height: 98em) {
+  .scroll {
+    max-height: calc(98em - 15em); } }
+@media (min-height: 98em) and (max-height: 99em) {
+  .scroll {
+    max-height: calc(99em - 15em); } }
+@media (min-height: 99em) and (max-height: 100em) {
+  .scroll {
+    max-height: calc(100em - 15em); } }
+@media (min-height: 100em) and (max-height: 101em) {
+  .scroll {
+    max-height: calc(101em - 15em); } }
+@media (min-height: 101em) and (max-height: 102em) {
+  .scroll {
+    max-height: calc(102em - 15em); } }
+@media (min-height: 102em) and (max-height: 103em) {
+  .scroll {
+    max-height: calc(103em - 15em); } }
+@media (min-height: 103em) and (max-height: 104em) {
+  .scroll {
+    max-height: calc(104em - 15em); } }
+@media (min-height: 104em) and (max-height: 105em) {
+  .scroll {
+    max-height: calc(105em - 15em); } }
+@media (min-height: 105em) and (max-height: 106em) {
+  .scroll {
+    max-height: calc(106em - 15em); } }
+@media (min-height: 106em) and (max-height: 107em) {
+  .scroll {
+    max-height: calc(107em - 15em); } }
+@media (min-height: 107em) and (max-height: 108em) {
+  .scroll {
+    max-height: calc(108em - 15em); } }
+@media (min-height: 108em) and (max-height: 109em) {
+  .scroll {
+    max-height: calc(109em - 15em); } }
+@media (min-height: 109em) and (max-height: 110em) {
+  .scroll {
+    max-height: calc(110em - 15em); } }
+@media (min-height: 110em) and (max-height: 111em) {
+  .scroll {
+    max-height: calc(111em - 15em); } }
+@media (min-height: 111em) and (max-height: 112em) {
+  .scroll {
+    max-height: calc(112em - 15em); } }
+@media (min-height: 112em) and (max-height: 113em) {
+  .scroll {
+    max-height: calc(113em - 15em); } }
+@media (min-height: 113em) and (max-height: 114em) {
+  .scroll {
+    max-height: calc(114em - 15em); } }
+@media (min-height: 114em) and (max-height: 115em) {
+  .scroll {
+    max-height: calc(115em - 15em); } }
+@media (min-height: 115em) and (max-height: 116em) {
+  .scroll {
+    max-height: calc(116em - 15em); } }
+@media (min-height: 116em) and (max-height: 117em) {
+  .scroll {
+    max-height: calc(117em - 15em); } }
+@media (min-height: 117em) and (max-height: 118em) {
+  .scroll {
+    max-height: calc(118em - 15em); } }
+@media (min-height: 118em) and (max-height: 119em) {
+  .scroll {
+    max-height: calc(119em - 15em); } }
+@media (min-height: 119em) and (max-height: 120em) {
+  .scroll {
+    max-height: calc(120em - 15em); } }
+@media (min-height: 120em) and (max-height: 121em) {
+  .scroll {
+    max-height: calc(121em - 15em); } }
+@media (min-height: 121em) and (max-height: 122em) {
+  .scroll {
+    max-height: calc(122em - 15em); } }
+@media (min-height: 122em) and (max-height: 123em) {
+  .scroll {
+    max-height: calc(123em - 15em); } }
+@media (min-height: 123em) and (max-height: 124em) {
+  .scroll {
+    max-height: calc(124em - 15em); } }
+@media (min-height: 124em) and (max-height: 125em) {
+  .scroll {
+    max-height: calc(125em - 15em); } }
+@media (min-height: 125em) and (max-height: 126em) {
+  .scroll {
+    max-height: calc(126em - 15em); } }
+@media (min-height: 126em) and (max-height: 127em) {
+  .scroll {
+    max-height: calc(127em - 15em); } }
+@media (min-height: 127em) and (max-height: 128em) {
+  .scroll {
+    max-height: calc(128em - 15em); } }
+@media (min-height: 128em) and (max-height: 129em) {
+  .scroll {
+    max-height: calc(129em - 15em); } }
+@media (min-height: 129em) and (max-height: 130em) {
+  .scroll {
+    max-height: calc(130em - 15em); } }
+@media (min-height: 130em) and (max-height: 131em) {
+  .scroll {
+    max-height: calc(131em - 15em); } }
+@media (min-height: 131em) and (max-height: 132em) {
+  .scroll {
+    max-height: calc(132em - 15em); } }
+@media (min-height: 132em) and (max-height: 133em) {
+  .scroll {
+    max-height: calc(133em - 15em); } }
+@media (min-height: 133em) and (max-height: 134em) {
+  .scroll {
+    max-height: calc(134em - 15em); } }
+@media (min-height: 134em) and (max-height: 135em) {
+  .scroll {
+    max-height: calc(135em - 15em); } }
+@media (min-height: 135em) and (max-height: 136em) {
+  .scroll {
+    max-height: calc(136em - 15em); } }
+@media (min-height: 136em) and (max-height: 137em) {
+  .scroll {
+    max-height: calc(137em - 15em); } }
+@media (min-height: 137em) and (max-height: 138em) {
+  .scroll {
+    max-height: calc(138em - 15em); } }
+@media (min-height: 138em) and (max-height: 139em) {
+  .scroll {
+    max-height: calc(139em - 15em); } }
+@media (min-height: 139em) and (max-height: 140em) {
+  .scroll {
+    max-height: calc(140em - 15em); } }
+@media (min-height: 140em) and (max-height: 141em) {
+  .scroll {
+    max-height: calc(141em - 15em); } }
+@media (min-height: 141em) and (max-height: 142em) {
+  .scroll {
+    max-height: calc(142em - 15em); } }
+@media (min-height: 142em) and (max-height: 143em) {
+  .scroll {
+    max-height: calc(143em - 15em); } }
+@media (min-height: 143em) and (max-height: 144em) {
+  .scroll {
+    max-height: calc(144em - 15em); } }
+@media (min-height: 144em) and (max-height: 145em) {
+  .scroll {
+    max-height: calc(145em - 15em); } }
+@media (min-height: 145em) and (max-height: 146em) {
+  .scroll {
+    max-height: calc(146em - 15em); } }
+@media (min-height: 146em) and (max-height: 147em) {
+  .scroll {
+    max-height: calc(147em - 15em); } }
+@media (min-height: 147em) and (max-height: 148em) {
+  .scroll {
+    max-height: calc(148em - 15em); } }
+@media (min-height: 148em) and (max-height: 149em) {
+  .scroll {
+    max-height: calc(149em - 15em); } }
+@media (min-height: 149em) and (max-height: 150em) {
+  .scroll {
+    max-height: calc(150em - 15em); } }
+@media (min-height: 150em) and (max-height: 151em) {
+  .scroll {
+    max-height: calc(151em - 15em); } }
+@media (min-height: 151em) and (max-height: 152em) {
+  .scroll {
+    max-height: calc(152em - 15em); } }
+@media (min-height: 152em) and (max-height: 153em) {
+  .scroll {
+    max-height: calc(153em - 15em); } }
+@media (min-height: 153em) and (max-height: 154em) {
+  .scroll {
+    max-height: calc(154em - 15em); } }
+@media (min-height: 154em) and (max-height: 155em) {
+  .scroll {
+    max-height: calc(155em - 15em); } }
+@media (min-height: 155em) and (max-height: 156em) {
+  .scroll {
+    max-height: calc(156em - 15em); } }
+@media (min-height: 156em) and (max-height: 157em) {
+  .scroll {
+    max-height: calc(157em - 15em); } }
+@media (min-height: 157em) and (max-height: 158em) {
+  .scroll {
+    max-height: calc(158em - 15em); } }
+@media (min-height: 158em) and (max-height: 159em) {
+  .scroll {
+    max-height: calc(159em - 15em); } }
+@media (min-height: 159em) and (max-height: 160em) {
+  .scroll {
+    max-height: calc(160em - 15em); } }
+@media (min-height: 160em) and (max-height: 161em) {
+  .scroll {
+    max-height: calc(161em - 15em); } }
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
 
@@ -862,6 +1294,9 @@ article fieldset.buttons :only-child {
 article fieldset.buttons form {
   display: inline-block; }
 
+fieldset fieldset {
+  margin: 0; }
+
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
 
@@ -1064,6 +1499,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .selecting {
   padding: 1em; }
 
+fieldset fieldset.selecting {
+  padding: 0 2em; }
+
 .selecting button {
   padding: 1em;
   width: 100%;
@@ -1071,16 +1509,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   margin: 0.5em 0;
   height: auto; }
 
-:lang(de) input.switch:checked + label span:last-of-type::before {
+:lang(de) input.switch:checked + p span.switch::before {
   content: "An" !important; }
 
-:lang(de) input.switch + label span:last-of-type::before {
+:lang(de) input.switch + p span.switch::before {
   content: "Aus" !important; }
 
-:lang(en) input.switch:checked + label span:last-of-type::before {
+:lang(en) input.switch:checked + p span.switch::before {
   content: "On" !important; }
 
-:lang(en) input.switch + label span:last-of-type::before {
+:lang(en) input.switch + p span.switch::before {
   content: "Off" !important; }
 
 article p.text {

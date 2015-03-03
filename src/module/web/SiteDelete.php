@@ -16,44 +16,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\email;
+namespace hemio\edentata\module\web;
 
 use hemio\edentata\gui;
 
 /**
- * Description of AliasDelete
+ * Description of SiteDelete
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class AliasDelete extends Window
+class SiteDelete extends Window
 {
 
-    public function content($mailbox, $alias)
+    public function content($domain)
     {
-        $message = _(
-            'Do you really want to delete the alias "%1$s"? After'.
-            ' deleting the alias you will no longer be reachable via "%1$s".'
+        $message = _('Do you really want to delete this webiste?');
+        $window  = $this->newDeleteWindow(
+            'site_delete'
+            , _('Delete Website')
+            , $domain
+            , $message
+            , _('Delete Website')
+            , true
         );
 
-        $window = $this->newDeleteWindow(
-            'alias_delete'
-            , _('Delete Alias')
-            , $alias
-            , sprintf($message, $alias)
-            , _('Delete Alias')
-        );
-
-        $this->handleSubmit($window->getForm(), $mailbox, $alias);
+        $this->handleSubmit($window->getForm(), $domain);
 
         return $window;
     }
 
-    public function handleSubmit(gui\FormPost $form, $mailbox, $alias)
+    protected function handleSubmit(gui\FormPost $form, $domain)
     {
         if ($form->correctSubmitted()) {
-            $params = Db::emailAddressToArgs($alias);
-            $params += Db::emailAddressToArgs($mailbox, 'mailbox_');
-            $this->db->aliasDelete($params);
+            $this->db->siteDelete(['p_domain' => $domain]);
 
             throw new \hemio\edentata\exception\Successful;
         }

@@ -45,7 +45,8 @@ class Overview extends Window
         foreach ($sites as $site) {
             $listbox->addLinkEntry(
                 $this->request->derive('site_details', $site['domain'])
-                , new \hemio\html\String($site['domain'])
+                ,
+                                       new \hemio\html\String($site['domain'].' ('.$site['user'].' @ '.$site['service_name'].')')
                 , $site['backend_status']
             );
         }

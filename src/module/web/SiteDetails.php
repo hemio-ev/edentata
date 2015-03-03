@@ -154,6 +154,8 @@ class SiteDetails extends Window
         }
 
         $window->addChild($https);
+        $window->addChild($this->aliases($domain));
+        $window->addChild($this->actions($domain));
 
         return $window;
     }
@@ -168,5 +170,45 @@ class SiteDetails extends Window
         if ($form->correctSubmitted()) {
 
         }
+    }
+
+    protected function actions($domain)
+    {
+        $selecting = new gui\Selecting(_('Possible Actions'));
+        $selecting->addLink(
+            $this->request->derive('site_delete', $domain)
+            , _('Delete entire site')
+        );
+
+        return $selecting;
+    }
+
+    protected function aliases($domain)
+    {
+        $fieldset = new gui\Fieldset(_('Aliases'));
+
+        $listbox = new gui\Listbox();
+
+        $aliases = $this->db->aliasSelect($domain)->fetchAll();
+        foreach ($aliases as $alias) {
+            $listbox->addEntry(
+                new html\String($alias['domain'])
+                , $alias['backend_status']
+                ,
+                                new gui\LinkButton(
+                $this->request->derive('alias_delete', $alias['domain'])
+                , _('Delete')
+            ));
+        }
+
+        $selecting = new gui\Selecting;
+        $selecting->addLink($this->request->derive('alias_create', $domain),
+                                                   _('Create Alias'));
+
+
+        $fieldset->addChild($listbox);
+        $fieldset->addChild($selecting);
+
+        return $fieldset;
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,19 +25,21 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class AddressCreate extends Window {
+class AddressCreate extends Window
+{
 
-    public function content() {
+    public function content()
+    {
         $window = $this->newWindow(_('Create Email Address'));
 
         $selecting = new gui\Selecting(_('Delivery for new Address'));
 
-        $reqMailbox = $this->module->request->derive('mailbox_create');
-        $strMailbox = _('Create new mailbox for incoming emails');
+        $reqMailbox  = $this->module->request->derive('mailbox_create');
+        $strMailbox  = _('Create new mailbox for incoming emails');
         $linkMailbox = $selecting->addLink($reqMailbox, $strMailbox);
 
-        $reqAlias = $this->module->request->derive('alias_create');
-        $strAlias = _('Deliver emails to existing mailbox (alias)');
+        $reqAlias  = $this->module->request->derive('alias_create');
+        $strAlias  = _('Deliver emails to existing mailbox (alias)');
         $linkAlias = $selecting->addLink($reqAlias, $strAlias);
 
         $reqRedirect = $this->module->request->derive('redirection_create');
@@ -53,11 +54,9 @@ class AddressCreate extends Window {
             $linkMailbox->getButton()->setAttribute('autofocus', true);
             $linkAlias->setDisabled();
         }
-        
+
         $window->addChild($selecting);
 
         return $window;
     }
-
-
 }

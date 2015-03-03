@@ -123,6 +123,8 @@ class SiteCreate extends Window
             }
 
             $this->db->commit();
+
+            throw new \hemio\edentata\exception\Successful;
         }
     }
 }

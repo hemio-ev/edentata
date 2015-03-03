@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,39 +27,41 @@ use hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class AliasCreate extends Window {
+class AliasCreate extends Window
+{
 
-    public function content($mailboxName = '') {
+    public function content($mailboxName = '')
+    {
         $window = $this->newFormWindow(
-                'create_alias'
-                , _('Create Email Alias')
-                , null
-                , _('Create')
+            'create_alias'
+            , _('Create Email Alias')
+            , null
+            , _('Create')
         );
 
         $fieldsetEmail = new gui\Fieldset(_('New Email Address'));
-        $email = new gui\FieldEmailWithSelect();
+        $email         = new gui\FieldEmailWithSelect();
 
         $fieldsetMailbox = new gui\Fieldset(_('Deliver emails to'));
-        $mailbox = new form\FieldSelect('mailbox', _('Mailbox'));
+        $mailbox         = new form\FieldSelect('mailbox', _('Mailbox'));
         $mailbox->setDefaultValue($mailboxName);
 
         $window->getForm()
-                ->addChild($fieldsetEmail)
-                ->addChild($email);
+            ->addChild($fieldsetEmail)
+            ->addChild($email);
 
         $window->getForm()
-                ->addChild($fieldsetMailbox)
-                ->addChild($mailbox);
+            ->addChild($fieldsetMailbox)
+            ->addChild($mailbox);
 
         $domains = $this->db->getPossibleDomains();
-        while ($domain = $domains->fetch()) {
+        while ($domain  = $domains->fetch()) {
             $email->getDomain()->addOption($domain['domain'], $domain['domain']);
         }
 
         $mailboxes = $this->db->mailboxSelect();
-        while ($mbox = $mailboxes->fetch()) {
-            $addr = $mbox['localpart'] . '@' . $mbox['domain'];
+        while ($mbox      = $mailboxes->fetch()) {
+            $addr = $mbox['localpart'].'@'.$mbox['domain'];
             $mailbox->addOption($addr, $addr);
         }
 
@@ -71,15 +72,16 @@ class AliasCreate extends Window {
 
     protected function handleSubmit(
     gui\FormPost $form
-    , form\FieldSelect $mailbox) {
+    , form\FieldSelect $mailbox)
+    {
 
         if ($form->submitted()) {
             if ($form->dataValid()) {
                 $args = $form->getVal(['localpart', 'domain']) +
-                        Db::emailAddressToArgs(
-                                $mailbox->getValueUser()
-                                , 'mailbox_'
-                        );
+                    Db::emailAddressToArgs(
+                        $mailbox->getValueUser()
+                        , 'mailbox_'
+                );
 
                 $this->db->aliasCreate($args);
 
@@ -89,5 +91,4 @@ class AliasCreate extends Window {
             }
         }
     }
-
 }

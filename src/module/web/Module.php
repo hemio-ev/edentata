@@ -48,8 +48,40 @@ class Module extends \hemio\edentata\Module
                 break;
 
             case 'site_create':
-                $content = (new SiteCreate($this))->content(
-                    $this->request->subject, $this->request->item);
+                try {
+                    $content = (new SiteCreate($this))->content(
+                        $this->request->subject, $this->request->item);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
+                break;
+
+            case 'alias_create':
+                try {
+                    $content = (new AliasCreate($this))->content(
+                        $this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive('site_details',
+                                                                        true));
+                }
+                break;
+
+            case 'alias_delete':
+                try {
+                    $content = (new AliasDelete($this))->content(
+                        $this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
+                break;
+
+            case 'site_delete':
+                try {
+                    $content = (new SiteDelete($this))->content(
+                        $this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
                 break;
 
             case 'site_details':

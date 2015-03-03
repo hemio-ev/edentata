@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,17 +25,19 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Overview extends Window {
+class Overview extends Window
+{
 
-    public function content() {
+    public function content()
+    {
         $window = $this->newWindow(_('Server Access'), null, false);
 
         $window->addButtonRight(
-                new gui\LinkButton(
-                $this->request->derive('service')
-                , _('Create User')
-                )
-                , true
+            new gui\LinkButton(
+            $this->request->derive('service')
+            , _('Create User')
+            )
+            , true
         );
 
         $window->addChild($this->users());
@@ -44,29 +45,30 @@ class Overview extends Window {
         return $window;
     }
 
-    protected function users() {
+    protected function users()
+    {
         $users = $this->db->userSelect()->fetchAll();
 
         if (empty($users)) {
             return new gui\Hint(
-                    _('You do not own a server access right now.')
+                _('You do not own a server access right now.')
             );
         } else {
             $list = new gui\Listbox();
             foreach ($users as $user) {
-                $str = sprintf('%s (%s, %s)', $user['user'], $user['service_name'], $user['service']);
+                $str = sprintf('%s (%s, %s)', $user['user'],
+                               $user['service_name'], $user['service']);
                 $list->addLinkEntry(
-                        $this->request->derive(
-                                'details'
-                                , $user['user']
-                                , $user['service_name']
-                        )
-                        , new \hemio\html\String($str)
-                        , $user['backend_status']
+                    $this->request->derive(
+                        'details'
+                        , $user['user']
+                        , $user['service_name']
+                    )
+                    , new \hemio\html\String($str)
+                    , $user['backend_status']
                 );
             }
             return $list;
         }
     }
-
 }

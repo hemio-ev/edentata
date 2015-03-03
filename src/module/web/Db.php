@@ -28,6 +28,36 @@ use hemio\edentata\sql;
 class Db extends \hemio\edentata\ModuleDb
 {
 
+    public function aliasCreate(array $params)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'web.ins_alias'
+        , $params
+        ))->execute();
+    }
+
+    public function aliasDelete(array $params)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'web.del_alias'
+        , $params
+        ))->execute();
+    }
+
+    public function aliasSelect($site)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'web.sel_alias'
+        );
+
+        $stmt->options('WHERE site = :site');
+
+        return $stmt->execute(['site' => $site]);
+    }
+
     public function userSelect()
     {
         return
@@ -63,6 +93,15 @@ class Db extends \hemio\edentata\ModuleDb
         (new sql\QuerySelectFunction(
         $this->pdo
         , 'web.ins_site'
+        , $params
+        ))->execute();
+    }
+
+    public function siteDelete(array $params)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'web.del_site'
         , $params
         ))->execute();
     }

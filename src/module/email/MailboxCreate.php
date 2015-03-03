@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,33 +27,38 @@ use \hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class MailboxCreate extends Window {
+class MailboxCreate extends Window
+{
 
-    public function content() {
+    public function content()
+    {
         $window = $this->newFormWindow(
-                'create_account'
-                , 'New Email Postbox'
-                , null
-                , _('Create')
+            'create_account'
+            , 'New Email Postbox'
+            , null
+            , _('Create')
         );
 
         $fieldsetEmail = new gui\Fieldset(_('New Email Address'));
-        $email = new gui\FieldEmailWithSelect();
+        $email         = new gui\FieldEmailWithSelect();
 
         $fieldsetPassword = new gui\Fieldset(_('Password'));
-        $password = new gui\FieldNewPassword('password');
+        $password         = new gui\FieldNewPassword('password');
 
         $window->getForm()
-                ->addChild($fieldsetEmail)
-                ->addChild($email);
+            ->addChild($fieldsetEmail)
+            ->addChild($email);
 
         $window->getForm()
-                ->addChild($fieldsetPassword)
-                ->addChild($password);
+            ->addChild($fieldsetPassword)
+            ->addChild($password);
 
         $domains = $this->db->getPossibleDomains();
-        while ($domain = $domains->fetch()) {
-            $email->getDomain()->addOption($domain['domain'], $domain['domain']);
+        while ($domain  = $domains->fetch()) {
+            $email->getDomain()->addOption(
+                $domain['domain']
+                , $domain['domain']
+            );
         }
 
         $this->handleSubmit($window->getForm());
@@ -62,18 +66,18 @@ class MailboxCreate extends Window {
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form) {
+    protected function handleSubmit(gui\FormPost $form)
+    {
         if ($form->submitted()) {
             if ($form->dataValid()) {
                 $this->db->mailboxCreate(
-                        $form->getVal(['localpart', 'domain', 'password'])
+                    $form->getVal(['localpart', 'domain', 'password'])
                 );
-                
+
                 throw new exception\Successful();
             } else {
                 // find error?
             }
         }
     }
-
 }
