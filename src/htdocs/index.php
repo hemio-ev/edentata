@@ -104,9 +104,19 @@ try {
     $header[]    = $aSettings;
 
     $ul = new html\Ul;
-    foreach (['hemio.de', 'Thomas Mustermann', 'Hinz und Kunz'] as $v) {
-        $ul->addLine(new html\String($v));
+
+    $userModule = (new LoadModule('user', $pdo))->getInstance($request);
+    foreach ($userModule->db->selectDeputy() as $represented) {
+        $a                  = new html\A();
+        $req                = $request->deriveModule($request->module);
+        $req->get['deputy'] = $represented['represented'];
+        $a->setAttribute('href', $req->getUrl());
+        $a->addChild(new html\String($represented['represented']));
+        $ul->addLine($a);
     }
+
+    if ($request->get('deputy'))
+        $userModule->db->actAsDeputy($request->get('deputy'));
 
     $header[] = $ul;
 

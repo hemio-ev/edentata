@@ -83,10 +83,12 @@ class SiteDetails extends Window
                     'p_domain' => $domain,
                     'p_identifier' => $identifier
                 ]);
+                $i = 0;
                 foreach ($newChain as $subjectKeyIdentifier) {
                     $params = [
                         'p_domain' => $domain,
                         'p_identifier' => $identifier,
+                        'p_order' => $i++,
                         'p_subject_key_identifier' => $subjectKeyIdentifier
                     ];
                     $this->db->intermediateChainInsert($params);

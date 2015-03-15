@@ -72,6 +72,6 @@ body > header a:first-of-type {
     @include button-background-active(lighten($outer-color, 10%));
 }
 
-.dropdown:focus + * {
+.dropdown:focus + *, .dropdown + *:hover {
     display: block;
 }

@@ -140,7 +140,7 @@ body > header a:first-of-type {
   background-color: #404040;
   background: linear-gradient(#404040, #4d4d4d); }
 
-.dropdown:focus + * {
+.dropdown:focus + *, .dropdown + *:hover {
   display: block; }
 
 /*

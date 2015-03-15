@@ -90,8 +90,13 @@ class Module extends \hemio\edentata\Module
                 break;
 
             case 'https_cert':
-                $content = (new HttpsCert($this))->content(
-                    $this->request->subject, $this->request->item);
+                try {
+                    $content = (new HttpsCert($this))->content(
+                        $this->request->subject, $this->request->item);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive('site_details',
+                                                                        true));
+                }
                 break;
 
             case 'intermediate_create':

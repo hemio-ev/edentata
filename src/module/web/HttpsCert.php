@@ -89,6 +89,8 @@ class HttpsCert extends Window
             ];
 
             $this->db->httpsUpdate($params);
+
+            throw new exception\Successful;
         }
     }
 }

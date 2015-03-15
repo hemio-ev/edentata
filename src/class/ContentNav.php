@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,10 +25,10 @@ use hemio\html;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ContentNav {
-
+class ContentNav
+{
     public $modules = [];
-    
+
     /**
      *
      * @var I10n
@@ -37,24 +36,26 @@ class ContentNav {
     protected $i10n;
 
     /**
-     * 
+     *
      * @param array $modules
      */
-    public function __construct(array $modules, I10n $i10) {
+    public function __construct(array $modules, I10n $i10)
+    {
         $this->modules = $modules;
-        $this->i10n = $i10;
+        $this->i10n    = $i10;
     }
 
     /**
-     * 
+     *
      * @return ContentEvents
      */
-    public function getNav() {
+    public function getNav()
+    {
         $nav = new html\Nav();
         $nav
-                ->addChild(new html\Header())
-                ->addChild(new html\H1())
-                ->addChild(new html\String(_('Services')));
+            ->addChild(new html\Header())
+            ->addChild(new html\H1())
+            ->addChild(new html\String(_('Services')));
 
         $contentEvents = new ContentEvents($nav);
 
@@ -66,11 +67,11 @@ class ContentNav {
             try {
                 $module = new LoadModule($moduleId);
                 $this->i10n->setDomainModule($module);
-                $str = new html\String($module->getName());
+                $str    = new html\String($module->getName());
                 $this->i10n->setDomainMain();
 
-                $a = new html\A();
-                $url = (new Request())->deriveModule($moduleId)->getUrl();
+                $a   = new html\A();
+                $url = (new Request($_GET))->deriveModule($moduleId)->getUrl();
                 $a->setAttribute('href', $url);
                 $a->addChild($str);
                 $ul->addLine($a);
@@ -81,5 +82,4 @@ class ContentNav {
 
         return $contentEvents;
     }
-
 }

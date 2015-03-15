@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,9 +25,11 @@ use hemio\edentata\sql;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Db extends \hemio\edentata\ModuleDb {
+class Db extends \hemio\edentata\ModuleDb
+{
 
-    public function password($params) {
+    public function password($params)
+    {
         (new sql\QuerySelectFunction(
         $this->pdo
         , 'user.upd_user'
@@ -36,4 +37,20 @@ class Db extends \hemio\edentata\ModuleDb {
         ))->execute();
     }
 
+    public function actAsDeputy($actAs)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'user.ins_deputy'
+        , ['p_act_as' => $actAs]
+        ))->execute();
+    }
+
+    public function selectDeputy()
+    {
+        return (new sql\QuerySelectFunction(
+            $this->pdo
+            , 'user.sel_deputy'
+            ))->execute();
+    }
 }
