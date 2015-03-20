@@ -42,3 +42,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .message[role="alert"] h2 {
     color: $button-delete-color;
 }
+
+.explanation {
+    @extend .message;
+    min-height: 4em;
+}
+
+.explanation p {
+    margin: 0;
+}

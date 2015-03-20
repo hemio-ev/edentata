@@ -16,35 +16,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\sql;
+namespace hemio\edentata\gui;
+
+use hemio\edentata\exception;
+use hemio\html;
 
 /**
- * Description of Connection
+ * Description of Explanation
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Connection extends \PDO
+class Explanation extends \hemio\form\Container
 {
-    /**
-     *
-     * @var array
-     */
-    protected $exceptionMapper = [];
 
-    public function __construct(
-    $dsn, $username = null, $passwd = null, $options = null
-    )
+    public function __construct(exception\Printable $event)
     {
-        parent::__construct($dsn, $username, $passwd, $options);
-    }
+        $this['div'] = new html\Div;
+        $this['div']->addCssClass('explanation');
 
-    public function getExceptionMapper()
-    {
-        return $this->exceptionMapper;
-    }
+        if ($event instanceof exception\Error) {
+            $this['div']->setAttribute('role', 'alert');
+        }
 
-    public function addExceptionMapper(ExceptionMapper $map)
-    {
-        $this->exceptionMapper[] = $map;
+        $this['div']['h2']   = new html\H2();
+        $this['div']['h2'][] = new html\String($event::title());
+
+        $this['div']['p']   = new html\P();
+        $this['div']['p'][] = new html\String($event->getMessage());
     }
 }

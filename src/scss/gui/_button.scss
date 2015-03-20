@@ -33,6 +33,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 }
 
+button * {
+    float: none !important;
+}
+
 .button:enabled:hover, span.select:hover, button:focus {
     @include button-background-hover($button-color);
 }

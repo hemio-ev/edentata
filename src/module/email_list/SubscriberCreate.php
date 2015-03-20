@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,18 +26,19 @@ use hemio\edentata\module\email;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class SubscriberCreate extends Window {
+class SubscriberCreate extends Window
+{
 
-    public function content($list) {
+    public function content($list)
+    {
         $window = $this->newFormWindow(
-                'subscriber_create'
-                , _('Add Subscriber')
-                , $list
-                , _('Subscribe')
+            'subscriber_create'
+            , _('Add Subscriber')
+            , $list
+            , _('Subscribe')
         );
 
         $address = new \hemio\form\FieldEmail('address', _('Subscriber'));
-        $address->getControlElement()->setAttribute('autofocus', true);
         $address->setRequired();
 
         $window->getForm()->addChild($address);
@@ -48,7 +48,8 @@ class SubscriberCreate extends Window {
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $list) {
+    protected function handleSubmit(gui\FormPost $form, $list)
+    {
         if ($form->correctSubmitted()) {
             $params = email\Db::emailAddressToArgs($list, 'list_');
             $params += $form->getVal(['address']);
@@ -58,5 +59,4 @@ class SubscriberCreate extends Window {
             throw new \hemio\edentata\exception\Successful;
         }
     }
-
 }

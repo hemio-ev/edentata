@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -23,15 +22,19 @@ use hemio\form;
 use hemio\html;
 use hemio\form\Abstract_\TemplateFormField;
 use hemio\form\Abstract_\FormElement;
+use hemio\edentata\exception;
 
 /**
  * Description of FormPost
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FormPost extends form\FormPost {
+class FormPost extends form\FormPost
+{
 
-    public function __construct($name, array $post = null, array $get = null, array $stored = array()) {
+    public function __construct($name, array $post = null, array $get = null,
+                                array $stored = array())
+    {
         parent::__construct($name, $post, $get, $stored);
         $this->setAttribute('autocomplete', 'off');
 
@@ -41,11 +44,26 @@ class FormPost extends form\FormPost {
         // patch template for <select> controls
         $templateSelect = $this->patchTemplateForSelect(clone $template);
         $this->addInheritableAppendage(
-                FormPost::FORM_FIELD_TEMPLATE . '_SELECT', $templateSelect
+            FormPost::FORM_FIELD_TEMPLATE.'_SELECT', $templateSelect
+        );
+
+        $this->addHookToString(
+            function ($elem) {
+
+            $filter = function ($elem) {
+                return $elem instanceof \hemio\form\Abstract_\FormField;
+            };
+
+            foreach ($elem->getRecursiveIterator($filter) as $formElement)
+                foreach ($formElement->getErrors() as $error)
+                    $formElement->addChild(new Explanation(new exception\Error($error)));
+        }
+            , 'error_messages'
         );
     }
 
-    protected function patchTemplateForSelect($templateSelect) {
+    protected function patchTemplateForSelect($templateSelect)
+    {
         $templateSelect['P']['SPAN'] = new html\Span();
         $templateSelect['P']['SPAN']->addCssClass('select');
 
@@ -57,7 +75,8 @@ class FormPost extends form\FormPost {
         return $templateSelect;
     }
 
-    public function getVal(array $keys) {
+    public function getVal(array $keys)
+    {
         $arr = [];
 
         $filter = function ($child) {
@@ -66,11 +85,10 @@ class FormPost extends form\FormPost {
 
         foreach ($this->getRecursiveIterator($filter) as $elem) {
             if (in_array($elem->getName(), $keys)) {
-                $arr['p_' . $elem->getName()] = $elem->getValueUser();
+                $arr['p_'.$elem->getName()] = $elem->getValueUser();
             }
         }
 
         return $arr;
     }
-
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,31 +26,34 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class RedirectionCreate extends Window {
+class RedirectionCreate extends Window
+{
 
-    public function content() {
+    public function content()
+    {
         $window = $this->newFormWindow(
-                'create_redirect'
-                , _('New Redirection')
-                , null, _('Create')
+            'create_redirect'
+            , _('New Redirection')
+            , null, _('Create')
         );
 
         $fieldsetFrom = new gui\Fieldset(_('Redirection from'));
-        $from = new gui\FieldEmailWithSelect();
+        $from         = new gui\FieldEmailWithSelect();
 
         $fieldsetTo = new gui\Fieldset(_('Redirection to'));
-        $to = new form\FieldEmail('to', _('Email Address'));
+        $to         = new form\FieldEmail('to', _('Email Address'));
+        $to->setAccesskey('t');
 
         $window->getForm()
-                ->addChild($fieldsetFrom)
-                ->addChild($from);
+            ->addChild($fieldsetFrom)
+            ->addChild($from);
 
         $window->getForm()
-                ->addChild($fieldsetTo)
-                ->addChild($to);
+            ->addChild($fieldsetTo)
+            ->addChild($to);
 
         $domains = $this->db->getPossibleDomains();
-        while ($domain = $domains->fetch()) {
+        while ($domain  = $domains->fetch()) {
             $from->getDomain()->addOption($domain['domain'], $domain['domain']);
         }
 
@@ -60,9 +62,12 @@ class RedirectionCreate extends Window {
         return $window;
     }
 
-    public function handleSubmit(gui\FormPost $form, gui\FieldEmailWithSelect $from, form\FieldEmail $to) {
+    public function handleSubmit(gui\FormPost $form,
+                                 gui\FieldEmailWithSelect $from,
+                                 form\FieldEmail $to)
+    {
         if ($form->correctSubmitted()) {
-            $args = $form->getVal(['localpart', 'domain']);
+            $args                  = $form->getVal(['localpart', 'domain']);
             $args['p_destination'] = $to->getValueUser();
 
             $this->db->redirectionCreate($args);
@@ -70,5 +75,4 @@ class RedirectionCreate extends Window {
             throw new \hemio\edentata\exception\Successful();
         }
     }
-
 }

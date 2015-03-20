@@ -192,7 +192,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Created on : Jan 20, 2015, 1:16:31 AM
     Author     : Michael Herold <quabla@hemio.de>
 */
-.window, .message, article, nav {
+.window, .message, .explanation, article, nav {
   background-color: #ededed;
   border-radius: 0.5em 0.5em 0 0;
   border: 1px solid #8e8e8e;
@@ -224,7 +224,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Created on : Jan 20, 2015, 1:16:31 AM
     Author     : Michael Herold <quabla@hemio.de>
 */
-.window header, .message header, article header, nav header {
+.window header, .message header, .explanation header, article header, nav header {
   background-color: #ededed;
   background: linear-gradient(white, #ededed);
   border-bottom: 1px solid #d9d9d9;
@@ -236,7 +236,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   align-items: center;
   justify-content: center; }
 
-.window header h1, .message header h1, article header h1, nav header h1 {
+.window header h1, .message header h1, .explanation header h1, article header h1, nav header h1 {
   font-size: 1.05em;
   padding-top: 0.2em;
   line-height: 0.9em;
@@ -245,20 +245,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   text-align: center;
   flex-shrink: 0; }
 
-.window header h1 span, .message header h1 span, article header h1 span, nav header h1 span {
+.window header h1 span, .message header h1 span, .explanation header h1 span, article header h1 span, nav header h1 span {
   color: gray;
   font-size: 0.8em;
   font-weight: normal;
   display: inline-block; }
 
-.window header > div, .message header > div, article header > div, nav header > div {
+.window header > div, .message header > div, .explanation header > div, article header > div, nav header > div {
   order: -1;
   margin-right: auto;
   padding: 0 0.3em;
   width: 40%;
   flex-shrink: 5; }
 
-.window header > div:first-of-type, .message header > div:first-of-type, article header > div:first-of-type, nav header > div:first-of-type {
+.window header > div:first-of-type, .message header > div:first-of-type, .explanation header > div:first-of-type, article header > div:first-of-type, nav header > div:first-of-type {
   order: 1;
   margin: 0;
   margin-left: auto;
@@ -284,7 +284,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Created on : Jan 20, 2015, 1:17:40 AM
     Author     : Michael Herold <quabla@hemio.de>
 */
-.message {
+.message, .explanation {
   border-radius: 0.5em;
   padding: 0.5em 1em;
   background-image: url("success.svg");
@@ -293,15 +293,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   background-size: contain;
   background-position: center; }
 
-.message h2 {
+.message h2, .explanation h2 {
   margin-top: 0.4em;
   font-size: 1.1em; }
 
-.message[role="alert"] {
+.message[role="alert"], [role="alert"].explanation {
   background-image: url("error.svg"); }
 
-.message[role="alert"] h2 {
+.message[role="alert"] h2, [role="alert"].explanation h2 {
   color: #c30f0f; }
+
+.explanation {
+  min-height: 4em; }
+
+.explanation p {
+  margin: 0; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -978,6 +984,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   min-width: 7.5em;
   transition-property: opacity;
   transition-duration: 400ms; }
+
+button * {
+  float: none !important; }
 
 .button:enabled:hover, button:enabled:hover, span.select:hover, button:focus {
   background-color: white;

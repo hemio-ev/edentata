@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,13 +27,17 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ServiceDetails extends Window {
+class ServiceDetails extends Window
+{
 
-    public function content($registered, $domain) {
-        $window = $this->newFormWindow('service_details', _('Service Activation'), $domain, _('Save'));
+    public function content($registered, $domain)
+    {
+        $window = $this->newFormWindow('service_details',
+                                       _('Service Activation'), $domain,
+                                         _('Save'));
 
         $activeServices = [];
-        $dnsService = $this->db->serviceSelect($domain)->fetchAll();
+        $dnsService     = $this->db->serviceSelect($domain)->fetchAll();
         foreach ($dnsService as $service) {
             $activeServices[$service['service']] = $service['service_name'];
         }
@@ -44,14 +47,15 @@ class ServiceDetails extends Window {
         $delServices = [];
         $insServices = [];
         foreach ($services as $service) {
-            $srv = $service['service'];
+            $srv    = $service['service'];
             $switch = new gui\FieldSwitch($srv, strtoupper($srv));
             $switch->getControlElement()->addCssClass('display_control');
             $window->getForm()->addChild($switch);
 
             $names = $this->db->activatableServiceNameSelect($srv);
 
-            $select = new form\FieldSelect('service_name_' . $srv, _('Host/Server'));
+            $select = new form\FieldSelect('service_name_'.$srv,
+                                           _('Host/Server'));
             foreach ($names as $name) {
                 $select->addOption($name['service_name']);
             }
@@ -63,14 +67,17 @@ class ServiceDetails extends Window {
 
             $window->getForm()->addChild($select);
 
-            if ($switch->getValueUser()) {
+            if ($switch->getValueUser() && !isset($activeServices[$srv])) {
                 $insServices[$srv] = $select->getValueUser();
-            } else {
+            }
+
+            if (!$switch->getValueUser() && isset($activeServices[$srv])) {
                 $delServices[] = $srv;
             }
         }
 
-        $this->handleSubmit($window->getForm(), $insServices, $delServices, $registered, $domain);
+        $this->handleSubmit($window->getForm(), $insServices, $delServices,
+                            $registered, $domain);
 
         return $window;
     }
@@ -81,7 +88,8 @@ class ServiceDetails extends Window {
     , array $delServices
     , $registered
     , $domain
-    ) {
+    )
+    {
         if ($form->correctSubmitted()) {
             $this->db->beginTransaction();
 
@@ -108,5 +116,4 @@ class ServiceDetails extends Window {
             throw new \hemio\edentata\exception\Successful;
         }
     }
-
 }

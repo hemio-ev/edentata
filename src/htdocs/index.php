@@ -19,6 +19,7 @@
 namespace hemio\edentata;
 
 use hemio\html;
+use hemio\form;
 
 chdir(__DIR__.'/../../');
 
@@ -41,7 +42,7 @@ $activeModuleName = $request->module;
 
 try {
     # doc
-    $doc = new html\Document(new html\String('Edentata Dev.'));
+    $doc = new form\Document(new html\String('Edentata Dev.'));
     $doc->getHtml()->getHead()->addCssFile('static/design/style.css');
     $doc->getHtml()->setAttribute('lang', $i10n->getLang());
 

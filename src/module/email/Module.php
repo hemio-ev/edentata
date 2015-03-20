@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,21 +27,28 @@ use hemio\edentata\exception\UnknownOperation;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Module extends edentata\Module {
+class Module extends edentata\Module
+{
 
-    public static function getName() {
+    public static function getName()
+    {
         return _('Email');
     }
 
-    public static function getDir() {
+    public static function getDir()
+    {
         return __DIR__;
     }
 
-    protected function constructHook() {
+    protected function constructHook()
+    {
         $this->db = new Db($this->pdo);
+        $this->pdo->addExceptionMapper(
+            new DbExceptionMapping($this->request->derive()));
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         switch ($this->request->action) {
             case '':
                 $content = (new Overview($this))->content();
@@ -63,9 +69,11 @@ class Module extends edentata\Module {
 
             case 'alias_delete':
                 try {
-                    $content = (new AliasDelete($this))->content($this->request->subject, $this->request->item);
+                    $content = (new AliasDelete($this))->content($this->request->subject,
+                                                                 $this->request->item);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('mailbox_details', true));
+                    edentata\Utils::htmlRedirect($this->request->derive('mailbox_details',
+                                                                        true));
                 }
                 break;
 
@@ -115,5 +123,4 @@ class Module extends edentata\Module {
 
         return $content;
     }
-
 }

@@ -50,6 +50,7 @@ class QuerySelectFunction extends QuerySelect
      */
     protected $options = '';
     protected $select  = null;
+    protected $as      = null;
 
     /**
      *
@@ -98,6 +99,11 @@ class QuerySelectFunction extends QuerySelect
         $this->select = $select;
     }
 
+    public function selectAs($as)
+    {
+        $this->as = $as;
+    }
+
     /**
      *
      * @return \PDOStatement
@@ -117,7 +123,11 @@ class QuerySelectFunction extends QuerySelect
             $selectString = implode(', ', $selectParts);
         }
 
-        $stmt = $this->pdo->prepare('SELECT '.$selectString.' FROM '.$this->getFunctionCall().' '.$this->options);
+        $as = '';
+        if ($this->as)
+            $as = ' AS '.$this->as;
+
+        $stmt = $this->pdo->prepare('SELECT '.$selectString.' FROM '.$this->getFunctionCall().$as.' '.$this->options);
         try {
             $stmt->execute($this->funcParams + $params);
         } catch (\PDOException $e) {

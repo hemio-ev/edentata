@@ -192,4 +192,21 @@ class Db extends \hemio\edentata\ModuleDb
 
         return $stmt->execute(['domain' => $domain, 'identifier' => $identifier]);
     }
+
+    public function availableDomains(array $services)
+    {
+        if (count($services) > 1)
+            throw new exception\Error('Multiple services not implemented.');
+
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo, 'dns.sel_available_service'
+        );
+        $stmt->selectAs('t');
+        $stmt->options('WHERE service = :service AND '
+            .'NOT EXISTS (SELECT TRUE FROM web.sel_site() AS s WHERE t.domain=s.domain) AND '
+            .'NOT EXISTS (SELECT TRUE FROM web.sel_alias() AS s WHERE t.domain=s.domain)');
+
+
+        return $stmt->execute(['service' => $services[0]]);
+    }
 }

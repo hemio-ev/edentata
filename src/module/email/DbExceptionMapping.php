@@ -16,35 +16,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\sql;
+namespace hemio\edentata\module\email;
 
 /**
- * Description of Connection
+ * Description of ExceptionMapping
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Connection extends \PDO
+class DbExceptionMapping extends \hemio\edentata\sql\ExceptionMapper
 {
-    /**
-     *
-     * @var array
-     */
-    protected $exceptionMapper = [];
 
-    public function __construct(
-    $dsn, $username = null, $passwd = null, $options = null
-    )
+    public function map(\hemio\edentata\exception\SqlSpecific $e)
     {
-        parent::__construct($dsn, $username, $passwd, $options);
-    }
+        switch ($e->getMessage()) {
+            case 'email:address_already_exists':
+                return $this->error(
+                        _('The chosen email address is already in use.')
+                        , 2001
+                        , $e);
 
-    public function getExceptionMapper()
-    {
-        return $this->exceptionMapper;
-    }
-
-    public function addExceptionMapper(ExceptionMapper $map)
-    {
-        $this->exceptionMapper[] = $map;
+            default:
+                return $e;
+        }
     }
 }
