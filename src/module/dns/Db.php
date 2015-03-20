@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,28 +25,43 @@ use hemio\edentata\sql;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Db extends \hemio\edentata\ModuleDb {
+class Db extends \hemio\edentata\ModuleDb
+{
 
-    public function registeredCreate(array $params) {
-        return (new sql\QuerySelectFunction(
-                $this->pdo
-                , 'dns.ins_registered'
-                , $params
-                )
-                )->execute();
-    }
-
-    public function registeredSelect() {
-        return (new sql\QuerySelectFunction(
-                $this->pdo
-                , 'dns.sel_registered')
-                )->execute();
-    }
-
-    public function serviceDomainSelect($registered) {
+    public function customSelect($registered)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'dns.sel_service')
+            $this->pdo
+            , 'dns.sel_custom');
+
+        $stmt->options('WHERE registered = :registered');
+
+        return $stmt->execute(['registered' => $registered]);
+    }
+
+    public function registeredCreate(array $params)
+    {
+        return (new sql\QuerySelectFunction(
+            $this->pdo
+            , 'dns.ins_registered'
+            , $params
+            )
+            )->execute();
+    }
+
+    public function registeredSelect()
+    {
+        return (new sql\QuerySelectFunction(
+            $this->pdo
+            , 'dns.sel_registered')
+            )->execute();
+    }
+
+    public function serviceDomainSelect($registered)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'dns.sel_service')
         ;
 
         $stmt->select(['domain']);
@@ -56,7 +70,8 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute(['registered' => $registered]);
     }
 
-    public function serviceInsert($params) {
+    public function serviceInsert($params)
+    {
         (new sql\QuerySelectFunction(
         $this->pdo
         , 'dns.ins_service'
@@ -64,7 +79,8 @@ class Db extends \hemio\edentata\ModuleDb {
         )->execute();
     }
 
-    public function serviceDelete($params) {
+    public function serviceDelete($params)
+    {
         (new sql\QuerySelectFunction(
         $this->pdo
         , 'dns.del_service'
@@ -72,20 +88,22 @@ class Db extends \hemio\edentata\ModuleDb {
         )->execute();
     }
 
-    public function serviceSelect($domain) {
+    public function serviceSelect($domain)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'dns.sel_service');
+            $this->pdo
+            , 'dns.sel_service');
 
         $stmt->options('WHERE domain = :domain');
 
         return $stmt->execute(['domain' => $domain]);
     }
 
-    public function activatableServiceSelect() {
+    public function activatableServiceSelect()
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'dns.sel_activatable_service');
+            $this->pdo
+            , 'dns.sel_activatable_service');
 
         $stmt->select(['service']);
         $stmt->options('GROUP BY service');
@@ -93,15 +111,15 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute();
     }
 
-    public function activatableServiceNameSelect($service) {
+    public function activatableServiceNameSelect($service)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'dns.sel_activatable_service');
+            $this->pdo
+            , 'dns.sel_activatable_service');
 
         $stmt->select(['service_name']);
         $stmt->options('WHERE service = :service');
 
         return $stmt->execute(['service' => $service]);
     }
-
 }

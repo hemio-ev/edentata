@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -24,24 +23,28 @@ namespace hemio\edentata;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Utils {
+class Utils
+{
 
-    public static function htmlRedirect(Request $request) {
+    public static function htmlRedirect(Request $request)
+    {
+        usleep(100 * 1000);
         header(
-                sprintf('Location: %s', $request->getUrl())
-                , true
-                , 303
+            sprintf('Location: %s', $request->getUrl())
+            , true
+            , 303
         );
         exit(0);
     }
 
-    public static function sysExec($command, $pipe = '') {
+    public static function sysExec($command, $pipe = '')
+    {
         $descriptorspec = [
             0 => ['pipe', 'r'], // STDIN
             1 => ['pipe', 'w'] // STDOUT
         ];
 
-        $pipes = [];
+        $pipes   = [];
         $process = proc_open($command, $descriptorspec, $pipes);
 
         if (!is_resource($process))
@@ -49,8 +52,8 @@ class Utils {
 
         $status = proc_get_status($process);
         if (
-                $status === false ||
-                $status['running'] === false
+            $status === false ||
+            $status['running'] === false
         )
             throw new exception\Error('Process is not running.');
 
@@ -70,5 +73,4 @@ class Utils {
 
         return $stdout;
     }
-
 }

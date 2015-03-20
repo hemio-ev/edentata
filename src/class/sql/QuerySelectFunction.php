@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -19,16 +18,18 @@
 
 namespace hemio\edentata\sql;
 
+use hemio\edentata\exception;
+
 /**
  * Description of Query
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class QuerySelectFunction extends QuerySelect {
-
+class QuerySelectFunction extends QuerySelect
+{
     /**
      *
-     * @var \PDO
+     * @var Connection
      */
     protected $pdo;
 
@@ -45,10 +46,10 @@ class QuerySelectFunction extends QuerySelect {
 
     /**
      *
-     * @var string 
+     * @var string
      */
     protected $options = '';
-    protected $select = null;
+    protected $select  = null;
 
     /**
      *
@@ -56,10 +57,11 @@ class QuerySelectFunction extends QuerySelect {
      * @param string $functionName
      * @param array $funcParams
      */
-    public function __construct(\PDO $pdo, $functionName, array $funcParams = []) {
-        $this->pdo = $pdo;
+    public function __construct(\PDO $pdo, $functionName, array $funcParams = [])
+    {
+        $this->pdo          = $pdo;
         $this->functionName = $functionName;
-        $this->funcParams = $funcParams;
+        $this->funcParams   = $funcParams;
     }
 
     /**
@@ -67,36 +69,41 @@ class QuerySelectFunction extends QuerySelect {
      * @param string $name
      * @return string
      */
-    public function sqlName($name) {
+    public function sqlName($name)
+    {
         $arr = array_map(function ($str) {
-            return '"' . $str . '"';
+            return '"'.$str.'"';
         }, explode('.', $name));
 
         return implode('.', $arr);
     }
 
-    public function getFunctionCall() {
+    public function getFunctionCall()
+    {
         $sqlParams = [];
         foreach (array_keys($this->funcParams) as $name) {
-            $sqlParams[] = $this->sqlName($name) . ' := :' . $name;
+            $sqlParams[] = $this->sqlName($name).' := :'.$name;
         }
 
-        return $this->sqlName($this->functionName) . '(' . implode(', ', $sqlParams) . ')';
+        return $this->sqlName($this->functionName).'('.implode(', ', $sqlParams).')';
     }
 
-    public function options($options) {
+    public function options($options)
+    {
         $this->options = $options;
     }
 
-    public function select(array $select) {
+    public function select(array $select)
+    {
         $this->select = $select;
     }
 
     /**
-     * 
+     *
      * @return \PDOStatement
      */
-    public function execute($params = []) {
+    public function execute($params = [])
+    {
         if ($this->select === null) {
             $selectString = '*';
         } else {
@@ -105,22 +112,33 @@ class QuerySelectFunction extends QuerySelect {
                 if (is_int($key))
                     $selectParts[] = $value;
                 else
-                    $selectParts[] = $key . ' AS ' . $value;
+                    $selectParts[] = $key.' AS '.$value;
             }
             $selectString = implode(', ', $selectParts);
         }
 
-        $stmt = $this->pdo->prepare('SELECT ' . $selectString . ' FROM ' . $this->getFunctionCall() . ' ' . $this->options);
+        $stmt = $this->pdo->prepare('SELECT '.$selectString.' FROM '.$this->getFunctionCall().' '.$this->options);
         try {
             $stmt->execute($this->funcParams + $params);
         } catch (\PDOException $e) {
             $errMessage = $e->errorInfo[2];
-            $reg = '/DETAIL:\s+\$carnivora:(.*):(.*)\$/';
-            $matches = [];
+            $reg        = '/DETAIL:\s+\$carnivora:(.*):(.*)\$/';
+            $matches    = [];
             if (preg_match($reg, $errMessage, $matches)) {
-                $carnivoraKey = $matches[2];
+                $carnivoraKey = $matches[1].':'.$matches[2];
 
-                ExceptionMapping::throwMapped(new \hemio\edentata\exception\SqlSpecific($carnivoraKey, 0, $e));
+                $eIn = new exception\SqlSpecific(
+                    $carnivoraKey
+                    , 0
+                    , $e);
+
+                foreach ($this->pdo->getExceptionMapper() as $mapper) {
+                    $eOut = $mapper->map($eIn);
+                    if (!$eOut instanceof exception\SqlSpecific)
+                        break;
+                }
+
+                throw $eOut;
             } else {
                 throw $e;
             }
@@ -128,5 +146,4 @@ class QuerySelectFunction extends QuerySelect {
 
         return $stmt;
     }
-
 }

@@ -47,29 +47,45 @@ class Module extends \hemio\edentata\Module
                 $content = (new Overview($this))->content();
                 break;
 
-            case 'site_create':
-                try {
-                    $content = (new SiteCreate($this))->content(
-                        $this->request->subject, $this->request->item);
-                } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive());
-                }
-                break;
-
             case 'alias_create':
                 try {
                     $content = (new AliasCreate($this))->content(
                         $this->request->subject);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('site_details',
-                                                                        true));
+                    edentata\Utils::htmlRedirect(
+                        $this->request->derive('site_details', true));
                 }
                 break;
 
             case 'alias_delete':
                 try {
                     $content = (new AliasDelete($this))->content(
-                        $this->request->subject);
+                        $this->request->item);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect(
+                        $this->request->derive('site_details', true));
+                }
+                break;
+
+            case 'https_cert':
+                try {
+                    $content = (new HttpsCert($this))->content(
+                        $this->request->subject, $this->request->item);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect(
+                        $this->request->derive('site_details', true));
+                }
+                break;
+
+            case 'intermediate_create':
+                $content = (new IntermediateCreate($this))->content(
+                    $this->request->subject, $this->request->item);
+                break;
+
+            case 'site_create':
+                try {
+                    $content = (new SiteCreate($this))->content(
+                        $this->request->subject, $this->request->item);
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($this->request->derive());
                 }
@@ -87,21 +103,6 @@ class Module extends \hemio\edentata\Module
             case 'site_details':
                 $content = (new SiteDetails($this))->content(
                     $this->request->subject);
-                break;
-
-            case 'https_cert':
-                try {
-                    $content = (new HttpsCert($this))->content(
-                        $this->request->subject, $this->request->item);
-                } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('site_details',
-                                                                        true));
-                }
-                break;
-
-            case 'intermediate_create':
-                $content = (new IntermediateCreate($this))->content(
-                    $this->request->subject, $this->request->item);
                 break;
 
             default:

@@ -198,7 +198,7 @@ class SiteDetails extends Window
                 , $alias['backend_status']
                 ,
                                 new gui\LinkButton(
-                $this->request->derive('alias_delete', $alias['domain'])
+                $this->request->derive('alias_delete', $domain, $alias['domain'])
                 , _('Delete')
             ));
         }

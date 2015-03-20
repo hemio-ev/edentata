@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,18 +27,43 @@ use hemio\html;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class RegisteredDetails extends Window {
+class RegisteredDetails extends Window
+{
 
-    public function content($registered) {
+    public function content($registered)
+    {
         $window = $this->newWindow(_('Domain'), $registered);
 
-        $window->addButtonRight(new gui\LinkButton($this->request->derive('service_create', $registered), _('Add Sub-Domain')));
+        $window->addButtonRight(
+            new gui\LinkButton(
+            $this->request->derive(
+                'service_create'
+                , $registered
+            )
+            , _('Add Sub-Domain')
+            )
+        );
 
+        $window
+            ->addChild(new gui\Fieldset(_('Domain Service Activation')))
+            ->addChild($this->service($registered));
+
+        $custom = $this->custom($registered);
+        if (!($custom instanceof html\Nothing))
+            $window
+                ->addChild(new gui\Fieldset(_('Custom DNS Entries')))
+                ->addChild($custom);
+
+        return $window;
+    }
+
+    protected function service($registered)
+    {
         $service = $this->db->serviceDomainSelect($registered)->fetchAll();
 
         $list = new gui\Listbox();
         foreach ($service as $domain) {
-            $dom = $domain['domain'];
+            $dom       = $domain['domain'];
             $container = new form\Container;
 
             $container->addChild(new html\String($dom));
@@ -58,18 +82,44 @@ class RegisteredDetails extends Window {
 
 
             $list->addLinkEntry(
-                    $this->request->derive(
-                            'service_details'
-                            , $registered
-                            , $dom
-                    )
-                    , $container
+                $this->request->derive(
+                    'service_details'
+                    , $registered
+                    , $dom
+                )
+                , $container
             );
         }
 
-        $window->addChild($list);
-
-        return $window;
+        return $list;
     }
 
+    protected function custom($registered)
+    {
+        $service = $this->db->customSelect($registered)->fetchAll();
+
+        if (empty($service))
+            return new html\Nothing;
+
+        $list = new gui\Listbox();
+        foreach ($service as $record) {
+            $domain = $record['domain'];
+            $span   = new html\Span;
+
+            $span->addChild(new html\String($domain.' '.$record['type']));
+
+            $a = $list->addLinkEntry(
+                $this->request->derive(
+                    'custom_details'
+                    , $registered
+                    , $record['id']
+                )
+                , $span
+                , $record['backend_status']
+            );
+            $span->setCssProperty('font-family', 'monospace');
+        }
+
+        return $list;
+    }
 }

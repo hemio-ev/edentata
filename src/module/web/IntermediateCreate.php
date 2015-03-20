@@ -68,8 +68,19 @@ class IntermediateCreate extends Window
             }
             $this->db->commit();
 
-            throw new exception\Successful(sprintf(_('Added %s intermediate certificate(s)',
-                                                     count($certs))));
+            $e = new exception\Successful(sprintf(
+                    ngettext(
+                        'Added one intermediate certificate.'
+                        ,
+                        'Added %s intermediate certificates.'
+                        , count($certs)
+                    )
+                    , count($certs))
+            );
+
+            $e->backTo = $this->request->derive('site_details', $domain);
+
+            throw $e;
         }
     }
 }

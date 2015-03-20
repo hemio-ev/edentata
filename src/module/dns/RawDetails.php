@@ -16,35 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\sql;
+namespace hemio\edentata\module\dns;
 
 /**
- * Description of Connection
+ * Description of CustomDetails
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Connection extends \PDO
+class CustomDetails
 {
-    /**
-     *
-     * @var array
-     */
-    protected $exceptionMapper = [];
-
-    public function __construct(
-    $dsn, $username = null, $passwd = null, $options = null
-    )
-    {
-        parent::__construct($dsn, $username, $passwd, $options);
-    }
-
-    public function getExceptionMapper()
-    {
-        return $this->exceptionMapper;
-    }
-
-    public function addExceptionMapper(ExceptionMapping $map)
-    {
-        $this->exceptionMapper[] = $map;
-    }
+    //put your code here
 }

@@ -18,33 +18,35 @@
 
 namespace hemio\edentata\sql;
 
+use hemio\edentata\exception;
+
 /**
- * Description of Connection
+ * Description of ExceptionMapper
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Connection extends \PDO
+abstract class ExceptionMapper
 {
+    protected $defaultRequest;
+
+    public function __construct(\hemio\edentata\Request $defaultRequest)
+    {
+        $this->defaultRequest = $defaultRequest;
+    }
+
+    abstract public function map(exception\SqlSpecific $e);
+
     /**
      *
-     * @var array
+     * @param string $message
+     * @param int $code
+     * @param exception\SqlSpecific $previous
      */
-    protected $exceptionMapper = [];
-
-    public function __construct(
-    $dsn, $username = null, $passwd = null, $options = null
-    )
+    public function error($message, $code, exception\SqlSpecific $previous)
     {
-        parent::__construct($dsn, $username, $passwd, $options);
-    }
+        $e         = new exception\Error($message, $code, $previous);
+        $e->backTo = $this->defaultRequest;
 
-    public function getExceptionMapper()
-    {
-        return $this->exceptionMapper;
-    }
-
-    public function addExceptionMapper(ExceptionMapping $map)
-    {
-        $this->exceptionMapper[] = $map;
+        return $e;
     }
 }
