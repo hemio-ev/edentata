@@ -25,8 +25,10 @@ chdir(__DIR__.'/../../');
 
 require_once 'vendor/autoload.php';
 
+
+
 # external data
-$request     = new Request($_GET, $_POST);
+$request     = new Request($_GET, Utils::getPost());
 $modulesNavi = [
     'email',
     'email_list',

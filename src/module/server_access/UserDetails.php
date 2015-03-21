@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,21 +25,23 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class UserDetails extends Window {
+class UserDetails extends Window
+{
 
-    public function content($user, $serviceName) {
-        $window = $this->newWindow(_('User'), $user . ' @ ' . $serviceName);
+    public function content($user, $serviceName)
+    {
+        $window = $this->newWindow(_('User'), $user.' @ '.$serviceName);
 
         $selecting = new gui\Selecting();
 
         $selecting->addLink(
-                $this->request->derive('password', $user, $serviceName)
-                , _('Change password authentication')
+            $this->request->derive('password', $user, $serviceName)
+            , _('Change password authentication')
         );
 
         $selecting->addLink(
-                $this->request->derive('delete', $user, $serviceName)
-                , _('Delete user')
+            $this->request->derive('delete', $user, $serviceName)
+            , _('Delete user')
         );
 
         $userData = $this->db->userSelectSingle($user, $serviceName)->fetch();
@@ -54,12 +55,11 @@ class UserDetails extends Window {
             $status = _('Disabled');
 
         $selecting->addChildBeginning(
-                new \hemio\html\String(_('Password Authentication: ') . $status)
+            new gui\Output(_('Password Authentication'), $status)
         );
 
         $window->addChild($selecting);
 
         return $window;
     }
-
 }

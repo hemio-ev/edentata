@@ -39,7 +39,7 @@ class SiteDetails extends Window
         $data = $this->db->siteSelectSingle($domain)->fetch();
 
         if ($data['https'] === null) {
-            $https->addChild(new gui\Hint(_('HTTPS disabled')));
+            $https->addChild(new gui\Output('HTTPS', 'disabled'));
         } else {
             $identifier = $data['https'];
 

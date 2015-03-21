@@ -26,6 +26,20 @@ namespace hemio\edentata;
 class Utils
 {
 
+    public static function getPost()
+    {
+        $pairs = explode('&', file_get_contents('php://input'));
+        $post  = [];
+        foreach ($pairs as $pair) {
+            $nv          = explode('=', $pair);
+            $name        = urldecode($nv[0]);
+            $value       = urldecode($nv[1]);
+            $post[$name] = $value;
+        }
+
+        return $post;
+    }
+
     public static function htmlRedirect(Request $request)
     {
         usleep(100 * 1000);
