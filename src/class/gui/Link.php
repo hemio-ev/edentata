@@ -18,51 +18,19 @@
 
 namespace hemio\edentata\gui;
 
-use hemio\html;
-
 /**
- * Description of StatusList
+ * Description of Link
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class StatusList extends html\Ul
+class Link extends \hemio\html\A
 {
 
-    public function __construct()
+    public function __construct(\hemio\edentata\Request $request, $text = null)
     {
-        $this->addCssClass('status');
-    }
+        $this->setAttribute('href', $request->getUrl());
 
-    /**
-     *
-     * @param string $text
-     * @param boolean $status
-     * @return html\Li
-     */
-    public function addEntry($text, $status)
-    {
-        $prefix = [
-            'ok' => _('OK'),
-            'error' => _('Error'),
-            'warning' => _('Warning')
-        ];
-
-
-        $li = $this->addLine();
-        $li->addChild(new html\String('['.$prefix[$status].'] '.$text));
-
-        $li->addCssClass($status);
-
-        return $li;
-    }
-
-    /**
-     *
-     * @param array $data
-     * @return html\Li
-     */
-    public function addEntryArray(array $data)
-    {
-        return $this->addEntry($data['text'], $data['status']);
+        if ($text !== null)
+            $this['text'] = new \hemio\html\String($text);
     }
 }

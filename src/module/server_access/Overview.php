@@ -19,6 +19,8 @@
 namespace hemio\edentata\module\server_access;
 
 use hemio\edentata\gui;
+use hemio\form;
+use hemio\html;
 
 /**
  * Description of Overview
@@ -56,15 +58,31 @@ class Overview extends Window
         } else {
             $list = new gui\Listbox();
             foreach ($users as $user) {
-                $str = sprintf('%s (%s, %s)', $user['user'],
-                               $user['service_name'], $user['service']);
+                $container = new form\Container();
+
+                $container->addChild(new html\String($user['user']));
+
+                $ul = new html\Ul();
+                $container->addChild($ul);
+
+                $ul->addLine(new html\String(
+                    sprintf(_('Host: %s'), $user['service_name'])));
+
+                $ul->addLine(new html\String(
+                    sprintf(
+                        _('Protocol: %s'),
+                          strtoupper(Utils::serviceToProto($user['service'])
+                        )
+                    )
+                ));
+
                 $list->addLinkEntry(
                     $this->request->derive(
                         'details'
                         , $user['user']
                         , $user['service_name']
                     )
-                    , new \hemio\html\String($str)
+                    , $container
                     , $user['backend_status']
                 );
             }

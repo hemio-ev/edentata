@@ -28,7 +28,12 @@ class Utils
 
     public static function getPost()
     {
-        $pairs = explode('&', file_get_contents('php://input'));
+        $input = file_get_contents('php://input');
+
+        if ($input === '')
+            return [];
+
+        $pairs = explode('&', $input);
         $post  = [];
         foreach ($pairs as $pair) {
             $nv          = explode('=', $pair);

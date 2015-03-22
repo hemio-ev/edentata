@@ -46,16 +46,16 @@ class Db extends \hemio\edentata\ModuleDb
         ))->execute();
     }
 
-    public function aliasSelect($site)
+    public function aliasSelect($site, $sitePort)
     {
         $stmt = new sql\QuerySelectFunction(
             $this->pdo
             , 'web.sel_alias'
         );
 
-        $stmt->options('WHERE site = :site');
+        $stmt->options('WHERE site = :site AND site_port = :site_port');
 
-        return $stmt->execute(['site' => $site]);
+        return $stmt->execute(['site' => $site, 'site_port' => $sitePort]);
     }
 
     public function userSelect()
@@ -76,16 +76,16 @@ class Db extends \hemio\edentata\ModuleDb
             ))->execute();
     }
 
-    public function siteSelectSingle($domain)
+    public function siteSelectSingle($domain, $port)
     {
         $stmt = new sql\QuerySelectFunction(
             $this->pdo
             , 'web.sel_site'
         );
 
-        $stmt->options('WHERE domain = :domain');
+        $stmt->options('WHERE domain = :domain AND port = :port');
 
-        return $stmt->execute(['domain' => $domain]);
+        return $stmt->execute(['domain' => $domain, 'port' => $port]);
     }
 
     public function siteCreate(array $params)
@@ -133,16 +133,35 @@ class Db extends \hemio\edentata\ModuleDb
         ))->execute();
     }
 
-    public function httpsSelect($domain, $identifier)
+    public function httpsSelectSingle($domain, $port, $identifier)
     {
         $stmt = new sql\QuerySelectFunction(
             $this->pdo
             , 'web.sel_https'
         );
 
-        $stmt->options('WHERE domain = :domain  AND identifier = :identifier');
+        $stmt->options('WHERE domain = :domain AND port = :port  AND identifier = :identifier');
 
-        return $stmt->execute(['domain' => $domain, 'identifier' => $identifier]);
+        return $stmt->execute([
+                'domain' => $domain,
+                'port' => $port,
+                'identifier' => $identifier
+        ]);
+    }
+
+    public function httpsSelect($domain, $port)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'web.sel_https'
+        );
+
+        $stmt->options('WHERE domain = :domain AND port = :port');
+
+        return $stmt->execute([
+                'domain' => $domain,
+                'port' => $port
+        ]);
     }
 
     public function intermediateCertSelect($subjectKeyIdentifier)
@@ -181,16 +200,44 @@ class Db extends \hemio\edentata\ModuleDb
         ))->execute();
     }
 
-    public function intermediateChainSelect($domain, $identifier)
+    public function intermediateChainSelect($domain, $port, $identifier)
     {
         $stmt = new sql\QuerySelectFunction(
             $this->pdo
             , 'web.sel_intermediate_chain'
         );
 
-        $stmt->options('WHERE domain = :domain AND identifier = :identifier');
+        $stmt->options('WHERE domain = :domain AND port = :port AND identifier = :identifier');
 
-        return $stmt->execute(['domain' => $domain, 'identifier' => $identifier]);
+        return $stmt->execute(['domain' => $domain, 'port' => $port, 'identifier' => $identifier]);
+    }
+
+    public function availableDomainsWeb($port)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo, 'dns.sel_available_service'
+        );
+        $stmt->selectAs('t');
+        $stmt->options('WHERE service = \'web\' AND '
+            .'NOT EXISTS (SELECT TRUE FROM web.sel_site() AS s WHERE t.domain = s.domain AND s.port = :port) AND '
+            .'NOT EXISTS (SELECT TRUE FROM web.sel_alias() AS s WHERE t.domain = s.domain AND s.site_port = :port)');
+
+
+        return $stmt->execute(['port' => $port]);
+    }
+
+    public function availableDomainsNewSite()
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo, 'dns.sel_available_service'
+        );
+        $stmt->selectAs('t');
+        $stmt->options('WHERE service = \'web\' AND '
+            .'2 <> COALESCE((SELECT COUNT(*) FROM web.sel_site() AS s WHERE t.domain = s.domain AND s.port IN (80,443) GROUP BY s.domain),0) + '
+            .'COALESCE((SELECT COUNT(*) FROM web.sel_alias() AS s WHERE t.domain = s.domain AND s.site_port IN (80,443) GROUP BY s.domain),0)');
+
+
+        return $stmt->execute();
     }
 
     public function availableDomains(array $services)
@@ -203,8 +250,8 @@ class Db extends \hemio\edentata\ModuleDb
         );
         $stmt->selectAs('t');
         $stmt->options('WHERE service = :service AND '
-            .'NOT EXISTS (SELECT TRUE FROM web.sel_site() AS s WHERE t.domain=s.domain) AND '
-            .'NOT EXISTS (SELECT TRUE FROM web.sel_alias() AS s WHERE t.domain=s.domain)');
+            .'NOT EXISTS (SELECT TRUE FROM web.sel_site() AS s WHERE t.domain = s.domain) AND '
+            .'NOT EXISTS (SELECT TRUE FROM web.sel_alias() AS s WHERE t.domain = s.domain)');
 
 
         return $stmt->execute(['service' => $services[0]]);

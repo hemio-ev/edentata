@@ -30,32 +30,43 @@ use hemio\edentata\exception;
 class HttpsCert extends Window
 {
 
-    public function content($domain, $identifier)
+    public function content($address, $identifier)
     {
+        $domain = Utils::getHost($address);
+        $port   = Utils::getPort($address);
+
         $window = $this->newFormWindow(
             'https_cert'
             , _('Supply Certificate')
-            , sprintf('%s (%s)', $domain, $identifier)
-            , _('Update')
+            , sprintf('%s (%s)', $address, $identifier)
+            , _('Supply Certificate')
         );
 
-        $certData = $this->db->httpsSelect($domain, $identifier)->fetch();
-
-        if (!$certData['x509_request'])
-            throw new Error(_('Waiting for certificate request'));
+        $certData = $this->db->httpsSelectSingle($domain, $port, $identifier)->fetch();
 
         $requestObj = new CertRequest($certData['x509_request']);
 
-        $request = new gui\Fieldset(_('Certificate request')
-        );
+        $request = new gui\Fieldset(_('Certificate Signing Request (CSR)'));
 
-        $request->addChild(new gui\Hint($requestObj->commonName()));
+        $request->addChild(new gui\Hint(
+            _('A CSR enables to request a SSL certificate from a certificate authority.'
+                .' The issued certificate from the certificate authority must be supplied below.')));
+
+        $request->addChild(
+            new gui\Output('Common Name (CN)', $requestObj->commonName()));
+
         $pre = new gui\Pre($requestObj->formatted());
         $request->addChild($pre);
 
-        $certFieldset = new gui\Fieldset(_('Certificate'));
+        $certFieldset = new gui\Fieldset(_('Certificate (PEM Format)'));
         $cert         = new form\FieldTextarea('x509_certificate',
                                                _('Certificate'));
+        $cert->addInheritableAppendage(form\Abstract_\Form::FORM_FIELD_TEMPLATE,
+                                       new form\template\FormPlainControl());
+        $cert->getControlElement()->addCssClass('pre_content');
+        $cert->getControlElement()->setCssProperty('height', '50em');
+        $cert->getControlElement()->setAttribute('placeholder',
+                                                 '-----BEGIN CERTIFICATE-----');
 
         if ($certData['x509_certificate']) {
             $certObj = new Cert($cert['x509_certificate']);
@@ -65,14 +76,19 @@ class HttpsCert extends Window
         $window->getForm()->addChild($request);
         $window->getForm()->addChild($certFieldset)->addChild($cert);
 
-        $this->handleSubmit($window->getForm(), $cert, $domain, $identifier);
+        $this->handleSubmit($window->getForm(), $cert, $domain, $port,
+                            $identifier);
 
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form,
-                                    form\FieldTextarea $cert, $domain,
-                                    $identifier)
+    protected function handleSubmit(
+    gui\FormPost $form
+    , form\FieldTextarea $cert
+    , $domain
+    , $port
+    , $identifier
+    )
     {
         if ($form->correctSubmitted()) {
             $certs = Cert::extract($cert->getValueUser());
@@ -83,6 +99,7 @@ class HttpsCert extends Window
 
             $params = [
                 'p_domain' => $domain,
+                'p_port' => $port,
                 'p_identifier' => $identifier,
                 'p_authority_key_identifier' => $crt->authorityKeyIdentifier(),
                 'p_x509_certificate' => $crt->raw()

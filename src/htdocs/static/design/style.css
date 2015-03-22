@@ -380,13 +380,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 pre.pre {
   display: block;
-  font-size: 0.9em;
-  background-color: white;
   border: 1px solid #a1a1a1;
   color: gray;
-  padding: 1em;
-  overflow: auto;
   max-width: 40em; }
+
+.pre_content, pre.pre {
+  font-family: monospace;
+  overflow: auto;
+  padding: 1em;
+  background-color: white;
+  font-size: 0.9em;
+  width: 100%; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -1528,17 +1532,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Created on : Jan 20, 2015, 1:21:49 AM
     Author     : Michael Herold <quabla@hemio.de>
 */
-.selecting {
-  padding: 1em; }
+.selecting form {
+  text-align: center; }
 
-fieldset fieldset.selecting {
-  padding: 0 2em; }
+.selecting legend {
+  margin-bottom: 1em; }
 
 .selecting button {
   padding: 1em;
-  width: 100%;
+  width: 90%;
   box-sizing: border-box;
-  margin: 0.5em 0;
+  margin: 0.4em 0;
   height: auto; }
 
 :lang(de) input.switch:checked + p span.switch::before {

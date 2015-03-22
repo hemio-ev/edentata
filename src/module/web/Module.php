@@ -60,7 +60,7 @@ class Module extends \hemio\edentata\Module
             case 'alias_delete':
                 try {
                     $content = (new AliasDelete($this))->content(
-                        $this->request->item);
+                        $this->request->subject, $this->request->item);
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect(
                         $this->request->derive('site_details', true));
@@ -73,8 +73,24 @@ class Module extends \hemio\edentata\Module
                         $this->request->subject, $this->request->item);
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect(
+                        $this->request->derive('https_details', true, true));
+                }
+                break;
+
+            case 'https_create':
+                try {
+                    $content = (new HttpsCreate($this))->content(
+                        $this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect(
                         $this->request->derive('site_details', true));
                 }
+                break;
+
+            case 'https_details':
+                $content = (new HttpsDetails($this))->content(
+                    $this->request->subject, $this->request->item);
+
                 break;
 
             case 'intermediate_create':
@@ -103,6 +119,16 @@ class Module extends \hemio\edentata\Module
             case 'site_details':
                 $content = (new SiteDetails($this))->content(
                     $this->request->subject);
+                break;
+
+            case 'site_https':
+                try {
+                    $content = (new SiteHttps($this))->content(
+                        $this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect(
+                        $this->request->derive('site_details', true));
+                }
                 break;
 
             default:

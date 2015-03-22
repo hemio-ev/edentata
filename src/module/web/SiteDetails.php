@@ -30,187 +30,280 @@ use hemio\form;
 class SiteDetails extends Window
 {
 
-    public function content($domain)
+    public function content($address)
     {
-        $window = $this->newWindow(_('Site'), $domain);
+        $domain = Utils::getHost($address);
+        $port   = Utils::getPort($address);
 
-        $https = new gui\Fieldset(_('HTTPS'));
+        $container = new form\Container();
 
-        $data = $this->db->siteSelectSingle($domain)->fetch();
+        $window = $this->newWindow(_('Website'), $address);
 
-        if ($data['https'] === null) {
-            $https->addChild(new gui\Output('HTTPS', 'disabled'));
-        } else {
-            $identifier = $data['https'];
+        $data = $this->db->siteSelectSingle($domain, $port)->fetch();
 
-            //$https->addChild(new gui\Hint(sprintf(_('HTTPS identifier: %s'),
-            //                                        $data['https'])));
-            $cert = $this->db->httpsSelect($domain, $identifier)->fetch();
+        $details = new gui\Fieldset(_('Site Details'));
 
-            if ($cert['x509_request'] === null) {
-                $status = new gui\StatusList();
+        $details->addChild(new gui\Output(_('Host'), $data['service_name']));
+        $user = $details->addChild(new gui\Output(_('User'), ''));
 
-                $status->addEntry(_('Waiting for certificate request of the webserver'),
-                                    'error');
-
-                $https->addChild($status);
-            } elseif ($cert['x509_certificate'] === null) {
-                $status = new gui\StatusList();
-
-                $status->addEntry(_('Certificate request available'), 'ok');
-                $status->addEntry(_('Waiting for HTTPS certificate'), 'error');
-
-                $selecting = new gui\Selecting();
-                $link      = $selecting->addLink($this->request->derive(
-                        'https_cert', $domain, $data['https']),
-                        _('Request certificate / supply HTTPS certificate'));
-                $link->setSuggested();
-
-                $https->addChild($status);
-                $https->addChild($selecting);
-            } else {
-                $status = new gui\StatusList();
-
-                $status->addEntry(_('Certificate request available'), 'ok');
-                $status->addEntry(_('HTTPS certificate supplied'), 'ok');
-
-                $certData = new Cert($cert['x509_certificate']);
-
-                $newChain = $certData->suggestChain($this->db);
-
-                $this->db->beginTransaction();
-                $this->db->intermediateChainDelete([
-                    'p_domain' => $domain,
-                    'p_identifier' => $identifier
-                ]);
-                $i = 0;
-                foreach ($newChain as $subjectKeyIdentifier) {
-                    $params = [
-                        'p_domain' => $domain,
-                        'p_identifier' => $identifier,
-                        'p_order' => $i++,
-                        'p_subject_key_identifier' => $subjectKeyIdentifier
-                    ];
-                    $this->db->intermediateChainInsert($params);
-                }
-                $this->db->commit();
-
-                $chain     = $this->db->intermediateChainSelect($domain,
-                                                                $identifier)->fetchAll();
-                $certChain = [];
-                foreach ($chain as $intCert) {
-                    $certChain[] = new Cert($intCert['x509_certificate']);
-                }
+        $serverAccessRequest = $this->request
+            ->deriveModule('server_access')
+            ->derive('details', $data['user'], $data['service_name']);
 
 
+        $user['p']['output'][] = new gui\Link($serverAccessRequest,
+                                              $data['user']);
 
-                $https->addChild($status);
-                $suggestIntermediate = false;
-                if (!$certData->trusted($certChain)) {
-                    $status->addEntry(
-                        _('Certificate could NOT be verified to be trusted. Try adding the intermediate certificates of your trust authority.')
-                        , 'error'
-                    );
-                    $suggestIntermediate = true;
-                } else {
-                    $status->addEntry(
-                        _('Certificate is trusted (valid chain of trust)')
-                        , 'ok'
-                    );
 
-                    $remaining = (new \DateTime())->diff($certData->validTo());
+        if ($data['https'] === null)
+            $details->addChild(new gui\Output(_('HTTPS'), _('disabled')));
+        else
+            $details->addChild(new gui\Output(_('HTTPS'), _('enabled')));
 
-                    if ($remaining->invert)
-                        $status->addEntry(
-                            sprintf(_('Certificate has expired since %s days'),
-                                      $remaining->days)
-                            , 'error'
-                        );
+        if (!Utils::defaultPort($port, $data['https']))
+            $details->addChild(new gui\Output(_('Port'), $data['port']));
 
-                    elseif ($remaining->days < 20)
-                        $status->addEntry(
-                            sprintf(_('Certificate is only valid for %s more days'),
-                                      $remaining->days)
-                            , 'warning'
-                        );
-                    else
-                        $status->addEntry(
-                            sprintf(_('Certificate is valid for another %s days'),
-                                      $remaining->days)
-                            , 'ok'
-                        );
-                }
+        if ($data['https'] === null)
+            $windowHttps = new html\Nothing;
+        else
+            $windowHttps = $this->httpsWindow($data);
 
-                $selecting = new gui\Selecting();
-                $selecting->addLink($this->request->derive(
-                            'intermediate_create', $domain, $data['https']),
-                            _('Add intermediate certificates'))
-                    ->setSuggested($suggestIntermediate);
+        $window->addChild($details);
+        $window->addChild($this->aliases($domain, $port));
+        $window->addChild($this->actions($address));
 
-                $selecting->addLink($this->request->derive(
-                        'https_cert', $domain, $data['https']),
-                        _('Change HTTPS certificate'));
+        $container->addChild($window);
+        $container->addChild($windowHttps);
 
-                $https->addChild($selecting);
-            }
-        }
-
-        $window->addChild($https);
-        $window->addChild($this->aliases($domain));
-        $window->addChild($this->actions($domain));
-
-        return $window;
+        return $container;
     }
 
-    protected
-        function handleSubmit(
-    gui\FormPost $form
-    , $user
-    , $serviceName
-    , gui\FieldSwitch $switch)
-    {
-        if ($form->correctSubmitted()) {
-
-        }
-    }
-
-    protected function actions($domain)
+    protected function actions($address)
     {
         $selecting = new gui\Selecting(_('Possible Actions'));
+
         $selecting->addLink(
-            $this->request->derive('site_delete', $domain)
+            $this->request->derive('alias_create', $address), _('Create alias'));
+
+        $selecting->addLink(
+            $this->request->derive('site_delete', $address)
             , _('Delete entire site')
         );
 
         return $selecting;
     }
 
-    protected function aliases($domain)
+    protected function aliases($domain, $port)
     {
         $fieldset = new gui\Fieldset(_('Aliases'));
 
         $listbox = new gui\Listbox();
 
-        $aliases = $this->db->aliasSelect($domain)->fetchAll();
+        $aliases = $this->db->aliasSelect($domain, $port)->fetchAll();
+        if (empty($aliases))
+            return new html\Nothing ();
+
         foreach ($aliases as $alias) {
             $listbox->addEntry(
                 new html\String($alias['domain'])
                 , $alias['backend_status']
                 ,
                                 new gui\LinkButton(
-                $this->request->derive('alias_delete', $domain, $alias['domain'])
+                $this->request->derive('alias_delete', $domain.':'.$port,
+                                       $alias['domain'])
                 , _('Delete')
             ));
         }
 
-        $selecting = new gui\Selecting;
-        $selecting->addLink($this->request->derive('alias_create', $domain),
-                                                   _('Create Alias'));
-
-
         $fieldset->addChild($listbox);
-        $fieldset->addChild($selecting);
 
         return $fieldset;
     }
+
+    protected function httpsWindow(array $site)
+    {
+        $domain = $site['domain'];
+        $port   = $site['port'];
+
+        $window = $this->newWindow(_('HTTPS'), null, false);
+
+        $httpsDetails  = new HttpsDetails($this->module);
+        $httpsCertInfo = $httpsDetails->https($domain, $port, $site['https']);
+
+        $window->addChild($this->httpsActiveCert($site));
+        $window->addChild($httpsCertInfo);
+        $window->addChild($this->httpsAvailableCerts($domain, $port));
+
+        return $window;
+    }
+
+    protected function httpsActiveCert(array $site)
+    {
+        $fieldset = new gui\Fieldset(_('Active Certificate'));
+
+        $list = new gui\Listbox();
+        $fieldset->addChild($list);
+
+        $url = $this->request->derive('site_https', true);
+        $list->addEntry(new html\String($site['https']), null,
+                                        new gui\LinkButton($url, _('Change')));
+
+        return $fieldset;
+    }
+
+    protected function httpsAvailableCerts($domain, $port)
+    {
+        $address  = $domain.':'.$port;
+        $fieldset = new gui\Fieldset(_('Available HTTPS Configurations'));
+
+        $selecting = new gui\Selecting();
+
+        $selecting->addLink(
+            $this->request->derive('https_create', $address)
+            , _('New configuration (new SSL key an certificate)')
+        );
+
+        $certs = $this->db->httpsSelect($domain, $port)->fetchAll();
+
+        $list = new gui\Listbox();
+        foreach ($certs as $cert) {
+            $url = $this->request->derive('https_details', $address,
+                                          $cert['identifier']);
+
+            $container   = new form\Container;
+            $container[] = new html\String($cert['identifier']);
+            $container[] = Utils::certSummary($domain, $port,
+                                              $cert['identifier'], $this->db);
+
+            $list->addLinkEntry($url, $container, $cert['backend_status']);
+        }
+
+        $fieldset->addChild($selecting);
+        $fieldset->addChild($list);
+
+        return $fieldset;
+    }
+    /*
+
+      protected function tryFindingTrustChain($site)
+      {
+      $cert = $this->db->httpsSelect(
+      $site['domain'], $site['port'], $site['https'])->fetch();
+
+      $certData = new Cert($cert['x509_certificate']);
+
+      $newChain = $certData->suggestChain($this->db);
+
+      if (!$certData->trusted($newChain))
+      return;
+
+      $this->db->beginTransaction();
+      $this->db->intermediateChainDelete([
+      'p_domain' => $site['domain'],
+      'p_port' => $site['port'],
+      'p_identifier' => $site['https']
+      ]);
+      $i = 0;
+      foreach ($newChain as $chainCert) {
+      $params = [
+      'p_domain' => $site['domain'],
+      'p_port' => $site['port'],
+      'p_identifier' => $site['https'],
+      'p_order' => $i++,
+      'p_subject_key_identifier' => $chainCert->subjectKeyIdentifier()
+      ];
+      $this->db->intermediateChainInsert($params);
+      }
+
+      $this->db->commit();
+
+      $e         = new \hemio\edentata\exception\Successful(
+      _('The system has generated a valid chain of trust for your certificate.'
+      .' It is now ready for use with your website.'));
+      $e->backTo = $this->request->derive(true, true, true);
+
+      throw $e;
+      }
+
+      protected function https(array $site)
+      {
+      $https = new gui\Fieldset(_('HTTPS Status'));
+
+      $identifier = $site['https'];
+
+      $cert = $this->db->httpsSelect(
+      $site['domain'], $site['port'], $identifier)->fetch();
+
+      $status     = Utils::certStatus($site, $this->db);
+      $statusList = new gui\StatusList();
+      $selecting  = new gui\Selecting();
+
+      if ($cert['x509_request'] !== null)
+      $statusList->addEntry(_('Certificate request available'), 'ok');
+
+      $suggestIntermediate = false;
+
+      switch ($status['code']) {
+      case 'no_csr':
+      $statusList->addEntryArray($status);
+      break;
+
+      case 'no_cert':
+      $statusList->addEntryArray($status);
+
+      $link = $selecting->addLink($this->request->derive(
+      'https_cert', $site['domain'].':'.$site['port'],
+      $site['https']),
+      _('Request certificate / Supply HTTPS certificate'));
+      $link->setSuggested();
+
+      break;
+
+      case 'not_trusted':
+      $this->tryFindingTrustChain($site);
+      $suggestIntermediate = true;
+      $statusList->addEntryArray($status);
+      break;
+
+      case 'expired':
+      $statusList->addEntryArray($status);
+      break;
+
+      case 'expiring':
+      $statusList->addEntryArray($status);
+      break;
+
+      case 'ok':
+      $statusList->addEntryArray($status);
+      break;
+
+      default:
+      $statusList->addEntry('Unknown status!', 'error');
+      }
+
+      if ($status['cert']) {
+      $diff = Utils::certUncoveredNames($site, $this->db);
+      if (!empty($diff))
+      $statusList->addEntry(
+      sprintf(
+      _('The following names are not covered by the certificate: %s.')
+      , implode(', ', $diff)
+      )
+      , 'error'
+      );
+      }
+
+
+      $https->addChild($statusList);
+
+      $selecting->addLink($this->request->derive(
+      'intermediate_create', $site['domain'].':'.$site['port'],
+      $site['https']), _('Add intermediate certificates'))
+      ->setSuggested($suggestIntermediate);
+
+      $https->addChild($selecting);
+
+      return $https;
+      }
+     */
 }

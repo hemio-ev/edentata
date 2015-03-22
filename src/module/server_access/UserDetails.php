@@ -30,7 +30,65 @@ class UserDetails extends Window
 
     public function content($user, $serviceName)
     {
-        $window = $this->newWindow(_('User'), $user.' @ '.$serviceName);
+        $window = $this->newWindow(_('Server Access'), $user.'@'.$serviceName);
+
+        $userData = $this->db->userSelectSingle($user, $serviceName)->fetch();
+
+        if ($userData === false)
+            throw new \hemio\edentata\exception\Error('User not found.');
+
+        $window->addChild($this->details($userData));
+        $window->addChild($this->actions($user, $serviceName));
+
+        return $window;
+    }
+
+    protected function details($userData)
+    {
+        if ($userData['password_login'] === null)
+            $status = _('Disabled');
+        else
+            $status = _('Enabled');
+
+        $proto = Utils::serviceToProto($userData['service']);
+
+        $fieldset = new gui\Fieldset(_('Details'));
+
+        $fieldset->addChild(
+            new gui\Output(_('User'), $userData['user'])
+        );
+
+        $fieldset->addChild(
+            new gui\Output(_('Host'), $userData['service_name'])
+        );
+
+        $fieldset->addChild(
+            new gui\Output(_('Communication Protocol'), strtoupper($proto))
+        );
+
+        $fieldset->addChild(
+            new gui\Output(_('Password Authentication'), $status)
+        );
+
+        $fieldset->addChild(
+            new gui\Output(
+            _('Connection URI')
+            ,
+              sprintf(
+                '%s://%s@%s'
+                , $proto
+                , $userData['user']
+                , $userData['service_name']
+            )
+            )
+        );
+
+        return $fieldset;
+    }
+
+    protected function actions($user, $serviceName)
+    {
+        $fieldset = new gui\Fieldset(_('Possible Actions'));
 
         $selecting = new gui\Selecting();
 
@@ -44,22 +102,8 @@ class UserDetails extends Window
             , _('Delete user')
         );
 
-        $userData = $this->db->userSelectSingle($user, $serviceName)->fetch();
+        $fieldset->addChild($selecting);
 
-        if ($userData === false)
-            throw new \hemio\edentata\exception\Error('User not found.');
-
-        if ($userData['password_login'])
-            $status = _('Enabled');
-        else
-            $status = _('Disabled');
-
-        $selecting->addChildBeginning(
-            new gui\Output(_('Password Authentication'), $status)
-        );
-
-        $window->addChild($selecting);
-
-        return $window;
+        return $fieldset;
     }
 }

@@ -19,19 +19,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Author     : Michael Herold <quabla@hemio.de>
 */
 
-.selecting {
-    padding: 1em;
+.selecting form {
+    text-align: center;
 }
-
-
-fieldset fieldset.selecting {
-    padding: 0 2em;
+.selecting legend {
+    margin-bottom: 1em;
 }
 
 .selecting button {
     padding: 1em;
-    width: 100%;
+    width: 90%;
     box-sizing: border-box;
-    margin: 0.5em 0;
+    margin: 0.4em 0;
     height: auto;
 }

@@ -19,6 +19,8 @@
 namespace hemio\edentata\module\web;
 
 use hemio\edentata\gui;
+use hemio\html;
+use hemio\form;
 
 /**
  * Description of SiteCreate
@@ -38,7 +40,7 @@ class SiteCreate extends Window
 
     protected function chooseServerAccess()
     {
-        $window = $this->newWindow(_('New Site'));
+        $window = $this->newWindow(_('New Site'), _('Choose Server Access'));
 
         $users = $this->db->userSelect()->fetchAll();
 
@@ -58,7 +60,32 @@ class SiteCreate extends Window
                 )
             );
         } else {
+            $window->addChild(
+                new gui\Hint(
+                _('Select a server access under which to construct the new site')
+                )
+            );
             $listbox = new gui\Listbox();
+            foreach ($users as $user) {
+                $container = new form\Container();
+
+                $container->addChild(new html\String($user['user']));
+
+                $ul = new html\Ul();
+                $container->addChild($ul);
+
+                $ul->addLine(new html\String(
+                    sprintf(_('Host: %s'), $user['service_name'])));
+
+                $listbox->addLinkEntry(
+                    $this->request->derive(
+                        true
+                        , $user['user']
+                        , $user['service_name']
+                    )
+                    , $container
+                );
+            }
             $window->addChild($listbox);
         }
 
@@ -76,24 +103,34 @@ class SiteCreate extends Window
 
         $domain = new \hemio\form\FieldSelect('domain', _('Domain'));
 
-        $switch = new gui\FieldSwitch('https-enabled', _('Enable HTTPS'));
-        $switch->getControlElement()->addCssClass('display_control');
+        $httpsSwitch = new gui\FieldSwitch('https-enabled', _('Enable HTTPS'));
+        $httpsSwitch->getControlElement()->addCssClass('display_control');
 
-        $identifier = new \hemio\form\FieldText('identifier',
-                                                _('Certificate Identifier'));
+        $identifier = new form\FieldText('identifier',
+                                         _('Certificate Identifier'));
         $identifier->setDefaultValue((new \DateTime)->format('Y'));
 
-        $window->getForm()->addChild($domain);
-        $window->getForm()->addChild($switch);
-        $window->getForm()->addChild($identifier);
+        $hint = new gui\Hint(_('The certificate identifier helps you to mange your certificates. It can be chosen arbitrarily.'));
 
-        $domains = $this->db->availableDomains(['web'])->fetchAll();
+
+        $https = new html\Div();
+
+        $window->getForm()->addChild($domain);
+        $window->getForm()->addChild($httpsSwitch);
+
+        $https->addChild($identifier);
+        $https->addChild($hint);
+
+        $window->getForm()->addChild($https);
+
+
+        $domains = $this->db->availableDomainsNewSite()->fetchAll();
         foreach ($domains as $data) {
             $domain->addOption($data['domain']);
         }
 
-
-        $this->handleSubmit($window->getForm(), $user, $serviceName, $switch);
+        $this->handleSubmit($window->getForm(), $user, $serviceName,
+                            $httpsSwitch);
 
         return $window;
     }
@@ -102,22 +139,28 @@ class SiteCreate extends Window
     gui\FormPost $form
     , $user
     , $serviceName
-    , gui\FieldSwitch $switch)
+    , gui\FieldSwitch $httpsSwitch)
     {
         if ($form->correctSubmitted()) {
+            if ($httpsSwitch->getValueUser())
+                $port = 443;
+            else
+                $port = 80;
+
             $siteParams = [
+                'p_port' => $port,
                 'p_user' => $user,
                 'p_service_name' => $serviceName
                 ] + $form->getVal(['domain']);
 
-            $httpsParams      = $form->getVal(['domain', 'identifier']);
-            $siteUpdateParams = $form->getVal(['domain', 'identifier']);
+            $httpsParams      = ['p_port' => $port] + $form->getVal(['domain', 'identifier']);
+            $siteUpdateParams = ['p_port' => $port] + $form->getVal(['domain', 'identifier']);
 
             $this->db->beginTransaction();
 
             $this->db->siteCreate($siteParams);
 
-            if ($switch->getValueUser()) {
+            if ($httpsSwitch->getValueUser()) {
                 $this->db->httpsCreate($httpsParams);
                 $this->db->siteUpdate($siteUpdateParams);
             }

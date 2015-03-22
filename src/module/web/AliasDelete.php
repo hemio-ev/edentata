@@ -28,8 +28,11 @@ use hemio\edentata\gui;
 class AliasDelete extends Window
 {
 
-    public function content($alias)
+    public function content($siteAddr, $alias)
     {
+        $site     = Utils::getHost($siteAddr);
+        $sitePort = Utils::getPort($siteAddr);
+
         $message = _('Are you sure you want to delete this website alias?');
 
         $window = $this->newDeleteWindow(
@@ -40,15 +43,15 @@ class AliasDelete extends Window
             , _('Delete Alias')
         );
 
-        $this->handleSubmit($window->getForm(), $alias);
+        $this->handleSubmit($window->getForm(), $alias, $sitePort);
 
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $alias)
+    protected function handleSubmit(gui\FormPost $form, $alias, $sitePort)
     {
         if ($form->correctSubmitted()) {
-            $this->db->aliasDelete(['p_domain' => $alias]);
+            $this->db->aliasDelete(['p_domain' => $alias, 'p_site_port' => $sitePort]);
 
             throw new \hemio\edentata\exception\Successful;
         }

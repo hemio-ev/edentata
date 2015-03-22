@@ -19,6 +19,8 @@
 namespace hemio\edentata\module\web;
 
 use hemio\edentata\gui;
+use hemio\form;
+use hemio\html;
 
 /**
  * Description of Overview
@@ -43,10 +45,35 @@ class Overview extends Window
         $listbox = new gui\Listbox();
         $sites   = $this->db->siteSelect()->fetchAll();
         foreach ($sites as $site) {
+            $container = new form\Container();
+
+            $container->addChild(
+                new html\String($site['domain'])
+            );
+
+            $ul = new html\Ul();
+            $container->addChild($ul);
+
+            if ($site['https'] !== null) {
+                $s = $ul->addLine(new html\String(_('HTTPS enabled')));
+                $s->addChild(Utils::certSummary($site['domain'], $site['port'],
+                                                $site['https'], $this->db));
+            }
+
+            // display port if it is not the default (80/443)
+            if (!Utils::defaultPort($site['port'], $site['https']))
+                $ul->addLine(new html\String(
+                    sprintf(_('Port: %s'), $site['port'])));
+
+            $ul->addLine(new html\String(
+                sprintf(_('User: %s'), $site['user'])));
+            $ul->addLine(new html\String(
+                sprintf(_('Host: %s'), $site['service_name'])));
+
             $listbox->addLinkEntry(
-                $this->request->derive('site_details', $site['domain'])
-                ,
-                                       new \hemio\html\String($site['domain'].' ('.$site['user'].' @ '.$site['service_name'].')')
+                $this->request->derive('site_details',
+                                       $site['domain'].':'.$site['port'])
+                , $container
                 , $site['backend_status']
             );
         }

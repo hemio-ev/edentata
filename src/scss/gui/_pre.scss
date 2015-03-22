@@ -20,12 +20,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 pre.pre {
-    display: block;
-    font-size: 0.9em;
-    background-color: white;
+    @extend .pre_content;
+    display: block;   
     border: 1px solid $control-border-color;
     color: gray;
-    padding: 1em;
-    overflow: auto;
     max-width: 40em;
+}
+
+.pre_content {
+    font-family: monospace;
+    overflow: auto;
+    padding: 1em;
+    background-color: white;
+    font-size: 0.9em;
+    width: 100%;
 }

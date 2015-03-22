@@ -70,6 +70,7 @@ class Cert
             throw new \hemio\edentata\exception\Error('Invalid Cert');
         }
     }
+
     /**
      *
      *         var_dump($parse['subject']['CN']);
@@ -86,6 +87,25 @@ class Cert
       ];
 
      */
+    public function commonName()
+    {
+        var_dump();
+        return $this->parsed['subject']['CN'];
+    }
+
+    public function altNames()
+    {
+        $names = [];
+
+        $entries = explode(',', $this->parsed['extensions']['subjectAltName']);
+        foreach ($entries as $entry) {
+            $keyVal  = explode(':', $entry);
+            if (trim($keyVal[0]) === 'DNS')
+                $names[] = trim($keyVal[1]);
+        }
+
+        return $names;
+    }
 
     /**
      *
@@ -122,7 +142,7 @@ class Cert
     {
         $str = $this->parsed['extensions']['authorityKeyIdentifier'];
 
-// extract from keyid:KEY,... format
+        // extract from keyid:KEY,... format
         $csv = explode(',', $str);
         $key = explode(':', $csv[0], 2);
 
@@ -150,7 +170,7 @@ class Cert
 
         $chain = [];
         while ($next  = $db->intermediateCertSelect($ident)->fetch()) {
-            $chain[] = $next['subject_key_identifier'];
+            $chain[] = new Cert($next['x509_certificate']);
             $ident   = $next['authority_key_identifier'];
         }
 

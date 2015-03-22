@@ -28,29 +28,39 @@ use hemio\edentata\gui;
 class AliasCreate extends Window
 {
 
-    public function content($site)
+    public function content($siteAddr)
     {
-        $window = $this->newFormWindow('alias_create', _('New Alias'), $site,
-                                                         _('Create'));
+        $site     = Utils::getHost($siteAddr);
+        $sitePort = Utils::getPort($siteAddr);
+
+        $window = $this->newFormWindow(
+            'alias_create'
+            , _('New Alias')
+            , $siteAddr
+            , _('Create')
+        );
 
         $domain = new \hemio\form\FieldSelect('domain', _('Domain'));
 
         $window->getForm()->addChild($domain);
 
-        $domains = $this->db->availableDomains(['web'])->fetchAll();
+        $domains = $this->db->availableDomainsWeb($sitePort)->fetchAll();
         foreach ($domains as $data) {
             $domain->addOption($data['domain']);
         }
 
-        $this->handleSubmit($window->getForm(), $site);
+        $this->handleSubmit($window->getForm(), $site, $sitePort);
 
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $site)
+    protected function handleSubmit(gui\FormPost $form, $site, $sitePort)
     {
         if ($form->correctSubmitted()) {
-            $params = ['p_site' => $site] + $form->getVal(['domain']);
+            $params = [
+                'p_site' => $site,
+                'p_site_port' => $sitePort
+                ] + $form->getVal(['domain']);
 
             $this->db->aliasCreate($params);
 

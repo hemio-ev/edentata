@@ -19,13 +19,14 @@
 namespace hemio\edentata\module\web;
 
 use hemio\edentata\gui;
+use hemio\form;
 
 /**
- * Description of SiteDelete
+ * Description of HttpsCreate
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class SiteDelete extends Window
+class HttpsCreate extends Window
 {
 
     public function content($address)
@@ -33,27 +34,36 @@ class SiteDelete extends Window
         $domain = Utils::getHost($address);
         $port   = Utils::getPort($address);
 
-        $message = _('Do you really want to delete this webiste?');
-        $window  = $this->newDeleteWindow(
-            'site_delete'
-            , _('Delete Website')
-            , $domain
-            , $message
-            , _('Delete Website')
-            , true
-        );
+        $window = $this->newFormWindow(
+            'https_create', _('New HTTPS Configuration'), $address, _('Create'));
 
-        $this->handleSubmit($window->getForm(), $domain, $port);
+        $existing   = [];
+        foreach ($this->db->httpsSelect($domain, $port) as $cert)
+            $existing[] = $cert['identifier'];
+
+        $default = (new \DateTime)->format('Y');
+        $chr     = 97;
+        while (in_array($default, $existing) && $chr < 123)
+            $default = (new \DateTime)->format('Y-').chr($chr++);
+
+        $identifier = new form\FieldText('identifier', _('Identifier'));
+        $identifier->setDefaultValue($default);
+
+        $window->getForm()->addChild($identifier);
+
+        $this->handleSubmit($domain, $port, $window->getForm());
 
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $domain, $port)
+    public function handleSubmit($domain, $port, gui\FormPost $form)
     {
         if ($form->correctSubmitted()) {
-            $this->db->siteDelete(['p_domain' => $domain, 'p_port' => $port]);
+            $params = ['p_domain' => $domain, 'p_port' => $port] + $form->getVal(['identifier']);
 
-            throw new \hemio\edentata\exception\Successful;
+            $this->db->httpsCreate($params);
+
+            throw new \hemio\edentata\exception\Successful();
         }
     }
 }

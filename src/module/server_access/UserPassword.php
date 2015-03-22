@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,17 +27,20 @@ use hemio\edentata\exception\Successful;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class UserPassword extends Window {
+class UserPassword extends Window
+{
 
-    public function content($user, $serviceName) {
+    public function content($user, $serviceName)
+    {
         $window = $this->newFormWindow(
-                'user_password'
-                , _('New User')
-                , $user . ' @ ' . $serviceName
-                , _('Save')
+            'user_password'
+            , _('User Password')
+            , $user.' @ '.$serviceName
+            , _('Save')
         );
 
-        $usePassword = new gui\FieldSwitch('use_password', _('Enable Password Login'));
+        $usePassword = new gui\FieldSwitch('use_password',
+                                           _('Enable Password Login'));
         $usePassword->getControlElement()->setAttribute('checked', true);
         $usePassword->getControlElement()->addCssClass('display_control');
         $usePassword->getControlElement()->addCssClass('display_control_2');
@@ -51,11 +53,11 @@ class UserPassword extends Window {
         $window->getForm()->addChild($password);
 
         $this->handleSubmit(
-                $window->getForm()
-                , $usePassword
-                , $password
-                , $user
-                , $serviceName
+            $window->getForm()
+            , $usePassword
+            , $password
+            , $user
+            , $serviceName
         );
 
         return $window;
@@ -67,7 +69,8 @@ class UserPassword extends Window {
     , gui\FieldNewPassword $password
     , $user
     , $serviceName
-    ) {
+    )
+    {
         if ($form->submitted()) {
             if (!$usePassword->getValueUser() || $password->dataValid()) {
                 $params = [
@@ -81,7 +84,7 @@ class UserPassword extends Window {
                 $this->db->userPassword($params);
 
                 $e = new Successful(
-                        _('Your password authentification settings haven been updates.')
+                    _('Your password authentification settings haven been updates.')
                 );
 
                 $e->backTo = $this->request->derive('details', true, true);
@@ -90,5 +93,4 @@ class UserPassword extends Window {
             }
         }
     }
-
 }

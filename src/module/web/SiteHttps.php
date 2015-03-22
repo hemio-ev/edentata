@@ -18,14 +18,15 @@
 
 namespace hemio\edentata\module\web;
 
+use hemio\form;
 use hemio\edentata\gui;
 
 /**
- * Description of SiteDelete
+ * Description of SiteHttps
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class SiteDelete extends Window
+class SiteHttps extends Window
 {
 
     public function content($address)
@@ -33,25 +34,34 @@ class SiteDelete extends Window
         $domain = Utils::getHost($address);
         $port   = Utils::getPort($address);
 
-        $message = _('Do you really want to delete this webiste?');
-        $window  = $this->newDeleteWindow(
-            'site_delete'
-            , _('Delete Website')
-            , $domain
-            , $message
-            , _('Delete Website')
-            , true
+        $window = $this->newFormWindow(
+            'site_https'
+            , _('Select HTTPS Configuration')
+            , $address, _('Change')
         );
 
-        $this->handleSubmit($window->getForm(), $domain, $port);
+        $identifier = new form\FieldSelect('identifier', _('Identifier'));
+
+        foreach ($this->db->httpsSelect($domain, $port)->fetchAll() as $config) {
+            $identifier->addOption($config['identifier']);
+        }
+
+        $site = $this->db->siteSelectSingle($domain, $port)->fetch();
+        $identifier->setDefaultValue($site['https']);
+
+        $window->getForm()->addChild($identifier);
+
+        $this->handleSubmit($domain, $port, $window->getForm());
 
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $domain, $port)
+    protected function handleSubmit($domain, $port, gui\FormPost $form)
     {
         if ($form->correctSubmitted()) {
-            $this->db->siteDelete(['p_domain' => $domain, 'p_port' => $port]);
+            $this->db->siteUpdate(
+                ['p_domain' => $domain, 'p_port' => $port] + $form->getVal(['identifier'])
+            );
 
             throw new \hemio\edentata\exception\Successful;
         }

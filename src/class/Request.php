@@ -131,6 +131,7 @@ class Request
     {
         $request                = $this->derive();
         $request->get['module'] = $moduleId;
+        $request->module        = $moduleId;
 
         return $request;
     }
