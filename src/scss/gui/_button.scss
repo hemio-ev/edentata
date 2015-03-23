@@ -19,6 +19,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Author     : Michael Herold <quabla@hemio.de>
 */
 
+.link_form {
+    display: inline-block;
+}
+
 .button {
     @extend .input_style;
     @extend .input_position;
@@ -29,8 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     padding-left: 1em;
     min-width: 7.5em;
     transition-property: opacity;
-        transition-duration: 400ms;
-
+    transition-duration: 400ms;
 }
 
 button * {

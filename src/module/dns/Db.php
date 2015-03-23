@@ -28,6 +28,15 @@ use hemio\edentata\sql;
 class Db extends \hemio\edentata\ModuleDb
 {
 
+    public function customCreate($params)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'dns.ins_custom'
+        , $params)
+        )->execute();
+    }
+
     public function customSelect($registered)
     {
         $stmt = new sql\QuerySelectFunction(
@@ -37,6 +46,26 @@ class Db extends \hemio\edentata\ModuleDb
         $stmt->options('WHERE registered = :registered');
 
         return $stmt->execute(['registered' => $registered]);
+    }
+
+    public function customUpdate($params)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'dns.upd_custom'
+        , $params)
+        )->execute();
+    }
+
+    public function customSelectSingle($recordId)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'dns.sel_custom');
+
+        $stmt->options('WHERE id = :id');
+
+        return $stmt->execute(['id' => $recordId]);
     }
 
     public function registeredCreate(array $params)

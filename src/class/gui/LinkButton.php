@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,10 +26,14 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class LinkButton extends form\Container {
+class LinkButton extends form\Container
+{
 
-    public function __construct(\hemio\edentata\Request $url, $text) {
+    public function __construct(\hemio\edentata\Request $url, $text)
+    {
         $this['form'] = new html\Form();
+
+        $this['form']->addCssClass('link_form');
 
         foreach ($url->get as $key => $value) {
             $input = new html\Input('hidden');
@@ -39,37 +42,40 @@ class LinkButton extends form\Container {
             $this['form']->addChild($input);
         }
 
-        $this['form']['button'] = new html\Button();
+        $this['form']['button']         = new html\Button();
         $this['form']['button']['text'] = new html\String($text);
     }
-    
+
     /**
-     * 
+     *
      * @return html\Button
      */
-    public function getButton() {
+    public function getButton()
+    {
         return $this['form']['button'];
     }
 
-    public function setSuggested($suggested = true) {
+    public function setSuggested($suggested = true)
+    {
         if ($suggested)
             $this['form']['button']->addCssClass('suggested');
         else
             $this['form']['button']->removeCssClass('suggested');
     }
 
-    public function setBack($suggested = true) {
+    public function setBack($suggested = true)
+    {
         if ($suggested)
             $this['form']['button']->addCssClass('back');
         else
             $this['form']['button']->removeCssClass('back');
     }
-    
-    public function setDisabled($disabled = true) {
+
+    public function setDisabled($disabled = true)
+    {
         if ($disabled)
             $this['form']['button']->setAttribute('disabled', true);
         else
             $this['form']['button']->setAttribute('disabled', null);
     }
-
 }

@@ -16,8 +16,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-chdir(__DIR__.'/../../');
+namespace hemio\edentata\module\home;
 
-require_once 'vendor/autoload.php';
+use hemio\edentata\gui;
 
-require 'src/main.php';
+/**
+ * Description of ModuleJabber
+ *
+ * @author Michael Herold <quabla@hemio.de>
+ */
+class Module extends \hemio\edentata\Module
+{
+
+    public static function getDir()
+    {
+        return __DIR__;
+    }
+
+    public static function getName()
+    {
+        return _('Home');
+    }
+
+    protected function constructHook()
+    {
+
+    }
+
+    public function getContent()
+    {
+        $window = new gui\Window(_('Home'));
+
+        $window->addChild(new gui\Hint(_('Welcome')));
+
+        return $window;
+    }
+}

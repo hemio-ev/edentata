@@ -19,6 +19,8 @@
 namespace hemio\edentata\module\web;
 
 use hemio\edentata\gui;
+use hemio\edentata;
+use hemio\html;
 
 /**
  * Description of HttpsDetails
@@ -35,8 +37,16 @@ class HttpsDetails extends Window
 
         $window = $this->newWindow(_('HTTPS Configuration'), $address);
 
-        $window->addChild(new gui\Output(_('Identifier'), $identifier));
         $window->addChild($this->https($domain, $port, $identifier));
+
+        $cert = $this->db->httpsSelectSingle(
+                $domain, $port, $identifier)->fetch();
+
+        if ($cert !== false && $cert['x509_certificate'] !== null) {
+            $window->addChild($this->certDetails(
+                    new Cert($cert['x509_certificate']), $identifier));
+            $window->addChild($this->trustChain($domain, $port, $identifier));
+        }
 
         return $window;
     }
@@ -79,6 +89,78 @@ class HttpsDetails extends Window
         $e->backTo = $this->request->derive(true, true, true);
 
         throw $e;
+    }
+
+    public function trustChain($domain, $port, $identifier)
+    {
+        $fieldset = new gui\Fieldset(_('Chain of Trust (Intermediate Certificates)'));
+
+        $chain = $this->db->intermediateChainSelect($domain, $port, $identifier)->fetchAll();
+
+        if (empty($chain)) {
+            $fieldset->addChild(new gui\Hint(_('No intermediate certificates')));
+        } else {
+            $list = new gui\Listbox();
+            $fieldset->addChild($list);
+
+            foreach ($chain as $data) {
+                $cert = new Cert($data['x509_certificate']);
+                $list->addEntry(new html\String(
+                    sprintf('%d. %s', $data['order'] + 1, $cert->commonName())));
+            }
+        }
+
+        return $fieldset;
+    }
+
+    public function certDetails(Cert $cert, $identifier)
+    {
+        $fieldset = new gui\Fieldset(_('Certficiate Details'));
+
+        $fieldset->addChild(new gui\Output(_('Identifier'), $identifier));
+
+        $fieldset->addChild(new gui\Output(
+            _('Common Name')
+            , $cert->commonName()
+        ));
+
+        $listNames = new gui\Listbox();
+        foreach ($cert->altNames() as $name)
+            $listNames->addEntry(new html\String($name));
+
+        $o                  = $fieldset->addChild(new gui\Output(
+            _('Alternative Names')
+            , ''
+        ));
+        $o['p']['output'][] = $listNames;
+
+        $fieldset->addChild(new gui\Output(
+            _('Valid From')
+            , edentata\Utils::fmtDateTime($cert->validFrom())
+        ));
+
+        $fieldset->addChild(new gui\Output(
+            _('Valid To')
+            , edentata\Utils::fmtDateTime($cert->validTo())
+        ));
+
+        foreach ($cert->fingerprints() as $alg => $fingerprint)
+            $fieldset->addChild(new gui\Output(
+                $alg.' '._('Fingerprint')
+                , Utils::shortHash($fingerprint)
+            ));
+
+        $fieldset->addChild(new gui\Output(
+            _('Subject Key Identifier')
+            , Utils::shortHash($cert->subjectKeyIdentifier())
+        ));
+
+        $fieldset->addChild(new gui\Output(
+            _('Authority Key Identifier')
+            , Utils::shortHash($cert->authorityKeyIdentifier())
+        ));
+
+        return $fieldset;
     }
 
     public function https($domain, $port, $identifier)

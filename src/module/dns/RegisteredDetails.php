@@ -34,6 +34,14 @@ class RegisteredDetails extends Window
     {
         $window = $this->newWindow(_('Domain'), $registered);
 
+        $menu = new gui\HeaderbarMenu();
+        $menu->addEntry(
+            $this->request->derive('custom_create', true)
+            , _('Create custom DNS record')
+        );
+
+        $window->addButtonRight($menu);
+
         $window->addButtonRight(
             new gui\LinkButton(
             $this->request->derive(
@@ -105,8 +113,16 @@ class RegisteredDetails extends Window
         foreach ($service as $record) {
             $domain = $record['domain'];
             $span   = new html\Span;
+            $ul     = new html\Ul();
+
+            $rdata = (array) json_decode($record['rdata']);
+            ksort($rdata);
+            foreach ($rdata as $key => $value) {
+                $ul->addLine(new html\String(sprintf('%s = %s', $key, $value)));
+            }
 
             $span->addChild(new html\String($domain.' '.$record['type']));
+            $span->addChild($ul);
 
             $a = $list->addLinkEntry(
                 $this->request->derive(

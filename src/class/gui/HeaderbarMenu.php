@@ -16,8 +16,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-chdir(__DIR__.'/../../');
+namespace hemio\edentata\gui;
 
-require_once 'vendor/autoload.php';
+use hemio\form;
+use hemio\html;
+use hemio\edentata;
 
-require 'src/main.php';
+class HeaderbarMenu extends form\Container
+{
+
+    public function __construct()
+    {
+        $this['button'] = new html\Button('button');
+        $this['button']->addCssClass('popover');
+        $this['button']->addCssClass('headerbar_menu');
+
+        $this['ul'] = new html\Ul();
+        $this['ul']->addCssClass('popover');
+    }
+
+    public function addEntry(edentata\Request $request = null, $text = null)
+    {
+        if ($request !== null)
+            return $this['ul']->addLine(new Link($request, $text));
+        else
+            return $this['ul']->addLine();
+    }
+}

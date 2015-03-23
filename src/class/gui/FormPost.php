@@ -75,7 +75,7 @@ class FormPost extends form\FormPost
         return $templateSelect;
     }
 
-    public function getVal(array $keys)
+    public function getVal(array $keys, $prefix = 'p_')
     {
         $arr = [];
 
@@ -85,7 +85,7 @@ class FormPost extends form\FormPost
 
         foreach ($this->getRecursiveIterator($filter) as $elem) {
             if (in_array($elem->getName(), $keys)) {
-                $arr['p_'.$elem->getName()] = $elem->getValueUser();
+                $arr[$prefix.$elem->getName()] = $elem->getValueUser();
             }
         }
 

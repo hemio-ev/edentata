@@ -192,7 +192,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Created on : Jan 20, 2015, 1:16:31 AM
     Author     : Michael Herold <quabla@hemio.de>
 */
-.window, .message, .explanation, article, nav {
+.window, .message, .explanation, .popover + *.popover, article, nav {
   background-color: #ededed;
   border-radius: 0.5em 0.5em 0 0;
   border: 1px solid #8e8e8e;
@@ -224,7 +224,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Created on : Jan 20, 2015, 1:16:31 AM
     Author     : Michael Herold <quabla@hemio.de>
 */
-.window header, .message header, .explanation header, article header, nav header {
+.window header, .message header, .explanation header, .popover + *.popover header, article header, nav header {
   background-color: #ededed;
   background: linear-gradient(white, #ededed);
   border-bottom: 1px solid #d9d9d9;
@@ -236,7 +236,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   align-items: center;
   justify-content: center; }
 
-.window header h1, .message header h1, .explanation header h1, article header h1, nav header h1 {
+.window header h1, .message header h1, .explanation header h1, .popover + *.popover header h1, article header h1, nav header h1 {
   font-size: 1.05em;
   padding-top: 0.2em;
   line-height: 0.9em;
@@ -245,20 +245,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   text-align: center;
   flex-shrink: 0; }
 
-.window header h1 span, .message header h1 span, .explanation header h1 span, article header h1 span, nav header h1 span {
+.window header h1 span, .message header h1 span, .explanation header h1 span, .popover + *.popover header h1 span, article header h1 span, nav header h1 span {
   color: gray;
   font-size: 0.8em;
   font-weight: normal;
   display: inline-block; }
 
-.window header > div, .message header > div, .explanation header > div, article header > div, nav header > div {
+.window header > div, .message header > div, .explanation header > div, .popover + *.popover header > div, article header > div, nav header > div {
   order: -1;
   margin-right: auto;
   padding: 0 0.3em;
   width: 40%;
   flex-shrink: 5; }
 
-.window header > div:first-of-type, .message header > div:first-of-type, .explanation header > div:first-of-type, article header > div:first-of-type, nav header > div:first-of-type {
+.window header > div:first-of-type, .message header > div:first-of-type, .explanation header > div:first-of-type, .popover + *.popover header > div:first-of-type, article header > div:first-of-type, nav header > div:first-of-type {
   order: 1;
   margin: 0;
   margin-left: auto;
@@ -357,6 +357,63 @@ li.error::before {
 li.warning::before {
   content: '❢';
   background-color: darkorange; }
+
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Mar 23, 2015, 12:50:40 PM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+button.headerbar_menu {
+  min-width: 1.4em; }
+
+button.headerbar_menu::before {
+  content: '.';
+  width: 1em;
+  display: block;
+  background-image: url("pack.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; }
+
+.popover + *.popover {
+  box-shadow: 0 0 0.25em #a8a8a8;
+  border-radius: 0.25em;
+  list-style: none;
+  display: none;
+  position: absolute;
+  padding: 0.75em 1em;
+  right: 1em; }
+
+.popover + *.popover li a {
+  display: block;
+  text-align: left;
+  line-height: 2.2em;
+  padding: 0 1em;
+  color: inherit;
+  text-decoration: inherit;
+  border-radius: 0.25em; }
+
+.popover + *.popover li a:hover {
+  background-color: lightgray; }
+
+.popover:focus + *.popover, .popover + *.popover:hover {
+  display: block;
+  z-index: 10; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -979,6 +1036,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Created on : Jan 20, 2015, 1:19:51 AM
     Author     : Michael Herold <quabla@hemio.de>
 */
+.link_form {
+  display: inline-block; }
+
 .button, button {
   width: auto;
   background-color: #e0e0e0;

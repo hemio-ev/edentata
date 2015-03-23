@@ -162,4 +162,9 @@ class Utils
                 ];
         }
     }
+
+    public static function shortHash($hash)
+    {
+        return substr($hash, 0, 14).' … '.substr($hash, -14);
+    }
 }

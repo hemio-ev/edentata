@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -29,18 +28,23 @@ use hemio\edentata\module\email;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ListUpdate extends Window {
+class ListUpdate extends Window
+{
 
-    public function content($list) {
+    public function content($list)
+    {
         $window = $this->newFormWindow(
-                'list_update'
-                , _('Email List')
-                , $list
-                , _('Save')
+            'list_update'
+            , _('Email List')
+            , $list
+            , _('Save')
         );
 
         $admin = new form\FieldEmail('admin', _('List Owner'));
         $window->getForm()->addChild($admin);
+
+        $window->getForm()->addChild(
+            new gui\Hint(_('The list owner is NOT automatically subscribed to the mailing list.')));
 
         $listData = $this->db->listSelect($list)->fetch();
         if (!$listData) {
@@ -53,7 +57,8 @@ class ListUpdate extends Window {
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $list) {
+    protected function handleSubmit(gui\FormPost $form, $list)
+    {
         if ($form->correctSubmitted()) {
             $params = email\Db::emailAddressToArgs($list);
             $params += $form->getVal(['admin']);
@@ -63,5 +68,4 @@ class ListUpdate extends Window {
             throw new exception\Successful;
         }
     }
-
 }

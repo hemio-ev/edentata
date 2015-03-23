@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,16 +27,39 @@ use hemio\edentata;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Module extends \hemio\edentata\Module {
+class Module extends \hemio\edentata\Module
+{
 
-    protected function constructHook() {
+    protected function constructHook()
+    {
         $this->db = new Db($this->pdo);
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         switch ($this->request->action) {
             case '':
                 $content = (new Overview($this))->content();
+                break;
+
+            case 'custom_create':
+                try {
+                    $content = (new CustomCreate($this))->content($this->request->subject,
+                                                                  $this->request->item);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive('registered_details',
+                                                                        true));
+                }
+                break;
+
+            case 'custom_details':
+                try {
+                    $content = (new CustomDetails($this))
+                        ->content($this->request->subject, $this->request->item);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive('registered_details',
+                                                                        true));
+                }
                 break;
 
             case 'registered_create':
@@ -54,9 +76,11 @@ class Module extends \hemio\edentata\Module {
 
             case 'service_details':
                 try {
-                    $content = (new ServiceDetails($this))->content($this->request->subject, $this->request->item);
+                    $content = (new ServiceDetails($this))->content($this->request->subject,
+                                                                    $this->request->item);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('registered_details', true));
+                    edentata\Utils::htmlRedirect($this->request->derive('registered_details',
+                                                                        true));
                 }
                 break;
 
@@ -75,12 +99,13 @@ class Module extends \hemio\edentata\Module {
         return $content;
     }
 
-    public static function getDir() {
+    public static function getDir()
+    {
         return __DIR__;
     }
 
-    public static function getName() {
+    public static function getName()
+    {
         return _('Domain');
     }
-
 }

@@ -92,4 +92,14 @@ class Utils
 
         return $stdout;
     }
+
+    public static function fmtDate(\DateTime $date)
+    {
+        return strftime('%x', $date->getTimestamp());
+    }
+
+    public static function fmtDateTime(\DateTime $date)
+    {
+        return strftime('%x %X', $date->getTimestamp());
+    }
 }

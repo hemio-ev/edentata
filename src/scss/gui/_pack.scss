@@ -1,0 +1,65 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Mar 23, 2015, 12:50:40 PM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+button.headerbar_menu {
+    min-width: 1.4em;
+}
+
+button.headerbar_menu::before {
+    content: '.';
+    width: 1em;
+    display: block;
+    background-image: url('pack.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.popover + *.popover {
+    @extend .window;
+    box-shadow: 0 0 0.25em lighten($article-border-color, 10%);
+    border-radius: $article-radius-top/2;
+    list-style: none;
+    
+    display: none;
+    position: absolute;
+    padding: 0.75em 1em;
+    right: 1em;
+}
+
+.popover + *.popover li a {
+    display: block;
+    text-align: left;
+    line-height: 2.2em;
+    padding: 0 1em;
+    color: inherit;
+    text-decoration: inherit;
+    border-radius: $article-radius-top/2;
+}
+
+.popover + *.popover li a:hover {
+    background-color: darken($article-color, 10%);
+}
+
+.popover:focus + *.popover, .popover + *.popover:hover {
+    display: block;
+    z-index: 10;
+}

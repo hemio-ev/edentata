@@ -73,23 +73,33 @@ class Cert
 
     /**
      *
-     *         var_dump($parse['subject']['CN']);
-      @var_dump($parse['extensions']['subjectAltName']);
-      var_dump(extractKeyid($parse['extensions']['authorityKeyIdentifier']));
-      var_dump($parse['extensions']['subjectKeyIdentifier']);
-      var_dump($parse['validFrom_time_t']);
-      var_dump($parse['validTo_time_t']);
-      $fp = [
-      'md5' => formatFp(openssl_x509_fingerprint($cert, 'md5', false)),
-      'sha1' => formatFp(openssl_x509_fingerprint($cert, 'sha1', false)),
-      'sha256' => formatFp(openssl_x509_fingerprint($cert, 'sha256', false)),
-      'sha512' => formatFp(openssl_x509_fingerprint($cert, 'sha512', false))
-      ];
-
+     * @param string $hashAlg
+     * @return string
      */
+    public function fingerprint($hashAlg)
+    {
+        $str   = openssl_x509_fingerprint($this->formatted, $hashAlg, false);
+        $chunk = trim(chunk_split($str, 2, ':'), ':');
+        return strtoupper($chunk);
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function fingerprints()
+    {
+        return [
+            'SHA-512' => $this->fingerprint('sha512'),
+            'SHA-384' => $this->fingerprint('sha384'),
+            'SHA-256' => $this->fingerprint('sha256'),
+            'SHA-1' => $this->fingerprint('sha1'),
+            'MD5' => $this->fingerprint('md5')
+        ];
+    }
+
     public function commonName()
     {
-        var_dump();
         return $this->parsed['subject']['CN'];
     }
 
@@ -105,6 +115,15 @@ class Cert
         }
 
         return $names;
+    }
+
+    /**
+     *
+     * @return \DateTime
+     */
+    public function validFrom()
+    {
+        return new \DateTime('@'.$this->parsed['validFrom_time_t']);
     }
 
     /**

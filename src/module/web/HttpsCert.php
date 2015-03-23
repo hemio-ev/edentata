@@ -38,7 +38,7 @@ class HttpsCert extends Window
         $window = $this->newFormWindow(
             'https_cert'
             , _('Supply Certificate')
-            , sprintf('%s (%s)', $address, $identifier)
+            , $address
             , _('Supply Certificate')
         );
 
