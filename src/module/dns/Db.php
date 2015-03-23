@@ -37,6 +37,15 @@ class Db extends \hemio\edentata\ModuleDb
         )->execute();
     }
 
+    public function customDelete($recordId)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'dns.del_custom'
+        , ['p_id' => $recordId])
+        )->execute();
+    }
+
     public function customSelect($registered)
     {
         $stmt = new sql\QuerySelectFunction(
@@ -66,6 +75,51 @@ class Db extends \hemio\edentata\ModuleDb
         $stmt->options('WHERE id = :id');
 
         return $stmt->execute(['id' => $recordId]);
+    }
+
+    public function handleCreate($params)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'domain_reseller.ins_handle'
+        , $params)
+        )->execute();
+    }
+
+    public function handleDelete($alias)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'domain_reseller.del_handle'
+        , ['p_alias' => $alias])
+        )->execute();
+    }
+
+    public function handleUpdate($params)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'domain_reseller.upd_handle'
+        , $params)
+        )->execute();
+    }
+
+    public function handleSelect()
+    {
+        return (new sql\QuerySelectFunction(
+            $this->pdo
+            , 'domain_reseller.sel_handle')
+            )->execute();
+    }
+
+    public function handleSelectSingle($alias)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo, 'domain_reseller.sel_handle');
+
+        $stmt->options('WHERE alias = :alias');
+
+        return $stmt->execute(['alias' => $alias]);
     }
 
     public function registeredCreate(array $params)

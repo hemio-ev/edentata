@@ -52,6 +52,16 @@ class Module extends \hemio\edentata\Module
                 }
                 break;
 
+            case 'custom_delete':
+                try {
+                    $content = (new CustomDelete($this))
+                        ->content($this->request->item);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive('registered_details',
+                                                                        true));
+                }
+                break;
+
             case 'custom_details':
                 try {
                     $content = (new CustomDetails($this))
@@ -59,6 +69,33 @@ class Module extends \hemio\edentata\Module
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($this->request->derive('registered_details',
                                                                         true));
+                }
+                break;
+
+            case 'handle_create':
+                try {
+                    $content = (new HandleCreate($this))
+                        ->content();
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
+                break;
+
+            case 'handle_delete':
+                try {
+                    $content = (new HandleDelete($this))
+                        ->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
+                break;
+
+            case 'handle_details':
+                try {
+                    $content = (new HandleDetails($this))
+                        ->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
                 }
                 break;
 

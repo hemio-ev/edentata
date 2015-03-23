@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -20,40 +19,94 @@
 namespace hemio\edentata\module\dns;
 
 use hemio\edentata\gui;
+use hemio\html;
 
 /**
  * Description of Overview
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Overview extends Window {
+class Overview extends Window
+{
 
-    public function content() {
+    public function content()
+    {
         $window = $this->newWindow(_('Domains'), null, false);
 
-        $window->addButtonRight(
-                new \hemio\edentata\gui\LinkButton(
-                $this->request->derive('registered_create')
-                , _('Register Domain')
-                )
+        $menu = new gui\HeaderbarMenu();
+        $menu->addEntry(
+            $this->request->derive('handle_create')
+            , _('Create new handle')
         );
 
-        $registered = $this->db->registeredSelect()->fetchAll();
+        $window->addButtonRight($menu);
 
-        $list = new gui\Listbox();
-        foreach ($registered as $domain) {
-            $list->addLinkEntry(
-                    $this->request->derive(
-                            'registered_details'
-                            , $domain['domain']
-                    )
-                    , new \hemio\html\String($domain['domain'])
-            );
-        }
-        
-        $window->addChild($list);
+        $window->addButtonRight(
+            new \hemio\edentata\gui\LinkButton(
+            $this->request->derive('registered_create')
+            , _('Register Domain')
+            )
+        );
+
+        $window->addChild($this->domains());
+        $window->addChild($this->handles());
 
         return $window;
     }
 
+    protected function domains()
+    {
+        $fieldset = new gui\Fieldset(_('Registered Domains'));
+
+        $list = new gui\Listbox();
+        foreach ($this->db->registeredSelect() as $domain) {
+            $list->addLinkEntry(
+                $this->request->derive(
+                    'registered_details'
+                    , $domain['domain']
+                )
+                ,
+                    new \hemio\html\String(
+                sprintf('%s (%s)', $domain['domain'], $domain['public_suffix']))
+                , $domain['backend_status']
+            );
+        }
+
+        if (!count($list))
+            return new gui\Hint(_('You do not have registered domains yet'));
+
+        $fieldset->addChild($list);
+
+        return $fieldset;
+    }
+
+    protected function handles()
+    {
+        $fieldset = new gui\Fieldset(_('Handles'));
+
+        $list = new gui\Listbox();
+        foreach ($this->db->handleSelect() as $value) {
+
+            $list->addLinkEntry(
+                $this->request->derive('handle_details', $value['alias'])
+                ,
+                                       new html\String(
+                sprintf(
+                    '%s %s (%s, ID: %s)'
+                    , $value['fname']
+                    , $value['lname']
+                    , $value['alias']
+                    , $value['id']
+                ))
+                , $value['backend_status']
+            );
+        }
+
+        if (!count($list))
+            return new html\Nothing();
+
+        $fieldset->addChild($list);
+
+        return $fieldset;
+    }
 }

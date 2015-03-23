@@ -39,6 +39,13 @@ class CustomDetails extends Window
             , _('Update')
         );
 
+        $menu = new gui\HeaderbarMenu();
+        $menu->addEntry(
+            $this->request->derive('custom_delete', $domain, $recordId)
+            , _('Delete Record')
+        );
+        $window->addButtonRight($menu, false, true);
+
         $raw = $this->db->customSelectSingle($recordId)->fetch();
 
         $data = $raw + (array) json_decode($raw['rdata']);
@@ -46,7 +53,6 @@ class CustomDetails extends Window
         $window->getForm()->setStoredValues($data);
 
         $x = (new CustomCreate($this->module))->formType($domain, $data['type']);
-
 
         $name = new gui\Output(_('Name (Domain)'), $data['domain']);
         $window->getForm()->addChild($name);
