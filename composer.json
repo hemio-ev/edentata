@@ -15,7 +15,7 @@
     "require": {
         "php": ">=5.5.0",
         "hemio/form": "dev-master",
-        "phpunit/phpunit": "~4.6@dev"
+        "phpunit/phpunit": "4.5"
     },
     "autoload": {
         "psr-4": {

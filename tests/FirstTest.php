@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -17,16 +16,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace hemio\edentata\tests;
+
 use hemio\html;
 use hemio\form;
 
-class FirstTest extends \Helpers {
+class FirstTest extends \Helpers
+{
 
-    public function test1() {
+    public function test1()
+    {
         $this->assertEquals('', '');
     }
 
-    public function test2() {
+    public function test2()
+    {
         $doc = new html\Document(new html\String('Test'));
         $doc->getHtml()->getHead()->addCssFile('style.css');
 
@@ -40,12 +44,12 @@ class FirstTest extends \Helpers {
         $selectbox = new \hemio\edentata\gui\Selectbox();
         $window->addChild($selectbox);
 
-        $options = new form\Container();
+        $options   = new form\Container();
         $options[] = new form\FieldSubmit('submit', _('Submit'));
         $selectbox->setOptions($options);
 
         for ($i = 1; $i < 20; $i++) {
-            $selectbox->addItem('test' . $i, sprintf('Test Nr. %d', $i));
+            $selectbox->addItem('test'.$i, sprintf('Test Nr. %d', $i));
         }
 
         $listbox = new \hemio\edentata\gui\Listbox();
@@ -53,7 +57,7 @@ class FirstTest extends \Helpers {
 
         for ($i = 1; $i < 20; $i++) {
             $str = new html\String(sprintf(_('Test Nr. %d'), $i));
-            $a = new html\A();
+            $a   = new html\A();
             $a[] = $str;
             $listbox->addLine($a);
         }
@@ -61,5 +65,4 @@ class FirstTest extends \Helpers {
 
         $this->_assertEqualsXmlFile($doc, 'selectbox.html');
     }
-
 }
