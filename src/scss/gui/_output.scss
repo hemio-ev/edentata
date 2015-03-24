@@ -22,3 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .output label {
     color: gray;
 }
+
+.output output {
+    order: 2;
+}

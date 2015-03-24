@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,21 +27,26 @@ use hemio\edentata\exception\UnknownOperation;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Module extends \hemio\edentata\Module {
+class Module extends \hemio\edentata\Module
+{
 
-    public static function getName() {
+    public static function getName()
+    {
         return _('Mailing Lists');
     }
 
-    public static function getDir() {
+    public static function getDir()
+    {
         return __DIR__;
-    } 
-    
-    protected function constructHook() {
+    }
+
+    protected function constructHook()
+    {
         $this->db = new Db($this->pdo);
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         switch ($this->request->action) {
             case '':
                 $content = (new Overview($this))->content();
@@ -72,7 +76,8 @@ class Module extends \hemio\edentata\Module {
                 try {
                     $content = (new ListUpdate($this))->content($this->request->subject);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('list_details', true));
+                    edentata\Utils::htmlRedirect(
+                        $this->request->derive('list_details', true));
                 }
                 break;
 
@@ -80,7 +85,17 @@ class Module extends \hemio\edentata\Module {
                 try {
                     $content = (new SubscriberCreate($this))->content($this->request->subject);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('list_details', true));
+                    edentata\Utils::htmlRedirect(
+                        $this->request->derive('list_details', true));
+                }
+                break;
+
+            case 'subscribers_move':
+                try {
+                    $content = (new SubscribersMove($this))->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect(
+                        $this->request->derive('list_details', true));
                 }
                 break;
 
@@ -88,7 +103,8 @@ class Module extends \hemio\edentata\Module {
                 try {
                     $content = (new SubscribersUnsubscribe($this))->content($this->request->subject);
                 } catch (exception\Successful $e) {
-                    edentata\Utils::htmlRedirect($this->request->derive('list_details', true));
+                    edentata\Utils::htmlRedirect(
+                        $this->request->derive('list_details', true));
                 }
                 break;
 
@@ -98,5 +114,4 @@ class Module extends \hemio\edentata\Module {
 
         return $content;
     }
-
 }

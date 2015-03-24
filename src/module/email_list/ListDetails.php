@@ -19,6 +19,7 @@
 namespace hemio\edentata\module\email_list;
 
 use hemio\edentata\gui;
+use hemio\form;
 
 /**
  * Description of ListDetails
@@ -83,16 +84,22 @@ class ListDetails extends Window
                 , $subscriber['backend_status']
             );
         }
-        $options = new \hemio\form\Container();
+        $options = new form\Container();
 
-        $move = new \hemio\form\FieldSubmit('move', _('Move …'));
-        #$options[] = $move;
+        $move      = new form\FieldSubmit('move', _('Move …'));
+        $move->getControlElement()
+            ->setAttribute(
+                'formaction',
+                $this->request->derive('subscribers_move', $list)->getUrl()
+        );
+        $options[] = $move;
 
-        $unsubscribe = new \hemio\form\FieldSubmit('unsubscribe',
-                                                   _('Unsubscribe'));
-        $unsubscribe->getControlElement()->setAttribute('formaction',
-                                                        $this->module->request->derive('subscribers_unsubscribe',
-                                                                                       $list)->getUrl());
+        $unsubscribe = new form\FieldSubmit('unsubscribe', _('Unsubscribe'));
+        $unsubscribe->getControlElement()
+            ->setAttribute(
+                'formaction',
+                $this->request->derive('subscribers_unsubscribe', $list)->getUrl()
+        );
         $options[]   = $unsubscribe;
 
         $selectbox->setOptions($options);
