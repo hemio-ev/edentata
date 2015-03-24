@@ -80,7 +80,7 @@ class RegisteredDetails extends Window
             $data['registrant']]));
         $list->addEntry(
             new gui\Fstr('%s: %s', [_('Admin Contact'), $data['admin_c']])
-            , null
+            , $data['backend_status']
             ,
                                       new gui\LinkButton(
             $this->request->derive('adminc', $registered)

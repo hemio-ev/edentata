@@ -1,0 +1,324 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: edentata web\n"
+"POT-Creation-Date: 2015-03-24 19:32+0100\n"
+"PO-Revision-Date: 2015-03-24 19:55+0100\n"
+"Last-Translator: Michael Herold <quabla@hemio.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: AliasCreate.php:38
+msgid "New Alias"
+msgstr "Neues Alias"
+
+#: AliasCreate.php:40 HttpsCreate.php:38 SiteCreate.php:101
+msgid "Create"
+msgstr "Erstellen"
+
+#: AliasCreate.php:43 SiteCreate.php:104
+msgid "Domain"
+msgstr ""
+
+#: AliasDelete.php:36
+msgid "Are you sure you want to delete this website alias?"
+msgstr ""
+
+#: AliasDelete.php:40 AliasDelete.php:43
+msgid "Delete Alias"
+msgstr "Alias Löschen"
+
+#: HttpsCert.php:40 HttpsCert.php:42
+msgid "Supply Certificate"
+msgstr "Zertifikat Eingeben"
+
+#: HttpsCert.php:49
+msgid "Certificate Signing Request (CSR)"
+msgstr "Zertifikatsignierungsanforderung (CSR)"
+
+#: HttpsCert.php:52
+msgid ""
+"A CSR enables to request a SSL certificate from a certificate authority. The "
+"issued certificate from the certificate authority must be supplied below."
+msgstr ""
+
+#: HttpsCert.php:61
+msgid "Certificate (PEM Format)"
+msgstr "Zertifikat (PEM-Format)"
+
+#: HttpsCert.php:63 IntermediateCreate.php:42
+msgid "Certificate"
+msgstr "Zertifikat"
+
+#: HttpsCreate.php:38
+msgid "New HTTPS Configuration"
+msgstr "Neue HTTPS-Konfiguration"
+
+#: HttpsCreate.php:49 HttpsDetails.php:120 SiteHttps.php:43
+msgid "Identifier"
+msgstr "Kennung"
+
+#: HttpsDetails.php:38
+msgid "HTTPS Configuration"
+msgstr "HTTPS Konfiguration"
+
+#: HttpsDetails.php:87
+msgid ""
+"The system has generated a valid chain of trust for your certificate. It is "
+"now ready for use with your website."
+msgstr ""
+
+#: HttpsDetails.php:96
+msgid "Chain of Trust (Intermediate Certificates)"
+msgstr "Vertrauenskette (Zwischenzertifikate)"
+
+#: HttpsDetails.php:101
+msgid "No intermediate certificates"
+msgstr "Keine Zwischenzertifikate"
+
+#: HttpsDetails.php:118
+msgid "Certficiate Details"
+msgstr "Zertifikat Details"
+
+#: HttpsDetails.php:123
+msgid "Common Name"
+msgstr "Gebrauchsname"
+
+#: HttpsDetails.php:132
+msgid "Alternative Names"
+msgstr "Alternative Namen"
+
+#: HttpsDetails.php:138
+msgid "Valid From"
+msgstr "Gültig Vom"
+
+#: HttpsDetails.php:143
+msgid "Valid To"
+msgstr "Gültig Bis"
+
+#: HttpsDetails.php:149
+msgid "Fingerprint"
+msgstr "Fingerabdruck"
+
+#: HttpsDetails.php:154
+msgid "Subject Key Identifier"
+msgstr "Objekt Schlüssel-Kennung"
+
+#: HttpsDetails.php:159
+msgid "Authority Key Identifier"
+msgstr "Autoritäts Schlüssel-Kennung"
+
+#: HttpsDetails.php:168
+msgid "HTTPS Certificate Status"
+msgstr "HTTPS-Zertifikat Status"
+
+#: HttpsDetails.php:180
+msgid "Certificate request available"
+msgstr "Zertifikatsignierungsanforderung verfügbar"
+
+#: HttpsDetails.php:198
+msgid "Request certificate / Supply HTTPS certificate"
+msgstr "Zertifikat anfordern / HTTPS-Zertifikat eintragen"
+
+#: HttpsDetails.php:231
+#, php-format
+msgid "The following names are not covered by the certificate: %s."
+msgstr ""
+
+#: HttpsDetails.php:243
+msgid "Add intermediate certificates"
+msgstr "Zwischenzertifikate hinzufügen"
+
+#: IntermediateCreate.php:37
+msgid "Intermediate Certificate"
+msgstr "Zwischenzertifikate"
+
+#: IntermediateCreate.php:39
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: IntermediateCreate.php:73
+#, php-format
+msgid "Added one intermediate certificate."
+msgid_plural "Added %s intermediate certificates."
+msgstr[0] ""
+msgstr[1] ""
+
+#: Module.php:148
+msgid "Web"
+msgstr ""
+
+#: Overview.php:35
+msgid "Websites"
+msgstr ""
+
+#: Overview.php:40 SiteCreate.php:43 SiteCreate.php:99
+msgid "New Site"
+msgstr "Neue Site"
+
+#: Overview.php:58
+msgid "HTTPS enabled"
+msgstr "HTTPS aktiviert"
+
+#: Overview.php:66
+#, php-format
+msgid "Port: %s"
+msgstr ""
+
+#: Overview.php:69
+#, php-format
+msgid "User: %s"
+msgstr "Benutzer: %s"
+
+#: Overview.php:71 SiteCreate.php:78
+#, php-format
+msgid "Host: %s"
+msgstr ""
+
+#: SiteCreate.php:43
+msgid "Choose Server Access"
+msgstr "Wähle Serverzugang"
+
+#: SiteCreate.php:50
+msgid "You need to create a server access first."
+msgstr ""
+
+#: SiteCreate.php:65
+msgid "Select a server access under which to construct the new site"
+msgstr ""
+
+#: SiteCreate.php:106
+msgid "Enable HTTPS"
+msgstr "HTTPS Aktivieren"
+
+#: SiteCreate.php:110
+msgid "Certificate Identifier"
+msgstr "Zertifikatskennung"
+
+#: SiteCreate.php:113
+msgid ""
+"The certificate identifier helps you to mange your certificates. It can be "
+"chosen arbitrarily."
+msgstr ""
+
+#: SiteDelete.php:36
+msgid "Do you really want to delete this webiste?"
+msgstr ""
+
+#: SiteDelete.php:39 SiteDelete.php:42
+msgid "Delete Website"
+msgstr "Website Löschen"
+
+#: SiteDetails.php:40
+msgid "Website"
+msgstr ""
+
+#: SiteDetails.php:44
+msgid "Site Details"
+msgstr ""
+
+#: SiteDetails.php:46
+msgid "Host"
+msgstr ""
+
+#: SiteDetails.php:47
+msgid "User"
+msgstr "Benutzer"
+
+#: SiteDetails.php:59 SiteDetails.php:61 SiteDetails.php:128
+msgid "HTTPS"
+msgstr ""
+
+#: SiteDetails.php:59
+msgid "disabled"
+msgstr "deaktiviert"
+
+#: SiteDetails.php:61
+msgid "enabled"
+msgstr "aktiviert"
+
+#: SiteDetails.php:64
+msgid "Port"
+msgstr ""
+
+#: SiteDetails.php:83
+msgid "Possible Actions"
+msgstr "Verfügbare Aktionen"
+
+#: SiteDetails.php:86
+msgid "Create alias"
+msgstr "Alias erstellen"
+
+#: SiteDetails.php:90
+msgid "Delete entire site"
+msgstr "Gesamte Webiste löschen"
+
+#: SiteDetails.php:98
+msgid "Aliases"
+msgstr ""
+
+#: SiteDetails.php:114
+msgid "Delete"
+msgstr "Löschen"
+
+#: SiteDetails.php:142
+msgid "Active Certificate"
+msgstr "Aktives Zertifikat"
+
+#: SiteDetails.php:149 SiteHttps.php:40
+msgid "Change"
+msgstr "Ändern"
+
+#: SiteDetails.php:157
+msgid "Available HTTPS Configurations"
+msgstr "Verfügbare HTTPS-Konfigurationen"
+
+#: SiteDetails.php:163
+msgid "New configuration (new SSL key an certificate)"
+msgstr "Neue Konfiguration (neuer SSL-Schlüssel und neues Zertifikat)"
+
+#: SiteHttps.php:39
+msgid "Select HTTPS Configuration"
+msgstr "HTTPS-Konfiguration wählen"
+
+#: Utils.php:58
+msgid "Not all names are covered by the certificate"
+msgstr "Nicht alle Namen sind vom Zertifikat abgedeckt"
+
+#: Utils.php:91
+msgid "Certificate configuration does not exist"
+msgstr "Zertifikatskonfiguration existert nicht"
+
+#: Utils.php:99
+msgid "Waiting for certificate signing request from webserver"
+msgstr "Warte auf Zertifikatsignierungsanforderung"
+
+#: Utils.php:107
+msgid "You must supply a HTTPS certificate"
+msgstr "Sie müssen ein HTTPS-Zertifikat eingeben"
+
+#: Utils.php:128
+msgid "Certificate could NOT be verified to be trusted"
+msgstr "Zertifkat konnte NICHT als vertrauenswürdig verifiziert werden"
+
+#: Utils.php:139
+#, php-format
+msgid "Certificate has expired since %s days"
+msgstr "Zertifikat ist seit %s Taken abgelaufen"
+
+#: Utils.php:149
+#, php-format
+msgid "Certificate is only valid for %s more days"
+msgstr "Zertifikat is nur noch für %s Tage gültig"
+
+#: Utils.php:158
+#, php-format
+msgid "Certificate is valid for another %s days"
+msgstr "Zertifikat ist weitere %s Tage gültig"

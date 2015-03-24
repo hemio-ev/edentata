@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: edentata user\n"
+"POT-Creation-Date: 2015-03-24 19:31+0100\n"
+"PO-Revision-Date: 2015-03-24 19:31+0100\n"
+"Last-Translator: Michael Herold <quabla@hemio.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Module.php:65 Overview.php:32
+msgid "User Settings"
+msgstr "Benutzereinstellungen"
+
+#: Overview.php:38
+msgid "Change password"
+msgstr "Passwort Ändern"
+
+#: Password.php:36
+msgid "User Password"
+msgstr "Benutzerpasswort"
+
+#: Password.php:38
+msgid "Change"
+msgstr "Ändern"
+
+#: Password.php:61
+msgid "Your password has been updated."
+msgstr ""

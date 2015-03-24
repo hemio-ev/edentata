@@ -40,7 +40,8 @@ if (!$activeModuleName)
 
 try {
     # doc
-    $doc = new form\Document(new html\String('Edentata Dev.'));
+    $title = new html\String('Edentata');
+    $doc   = new form\Document($title);
     $doc->getHtml()->getHead()->addCssFile('static/design/style.css');
     $doc->getHtml()->setAttribute('lang', $i10n->getLang());
 
@@ -137,6 +138,8 @@ try {
     # module
     $loadedModule = new LoadModule($activeModuleName, $pdo);
     $i10n->setDomainModule($loadedModule);
+
+    $title->setValue(sprintf(_('Edentata – %s'), $loadedModule->getName()));
 
     # generate content
     $content = $loadedModule->getContent($request);

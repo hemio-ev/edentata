@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: edentata jabber\n"
+"POT-Creation-Date: 2015-03-24 19:24+0100\n"
+"PO-Revision-Date: 2015-03-24 19:25+0100\n"
+"Last-Translator: Michael Herold <quabla@hemio.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: AccountCreate.php:34
+msgid "New Account"
+msgstr "Neues Konto"
+
+#: AccountCreate.php:36
+msgid "Create"
+msgstr "Erstellen"
+
+#: AccountCreate.php:39
+msgid "Node"
+msgstr ""
+
+#: AccountDelete.php:32
+msgid "Do you really want to delete this jabber account?"
+msgstr ""
+
+#: AccountDelete.php:36 AccountDelete.php:39
+msgid "Delete Account"
+msgstr "Konto Löschen"
+
+#: AccountDetails.php:30
+msgid "Jabber Account"
+msgstr "Jabber-Konto"
+
+#: AccountDetails.php:32
+msgid "Possible Actions"
+msgstr "Verfügbare Aktionen"
+
+#: AccountDetails.php:36
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: AccountDetails.php:40
+msgid "Delete account"
+msgstr "Konto löschen"
+
+#: AccountPassword.php:34
+msgid "Account Password"
+msgstr "Konto-Passwort"
+
+#: AccountPassword.php:36
+msgid "Change"
+msgstr "Ändern"
+
+#: AccountPassword.php:56
+msgid "Your password has been changed successfully."
+msgstr ""
+
+#: Module.php:86
+msgid "Jabber"
+msgstr ""
+
+#: Overview.php:33
+msgid "Jabber Accounts"
+msgstr "Jabber-Konten"
+
+#: Overview.php:38
+msgid "Create Account"
+msgstr "Konto Erstellen"
+
+#: Overview.php:55
+msgid "You do not own any jabber accounts right now."
+msgstr ""

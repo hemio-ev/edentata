@@ -1,0 +1,135 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: edentata server access\n"
+"POT-Creation-Date: 2015-03-24 19:26+0100\n"
+"PO-Revision-Date: 2015-03-24 19:30+0100\n"
+"Last-Translator: Michael Herold <quabla@hemio.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Module.php:89 Overview.php:35 UserDetails.php:33
+msgid "Server Access"
+msgstr "Serverzugang"
+
+#: Overview.php:40 UserService.php:30
+msgid "Create User"
+msgstr "Benutzer Erstellen"
+
+#: Overview.php:56
+msgid "You do not own a server access right now."
+msgstr ""
+
+#: Overview.php:69
+#, php-format
+msgid "Host: %s"
+msgstr ""
+
+#: Overview.php:73
+#, php-format
+msgid "Protocol: %s"
+msgstr "Protokoll: %s"
+
+#: UserCreate.php:33
+msgid "New User"
+msgstr "Neuer Benutzer"
+
+#: UserCreate.php:33
+msgid "Create"
+msgstr "Erstellen"
+
+#: UserCreate.php:35
+msgid "User Name"
+msgstr "Benutzername"
+
+#: UserCreate.php:38 UserPassword.php:43
+msgid "Enable Password Login"
+msgstr "Passwort-Anmeldung Aktivieren"
+
+#: UserCreate.php:47
+msgid "Host/Server"
+msgstr ""
+
+#: UserDelete.php:33
+#, php-format
+msgid "Are you sure you want to delete \"%1$s\" @ %2$s account?"
+msgstr ""
+
+#: UserDelete.php:40 UserDelete.php:43
+msgid "Delete User"
+msgstr "Benutzer Löschen"
+
+#: UserDetails.php:49
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+#: UserDetails.php:51
+msgid "Enabled"
+msgstr "Aktiviert"
+
+#: UserDetails.php:55
+msgid "Details"
+msgstr ""
+
+#: UserDetails.php:58
+msgid "User"
+msgstr "Benutzer"
+
+#: UserDetails.php:62
+msgid "Host"
+msgstr ""
+
+#: UserDetails.php:66
+msgid "Communication Protocol"
+msgstr "Kommunikationsprotokoll"
+
+#: UserDetails.php:70
+msgid "Password Authentication"
+msgstr "Passwort-Authentifizierung"
+
+#: UserDetails.php:75
+msgid "Connection URI"
+msgstr "Verbindungs-URI"
+
+#: UserDetails.php:91
+msgid "Possible Actions"
+msgstr "Verfügbare Aktionen"
+
+#: UserDetails.php:97
+msgid "Change password authentication"
+msgstr "Passwort-Authentifizierung ändern"
+
+#: UserDetails.php:102
+msgid "Delete user"
+msgstr "Benutzer löschen"
+
+#: UserPassword.php:37
+msgid "User Password"
+msgstr "Benutzerpasswort"
+
+#: UserPassword.php:39
+msgid "Save"
+msgstr "Speichern"
+
+#: UserPassword.php:87
+msgid "Your password authentification settings haven been updates."
+msgstr ""
+
+#: UserService.php:33
+msgid "Choose Access Type"
+msgstr ""
+
+#: UserService.php:38
+msgid "SFTP: File transfer via SSH"
+msgstr "SFTP: Dateiübertragung via SSH"
+
+#: UserService.php:43
+msgid "SSH: Full shell access"
+msgstr "SSH: Vollständiger Shell-Zugang"
