@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -23,16 +22,12 @@ namespace hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-abstract class Printable extends \Exception implements Event {
-
+abstract class Printable extends \Exception implements Event, PrintableInterface
+{
     /**
      *
      * @var \hemio\edentata\Request
      */
     public $backTo = null;
-    
-    /**
-     * @return string Localized title
-     */
-    abstract public static function title();
+
 }

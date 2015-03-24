@@ -16,39 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata;
+namespace hemio\edentata\exception;
 
 /**
- * Description of Module
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-abstract class Module implements ModuleInterface
+interface PrintableInterface
 {
-    /**
-     *
-     * @var Request
-     */
-    public $request;
 
     /**
-     * Database connection
-     *
-     * @var sql\Connection
+     * @return string Localized title
      */
-    public $pdo;
-
-    /**
-     * @return \hemio\html\Interface_\HtmlCode HTML code for module
-     */
-    abstract public function getContent();
-
-    abstract protected function constructHook();
-
-    public function __construct(Request $request, sql\Connection $pdo)
-    {
-        $this->request = $request;
-        $this->pdo     = $pdo;
-        $this->constructHook();
-    }
+    public static function title();
 }
