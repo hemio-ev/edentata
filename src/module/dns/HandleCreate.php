@@ -64,10 +64,16 @@ class HandleCreate extends Window
         $required[]        = new form\FieldTextarea('address', _('Address'));
         $required[]        = new form\FieldText('pcode', _('Zip Code'));
         $required[]        = new form\FieldText('city', _('City'));
-        $required[]        = new form\FieldText('country', _('Country'));
+
+        $required['country'] = new form\FieldSelect('country', _('Country'));
+        $required['country']->addOption('');
+        foreach (\hemio\edentata\Utils::getIso3166Countries() as $key => $val)
+            $required['country']->addOption($key, $val);
+
         $required[]        = new form\FieldText('state', _('State'));
-        $required[]        = new form\FieldText('email', _('Email'));
-        $required[]        = new form\FieldText('phone', _('Phone'));
+        $required[]        = new form\FieldEmail('email', _('Email'));
+        $required['phone'] = new form\FieldTel('phone', _('Phone'));
+        $required['phone']->setPlaceholder('+49-3-11');
 
         foreach ($required as $field)
             $field->setRequired();
@@ -83,8 +89,12 @@ class HandleCreate extends Window
 
         $optional = new form\Container();
 
-        $optional[] = new form\FieldText('fax', _('Fax'));
-        $optional[] = new form\FieldText('mobile_phone', _('Mobile Phone'));
+        $optional['fax'] = new form\FieldTel('fax', _('Fax'));
+        $optional['fax']->setPlaceholder('+49-3-10');
+
+        $optional['mobile_phone'] = new form\FieldText('mobile_phone',
+                                                       _('Mobile Phone'));
+        $optional['mobile_phone']->setPlaceholder('+49-3-11');
 
 
         $container   = new form\Container();

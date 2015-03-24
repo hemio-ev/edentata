@@ -42,6 +42,15 @@ class Module extends \hemio\edentata\Module
                 $content = (new Overview($this))->content();
                 break;
 
+            case 'adminc':
+                try {
+                    $content = (new AdminC($this))->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect(
+                        $this->request->derive('registered_details', true));
+                }
+                break;
+
             case 'custom_create':
                 try {
                     $content = (new CustomCreate($this))->content($this->request->subject,

@@ -102,4 +102,19 @@ class Utils
     {
         return strftime('%x %X', $date->getTimestamp());
     }
+
+    public static function getIso3166Countries()
+    {
+        $xml = simplexml_load_file('/usr/share/xml/iso-codes/iso_3166.xml');
+
+        $countries = [];
+        foreach ($xml->iso_3166_entry as $elem) {
+            $code    = (string) $elem['alpha_2_code'];
+            $country = (string) $elem['name'];
+
+            $countries[$code] = $country;
+        }
+
+        return $countries;
+    }
 }

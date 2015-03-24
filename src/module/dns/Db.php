@@ -28,7 +28,16 @@ use hemio\edentata\sql;
 class Db extends \hemio\edentata\ModuleDb
 {
 
-    public function customCreate($params)
+    public function adminC(array $params)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'domain_reseller.upd_registered'
+        , $params)
+        )->execute();
+    }
+
+    public function customCreate(array $params)
     {
         (new sql\QuerySelectFunction(
         $this->pdo
@@ -138,6 +147,27 @@ class Db extends \hemio\edentata\ModuleDb
             $this->pdo
             , 'dns.sel_registered')
             )->execute();
+    }
+
+    public function resellerRegisteredCreate(array $params)
+    {
+        (new sql\QuerySelectFunction(
+        $this->pdo
+        , 'domain_reseller.ins_registered'
+        , $params
+        ))->execute();
+    }
+
+    public function resellerRegisteredSelectSingle($domain)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'domain_reseller.sel_registered'
+        );
+
+        $stmt->options('WHERE domain = :domain');
+
+        return $stmt->execute(['domain' => $domain]);
     }
 
     public function serviceDomainSelect($registered)

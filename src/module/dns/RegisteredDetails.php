@@ -52,9 +52,9 @@ class RegisteredDetails extends Window
             )
         );
 
-        $window
-            ->addChild(new gui\Fieldset(_('Domain Service Activation')))
-            ->addChild($this->service($registered));
+        $window->addChild($this->domain($registered));
+
+        $window->addChild($this->service($registered));
 
         $custom = $this->custom($registered);
         if (!($custom instanceof html\Nothing))
@@ -65,12 +65,39 @@ class RegisteredDetails extends Window
         return $window;
     }
 
-    protected function service($registered)
+    protected function domain($registered)
     {
-        $service = $this->db->serviceDomainSelect($registered)->fetchAll();
+        $fieldset = new gui\Fieldset(_('Domain Details'));
 
         $list = new gui\Listbox();
-        foreach ($service as $domain) {
+        $data = $this->db->resellerRegisteredSelectSingle($registered)->fetch();
+
+        if ($data === false)
+            return new gui\Hint(_('No detailed domain information available'));
+
+        $list->addEntry(new gui\Fstr('%s: %s',
+                                     [_('Registrant (Owner)'),
+            $data['registrant']]));
+        $list->addEntry(
+            new gui\Fstr('%s: %s', [_('Admin Contact'), $data['admin_c']])
+            , null
+            ,
+                                      new gui\LinkButton(
+            $this->request->derive('adminc', $registered)
+            , _('Change')
+        ));
+
+        $fieldset->addChild($list);
+
+        return $fieldset;
+    }
+
+    protected function service($registered)
+    {
+        $fieldset = new gui\Fieldset(_('Domain Service Activation'));
+
+        $list = new gui\Listbox();
+        foreach ($this->db->serviceDomainSelect($registered) as $domain) {
             $dom       = $domain['domain'];
             $container = new form\Container;
 
@@ -98,6 +125,11 @@ class RegisteredDetails extends Window
                 , $container
             );
         }
+
+        if (empty($list))
+            return new html\Nothing;
+
+        $fieldset->addChild($list);
 
         return $list;
     }

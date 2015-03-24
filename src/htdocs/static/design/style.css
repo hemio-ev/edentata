@@ -1039,6 +1039,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .link_form {
   display: inline-block; }
 
+.selecting .link_form {
+  display: block; }
+
 .button, button {
   width: auto;
   background-color: #e0e0e0;

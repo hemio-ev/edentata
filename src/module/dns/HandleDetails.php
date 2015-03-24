@@ -48,6 +48,8 @@ class HandleDetails extends Window
         $data = $this->db->handleSelectSingle($alias)->fetch();
         $window->getForm()->setStoredValues($data);
 
+        $window->getForm()->addChild(new gui\Output(_('ID'), $data['id']));
+
         $helper = new HandleCreate($this->module);
 
         $window->getForm()->addChild($helper->handle(true));

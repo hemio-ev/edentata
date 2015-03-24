@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -19,37 +18,64 @@
 
 namespace hemio\edentata\module\dns;
 
+use \hemio\form;
+use hemio\edentata\gui;
+
 /**
  * Description of RegisteredCreate
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class RegisteredCreate extends Window {
+class RegisteredCreate extends Window
+{
 
-    public function content() {
-        $window = $this->newFormWindow('registered_create', _('New Domain'), null, _('Register'));
+    public function content()
+    {
+        $window = $this->newFormWindow('registered_create', _('New Domain'),
+                                                              null,
+                                                              _('Register'));
 
         $domain = new \hemio\form\FieldText('domain', _('Domain'));
         $domain->setRequired();
 
+        $registrant = new form\FieldSelect('registrant', _('Registrant (Owner)'));
+        $registrant->setRequired();
+
+        $adminC = new form\FieldSelect('admin_c', _('Admin Contact'));
+        $adminC->setRequired();
+
+        foreach ($this->db->handleSelect() as $handle) {
+            $text = Utils::handleOut($handle);
+
+            $registrant->addOption($handle['alias'], $text);
+            $adminC->addOption($handle['alias'], $text);
+        }
+
         $window->getForm()->addChild($domain);
+        $window->getForm()->addChild($registrant);
+        $window->getForm()->addChild($adminC);
 
         $this->handleSubmit($window->getForm());
 
         return $window;
     }
 
-    protected function handleSubmit(\hemio\edentata\gui\FormPost $form) {
+    protected function handleSubmit(\hemio\edentata\gui\FormPost $form)
+    {
         if ($form->correctSubmitted()) {
-            $params = $form->getVal(['domain']);
-            $split = explode('.', $params['p_domain']);
+            $this->db->beginTransaction();
 
-            $params['p_public_suffix'] = array_pop($split);
+            $paramsDns                    = $form->getVal(['domain']);
+            $split                        = explode('.', $paramsDns['p_domain']);
+            $paramsDns['p_public_suffix'] = array_pop($split);
 
-            $this->db->registeredCreate($params);
+            $paramsReseller = $form->getVal(['domain', 'registrant', 'admin_c']);
 
+            $this->db->registeredCreate($paramsDns);
+            $this->db->resellerRegisteredCreate($paramsReseller);
+
+            $this->db->commit();
             throw new \hemio\edentata\exception\Successful;
         }
     }
-
 }
