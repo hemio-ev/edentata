@@ -71,24 +71,20 @@ class AliasCreate extends Window
     }
 
     protected function handleSubmit(
-    gui\FormPost $form
-    , form\FieldSelect $mailbox)
+    gui\FormPost $form, form\FieldSelect $mailbox)
     {
 
-        if ($form->submitted()) {
-            if ($form->dataValid()) {
-                $args = $form->getVal(['localpart', 'domain']) +
-                    Db::emailAddressToArgs(
-                        $mailbox->getValueUser()
-                        , 'mailbox_'
-                );
+        if ($form->correctSubmitted()) {
+            $params = $form->getVal(['localpart', 'domain']);
 
-                $this->db->aliasCreate($args);
+            $params += Db::emailAddressToArgs(
+                    $mailbox->getValueUser()
+                    , 'mailbox_'
+            );
 
-                throw new exception\Successful();
-            } else {
-                // find error?
-            }
+            $this->db->aliasCreate($params);
+
+            throw new exception\Successful();
         }
     }
 }

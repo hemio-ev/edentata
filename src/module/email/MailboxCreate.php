@@ -18,9 +18,8 @@
 
 namespace hemio\edentata\module\email;
 
-use hemio\form;
 use hemio\edentata\gui;
-use \hemio\edentata\exception;
+use hemio\edentata\exception;
 
 /**
  * Description of CreateAccount

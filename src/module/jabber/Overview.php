@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -20,52 +19,51 @@
 namespace hemio\edentata\module\jabber;
 
 use hemio\edentata\gui;
-use hemio\edentata\module\email;
 
 /**
  * Description of Overview
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Overview extends Window {
+class Overview extends Window
+{
 
-    public function content() {
+    public function content()
+    {
         $window = $this->newWindow(_('Jabber Accounts'), null, false);
 
         $window->addButtonRight(
-                new gui\LinkButton(
-                $this->request->derive('create')
-                , _('Create Account')
-                )
-                , true
+            new gui\LinkButton(
+            $this->request->derive('create')
+            , _('Create Account')
+            )
+            , true
         );
-
-
 
         $window->addChild($this->accounts());
 
         return $window;
     }
 
-    protected function accounts() {
+    protected function accounts()
+    {
         $accounts = $this->db->accountSelect()->fetchAll();
 
-        if (empty($accounts)) {
+        if (empty($accounts))
             return new gui\Hint(
-                    _('You do not own any jabber accounts right now.')
+                _('You do not own any jabber accounts right now.')
             );
-        } else {
-            $list = new gui\Listbox();
-            foreach ($accounts as $account) {
-                $addr = $account['node'] . '@' . $account['domain'];
-                $list->addLinkEntry(
-                        $this->request->derive('details', $addr)
-                        , new \hemio\html\String($addr)
-                        , $account['backend_status']
-                );
-            }
-            return $list;
-        }
-    }
 
+        $list = new gui\Listbox();
+        foreach ($accounts as $account) {
+            $addr = $account['node'].'@'.$account['domain'];
+            $list->addLinkEntry(
+                $this->request->derive('details', $addr)
+                , new \hemio\html\String($addr)
+                , $account['backend_status']
+            );
+        }
+
+        return $list;
+    }
 }

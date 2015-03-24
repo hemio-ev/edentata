@@ -19,6 +19,7 @@
 namespace hemio\edentata\module\web;
 
 use hemio\edentata\sql;
+use hemio\edentata\exception;
 
 /**
  * Description of Db

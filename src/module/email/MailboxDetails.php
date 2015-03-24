@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -20,8 +19,6 @@
 namespace hemio\edentata\module\email;
 
 use hemio\edentata\gui;
-use hemio\form;
-use hemio\html;
 use hemio\html\String;
 
 /**
@@ -29,18 +26,20 @@ use hemio\html\String;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class MailboxDetails extends Window {
+class MailboxDetails extends Window
+{
 
-    public function content($address) {
+    public function content($address)
+    {
         $window = $this->newFormWindow(
-                'edit_account'
-                , _('Email Mailbox')
-                , $address
+            'edit_account'
+            , _('Email Mailbox')
+            , $address
         );
 
         $resAliases = $this->db->aliasSelect(
-                Utils::addrLocalpart($address)
-                , Utils::addrDomain($address)
+            Utils::addrLocalpart($address)
+            , Utils::addrDomain($address)
         );
 
         $aliases = $resAliases->fetchAll();
@@ -48,53 +47,53 @@ class MailboxDetails extends Window {
         $list = new gui\Listbox();
 
         foreach ($aliases as $alias) {
-            $aliasAddr = $alias['localpart'] . '@' . $alias['domain'];
-            $button = new gui\LinkButton(
-                    $this->module->request->derive(
-                            'alias_delete'
-                            , $address
-                            , $aliasAddr
-                    )
-                    , _('Delete')
+            $aliasAddr = $alias['localpart'].'@'.$alias['domain'];
+            $button    = new gui\LinkButton(
+                $this->module->request->derive(
+                    'alias_delete'
+                    , $address
+                    , $aliasAddr
+                )
+                , _('Delete')
             );
 
 
             $list->addEntry(
-                    new String($aliasAddr)
-                    , $alias['backend_status']
-                    , $button
+                new String($aliasAddr)
+                , $alias['backend_status']
+                , $button
             );
         }
 
         if (count($aliases) > 0) {
             $window
-                    ->addChild(new gui\Fieldset(_('Aliases')))
-                    ->addChild($list);
+                ->addChild(new gui\Fieldset(_('Aliases')))
+                ->addChild($list);
         }
         $window->addChild($this->actions($address));
 
         return $window;
     }
 
-    public function actions($address) {
+    public function actions($address)
+    {
         $selecting = new gui\Selecting(_('Possible Actions'));
 
         $selecting->addLink(
-                $this->module->request->derive('mailbox_password', $address)
-                , _('Change password')
+            $this->module->request->derive('mailbox_password', $address)
+            , _('Change password')
         );
 
         $selecting->addLink(
-                $this->module->request->derive('alias_create', $address)
-                , _('Create alias for this mailbox')
+            $this->module->request->derive('alias_create', $address)
+            , _('Create alias for this mailbox')
         );
 
         $selecting->addLink(
-                $this->module->request->derive('mailbox_delete', $address)
-                , _('Delete entire mailbox')
+            $this->module->request->derive('mailbox_delete', $address)
+            , _('Delete entire mailbox')
         );
 
         return $selecting;
     }
-
 }

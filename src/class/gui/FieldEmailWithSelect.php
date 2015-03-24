@@ -62,7 +62,6 @@ class FieldEmailWithSelect extends \hemio\form\Container
 
         $p['text'] = new form\FieldText($name1, $title1);
         $p['text']->setRequired(true);
-        #$p['text']->getControlElement()->setAttribute('autofocus', true);
         $p['text']->addInheritableAppendage(
             form\FormPost::FORM_FIELD_TEMPLATE,
             new form\template\FormPlainControl

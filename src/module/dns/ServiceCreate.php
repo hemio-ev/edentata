@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -20,35 +19,38 @@
 namespace hemio\edentata\module\dns;
 
 use hemio\form;
-use hemio\html;
 
 /**
  * Description of ServiceCreate
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ServiceCreate extends Window {
+class ServiceCreate extends Window
+{
 
-    public function content($registered) {
-        $window = $this->newFormWindow('service_create', _('Create Sub-Domain'), $registered, _('Continue …'));
+    public function content($registered)
+    {
+        $window = $this->newFormWindow('service_create', _('Create Sub-Domain'),
+                                                           $registered,
+                                                           _('Continue …'));
 
         $domain = new form\FieldText('domain', _('Sub-Domain'));
-        $domain->getControlElement()->setAttribute('placeholder', 'sub-domain.' . $registered);
+        $domain->getControlElement()->setAttribute('placeholder',
+                                                   'sub-domain.'.$registered);
         $domain->setRequired();
-        
+
         $window->getForm()->addChild($domain);
 
         if ($window->getForm()->correctSubmitted()) {
-            $e = new \hemio\edentata\exception\Successful;
+            $e         = new \hemio\edentata\exception\Successful;
             $e->backTo = $this->request->derive(
-                    'service_details'
-                    , $registered
-                    , $domain->getValueUser()
+                'service_details'
+                , $registered
+                , $domain->getValueUser()
             );
             throw $e;
         }
 
         return $window;
     }
-
 }

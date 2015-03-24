@@ -19,7 +19,6 @@
 namespace hemio\edentata\module\dns;
 
 use hemio\edentata\gui;
-use hemio\html;
 use hemio\form;
 
 /**

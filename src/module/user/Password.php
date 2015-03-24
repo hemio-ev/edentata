@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -20,7 +19,6 @@
 namespace hemio\edentata\module\user;
 
 use hemio\edentata\gui;
-use hemio\form;
 use hemio\edentata\exception\Successful;
 
 /**
@@ -28,14 +26,16 @@ use hemio\edentata\exception\Successful;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Password extends Window {
+class Password extends Window
+{
 
-    public function content() {
+    public function content()
+    {
         $window = $this->newFormWindow(
-                'password'
-                , _('User Password')
-                , null
-                , _('Change')
+            'password'
+            , _('User Password')
+            , null
+            , _('Change')
         );
 
         $password = new gui\FieldNewPassword('password');
@@ -44,13 +44,14 @@ class Password extends Window {
         $window->getForm()->addChild($password);
 
         $this->handleSubmit(
-                $window->getForm()
+            $window->getForm()
         );
 
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form) {
+    protected function handleSubmit(gui\FormPost $form)
+    {
         if ($form->correctSubmitted()) {
 
             $params = $form->getVal(['password']);
@@ -58,7 +59,7 @@ class Password extends Window {
             $this->db->password($params);
 
             $e = new Successful(
-                    _('Your password has been updated.')
+                _('Your password has been updated.')
             );
 
             $e->backTo = $this->request->derive();
@@ -66,5 +67,4 @@ class Password extends Window {
             throw $e;
         }
     }
-
 }

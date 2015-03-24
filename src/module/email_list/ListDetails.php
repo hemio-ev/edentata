@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -20,24 +19,26 @@
 namespace hemio\edentata\module\email_list;
 
 use hemio\edentata\gui;
-use hemio\form;
 
 /**
  * Description of ListDetails
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ListDetails extends Window {
+class ListDetails extends Window
+{
 
-    public function content($list) {
-        $window = $this->newFormWindow('select_subscribers', _('Email List'), $list);
+    public function content($list)
+    {
+        $window = $this->newFormWindow('select_subscribers', _('Email List'),
+                                                               $list);
 
         $window->addButtonRight(
-                new gui\LinkButton(
-                $this->module->request->derive('subscribers_create', true)
-                , _('Add Subscriber')
-                )
-                , true);
+            new gui\LinkButton(
+            $this->module->request->derive('subscribers_create', true)
+            , _('Add Subscriber')
+            )
+            , true);
 
         $window->addChild($this->details());
         $this->subscribers($window, $list);
@@ -45,40 +46,41 @@ class ListDetails extends Window {
         return $window;
     }
 
-    protected function details() {
+    protected function details()
+    {
         $selecting = new gui\Selecting(_('Email List'));
 
         $selecting->addLink(
-                $this->module->request->derive('list_update', true)
-                , _('Change list owner')
+            $this->module->request->derive('list_update', true)
+            , _('Change list owner')
         );
 
         $selecting->addLink(
-                $this->module->request->derive('list_delete', true)
-                , _('Delete list')
+            $this->module->request->derive('list_delete', true)
+            , _('Delete list')
         );
-        
+
         return $selecting;
     }
 
-    protected function subscribers(gui\WindowModuleWithForm $window, $list) {
+    protected function subscribers(gui\WindowModuleWithForm $window, $list)
+    {
         $subscribers = $this->db->subscriberSelect($list)->fetchAll();
 
-        $fieldset = new gui\Fieldset(_('Subscribers'));
+        $fieldset  = new gui\Fieldset(_('Subscribers'));
         $selectbox = new gui\Selectbox();
 
         $window->getForm()->addInheritableAppendage(
-                'selected_subscribers', $selectbox
+            'selected_subscribers', $selectbox
         );
 
         $window->getForm()->addChild($fieldset)->addChild($selectbox);
 
         foreach ($subscribers as $subscriber) {
-            //todo add extra prefix outside of name logic
             $selectbox->addItem(
-                    $subscriber['address']
-                    , $subscriber['address']
-                    , $subscriber['backend_status']
+                $subscriber['address']
+                , $subscriber['address']
+                , $subscriber['backend_status']
             );
         }
         $options = new \hemio\form\Container();
@@ -86,11 +88,13 @@ class ListDetails extends Window {
         $move = new \hemio\form\FieldSubmit('move', _('Move …'));
         #$options[] = $move;
 
-        $unsubscribe = new \hemio\form\FieldSubmit('unsubscribe', _('Unsubscribe'));
-        $unsubscribe->getControlElement()->setAttribute('formaction', $this->module->request->derive('subscribers_unsubscribe', $list)->getUrl());
-        $options[] = $unsubscribe;
+        $unsubscribe = new \hemio\form\FieldSubmit('unsubscribe',
+                                                   _('Unsubscribe'));
+        $unsubscribe->getControlElement()->setAttribute('formaction',
+                                                        $this->module->request->derive('subscribers_unsubscribe',
+                                                                                       $list)->getUrl());
+        $options[]   = $unsubscribe;
 
         $selectbox->setOptions($options);
     }
-
 }
