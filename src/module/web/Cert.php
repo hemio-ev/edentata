@@ -137,7 +137,7 @@ class Cert
 
     public function trusted(array $intermediate)
     {
-        $itermediateFormatted = array_map(function ($obj) {
+        $itermediateFormatted = array_map(function (Cert $obj) {
             return $obj->formatted();
         }, $intermediate);
         $strInterm = implode(PHP_EOL, $itermediateFormatted);

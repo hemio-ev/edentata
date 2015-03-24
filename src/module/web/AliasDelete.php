@@ -30,7 +30,6 @@ class AliasDelete extends Window
 
     public function content($siteAddr, $alias)
     {
-        $site     = Utils::getHost($siteAddr);
         $sitePort = Utils::getPort($siteAddr);
 
         $message = _('Are you sure you want to delete this website alias?');

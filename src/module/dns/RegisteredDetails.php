@@ -156,7 +156,7 @@ class RegisteredDetails extends Window
             $span->addChild(new html\String($domain.' '.$record['type']));
             $span->addChild($ul);
 
-            $a = $list->addLinkEntry(
+            $list->addLinkEntry(
                 $this->request->derive(
                     'custom_details'
                     , $registered

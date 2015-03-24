@@ -48,7 +48,7 @@ class FormPost extends form\FormPost
         );
 
         $this->addHookToString(
-            function ($elem) {
+            function (html\Interface_\HtmlCode $elem) {
 
             $filter = function ($elem) {
                 return $elem instanceof \hemio\form\Abstract_\FormField;
