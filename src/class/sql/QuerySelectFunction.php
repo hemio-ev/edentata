@@ -66,12 +66,14 @@ class QuerySelectFunction extends QuerySelect
     }
 
     /**
-     * @todo there might be more to escape
      * @param string $name
      * @return string
      */
     public function sqlName($name)
     {
+        if (strpos($name, '"') !== false)
+            throw new \Exception('SQL names with double quotes not supported.');
+
         $arr = array_map(function ($str) {
             return '"'.$str.'"';
         }, explode('.', $name));
