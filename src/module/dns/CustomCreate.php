@@ -137,7 +137,6 @@ class CustomCreate extends Window
         if ($form->correctSubmitted()) {
             $keys   = self::TYPE_KEYS;
             $rdata  = json_encode($form->getVal($keys[$type], ''));
-            var_dump($rdata);
             $params = ['p_registered' => $domain, 'p_type' => $type, 'p_rdata' => $rdata]
                 + $form->getVal(['domain', 'ttl']);
 

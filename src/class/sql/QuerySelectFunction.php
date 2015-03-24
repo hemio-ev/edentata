@@ -127,7 +127,15 @@ class QuerySelectFunction extends QuerySelect
         if ($this->as)
             $as = ' AS '.$this->as;
 
-        $stmt = $this->pdo->prepare('SELECT '.$selectString.' FROM '.$this->getFunctionCall().$as.' '.$this->options);
+        $sqlCode = sprintf('SELECT %s FROM %s%s %s'
+            , $selectString
+            , $this->getFunctionCall()
+            , $as
+            , $this->options
+        );
+
+        $stmt = $this->pdo->prepare($sqlCode);
+
         try {
             $stmt->execute($this->funcParams + $params);
         } catch (\PDOException $e) {
