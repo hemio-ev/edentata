@@ -71,11 +71,32 @@ try {
         new sql\ExceptionMapping($request->derive())
     );
 
+    $httpAuth         = isset($_GET['auth']) && $_GET['auth'] === 'http';
+    $authMethod       = isset($_GET['auth']) ? $_GET['auth'] : null;
+    $httpAuthSupplied = isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']);
+
     # db auth
-    if (!isset($_SERVER['PHP_AUTH_USER']) && !isset($_SERVER['PHP_AUTH_PW'])) {
+    if ($authMethod === 'http_logout') {
         header('WWW-Authenticate: Basic realm="Edentata"');
         header('HTTP/1.1 401 Unauthorized');
         throw new exception\Error(_('Login failed'));
+    }
+
+    if ($authMethod === 'logout') {
+        require 'src/load/login.php';
+        exit(0);
+    }
+
+    if ($authMethod === 'http' && !$httpAuthSupplied) {
+        usleep(100 * 1000);
+        header('WWW-Authenticate: Basic realm="Edentata"');
+        header('HTTP/1.1 401 Unauthorized');
+        throw new exception\Error(_('Login failed'));
+    }
+
+    if (!$httpAuthSupplied) {
+        require 'src/load/login.php';
+        exit(0);
     }
 
     $usrData = [
@@ -87,42 +108,63 @@ try {
         $qryAuth = new sql\QuerySelectFunction($pdo, 'user.ins_login', $usrData);
         $qryAuth->execute();
     } catch (\Exception $e) {
-        header('WWW-Authenticate: Basic realm="Edentata"');
-        header('HTTP/1.1 401 Unauthorized');
-        throw new exception\Error(_('Login failed'));
+        if ($httpAuth) {
+            usleep(100 * 1000);
+            header('WWW-Authenticate: Basic realm="Edentata"');
+            header('HTTP/1.1 401 Unauthorized');
+            throw new exception\Error(_('Login failed'));
+        } else {
+            require 'src/load/login.php';
+            exit(0);
+        }
     }
 
-    $span        = new html\Span;
-    $span[]      = new html\String('Edentata – User: '.$_SERVER['PHP_AUTH_USER']);
+    $span   = new html\Span;
+    $span[] = new html\String('Edentata – User: '.$_SERVER['PHP_AUTH_USER']);
     $header->addChild($span);
-    $aSettings   = new html\A;
-    $aSettings[] = new html\String(_('User Settings'));
-    $settings    = new Request(['module' => 'user']);
-    $aSettings->setAttribute('href', $settings->getUrl());
-    $header[]    = $aSettings;
-    $aSettings   = new html\A;
-    $aSettings->addCssClass('dropdown');
-    $aSettings[] = new html\String(_('Act as Deputy'));
-    $settings    = new Request(['module' => 'user']);
-    $aSettings->setAttribute('href', '#');
-    $header[]    = $aSettings;
 
-    $ul = new html\Ul;
+    $header[] = new gui\Link(
+        (new Request())->deriveModule('user')
+        , _('User Settings')
+    );
 
     $userModule = (new LoadModule('user', $pdo))->getInstance($request);
-    foreach ($userModule->db->selectDeputy() as $represented) {
-        $a                  = new html\A();
-        $req                = $request->deriveModule($request->module);
-        $req->get['deputy'] = $represented['represented'];
-        $a->setAttribute('href', $req->getUrl());
-        $a->addChild(new html\String($represented['represented']));
-        $ul->addLine($a);
+    $users      = $userModule->db->selectDeputy()->fetchAll();
+
+    if (!empty($users)) {
+        $ul = new html\Ul;
+        $ul->addCssClass('popover');
+
+        $req = $request->deriveModule($request->module);
+
+        $req->get['deputy'] = null;
+
+        $ul->addLine(new gui\Link($req, _('Stop acting as deputy')));
+        $ul->addLine(new html\Hr());
+
+        foreach ($users as $represented) {
+            $req->get['deputy'] = $represented['represented'];
+            $ul->addLine(new gui\Link($req, $represented['represented']));
+        }
+
+        $aSettings   = new html\A;
+        $aSettings->addCssClass('popover');
+        $aSettings[] = new html\String(_('Act as Deputy'));
+        $aSettings->setAttribute('href', '#');
+        $header[]    = $aSettings;
+
+        $header[] = $ul;
     }
+
+
+    $aLogout   = new html\A;
+    $aLogout->setAttribute('href', '?auth=logout');
+    $aLogout[] = new html\String(_('Logout'));
+    $header[]  = $aLogout;
 
     if ($request->get('deputy'))
         $userModule->db->actAsDeputy($request->get('deputy'));
 
-    $header[] = $ul;
 
     # navi
     $nav = (new ContentNav($modulesNavi, $i10n))->getNav();

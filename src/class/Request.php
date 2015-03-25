@@ -140,7 +140,8 @@ class Request
     {
         $exprs   = [];
         foreach ($this->get as $key => $value)
-            $exprs[] = $key.'='.$value;
+            if ($value !== null)
+                $exprs[] = $key.'='.$value;
 
         return '?'.implode('&', $exprs);
     }

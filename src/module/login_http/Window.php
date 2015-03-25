@@ -16,8 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-chdir(__DIR__.'/../../');
+namespace hemio\edentata\module\login_http;
 
-require_once 'vendor/autoload.php';
+/**
+ * Description of Window
+ *
+ * @author Michael Herold <quabla@hemio.de>
+ */
+class Window extends \hemio\edentata\Window
+{
+    /**
+     *
+     * @var Module
+     */
+    protected $module;
 
-require 'src/load/main.php';
+    /**
+     *
+     * @var Db
+     */
+    protected $db;
+
+}

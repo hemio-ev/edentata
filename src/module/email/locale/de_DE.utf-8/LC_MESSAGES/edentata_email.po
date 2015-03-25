@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: edentata email\n"
 "POT-Creation-Date: 2015-02-19 15:48+0100\n"
-"PO-Revision-Date: 2015-02-19 15:49+0100\n"
+"PO-Revision-Date: 2015-03-25 01:07+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -36,7 +36,7 @@ msgstr ""
 
 #: AliasCreate.php:36
 msgid "Create Email Alias"
-msgstr ""
+msgstr "E-Mail Alias Erstellen"
 
 #: AliasCreate.php:38 MailboxCreate.php:38 RedirectionCreate.php:36
 msgid "Create"
@@ -48,7 +48,7 @@ msgstr "Neues E-Mail-Adresse"
 
 #: AliasCreate.php:44
 msgid "Deliver emails to"
-msgstr ""
+msgstr "E-Mail ausliefern an"
 
 #: AliasCreate.php:45
 msgid "Mailbox"
@@ -103,11 +103,11 @@ msgstr "Passwort ändern"
 
 #: MailboxDetails.php:89
 msgid "Create alias for this mailbox"
-msgstr ""
+msgstr "Alias für dieses Postfach erstellen"
 
 #: MailboxDetails.php:94
 msgid "Delete entire mailbox"
-msgstr ""
+msgstr "Gesamtes Postfach löschen"
 
 #: MailboxPassword.php:37
 msgid "Change Password"
@@ -147,11 +147,11 @@ msgstr "Neue Umleitung"
 
 #: RedirectionCreate.php:39
 msgid "Redirection from"
-msgstr ""
+msgstr "Umleitung von"
 
 #: RedirectionCreate.php:42
 msgid "Redirection to"
-msgstr ""
+msgstr "Umleitung nach"
 
 #: RedirectionCreate.php:43
 msgid "Email Address"

@@ -16,8 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-chdir(__DIR__.'/../../');
+namespace hemio\edentata\module\login_http;
 
-require_once 'vendor/autoload.php';
+/**
+ * Description of Db
+ *
+ * @author Michael Herold <quabla@hemio.de>
+ */
+class Db extends \hemio\edentata\ModuleDb
+{
 
-require 'src/load/main.php';
+}

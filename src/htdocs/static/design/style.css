@@ -48,7 +48,8 @@ body {
   color: #2e3436;
   padding: 0;
   margin: 0 auto;
-  background-color: white; }
+  background-color: white;
+  text-align: center; }
 
 div.main {
   display: flex;
@@ -75,6 +76,9 @@ h3 {
 #main_content {
   width: 36em;
   margin: 0 1em; }
+
+.login_window {
+  width: 36em; }
 
 pre {
   font-size: 0.9em; }
@@ -105,14 +109,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   line-height: 2em;
   color: #EEE;
   font-weight: bold;
-  width: 30em;
-  display: flex;
+  display: inline-flex;
   margin: auto;
   border-radius: 0 0 1em 1em;
   box-shadow: #333 0 0 3px;
   margin-bottom: 1em; }
 
-.header .link, body > header .link, .header body > header a, body > header .header a, body > header a {
+.header > .link, body > header > .link, body > header > a {
   background-color: #4d4d4d;
   background: linear-gradient(#666666, #4d4d4d);
   display: inline-block;
@@ -121,27 +124,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   color: inherit;
   border-right: 1px solid #222; }
 
-body > header a:first-of-type {
+body > header > span {
+  margin-right: 1em; }
+
+body > header > a:first-of-type {
   border-left: 1px solid #222;
   margin-left: auto; }
 
-.dropdown + * {
-  display: none;
-  position: absolute;
-  background-color: #333;
-  padding: 1.5em;
-  line-height: 2em;
-  color: #EEE;
-  z-index: 10;
-  margin: 0;
-  border-radius: 3px; }
+.header .link:hover, body > header .link:hover, .header body > header > a:hover, body > header > a:hover {
+  background-color: #4d4d4d;
+  background: linear-gradient(#4d4d4d, #595959); }
 
-.header .link:focus, body > header .link:focus, .header body > header a:focus, body > header .header a:focus, body > header a:focus {
+.header .link:focus, body > header .link:focus, .header body > header > a:focus, body > header > a:focus {
   background-color: #404040;
   background: linear-gradient(#404040, #4d4d4d); }
-
-.dropdown:focus + *, .dropdown + *:hover {
-  display: block; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -193,6 +189,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Author     : Michael Herold <quabla@hemio.de>
 */
 .window, .message, .explanation, .popover + *.popover, article, nav {
+  color: #2e3436;
   background-color: #ededed;
   border-radius: 0.5em 0.5em 0 0;
   border: 1px solid #8e8e8e;
@@ -202,7 +199,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   display: block;
   box-sizing: border-box;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  text-align: justify; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
@@ -309,6 +307,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .explanation p {
   margin: 0; }
 
+*[data-js-hidden="data-js-hidden"] {
+  display: none; }
+
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>
 
@@ -396,8 +397,7 @@ button.headerbar_menu::before {
   list-style: none;
   display: none;
   position: absolute;
-  padding: 0.75em 1em;
-  right: 1em; }
+  padding: 0.75em 1em; }
 
 .popover + *.popover li a {
   display: block;

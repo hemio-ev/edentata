@@ -29,6 +29,7 @@ body {
     padding: 0;
     margin: 0 auto;
     background-color: white;
+    text-align: center;
 }
 
 div.main {
@@ -62,6 +63,10 @@ h3 {
 #main_content {
     width: 36em;
     margin:  0 1em;
+}
+
+.login_window {
+    width: 36em;
 }
 
 pre {

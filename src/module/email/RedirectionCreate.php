@@ -42,7 +42,7 @@ class RedirectionCreate extends Window
 
         $fieldsetTo = new gui\Fieldset(_('Redirection to'));
         $to         = new form\FieldEmail('to', _('Email Address'));
-        $to->setAccesskey('t');
+        $to->setRequired();
 
         $window->getForm()
             ->addChild($fieldsetFrom)

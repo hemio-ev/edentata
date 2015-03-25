@@ -25,16 +25,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     line-height: 2em;
     color: #EEE;
     font-weight: bold;
-    //text-align: center;
-    width: 30em;
-    display: flex;
+    display: inline-flex;
     margin: auto;
     border-radius: 0 0 1em 1em;
     box-shadow: $outer-color 0 0 3px;
     margin-bottom: 1em;
 }
 
-.header .link {
+.header > .link {
     @include button-background(lighten($outer-color, 10%));
     display: inline-block;
     padding: 0 1em;
@@ -47,31 +45,25 @@ body > header {
     @extend .header;
 }
 
-body > header a {
+body > header > span {
+   margin-right: 1em;
+}
+
+body > header > a {
     @extend .link;
 }
 
-body > header a:first-of-type {
+body > header > a:first-of-type {
     border-left: 1px solid #222;
     margin-left: auto;
 }
 
-.dropdown + * {
-    display: none;
-    position: absolute;
-    background-color: $outer-color;
-    padding: 1.5em;
-    line-height: 2em;
-    color: #EEE;
-    z-index: 10;
-    margin: 0;
-    border-radius: 3px;
+.header .link:hover {
+    @include button-background-active(lighten($outer-color, 15%));
 }
+
 
 .header .link:focus {
     @include button-background-active(lighten($outer-color, 10%));
 }
 
-.dropdown:focus + *, .dropdown + *:hover {
-    display: block;
-}

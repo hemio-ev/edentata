@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata\n"
-"POT-Creation-Date: 2015-02-21 00:36+0100\n"
-"PO-Revision-Date: 2015-02-21 00:37+0100\n"
+"POT-Creation-Date: 2015-03-25 21:57+0100\n"
+"PO-Revision-Date: 2015-03-25 22:00+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -10,11 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.10\n"
-"X-Poedit-Basepath: ../../../\n"
+"X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: src/class\n"
+"X-Poedit-SearchPath-1: src/load\n"
 
-#: src/class/ContentNav.php:57
+#: src/class/ContentNav.php:58
 msgid "Services"
 msgstr "Dienste"
 
@@ -28,7 +30,7 @@ msgstr ""
 msgid "Failed to load module \"%s\". Module not found."
 msgstr ""
 
-#: src/class/Request.php:41
+#: src/class/Request.php:78
 #, php-format
 msgid "Invalid input with key \"%s\"."
 msgstr ""
@@ -50,7 +52,7 @@ msgstr "Abbrechen"
 msgid "The chosen password is too weak: %s."
 msgstr "Das gewählte Passwort ist zu schwach: %s."
 
-#: src/class/exception/Error.php:30
+#: src/class/exception/Error.php:30 src/class/gui/StatusList.php:46
 msgid "Error"
 msgstr "Fehler"
 
@@ -63,15 +65,15 @@ msgstr "Erfolgreich"
 msgid "Unkown module action \"%s\"."
 msgstr "Unbekannte Modul-Aktion \"%s\"."
 
-#: src/class/exception/Warning.php:30
+#: src/class/exception/Warning.php:30 src/class/gui/StatusList.php:47
 msgid "Warning"
 msgstr "Warnung"
 
-#: src/class/gui/FieldEmailWithSelect.php:50
+#: src/class/gui/FieldEmailWithSelect.php:54
 msgid "Local Part"
 msgstr "Lokalteil"
 
-#: src/class/gui/FieldEmailWithSelect.php:53
+#: src/class/gui/FieldEmailWithSelect.php:57
 msgid "Domain"
 msgstr "Domain"
 
@@ -87,7 +89,7 @@ msgstr "Password Wiederholen"
 msgid "The repeated password does not match the original one."
 msgstr ""
 
-#: src/class/gui/Message.php:52
+#: src/class/gui/Message.php:52 src/class/gui/StatusList.php:45
 msgid "OK"
 msgstr ""
 
@@ -111,16 +113,41 @@ msgstr "Unbekannter Status"
 msgid "Overview"
 msgstr "Übersicht"
 
-#: src/class/sql/ExceptionMapping.php:35
+#: src/class/sql/ExceptionMapping.php:42
 msgid "Invalid unser login."
 msgstr "Ungültige Benutzerdaten."
 
-#: src/class/sql/ExceptionMapping.php:42
+#: src/class/sql/ExceptionMapping.php:52
 msgid ""
 "The operation you want to perform would exceed your current contingent. "
 "Please contact the support to extend your contingent."
 msgstr ""
 
-#: src/class/sql/ExceptionMapping.php:50
+#: src/class/sql/ExceptionMapping.php:60
 msgid "The object you tried to change is inaccessible or missing."
+msgstr ""
+
+#: src/load/main.php:82 src/load/main.php:94 src/load/main.php:115
+msgid "Login failed"
+msgstr "Anmeldung fehlgeschlagen"
+
+#: src/load/main.php:128
+msgid "User Settings"
+msgstr "Benutzereinstellungen"
+
+#: src/load/main.php:142
+msgid "Stop acting as deputy"
+msgstr "Stellvertretung aufgeben"
+
+#: src/load/main.php:152
+msgid "Act as Deputy"
+msgstr "Stellvertretung Ausüben"
+
+#: src/load/main.php:162
+msgid "Logout"
+msgstr "Abmelden"
+
+#: src/load/main.php:184
+#, php-format
+msgid "Edentata – %s"
 msgstr ""

@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 .window {
+    color: $text-color;
     background-color: $article-color;
     border-radius: $article-radius-top $article-radius-top $article-radius-bottom $article-radius-bottom;
     border: 1px solid $article-border-color;
@@ -30,4 +31,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
+    text-align: justify;
 }

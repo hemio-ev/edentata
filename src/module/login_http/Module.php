@@ -16,8 +16,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-chdir(__DIR__.'/../../');
+namespace hemio\edentata\module\login_http;
 
-require_once 'vendor/autoload.php';
+use hemio\edentata\exception;
+use hemio\edentata\exception\UnknownOperation;
+use hemio\edentata;
 
-require 'src/load/main.php';
+/**
+ * Description of ModuleJabber
+ *
+ * @author Michael Herold <quabla@hemio.de>
+ */
+class Module extends \hemio\edentata\Module
+{
+    /**
+     *
+     * @var Db
+     */
+    public $db;
+
+    protected function constructHook()
+    {
+        $this->db = new Db($this->pdo);
+    }
+
+    public function getContent()
+    {
+        return (new Login($this))->content();
+    }
+
+    public static function getDir()
+    {
+        return __DIR__;
+    }
+
+    public static function getName()
+    {
+        return _('Login');
+    }
+}
