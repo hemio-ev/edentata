@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata\n"
-"POT-Creation-Date: 2015-03-25 21:57+0100\n"
-"PO-Revision-Date: 2015-03-25 22:00+0100\n"
+"POT-Creation-Date: 2015-03-26 18:59+0100\n"
+"PO-Revision-Date: 2015-03-26 18:59+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -20,15 +20,31 @@ msgstr ""
 msgid "Services"
 msgstr "Dienste"
 
-#: src/class/LoadModule.php:78
+#: src/class/LoadModule.php:80
 #, php-format
 msgid "Failed to load module \"%s\". The module id is invalid."
 msgstr ""
 
-#: src/class/LoadModule.php:88
+#: src/class/LoadModule.php:91
 #, php-format
 msgid "Failed to load module \"%s\". Module not found."
 msgstr ""
+
+#: src/class/LoadModule.php:148
+#, php-format
+msgid ""
+"There are elements in this view with status %s. These tasks should be "
+"processed by the system soon. If the status remains unchanged please contact "
+"the support. This view will NOT be refreshed automatically."
+msgstr ""
+"In dieser Ansicht existieren Elemente mit dem Status %s. Diese Aufträge "
+"sollten in Kürze abgewickelt werden. Falls der Status unverändert bleibt, "
+"kontaktieren Sie bitten den Support. Diese Ansicht wird sich NICHT "
+"automatisch aktualisieren."
+
+#: src/class/LoadModule.php:158
+msgid "Refresh View"
+msgstr "Ansicht Aktualisieren"
 
 #: src/class/Request.php:78
 #, php-format
@@ -89,23 +105,23 @@ msgstr "Password Wiederholen"
 msgid "The repeated password does not match the original one."
 msgstr ""
 
-#: src/class/gui/Message.php:52 src/class/gui/StatusList.php:45
+#: src/class/gui/Message.php:54 src/class/gui/StatusList.php:45
 msgid "OK"
 msgstr ""
 
-#: src/class/gui/Progress.php:39
+#: src/class/gui/Progress.php:45
 msgid "Deletion Pending"
 msgstr "Ausstehende Löschung"
 
-#: src/class/gui/Progress.php:43
+#: src/class/gui/Progress.php:49
 msgid "Changes Pending"
 msgstr "Ausstehende Änderungen"
 
-#: src/class/gui/Progress.php:47
+#: src/class/gui/Progress.php:53
 msgid "Setup Pending"
 msgstr "Ausstehende Einrichtung"
 
-#: src/class/gui/Progress.php:51
+#: src/class/gui/Progress.php:57
 msgid "Unknown Status"
 msgstr "Unbekannter Status"
 

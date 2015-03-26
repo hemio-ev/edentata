@@ -18,7 +18,7 @@
 
 namespace hemio\edentata\module\dns;
 
-use \hemio\form;
+use hemio\form;
 use hemio\edentata\gui;
 
 /**
@@ -31,9 +31,12 @@ class RegisteredCreate extends Window
 
     public function content()
     {
-        $window = $this->newFormWindow('registered_create', _('New Domain'),
-                                                              null,
-                                                              _('Register'));
+        $window = $this->newFormWindow(
+            'registered_create'
+            , _('New Domain')
+            , null
+            , _('Register')
+        );
 
         $domain = new \hemio\form\FieldText('domain', _('Domain'));
         $domain->setRequired();
@@ -43,6 +46,9 @@ class RegisteredCreate extends Window
 
         $adminC = new form\FieldSelect('admin_c', _('Admin Contact'));
         $adminC->setRequired();
+
+        $registrant->addOption('');
+        $adminC->addOption('');
 
         foreach ($this->db->handleSelect() as $handle) {
             $text = Utils::handleOut($handle);
@@ -60,7 +66,7 @@ class RegisteredCreate extends Window
         return $window;
     }
 
-    protected function handleSubmit(\hemio\edentata\gui\FormPost $form)
+    protected function handleSubmit(gui\FormPost $form)
     {
         if ($form->correctSubmitted()) {
             $this->db->beginTransaction();

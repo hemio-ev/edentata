@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -20,15 +19,58 @@
 namespace hemio\edentata\gui;
 
 use hemio\html;
+use hemio\form;
+use hemio\edentata;
 
 /**
  * Description of Pending
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Progress extends \hemio\form\Container {
+class Progress extends form\Container implements ProgressInterface
+{
+    protected $msg;
+    protected $status;
 
-    public function __construct($backendStatus) {
+    public static function enhanceWithStatusExplanation(
+    html\Interface_\MaintainsChilds $content
+    , edentata\Request $request)
+    {
+        $filter = function (\hemio\html\Interface_\HtmlCode $child) {
+            return $child instanceof ProgressInterface;
+        };
+
+        $status = [];
+        foreach ($content->getRecursiveIterator($filter) as $progress) {
+            if ($progress->isPending()) {
+                $status[$progress->getStatus()] = $progress->getMessage();
+            }
+        }
+
+        if (empty($status))
+            return new html\Nothing;
+
+        $event         = new edentata\exception\Warning(
+            sprintf(
+                _('There are elements in this view with status %s. '
+                    .'These tasks should be processed by the system soon. '
+                    .'If the status remains unchanged please contact the support. '
+                    .'This view will NOT be refreshed automatically.')
+                , implode(', ', $status)
+            )
+        );
+        $event->backTo = $request;
+
+        $msg = new Message($event);
+        $msg->getButtonString()->setValue(_('Refresh View'));
+
+        return $msg;
+    }
+
+    public function __construct($backendStatus)
+    {
+        $this->status = $backendStatus;
+
         if ($backendStatus !== null) {
 
             $this['span'] = new html\Span();
@@ -36,23 +78,38 @@ class Progress extends \hemio\form\Container {
 
             switch ($backendStatus) {
                 case 'del':
-                    $msg = _('Deletion Pending');
+                    $this->msg = _('Deletion Pending');
                     break;
 
                 case 'upd':
-                    $msg = _('Changes Pending');
+                    $this->msg = _('Changes Pending');
                     break;
 
                 case 'ins':
-                    $msg = _('Setup Pending');
+                    $this->msg = _('Setup Pending');
                     break;
 
                 default:
-                    $msg = _('Unknown Status');
+                    $this->msg    = _('Unknown Status');
+                    $this->status = '?';
             }
 
-            $this['span']->addChild(new html\String($msg));
+            $this['span']->addChild(new html\String($this->msg));
         }
     }
 
+    public function getMessage()
+    {
+        return $this->msg;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function isPending()
+    {
+        return $this->status !== null;
+    }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,9 +27,11 @@ use hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Message extends form\Container {
+class Message extends form\Container
+{
 
-    public function __construct(exception\Printable $event) {
+    public function __construct(exception\Printable $event)
+    {
         $this['article'] = new html\Article;
         $this['article']->addCssClass('message');
 
@@ -38,10 +39,10 @@ class Message extends form\Container {
             $this['article']->setAttribute('role', 'alert');
         }
 
-        $this['article']['h2'] = new html\H2();
+        $this['article']['h2']   = new html\H2();
         $this['article']['h2'][] = new html\String($event::title());
 
-        $this['article']['p'] = new html\P();
+        $this['article']['p']   = new html\P();
         $this['article']['p'][] = new html\String($event->getMessage());
 
         if ($event->backTo !== null)
@@ -49,12 +50,20 @@ class Message extends form\Container {
         else
             $backUrl = new \hemio\edentata\Request();
 
-        $button = new LinkButton($backUrl, _('OK'));
+        $button                                    = new LinkButton($backUrl,
+                                                                    _('OK'));
         $button->getButton()->setAttribute('autofocus', true);
         $button->setSuggested();
-        $this['article']
-                ->addChild(new ButtonGroup())
-                ->addChild($button);
+        $this['article']['button_group']           = new ButtonGroup();
+        $this['article']['button_group']['button'] = $button;
     }
 
+    /**
+     *
+     * @return html\String
+     */
+    public function getButtonString()
+    {
+        return $this['article']['button_group']['button']->getButtonString();
+    }
 }

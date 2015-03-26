@@ -16,38 +16,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\login_http;
+namespace hemio\edentata\gui;
 
-/**
- * Description of ModuleJabber
- *
- * @author Michael Herold <quabla@hemio.de>
- */
-class Module extends \hemio\edentata\Module
+interface ProgressInterface
 {
+
     /**
-     *
-     * @var Db
+     * @return string message
      */
-    public $db;
+    public function getMessage();
 
-    protected function constructHook()
-    {
-        $this->db = new Db($this->pdo);
-    }
+    /**
+     * @return string status
+     */
+    public function getStatus();
 
-    public function getContent()
-    {
-        return (new Login($this))->content();
-    }
-
-    public static function getDir()
-    {
-        return __DIR__;
-    }
-
-    public static function getName()
-    {
-        return _('Login');
-    }
+    /**
+     * @return boolean true if pending
+     */
+    public function isPending();
 }

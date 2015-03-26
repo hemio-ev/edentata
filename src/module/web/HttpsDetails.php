@@ -238,10 +238,11 @@ class HttpsDetails extends Window
 
         $https->addChild($statusList);
 
-        $selecting->addLink($this->request->derive(
-                    'intermediate_create', $domain.':'.$port, $identifier),
-                    _('Add intermediate certificates'))
-            ->setSuggested($suggestIntermediate);
+        if ($suggestIntermediate)
+            $selecting->addLink($this->request->derive(
+                        'intermediate_create', $domain.':'.$port, $identifier),
+                        _('Add intermediate certificates'))
+                ->setSuggested($suggestIntermediate);
 
         $https->addChild($selecting);
 

@@ -39,6 +39,8 @@ class SiteDetails extends Window
 
         $window = $this->newWindow(_('Website'), $address);
 
+        $window->addButtonRight($this->actions($address));
+
         $data = $this->db->siteSelectSingle($domain, $port)->fetch();
 
         $details = new gui\Fieldset(_('Site Details'));
@@ -70,7 +72,6 @@ class SiteDetails extends Window
 
         $window->addChild($details);
         $window->addChild($this->aliases($domain, $port));
-        $window->addChild($this->actions($address));
 
         $container->addChild($window);
         $container->addChild($windowHttps);
@@ -80,17 +81,17 @@ class SiteDetails extends Window
 
     protected function actions($address)
     {
-        $selecting = new gui\Selecting(_('Possible Actions'));
+        $menu = new gui\HeaderbarMenu();
 
-        $selecting->addLink(
+        $menu->addEntry(
             $this->request->derive('alias_create', $address), _('Create alias'));
 
-        $selecting->addLink(
+        $menu->addEntry(
             $this->request->derive('site_delete', $address)
             , _('Delete entire site')
         );
 
-        return $selecting;
+        return $menu;
     }
 
     protected function aliases($domain, $port)
@@ -126,6 +127,14 @@ class SiteDetails extends Window
         $port   = $site['port'];
 
         $window = $this->newWindow(_('HTTPS'), null, false);
+
+        $menu = new gui\HeaderbarMenu();
+        $menu->addEntry(
+            $this->request->derive(
+                'intermediate_create', $domain.':'.$port, $site['https'])
+            , _('Add intermediate certificates')
+        );
+        $window->addButtonRight($menu);
 
         $httpsDetails  = new HttpsDetails($this->module);
         $httpsCertInfo = $httpsDetails->https($domain, $port, $site['https']);

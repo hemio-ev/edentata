@@ -46,6 +46,11 @@ class LinkButton extends form\Container
         $this['form']['button']['text'] = new html\String($text);
     }
 
+    public function getButtonString()
+    {
+        return $this['form']['button']['text'];
+    }
+
     /**
      *
      * @return html\Button

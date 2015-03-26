@@ -199,7 +199,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   display: block;
   box-sizing: border-box;
   position: relative;
-  overflow: hidden;
   text-align: justify; }
 
 /*
@@ -397,7 +396,8 @@ button.headerbar_menu::before {
   list-style: none;
   display: none;
   position: absolute;
-  padding: 0.75em 1em; }
+  padding: 0.75em 1em;
+  min-width: 17em; }
 
 .popover + *.popover li a {
   display: block;
