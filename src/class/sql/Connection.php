@@ -36,6 +36,8 @@ class Connection extends \PDO
     )
     {
         parent::__construct($dsn, $username, $passwd, $options);
+        $this->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $this->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
     }
 
     public function getExceptionMapper()

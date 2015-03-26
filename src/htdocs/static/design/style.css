@@ -1195,9 +1195,8 @@ input.switch {
   position: absolute;
   margin: 0;
   padding: 0;
-  width: 0;
-  height: 0;
-  left: -2em; }
+  z-index: -2;
+  opacity: 0; }
 
 input.switch + p label {
   width: 100%; }

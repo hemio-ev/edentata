@@ -21,16 +21,16 @@ namespace hemio\edentata;
 use hemio\form;
 use hemio\html;
 
-$document = new form\Document(new html\String('Login'));
+$document = new form\Document(new html\String(_('Edentata Login')));
 
-$document->getHtml()->getHead()->setBaseUrl('http://localhost:8080/');
+$document->getHtml()->getHead()->setBaseUrl($config['base_url']);
 $document->getHtml()->getHead()->addJsFile('/static/js/login.js');
 if ($authMethod === 'logout')
     $document->getHtml()->getHead()->addJsFile('/static/js/logout.js');
 
 $document->getHtml()->getHead()->addCssFile('/static/design/style.css');
 
-$pdo = new sql\Connection('pgsql:dbname=test1', 'carnivora_edentata');
+$pdo = new sql\Connection($config['database_dsn']);
 
 $loadedModule = new LoadModule('login_http', $pdo);
 $i10n->setDomainModule($loadedModule);

@@ -22,15 +22,14 @@ use hemio\html;
 use hemio\form;
 
 # external data
-$request     = new Request($_GET, Utils::getPost());
-$modulesNavi = [
-    'email',
-    'email_list',
-    'jabber',
-    'dns',
-    'server_access',
-    'web'
-];
+$request = new Request($_GET, Utils::getPost());
+
+$config = Config::load('edentata.config.yaml');
+
+$modulesNavi    = $config['modules_nav'];
+$modulesAllowed = array_merge($config['modules_nav'], $config['modules_hidden']);
+
+I10n::$supportedLocales = $config['locales'];
 
 $i10n = new I10n();
 
@@ -44,6 +43,7 @@ try {
     $doc   = new form\Document($title);
     $doc->getHtml()->getHead()->addCssFile('static/design/style.css');
     $doc->getHtml()->setAttribute('lang', $i10n->getLang());
+    $doc->getHtml()->getHead()->setBaseUrl($config['base_url']);
 
     $body = $doc->getHtml()->getBody();
 
@@ -63,9 +63,7 @@ try {
     $mainContent['messages']      = new \hemio\form\Container;
 
     # db connect
-    $pdo = new sql\Connection('pgsql:dbname=test1', 'carnivora_edentata');
-    $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+    $pdo = new sql\Connection($config['database_dsn']);
 
     $pdo->addExceptionMapper(
         new sql\ExceptionMapping($request->derive())
@@ -150,7 +148,7 @@ try {
         $aSettings   = new html\A;
         $aSettings->addCssClass('popover');
         $aSettings[] = new html\String(_('Act as Deputy'));
-        $aSettings->setAttribute('href', '#');
+        $aSettings->setAttribute('href', $request->getUrl().'#');
         $header[]    = $aSettings;
 
         $header[] = $ul;
@@ -178,6 +176,9 @@ try {
     $mainNav[] = $nav->getContent();
 
     # module
+    if (!in_array($activeModuleName, $modulesAllowed))
+        throw new exception\Error(_('Tried to access unknown or disabled module'));
+
     $loadedModule = new LoadModule($activeModuleName, $pdo);
     $i10n->setDomainModule($loadedModule);
 

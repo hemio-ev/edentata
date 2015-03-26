@@ -1,0 +1,7 @@
+destination: docs
+
+source:
+ - src/class
+
+title: "hemio/edentata"
+todo: true

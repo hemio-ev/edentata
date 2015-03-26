@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -24,20 +23,19 @@ namespace hemio\edentata;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class I10n {
+class I10n
+{
+    public static $supportedLocales = ['en_US.utf-8'];
+    public $locale                  = null;
+    protected $domainsLoaded        = [];
 
-    public static $supportedLocales = [
-        'en_US.utf-8'
-        , 'de_DE.utf-8'
-    ];
-    public $locale = null;
-    protected $domainsLoaded = [];
-
-    public function __construct() {
+    public function __construct()
+    {
         $guessedLocale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
         $locales = array_filter(self::$supportedLocales
-                , function ($supportedLocale) use ($guessedLocale) {
+            ,
+                                function ($supportedLocale) use ($guessedLocale) {
             return substr($supportedLocale, 0, 2) == substr($guessedLocale, 0, 2);
         }
         );
@@ -47,7 +45,7 @@ class I10n {
         else
             $this->locale = self::$supportedLocales[0];
 
-        putenv('LC_ALL=' . $this->locale);
+        putenv('LC_ALL='.$this->locale);
         if (!setlocale(LC_ALL, $this->locale))
             echo 'failed to set locale';
 
@@ -55,24 +53,25 @@ class I10n {
         $this->setDomainMain();
     }
 
-    public function setDomainModule(LoadModule $module) {
-        $domain = 'edentata_' . $module->getId();
+    public function setDomainModule(LoadModule $module)
+    {
+        $domain = 'edentata_'.$module->getId();
 
         if (!array_key_exists($domain, $this->domainsLoaded)) {
-            bindtextdomain($domain, $module->getDir() . '/locale');
+            bindtextdomain($domain, $module->getDir().'/locale');
             $this->domainsLoaded[$domain] = $domain;
         }
 
         textdomain($domain);
     }
 
-    public function setDomainMain() {
+    public function setDomainMain()
+    {
         textdomain('edentata');
     }
 
     public function getLang()
     {
-        return substr($this->locale,0,2);
+        return substr($this->locale, 0, 2);
     }
-
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,8 +27,8 @@ use hemio\html;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-abstract class Window {
-
+abstract class Window
+{
     /**
      *
      * @var Request
@@ -37,12 +36,13 @@ abstract class Window {
     protected $request;
 
     /**
-     * 
+     *
      * @param \hemio\edentata\Module $module
      */
-    public function __construct(Module $module) {
-        $this->module = $module;
-        $this->db = $module->db;
+    public function __construct(Module $module)
+    {
+        $this->module  = $module;
+        $this->db      = $module->db;
         $this->request = $module->request;
     }
 
@@ -50,7 +50,8 @@ abstract class Window {
     $title = null
     , $subtitle = null
     , $addOverviewButton = true
-    ) {
+    )
+    {
         $window = new gui\WindowModule($title, $subtitle);
         $window->setModule($this->module);
 
@@ -60,7 +61,8 @@ abstract class Window {
         return $window;
     }
 
-    public function newForm($formName) {
+    public function newForm($formName)
+    {
         return new gui\FormPost($formName, $this->module->request->post);
     }
 
@@ -70,7 +72,8 @@ abstract class Window {
     , $subtitle = null
     , $submitText = null
     , $addOverviewButton = true
-    ) {
+    )
+    {
         $window = new gui\WindowModuleWithForm($title, $subtitle);
         $window->setModule($this->module);
 
@@ -96,7 +99,8 @@ abstract class Window {
     , $message
     , $deleteText
     , $protectedDelete = false
-    ) {
+    )
+    {
         $window = new gui\WindowModuleWithForm($title, $subtitle);
         $window->setModule($this->module);
         $window->addCssClass('delete_dialog');
@@ -121,12 +125,14 @@ abstract class Window {
         }
 
         $cancelButton = new gui\LinkButton(
-                $this->module->request->derive()
-                , _('Cancel')
+            $this->module->request->derive()
+            , _('Cancel')
         );
+        $cancelButton->getButton()->setAttribute('autofocus', true);
 
         $deleteButton = new form\FieldSubmit('delete', $deleteText);
         $deleteButton->setForm($form);
+        $deleteButton->setAutofocus(false);
 
         $buttonGroup = new gui\ButtonGroup();
         $buttonGroup->addChild($deleteButton);
@@ -142,5 +148,4 @@ abstract class Window {
 
         return $window;
     }
-
 }
