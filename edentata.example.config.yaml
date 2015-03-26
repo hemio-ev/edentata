@@ -1,0 +1,9 @@
+database_dsn: 'pgsql:user=edentata host=localhost dbname=carnivora'
+modules_nav:
+ - email
+ - email_list
+ - jabber
+ - dns
+ - server_access
+ - web
+base_url: '/edentata/'
