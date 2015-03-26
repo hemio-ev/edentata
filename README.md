@@ -16,13 +16,16 @@ Debian packages
 
 # Apache2 configuration
 
-> AliasMatch ^<base url>(?!static).*/(.*)$ /usr/share/edentata/src/htdocs/index.php
-> Alias <base url>/static/ /usr/share/edentata/src/htdocs/static/
+```
+AliasMatch ^<BASE_URL>(?!static).*/(.*)$ /usr/share/edentata/src/htdocs/index.php`
+Alias <BASE_URL>/static/ /usr/share/edentata/src/htdocs/static/
+```
 
-Where the edentata *base_url* option is set to *<base url>*
+Where the edentata `base_url` option is set to `<BASE_URL>`
 
 Example:
 
-> AliasMatch ^/edentata/(?!static).*/(.*)$ /usr/share/edentata/src/htdocs/index.php
-> Alias /edentata/static/ /usr/share/edentata/src/htdocs/static/
-
+```
+AliasMatch ^/edentata/(?!static).*/(.*)$ /usr/share/edentata/src/htdocs/index.php
+Alias /edentata/static/ /usr/share/edentata/src/htdocs/static/
+```
