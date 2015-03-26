@@ -6,10 +6,13 @@ database_dsn: 'pgsql:'
 # allowed modules not displayed in navigation
 modules_hidden:
  - home
- - user
 
 # allowed modules displayed in navigation
 modules_nav: []
+
+# allowed modules displayed under user settings
+modules_settings:
+ - user
 
 # available locales
 # first entry is the default

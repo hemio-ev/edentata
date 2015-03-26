@@ -27,7 +27,7 @@ $request = new Request($_GET, Utils::getPost());
 $config = Config::load('edentata.config.yaml');
 
 $modulesNavi    = $config['modules_nav'];
-$modulesAllowed = array_merge($config['modules_nav'], $config['modules_hidden']);
+$modulesAllowed = $config->getAllowedModules();
 
 I10n::$supportedLocales = $config['locales'];
 

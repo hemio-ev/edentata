@@ -67,4 +67,17 @@ class Config implements \ArrayAccess
     {
         throw new \Exception('Configs cannot be changed');
     }
+
+    /**
+     *
+     * @return array
+     */
+    public function getAllowedModules()
+    {
+        return array_merge(
+            $this['modules_nav']
+            , $this['modules_hidden']
+            , $this['modules_settings']
+        );
+    }
 }
