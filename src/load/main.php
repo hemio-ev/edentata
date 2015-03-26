@@ -22,9 +22,10 @@ use hemio\html;
 use hemio\form;
 
 # external data
-$request = new Request($_GET, Utils::getPost());
-
 $config = Config::load('edentata.config.yaml');
+
+$request = new Request($_GET, Utils::getPost(), $_SERVER['REQUEST_URI'],
+                       $config['base_url']);
 
 $modulesNavi    = $config['modules_nav'];
 $modulesAllowed = $config->getAllowedModules();
@@ -122,7 +123,7 @@ try {
     $header->addChild($span);
 
     $header[] = new gui\Link(
-        (new Request())->deriveModule('user')
+        $request->deriveModule('user')
         , _('User Settings')
     );
 
@@ -165,7 +166,7 @@ try {
 
 
     # navi
-    $nav = (new ContentNav($modulesNavi, $i10n))->getNav();
+    $nav = (new ContentNav($modulesNavi, $i10n))->getNav($request);
     while ($nav->unhandledEvents()) {
         try {
             $nav->handleEvent();

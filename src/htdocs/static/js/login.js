@@ -55,7 +55,7 @@ document.addEventListener(
 function runHttpAuth() {
     var username = elementUsername().value;
     var password = elementPassword().value;
-    httpAuth("/?auth=http", username, password);
+    httpAuth("?auth=http", username, password);
 }
 
 function httpAuth(url, username, password) {

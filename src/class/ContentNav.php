@@ -49,7 +49,7 @@ class ContentNav
      *
      * @return ContentEvents
      */
-    public function getNav()
+    public function getNav(Request $request)
     {
         $nav = new html\Nav();
         $nav
@@ -71,7 +71,7 @@ class ContentNav
                 $this->i10n->setDomainMain();
 
                 $a   = new html\A();
-                $url = (new Request($_GET))->deriveModule($moduleId)->getUrl();
+                $url = $request->deriveModule($moduleId)->getUrl();
                 $a->setAttribute('href', $url);
                 $a->addChild($str);
                 $ul->addLine($a);

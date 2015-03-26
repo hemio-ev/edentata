@@ -21,10 +21,15 @@ namespace hemio\edentata;
 /**
  * Description of Request
  *
+ * @todo Get rid of the worst code in this project
  * @author Michael Herold <quabla@hemio.de>
  */
 class Request
 {
+    const SPECIAL_GET_KEYS = ['role', 'module', 'action', 'subject', 'item'];
+
+    public $role = '';
+
     /**
      *
      * @var string
@@ -61,11 +66,30 @@ class Request
      */
     public $post = [];
 
-    public function __construct(array $get = [], array $post = [])
+    public function __construct(array $get = [], array $post = [], $uri = null,
+                                $baseUrl = '/')
     {
         $this->get  = $get;
         $this->post = $post;
 
+        if ($uri !== null) {
+            $i = 0;
+            $s = self::SPECIAL_GET_KEYS;
+
+            $uriSplit = explode('/', $uri);
+            array_pop($uriSplit);
+
+            $count = count(explode('/', $baseUrl)) - 1;
+
+            $special = array_slice($uriSplit, $count);
+
+            foreach ($special as $val)
+                $this->get[$s[$i++]] = $val;
+        }
+
+        $this->role    = self::filter('role', $this->get('role'));
+        if (!$this->role)
+            $this->role    = 'service';
         $this->module  = self::filter('module', $this->get('module'));
         $this->action  = self::filter('action', $this->get('action'));
         $this->subject = self::filter('subject', $this->get('subject'));
@@ -87,7 +111,13 @@ class Request
         if (array_key_exists($key, $this->get))
             return $this->get[$key];
         else
-            return '';
+            return null;
+    }
+
+    public function getGet()
+    {
+        $specialKeys = array_flip(self::SPECIAL_GET_KEYS);
+        return array_diff_key($this->get, $specialKeys);
     }
 
     protected function deriveArray($action = null, $subject = null, $item = null)
@@ -100,6 +130,7 @@ class Request
             if (isset($this->get[$key]))
                 $get[$key] = $this->get[$key];
 
+        $get['role']   = $this->role;
         $get['module'] = $this->module;
 
         if ($action === true)
@@ -136,13 +167,39 @@ class Request
         return $request;
     }
 
+    /**
+     *
+     * @return string
+     */
+    public function getPathname()
+    {
+        $activeSpecialKeys       = [];
+        foreach (self::SPECIAL_GET_KEYS as $key)
+            if ($this->get($key) !== null)
+                $activeSpecialKeys[$key] = $this->get($key);
+
+        $path = join('/', $activeSpecialKeys);
+
+        if ($path)
+            $path.='/';
+
+        return $path;
+    }
+
     public function getUrl()
     {
+        $specialKeys = array_flip(self::SPECIAL_GET_KEYS);
+
+
         $exprs   = [];
-        foreach ($this->get as $key => $value)
+        foreach (array_diff_key($this->get, $specialKeys) as $key => $value)
             if ($value !== null)
                 $exprs[] = $key.'='.$value;
 
-        return '?'.implode('&', $exprs);
+        $search = '?'.implode('&', $exprs);
+        if ($search === '?')
+            $search = '';
+
+        return $this->getPathname().$search;
     }
 }

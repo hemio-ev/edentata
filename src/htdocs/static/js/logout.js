@@ -26,7 +26,7 @@ document.addEventListener(
         function () {
             console.log("Event: Document loaded");
             elementWindowLogin().setAttribute("data-js-hidden", "data-js-hidden");
-            httpLogout('/?auth=http_logout');
+            httpLogout('?auth=http_logout');
         }
 );
 

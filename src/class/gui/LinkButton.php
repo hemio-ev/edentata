@@ -32,10 +32,11 @@ class LinkButton extends form\Container
     public function __construct(\hemio\edentata\Request $url, $text)
     {
         $this['form'] = new html\Form();
+        $this['form']->setAttribute('action', $url->getPathname());
 
         $this['form']->addCssClass('link_form');
 
-        foreach ($url->get as $key => $value) {
+        foreach ($url->getGet() as $key => $value) {
             $input = new html\Input('hidden');
             $input->setAttribute('name', $key);
             $input->setAttribute('value', $value);

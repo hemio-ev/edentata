@@ -13,3 +13,16 @@ Debian packages
 - php5-pgsql
 - cracklib-runtime
 - php5 (>= 5.6)
+
+# Apache2 configuration
+
+> AliasMatch ^<base url>(?!static).*/(.*)$ /usr/share/edentata/src/htdocs/index.php
+> Alias <base url>/static/ /usr/share/edentata/src/htdocs/static/
+
+Where the edentata *base_url* option is set to *<base url>*
+
+Example:
+
+> AliasMatch ^/edentata/(?!static).*/(.*)$ /usr/share/edentata/src/htdocs/index.php
+> Alias /edentata/static/ /usr/share/edentata/src/htdocs/static/
+

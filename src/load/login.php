@@ -24,11 +24,11 @@ use hemio\html;
 $document = new form\Document(new html\String(_('Edentata Login')));
 
 $document->getHtml()->getHead()->setBaseUrl($config['base_url']);
-$document->getHtml()->getHead()->addJsFile('/static/js/login.js');
+$document->getHtml()->getHead()->addJsFile('static/js/login.js');
 if ($authMethod === 'logout')
-    $document->getHtml()->getHead()->addJsFile('/static/js/logout.js');
+    $document->getHtml()->getHead()->addJsFile('static/js/logout.js');
 
-$document->getHtml()->getHead()->addCssFile('/static/design/style.css');
+$document->getHtml()->getHead()->addCssFile('static/design/style.css');
 
 $pdo = new sql\Connection($config['database_dsn']);
 
@@ -36,7 +36,9 @@ $loadedModule = new LoadModule('login_http', $pdo);
 $i10n->setDomainModule($loadedModule);
 
 $document->getHtml()->getBody()->addChild(
-    $loadedModule->getContent(new Request($_GET))
+    $loadedModule->getContent(new Request($_GET, Utils::getPost(),
+                                          $_SERVER['REQUEST_URI'],
+                                          $config['base_url']))
 );
 
 echo $document->__toString();
