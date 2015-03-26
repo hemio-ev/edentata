@@ -1,0 +1,22 @@
+# database connection string
+# the required format after psql: is the one of "Keyword/Value Connection Strings"
+# see <http://www.postgresql.org/docs/current/static/libpq-connect.html>
+database_dsn: 'pgsql:'
+
+# allowed modules not displayed in navigation
+modules_hidden:
+ - home
+ - user
+
+# allowed modules displayed in navigation
+modules_nav: []
+
+# available locales
+# first entry is the default
+locales:
+ - 'en_US.utf-8'
+ - 'de_DE.utf-8'
+
+# base URL: can be relative or absolute
+base_url: '/'
+
