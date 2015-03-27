@@ -23,7 +23,7 @@ use hemio\edentata\exception;
 use hemio\edentata;
 
 /**
- * Description of ModuleDns
+ * DNS, Domain and Handle module.
  *
  * @author Michael Herold <quabla@hemio.de>
  */

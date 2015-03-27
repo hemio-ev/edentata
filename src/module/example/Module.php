@@ -16,31 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\login_http;
+namespace hemio\edentata\module\example;
+
+use hemio\edentata\gui;
 
 /**
- * System Module for HTTP auth. At the moment hard wired in Edentata core!
- * No need to enable this module in the config.
+ * Example module without funcionality
  *
  * @author Michael Herold <quabla@hemio.de>
  */
 class Module extends \hemio\edentata\Module
 {
-    /**
-     *
-     * @var Db
-     */
-    public $db;
-
-    protected function constructHook()
-    {
-        $this->db = new Db($this->pdo);
-    }
-
-    public function getContent()
-    {
-        return (new Login($this))->content();
-    }
 
     public static function getDir()
     {
@@ -49,6 +35,21 @@ class Module extends \hemio\edentata\Module
 
     public static function getName()
     {
-        return _('Login');
+        return _('Example');
+    }
+
+    protected function constructHook()
+    {
+
+    }
+
+    public function getContent()
+    {
+        $window = new gui\Window(_('Example Module'));
+
+        $window->addChild(new gui\Hint(
+            _('Simple example module without functionality.')));
+
+        return $window;
     }
 }

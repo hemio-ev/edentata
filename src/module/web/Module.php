@@ -23,7 +23,7 @@ use hemio\edentata;
 use hemio\edentata\exception\UnknownOperation;
 
 /**
- * Description of ModuleUnixuser
+ * Web Module
  *
  * @author Michael Herold <quabla@hemio.de>
  */

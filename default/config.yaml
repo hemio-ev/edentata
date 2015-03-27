@@ -8,7 +8,8 @@ modules_hidden:
  - home
 
 # allowed modules displayed in navigation
-modules_nav: []
+modules_nav:
+ - example
 
 # allowed modules displayed under user settings
 modules_settings:

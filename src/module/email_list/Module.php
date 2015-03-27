@@ -23,7 +23,7 @@ use hemio\edentata\exception;
 use hemio\edentata\exception\UnknownOperation;
 
 /**
- * Description of ModuleEmail_list
+ * Email List module
  *
  * @author Michael Herold <quabla@hemio.de>
  */

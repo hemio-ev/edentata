@@ -70,7 +70,6 @@ set_exception_handler(
         ), $id
     );
 
-
     throw $e;
 }
 );

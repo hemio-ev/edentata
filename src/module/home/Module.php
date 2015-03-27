@@ -21,7 +21,7 @@ namespace hemio\edentata\module\home;
 use hemio\edentata\gui;
 
 /**
- * Description of ModuleJabber
+ * Home module. Shows only a welcome message right now.
  *
  * @author Michael Herold <quabla@hemio.de>
  */

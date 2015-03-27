@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -24,23 +23,25 @@ use hemio\edentata;
 use hemio\edentata\exception\UnknownOperation;
 
 /**
- * Description of ModuleUnixuser
+ * Server Access module.
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Module extends \hemio\edentata\Module {
-
+class Module extends \hemio\edentata\Module
+{
     /**
      *
      * @var Db
      */
     public $db;
 
-    protected function constructHook() {
+    protected function constructHook()
+    {
         $this->db = new Db($this->pdo);
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         switch ($this->request->action) {
             case '':
                 $content = (new Overview($this))->content();
@@ -56,18 +57,21 @@ class Module extends \hemio\edentata\Module {
 
             case 'delete':
                 try {
-                    $content = (new UserDelete($this))->content($this->request->subject, $this->request->item);
+                    $content = (new UserDelete($this))->content($this->request->subject,
+                                                                $this->request->item);
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($this->request->derive());
                 }
                 break;
 
             case 'details':
-                $content = (new UserDetails($this))->content($this->request->subject, $this->request->item);
+                $content = (new UserDetails($this))->content($this->request->subject,
+                                                             $this->request->item);
                 break;
 
             case 'password':
-                $content = (new UserPassword($this))->content($this->request->subject, $this->request->item);
+                $content = (new UserPassword($this))->content($this->request->subject,
+                                                              $this->request->item);
                 break;
 
             case 'service':
@@ -81,12 +85,13 @@ class Module extends \hemio\edentata\Module {
         return $content;
     }
 
-    public static function getDir() {
+    public static function getDir()
+    {
         return __DIR__;
     }
 
-    public static function getName() {
+    public static function getName()
+    {
         return _('Server Access');
     }
-
 }
