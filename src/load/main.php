@@ -41,15 +41,45 @@ set_error_handler(
         ), $id
     );
 
-    trigger_error(sprintf('Made non fatal error fatal. (%s:%s %s)', $errfile,
-                          $errline, $errstr), E_USER_ERROR);
+    trigger_error(
+        sprintf(
+            'Made non fatal error fatal. (%s:%s %s)'
+            , $errfile
+            , $errline
+            , $errstr
+        ), E_USER_ERROR
+    );
 
-    return true;
+    exit(1);
+}
+);
+
+set_exception_handler(
+    function (\Exception $e) {
+    $id = uniqid();
+
+    syslog(LOG_ERR, sprintf('PHP exception[%s] class: %s', $id, get_class($e)));
+    syslog(LOG_ERR,
+           sprintf('PHP exception[%s] message: %s', $id, $e->getMessage()));
+
+    echo sprintf(
+        _(
+            'An error has occured. We are sorry. '
+            .'You should contact the support and reference to error id "%s". '
+            .'You can use the back button of your browser and try again.'
+        ), $id
+    );
+
+
+    throw $e;
 }
 );
 
 # external data
-$config = Config::load('edentata.config.yaml');
+if (isset($_SERVER['EDENTATA_CONFIG_FILE']))
+    $config = Config::load($_SERVER['EDENTATA_CONFIG_FILE']);
+else
+    $config = Config::load('/etc/edentata/config.yaml');
 
 $loader->addPsr4('hemio\\edentata\\module\\', $config['module_load_dirs']);
 
