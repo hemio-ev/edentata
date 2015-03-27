@@ -21,6 +21,33 @@ namespace hemio\edentata;
 use hemio\html;
 use hemio\form;
 
+openlog('edentata', LOG_ODELAY, LOG_USER);
+ini_set('log_errors', true);
+ini_set('error_log', 'syslog');
+
+set_error_handler(
+    function ($errno, $errstr, $errfile, $errline, array $errcontext) {
+    $id = uniqid();
+    syslog(LOG_ERR, sprintf('PHP error[%s] message: %s', $id, $errstr));
+    syslog(LOG_ERR,
+           sprintf('PHP error[%s] details: (%s) %s:%s', $id, $errno, $errfile,
+                   $errline));
+
+    echo sprintf(
+        _(
+            'An error has occured. We are sorry. '
+            .'You should contact the support and reference to error id "%s". '
+            .'You can use the back button of your browser and try again.'
+        ), $id
+    );
+
+    trigger_error(sprintf('Made non fatal error fatal. (%s:%s %s)', $errfile,
+                          $errline, $errstr), E_USER_ERROR);
+
+    return true;
+}
+);
+
 # external data
 $config = Config::load('edentata.config.yaml');
 
@@ -39,7 +66,7 @@ if (!$activeModuleName)
     $activeModuleName = 'home';
 
 try {
-    # doc
+# doc
     $title = new html\String('Edentata');
     $doc   = new form\Document($title);
     $doc->getHtml()->getHead()->addCssFile('static/design/style.css');
@@ -63,7 +90,7 @@ try {
     $mainContent->setId('main_content');
     $mainContent['messages']      = new \hemio\form\Container;
 
-    # db connect
+# db connect
     $pdo = new sql\Connection($config['database_dsn']);
 
     $pdo->addExceptionMapper(
@@ -74,7 +101,7 @@ try {
     $authMethod       = isset($_GET['auth']) ? $_GET['auth'] : null;
     $httpAuthSupplied = isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']);
 
-    # db auth
+# db auth
     if ($authMethod === 'http_logout') {
         header('WWW-Authenticate: Basic realm="Edentata"');
         header('HTTP/1.1 401 Unauthorized');
@@ -165,7 +192,7 @@ try {
         $userModule->db->actAsDeputy($request->get('deputy'));
 
 
-    # navi
+# navi
     $nav = (new ContentNav($modulesNavi, $i10n))->getNav($request);
     while ($nav->unhandledEvents()) {
         try {
@@ -176,7 +203,7 @@ try {
     }
     $mainNav[] = $nav->getContent();
 
-    # module
+# module
     if (!in_array($activeModuleName, $modulesAllowed))
         throw new exception\Error(_('Tried to access unknown or disabled module'));
 
@@ -185,7 +212,7 @@ try {
 
     $title->setValue(sprintf(_('Edentata – %s'), $loadedModule->getName()));
 
-    # generate content
+# generate content
     $content = $loadedModule->getContent($request);
     $mainContent->addChild($content);
 } catch (\PDOException $e) {
