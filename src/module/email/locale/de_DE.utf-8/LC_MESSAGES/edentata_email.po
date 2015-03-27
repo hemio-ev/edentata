@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata email\n"
-"POT-Creation-Date: 2015-02-19 15:48+0100\n"
-"PO-Revision-Date: 2015-03-25 01:07+0100\n"
+"POT-Creation-Date: 2015-03-27 14:11+0100\n"
+"PO-Revision-Date: 2015-03-27 14:11+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -14,56 +14,60 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: AddressCreate.php:32
+#: AddressCreate.php:33
 msgid "Create Email Address"
 msgstr "E-Mail-Adresse Erstellen"
 
-#: AddressCreate.php:34
+#: AddressCreate.php:35
 msgid "Delivery for new Address"
-msgstr ""
+msgstr "Auslieferung für neue Adresse"
 
-#: AddressCreate.php:37
+#: AddressCreate.php:38
 msgid "Create new mailbox for incoming emails"
 msgstr "Neues Postfach für eingegende E-Mails erstellen"
 
-#: AddressCreate.php:41
+#: AddressCreate.php:42
 msgid "Deliver emails to existing mailbox (alias)"
-msgstr ""
+msgstr "E-Mails an bestehendes Postfach ausliefern (Alias)"
 
-#: AddressCreate.php:45
+#: AddressCreate.php:46
 msgid "Deliver emails to external mailbox (redirection)"
-msgstr ""
+msgstr "E-Mails an externes Postfach ausliefern (Umleitung)"
 
-#: AliasCreate.php:36
+#: AliasCreate.php:37
 msgid "Create Email Alias"
 msgstr "E-Mail Alias Erstellen"
 
-#: AliasCreate.php:38 MailboxCreate.php:38 RedirectionCreate.php:36
+#: AliasCreate.php:39 MailboxCreate.php:38 RedirectionCreate.php:37
 msgid "Create"
 msgstr "Erstellen"
 
-#: AliasCreate.php:41 MailboxCreate.php:41
+#: AliasCreate.php:42 MailboxCreate.php:41
 msgid "New Email Address"
 msgstr "Neues E-Mail-Adresse"
 
-#: AliasCreate.php:44
+#: AliasCreate.php:45
 msgid "Deliver emails to"
 msgstr "E-Mail ausliefern an"
 
-#: AliasCreate.php:45
+#: AliasCreate.php:46
 msgid "Mailbox"
 msgstr "Postfach"
 
-#: AliasDelete.php:33
+#: AliasDelete.php:34
 #, php-format
 msgid ""
 "Do you really want to delete the alias \"%1$s\"? After deleting the alias "
 "you will no longer be reachable via \"%1$s\"."
 msgstr ""
 
-#: AliasDelete.php:39 AliasDelete.php:42
+#: AliasDelete.php:40 AliasDelete.php:43
 msgid "Delete Alias"
 msgstr "Alias Löschen"
+
+#: DbExceptionMapping.php:34
+msgid "The chosen email address is already in use."
+msgstr "Die gewählte E-Mail-Adresse wird bereits verwendet."
 
 #: MailboxCreate.php:44
 msgid "Password"
@@ -81,15 +85,15 @@ msgstr ""
 msgid "Delete Mailbox"
 msgstr "Postfach Löschen"
 
-#: MailboxDetails.php:37
+#: MailboxDetails.php:36
 msgid "Email Mailbox"
 msgstr "E-Mail Postfach"
 
-#: MailboxDetails.php:58 Overview.php:119
+#: MailboxDetails.php:57 Overview.php:111
 msgid "Delete"
 msgstr "Löschen"
 
-#: MailboxDetails.php:71
+#: MailboxDetails.php:70
 msgid "Aliases"
 msgstr ""
 
@@ -115,9 +119,9 @@ msgstr "Passwort Ändern"
 
 #: MailboxPassword.php:59
 msgid "The password of your mailbox has been changed successfully."
-msgstr ""
+msgstr "Das Passwort für das Postfach wurde erfolgreich geändert."
 
-#: ModuleEmail.php:34 Overview.php:35
+#: Module.php:35 Overview.php:35
 msgid "Email"
 msgstr "E-Mail"
 
@@ -125,35 +129,35 @@ msgstr "E-Mail"
 msgid "New Address"
 msgstr "Neue Adresse"
 
-#: Overview.php:59
+#: Overview.php:58
 msgid "You do not own any email addresses yet."
-msgstr ""
+msgstr "Sie besitzen bisher keine E-Mail-Adressen."
 
-#: Overview.php:63
+#: Overview.php:59
 msgid "Start by creating a new one."
 msgstr ""
 
-#: Overview.php:78
+#: Overview.php:70
 msgid "Mailboxes"
 msgstr "Postfächer"
 
-#: Overview.php:112
+#: Overview.php:104
 msgid "Redirections"
 msgstr "Umleitungen"
 
-#: RedirectionCreate.php:35
+#: RedirectionCreate.php:36
 msgid "New Redirection"
 msgstr "Neue Umleitung"
 
-#: RedirectionCreate.php:39
+#: RedirectionCreate.php:40
 msgid "Redirection from"
 msgstr "Umleitung von"
 
-#: RedirectionCreate.php:42
+#: RedirectionCreate.php:43
 msgid "Redirection to"
 msgstr "Umleitung nach"
 
-#: RedirectionCreate.php:43
+#: RedirectionCreate.php:44
 msgid "Email Address"
 msgstr "E-Mail-Adresse"
 
