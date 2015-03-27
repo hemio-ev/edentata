@@ -89,6 +89,10 @@ ul.listbox li:last-child {
     background-color: lighten($button-color, 7.5%);
 }
 
+.listbox .selected {
+    background-color: lighten($button-suggested-color, 20%);
+}
+
 .listbox .listbox_entry > a {
     @extend .listbox_link;
 }

@@ -18,6 +18,6 @@
 
 chdir(__DIR__.'/../../');
 
-require_once 'vendor/autoload.php';
+$loader = require_once 'vendor/autoload.php';
 
 require 'src/load/main.php';

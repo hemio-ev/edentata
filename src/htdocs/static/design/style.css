@@ -1469,6 +1469,9 @@ ul.listbox li:last-child, ul.selectbox li:last-child {
 .listbox_link:hover, .listbox .listbox_entry > a:hover, .selectbox .listbox_entry > a:hover, ul.listbox > li > a:hover, ul.selectbox > li > a:hover, .selectbox p:not(.options) > a:hover, .selectbox label:hover {
   background-color: #f3f3f3; }
 
+.listbox .selected, .selectbox .selected {
+  background-color: #8ab7e7; }
+
 .listbox ul, .selectbox ul {
   font-size: 0.9em;
   padding-left: 2em;

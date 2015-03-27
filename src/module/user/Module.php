@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,22 +27,24 @@ use hemio\edentata\exception\UnknownOperation;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Module extends \hemio\edentata\Module {
-
+class Module extends \hemio\edentata\Module
+{
     /**
      *
      * @var Db
      */
     public $db;
 
-    protected function constructHook() {
+    protected function constructHook()
+    {
         $this->db = new Db($this->pdo);
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         switch ($this->request->action) {
             case '':
-                $content = (new Overview($this))->content();
+                $content = (new Password($this))->content();
                 break;
 
             case 'password':
@@ -57,12 +58,13 @@ class Module extends \hemio\edentata\Module {
         return $content;
     }
 
-    public static function getDir() {
+    public static function getDir()
+    {
         return __DIR__;
     }
 
-    public static function getName() {
-        return _('User Settings');
+    public static function getName()
+    {
+        return _('Change Login Password');
     }
-
 }

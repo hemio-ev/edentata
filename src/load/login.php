@@ -36,9 +36,14 @@ $loadedModule = new LoadModule('login_http', $pdo);
 $i10n->setDomainModule($loadedModule);
 
 $document->getHtml()->getBody()->addChild(
-    $loadedModule->getContent(new Request($_GET, Utils::getPost(),
-                                          $_SERVER['REQUEST_URI'],
-                                          $config['base_url']))
+    $loadedModule->getContent(
+        new Request(
+        $_GET
+        , Utils::getPost(), $_SERVER['REQUEST_URI']
+        , $config['base_url']
+        )
+        , $i10n
+    )
 );
 
 echo $document->__toString();

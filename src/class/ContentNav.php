@@ -66,14 +66,15 @@ class ContentNav
         foreach ($this->modules as $moduleId) {
             try {
                 $module = new LoadModule($moduleId);
+                $url    = $request->deriveRole('service')->deriveModule($moduleId);
+
                 $this->i10n->setDomainModule($module);
-                $str    = new html\String($module->getName());
+                $a = new gui\Link($url, $module->getName());
                 $this->i10n->setDomainMain();
 
-                $a   = new html\A();
-                $url = $request->deriveRole('service')->deriveModule($moduleId)->getUrl();
-                $a->setAttribute('href', $url);
-                $a->addChild($str);
+                if ($request->module === $moduleId)
+                    $a->addCssClass('selected');
+
                 $ul->addLine($a);
             } catch (exception\Event $event) {
                 $contentEvents->addEvent($event);

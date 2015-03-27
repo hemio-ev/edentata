@@ -51,6 +51,8 @@ set_error_handler(
 # external data
 $config = Config::load('edentata.config.yaml');
 
+$loader->addPsr4('hemio\\edentata\\module\\', $config['module_load_dirs']);
+
 $request = new Request($_GET, Utils::getPost(), $_SERVER['REQUEST_URI'],
                        $config['base_url']);
 
@@ -216,10 +218,13 @@ try {
         foreach ($config['modules_settings'] as $moduleId) {
             $loadedModule = new LoadModule($moduleId, $pdo);
 
-            $list->addLinkEntry(
+            $a = $list->addLinkEntry(
                 $request->deriveModule($moduleId)
                 , new html\String($loadedModule->getName())
             );
+
+            if ($moduleId === $request->module)
+                $a->addCssClass('selected');
         }
 
         $loadedModule = new LoadModule($activeModuleName, $pdo);

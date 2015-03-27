@@ -36,6 +36,7 @@ class Password extends Window
             , _('User Password')
             , null
             , _('Change')
+            , false
         );
 
         $password = new gui\FieldNewPassword('password');
