@@ -124,8 +124,10 @@ class LoadModule
         return new $moduleClass($request, $this->pdo);
     }
 
-    public function getContent(Request $request)
+    public function getContent(Request $request, I10n $i10n)
     {
+        $i10n->setDomainModule($this);
+
         $module  = $this->getInstance($request);
         $content = $module->getContent();
 

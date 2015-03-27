@@ -105,7 +105,7 @@ try {
     if ($authMethod === 'http_logout') {
         header('WWW-Authenticate: Basic realm="Edentata"');
         header('HTTP/1.1 401 Unauthorized');
-        throw new exception\Error(_('Login failed'));
+        throw new exception\Successful(_('Logout successfull'));
     }
 
     if ($authMethod === 'logout') {
@@ -150,7 +150,7 @@ try {
     $header->addChild($span);
 
     $header[] = new gui\Link(
-        $request->deriveModule('user')
+        $request->deriveRole('settings')->deriveModule($config['modules_settings'][0])
         , _('User Settings')
     );
 
@@ -203,18 +203,41 @@ try {
     }
     $mainNav[] = $nav->getContent();
 
-# module
-    if (!in_array($activeModuleName, $modulesAllowed))
-        throw new exception\Error(_('Tried to access unknown or disabled module'));
+# modules
+    if ($request->role === 'settings') {
+        $title->setValue(_('Edentata – Settings'));
 
-    $loadedModule = new LoadModule($activeModuleName, $pdo);
-    $i10n->setDomainModule($loadedModule);
+        $nav   = new gui\Window(_('Settings'));
+        $list  = new gui\Listbox();
+        $nav[] = $list;
+        if (count($config['modules_settings']) > 1)
+            $mainContent->addChild($nav);
 
-    $title->setValue(sprintf(_('Edentata – %s'), $loadedModule->getName()));
+        foreach ($config['modules_settings'] as $moduleId) {
+            $loadedModule = new LoadModule($moduleId, $pdo);
+
+            $list->addLinkEntry(
+                $request->deriveModule($moduleId)
+                , new html\String($loadedModule->getName())
+            );
+        }
+
+        $loadedModule = new LoadModule($activeModuleName, $pdo);
+
+        $content = $loadedModule->getContent($request, $i10n);
+        $mainContent->addChild($content);
+    } else {
+        if (!in_array($activeModuleName, $modulesAllowed))
+            throw new exception\Error(_('Tried to access unknown or disabled module'));
+
+        $loadedModule = new LoadModule($activeModuleName, $pdo);
+
+        $title->setValue(sprintf(_('Edentata – %s'), $loadedModule->getName()));
 
 # generate content
-    $content = $loadedModule->getContent($request);
-    $mainContent->addChild($content);
+        $content = $loadedModule->getContent($request, $i10n);
+        $mainContent->addChild($content);
+    }
 } catch (\PDOException $e) {
     $mainContent['messages']
         ->addChild(new gui\Message(new exception\Error('*DB operation failed* '.$e->getMessage())));

@@ -71,7 +71,7 @@ class ContentNav
                 $this->i10n->setDomainMain();
 
                 $a   = new html\A();
-                $url = $request->deriveModule($moduleId)->getUrl();
+                $url = $request->deriveRole('service')->deriveModule($moduleId)->getUrl();
                 $a->setAttribute('href', $url);
                 $a->addChild($str);
                 $ul->addLine($a);

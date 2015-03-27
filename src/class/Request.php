@@ -167,6 +167,15 @@ class Request
         return $request;
     }
 
+    public function deriveRole($role)
+    {
+        $request              = $this->deriveModule(null);
+        $request->get['role'] = $role;
+        $request->role        = $role;
+
+        return $request;
+    }
+
     /**
      *
      * @return string
