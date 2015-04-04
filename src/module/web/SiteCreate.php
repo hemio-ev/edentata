@@ -112,7 +112,6 @@ class SiteCreate extends Window
 
         $hint = new gui\Hint(_('The certificate identifier helps you to mange your certificates. It can be chosen arbitrarily.'));
 
-
         $https = new html\Div();
 
         $window->getForm()->addChild($domain);
