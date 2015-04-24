@@ -39,6 +39,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     background-image: url('error.svg');
 }
 
+.message.warning {
+    background-image: url('warning.svg');
+}
+
 .message[role="alert"] h2 {
     color: $button-delete-color;
 }

@@ -239,7 +239,7 @@ try {
         $title->setValue(_('Edentata – Settings'));
 
         $nav   = new gui\Window(_('Settings'));
-        $list  = new gui\Listbox();
+        $list  = new gui\Sidebar();
         $nav[] = $list;
         if (count($config['modules_settings']) > 1)
             $mainContent->addChild($nav);

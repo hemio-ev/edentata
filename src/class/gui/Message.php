@@ -35,9 +35,11 @@ class Message extends form\Container
         $this['article'] = new html\Article;
         $this['article']->addCssClass('message');
 
-        if ($event instanceof exception\Error) {
+        if ($event instanceof exception\Error)
             $this['article']->setAttribute('role', 'alert');
-        }
+
+        if ($event instanceof exception\Warning)
+            $this['article']->addCssClass('warning');
 
         $this['article']['h2']   = new html\H2();
         $this['article']['h2'][] = new html\String($event::title());
@@ -50,10 +52,10 @@ class Message extends form\Container
         else
             $backUrl = new \hemio\edentata\Request();
 
-        $button                                    = new LinkButton($backUrl,
-                                                                    _('OK'));
+        $button = new LinkButton($backUrl, _('OK'));
         $button->getButton()->setAttribute('autofocus', true);
         $button->setSuggested();
+
         $this['article']['button_group']           = new ButtonGroup();
         $this['article']['button_group']['button'] = $button;
     }

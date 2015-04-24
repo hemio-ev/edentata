@@ -32,6 +32,9 @@ $select-focus-color: rgb(255, 255, 255);
 $header-color: $article-color;
 $header-border-color: rgb(217,217,217);
 
+$sidebar-selected-color: #4A90D9;
+$sidebar-hover-color: #F4F4F4;
+
 $outer-color: #333;
 
 $list-entry-height: 3.5em;
@@ -46,6 +49,7 @@ $list-entry-height: 3.5em;
 @import "gui/_message.scss";
 @import "gui/_statuslist.scss";
 @import "gui/_pack.scss";
+@import "gui/_sidebar.scss";
 
 @import "gui/_pre.scss";
 

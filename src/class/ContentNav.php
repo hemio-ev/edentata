@@ -59,9 +59,8 @@ class ContentNav
 
         $contentEvents = new ContentEvents($nav);
 
-        $ul = new html\Ul();
+        $ul = new gui\Sidebar();
         $nav->addChild($ul);
-        $ul->addCssClass('listbox');
 
         foreach ($this->modules as $moduleId) {
             try {

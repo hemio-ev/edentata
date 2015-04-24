@@ -84,7 +84,7 @@ label {
     background-color: lighten($control-color, 12.5%);
     background: linear-gradient(
         $control-color 0%, 
-        lighten($control-color, 12.5%) 10%,
+        lighten($control-color, 12.5%) 0.25em,
         lighten($control-color, 30%) 100%
         );
 
