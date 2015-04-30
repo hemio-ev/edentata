@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -19,30 +18,40 @@
 
 namespace hemio\edentata\module\jabber;
 
+use hemio\edentata\gui;
+use hemio\edentata\exception;
+
 /**
  * Description of AccountDetails
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class AccountDetails extends Window {
+class AccountDetails extends Window
+{
 
-    public function content($account) {
+    public function content($account)
+    {
         $window = $this->newWindow(_('Jabber Account'), $account);
 
-        $selecting = new \hemio\edentata\gui\Selecting(_('Possible Actions'));
-        
-        $selecting->addLink(
-                $this->request->derive('password', $account)
-                , _('Change password')
-        );
-        
-        $selecting->addLink($this->request->derive('delete', $account)
-                , _('Delete account')
+        $details = $this->db->accountSelectSingle($account)->fetch();
+        if (!$details)
+            throw new exception\Error('Jabber Account does not exist');
+
+        $window[] = new gui\OutputStatus($details);
+        $window[] = new gui\Output(_('Account'), $account);
+
+        $menu = $window->addHeaderbarMenu();
+
+        $menu->addEntry(
+            $this->request->derive('password', $account)
+            , _('Change password')
         );
 
-        $window->addChild($selecting);
+        $menu->addEntry(
+            $this->request->derive('delete', $account)
+            , _('Delete account')
+        );
 
         return $window;
     }
-
 }

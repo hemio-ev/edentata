@@ -19,6 +19,7 @@
 namespace hemio\edentata\module\server_access;
 
 use hemio\edentata\gui;
+use hemio\form;
 
 /**
  * Description of UserDetails
@@ -34,33 +35,54 @@ class UserDetails extends Window
 
         $userData = $this->db->userSelectSingle($user, $serviceName)->fetch();
 
-        if ($userData === false)
-            throw new \hemio\edentata\exception\Error('User not found.');
+        if (!$userData)
+            throw new \hemio\edentata\exception\Error('Server access not found.');
 
+        $menu = $window->addHeaderbarMenu();
+
+        $menu->addEntry(
+            $this->request->derive('password', $user, $serviceName)
+            , _('Change password authentication')
+        );
+
+        $menu->addEntry(
+            $this->request->derive('delete', $user, $serviceName)
+            , _('Delete server access')
+        );
+
+        $window->addChild($this->basics($userData));
         $window->addChild($this->details($userData));
-        $window->addChild($this->actions($user, $serviceName));
 
         return $window;
     }
 
+    protected function basics($userData)
+    {
+        $container = new form\Container();
+
+        $container->addChild(new gui\OutputStatus($userData));
+
+        $container->addChild(
+            new gui\Output(_('User'), $userData['user'])
+        );
+
+        $container->addChild(
+            new gui\Output(_('Host'), $userData['service_name'])
+        );
+
+        return $container;
+    }
+
     protected function details($userData)
     {
-        if ($userData['password_login'] === null)
-            $status = _('Disabled');
-        else
+        if ($userData['password_login'])
             $status = _('Enabled');
+        else
+            $status = _('Disabled');
 
         $proto = Utils::serviceToProto($userData['service']);
 
         $fieldset = new gui\Fieldset(_('Details'));
-
-        $fieldset->addChild(
-            new gui\Output(_('User'), $userData['user'])
-        );
-
-        $fieldset->addChild(
-            new gui\Output(_('Host'), $userData['service_name'])
-        );
 
         $fieldset->addChild(
             new gui\Output(_('Communication Protocol'), strtoupper($proto))
@@ -82,27 +104,6 @@ class UserDetails extends Window
             )
             )
         );
-
-        return $fieldset;
-    }
-
-    protected function actions($user, $serviceName)
-    {
-        $fieldset = new gui\Fieldset(_('Possible Actions'));
-
-        $selecting = new gui\Selecting();
-
-        $selecting->addLink(
-            $this->request->derive('password', $user, $serviceName)
-            , _('Change password authentication')
-        );
-
-        $selecting->addLink(
-            $this->request->derive('delete', $user, $serviceName)
-            , _('Delete user')
-        );
-
-        $fieldset->addChild($selecting);
 
         return $fieldset;
     }

@@ -44,6 +44,14 @@ class Overview extends Window
 
         $listbox = new gui\Listbox();
         $sites   = $this->db->siteSelect()->fetchAll();
+
+        if (empty($sites)) {
+            $window->addChild(new gui\Hint(
+                _('You do not own a website.')
+            ));
+            return $window;
+        }
+
         foreach ($sites as $site) {
             $container = new form\Container();
 

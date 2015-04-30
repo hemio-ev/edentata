@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata email\n"
-"POT-Creation-Date: 2015-03-27 14:11+0100\n"
-"PO-Revision-Date: 2015-03-27 14:11+0100\n"
+"POT-Creation-Date: 2015-04-28 00:51+0100\n"
+"PO-Revision-Date: 2015-04-28 00:51+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -89,7 +89,7 @@ msgstr "Postfach Löschen"
 msgid "Email Mailbox"
 msgstr "E-Mail Postfach"
 
-#: MailboxDetails.php:57 Overview.php:111
+#: MailboxDetails.php:57 Overview.php:117
 msgid "Delete"
 msgstr "Löschen"
 
@@ -121,27 +121,23 @@ msgstr "Passwort Ändern"
 msgid "The password of your mailbox has been changed successfully."
 msgstr "Das Passwort für das Postfach wurde erfolgreich geändert."
 
-#: Module.php:35 Overview.php:35
+#: Module.php:35 Overview.php:36
 msgid "Email"
 msgstr "E-Mail"
 
-#: Overview.php:39
+#: Overview.php:40
 msgid "New Address"
 msgstr "Neue Adresse"
 
-#: Overview.php:58
-msgid "You do not own any email addresses yet."
-msgstr "Sie besitzen bisher keine E-Mail-Adressen."
+#: Overview.php:60
+msgid "You do not own an email address."
+msgstr "Sie besitzen keine E-Mail-Adresse."
 
-#: Overview.php:59
-msgid "Start by creating a new one."
-msgstr ""
-
-#: Overview.php:70
+#: Overview.php:72
 msgid "Mailboxes"
 msgstr "Postfächer"
 
-#: Overview.php:104
+#: Overview.php:109
 msgid "Redirections"
 msgstr "Umleitungen"
 

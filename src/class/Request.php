@@ -87,9 +87,10 @@ class Request
                 $this->get[$s[$i++]] = $val;
         }
 
+        if (!$this->get('role'))
+            $this->get['role'] = 'service';
+
         $this->role    = self::filter('role', $this->get('role'));
-        if (!$this->role)
-            $this->role    = 'service';
         $this->module  = self::filter('module', $this->get('module'));
         $this->action  = self::filter('action', $this->get('action'));
         $this->subject = self::filter('subject', $this->get('subject'));

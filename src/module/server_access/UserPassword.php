@@ -83,7 +83,7 @@ class UserPassword extends Window
                 $this->db->userPassword($params);
 
                 $e = new Successful(
-                    _('Your password authentification settings haven been updates.')
+                    _('Your password authentification settings haven been updated.')
                 );
 
                 $e->backTo = $this->request->derive('details', true, true);

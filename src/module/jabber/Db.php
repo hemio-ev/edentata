@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,16 +25,19 @@ use hemio\edentata\sql;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Db extends \hemio\edentata\ModuleDb {
+class Db extends \hemio\edentata\ModuleDb
+{
 
-    public static function accountToArgs($address) {
+    public static function accountToArgs($address)
+    {
         return [
             'p_node' => explode('@', $address)[0],
             'p_domain' => explode('@', $address)[1]
         ];
     }
 
-    public function accountDelete($params) {
+    public function accountDelete($params)
+    {
         (new sql\QuerySelectFunction(
         $this->pdo
         , 'jabber.del_account'
@@ -43,7 +45,8 @@ class Db extends \hemio\edentata\ModuleDb {
         ))->execute();
     }
 
-    public function accountCreate($params) {
+    public function accountCreate($params)
+    {
         (new sql\QuerySelectFunction(
         $this->pdo
         , 'jabber.ins_account'
@@ -51,7 +54,8 @@ class Db extends \hemio\edentata\ModuleDb {
         ))->execute();
     }
 
-    public function accountPassword($params) {
+    public function accountPassword($params)
+    {
         (new sql\QuerySelectFunction(
         $this->pdo
         , 'jabber.upd_account'
@@ -59,12 +63,28 @@ class Db extends \hemio\edentata\ModuleDb {
         ))->execute();
     }
 
-    public function accountSelect() {
+    public function accountSelect()
+    {
         return
-                (new sql\QuerySelectFunction(
-                $this->pdo
-                , 'jabber.sel_account'
-                ))->execute();
+            (new sql\QuerySelectFunction(
+            $this->pdo
+            , 'jabber.sel_account'
+            ))->execute();
     }
-   
+
+    /**
+     *
+     * @param string $account
+     */
+    public function accountSelectSingle($account)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'jabber.sel_account'
+        );
+
+        $stmt->options('WHERE node=:p_node AND domain=:p_domain');
+
+        return $stmt->execute(self::accountToArgs($account));
+    }
 }

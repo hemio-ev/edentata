@@ -51,7 +51,7 @@ class Overview extends Window
 
         if (empty($accounts))
             return new gui\Hint(
-                _('You do not own any jabber accounts right now.')
+                _('You do not own a jabber account.')
             );
 
         $list = new gui\Listbox();

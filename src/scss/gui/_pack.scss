@@ -53,6 +53,7 @@ button.headerbar_menu::before {
     color: inherit;
     text-decoration: inherit;
     border-radius: $article-radius-top/2;
+    white-space: nowrap;
 }
 
 .popover + *.popover li a:hover {

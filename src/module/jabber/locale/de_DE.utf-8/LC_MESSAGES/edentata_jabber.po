@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata jabber\n"
-"POT-Creation-Date: 2015-03-24 19:24+0100\n"
-"PO-Revision-Date: 2015-03-24 19:25+0100\n"
+"POT-Creation-Date: 2015-04-28 00:52+0100\n"
+"PO-Revision-Date: 2015-04-28 00:52+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -25,7 +25,7 @@ msgstr "Erstellen"
 
 #: AccountCreate.php:39
 msgid "Node"
-msgstr ""
+msgstr "Knoten (Node)"
 
 #: AccountDelete.php:32
 msgid "Do you really want to delete this jabber account?"
@@ -35,19 +35,19 @@ msgstr ""
 msgid "Delete Account"
 msgstr "Konto Löschen"
 
-#: AccountDetails.php:30
+#: AccountDetails.php:34
 msgid "Jabber Account"
 msgstr "Jabber-Konto"
 
-#: AccountDetails.php:32
-msgid "Possible Actions"
-msgstr "Verfügbare Aktionen"
+#: AccountDetails.php:41
+msgid "Account"
+msgstr "Konto"
 
-#: AccountDetails.php:36
+#: AccountDetails.php:47
 msgid "Change password"
 msgstr "Passwort ändern"
 
-#: AccountDetails.php:40
+#: AccountDetails.php:52
 msgid "Delete account"
 msgstr "Konto löschen"
 
@@ -63,7 +63,7 @@ msgstr "Ändern"
 msgid "Your password has been changed successfully."
 msgstr ""
 
-#: Module.php:86
+#: Module.php:89
 msgid "Jabber"
 msgstr ""
 
@@ -75,6 +75,9 @@ msgstr "Jabber-Konten"
 msgid "Create Account"
 msgstr "Konto Erstellen"
 
-#: Overview.php:55
-msgid "You do not own any jabber accounts right now."
-msgstr ""
+#: Overview.php:54
+msgid "You do not own a jabber account."
+msgstr "Sie besitzen kein Jabber-Konto."
+
+#~ msgid "Possible Actions"
+#~ msgstr "Verfügbare Aktionen"

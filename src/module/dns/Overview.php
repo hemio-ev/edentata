@@ -33,13 +33,12 @@ class Overview extends Window
     {
         $window = $this->newWindow(_('Domains'), null, false);
 
-        $menu = new gui\HeaderbarMenu();
+        $menu = $window->addHeaderbarMenu();
+
         $menu->addEntry(
             $this->request->derive('handle_create')
             , _('Create new handle')
         );
-
-        $window->addButtonRight($menu);
 
         $window->addButtonRight(
             new \hemio\edentata\gui\LinkButton(
@@ -73,7 +72,7 @@ class Overview extends Window
         }
 
         if (!count($list))
-            return new gui\Hint(_('You do not have registered domains yet'));
+            return new gui\Hint(_('You do not own a registered domain.'));
 
         $fieldset->addChild($list);
 

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata web\n"
-"POT-Creation-Date: 2015-03-24 19:32+0100\n"
-"PO-Revision-Date: 2015-03-24 19:55+0100\n"
+"POT-Creation-Date: 2015-04-28 00:55+0100\n"
+"PO-Revision-Date: 2015-04-28 00:56+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -27,11 +27,11 @@ msgstr "Erstellen"
 msgid "Domain"
 msgstr ""
 
-#: AliasDelete.php:36
+#: AliasDelete.php:35
 msgid "Are you sure you want to delete this website alias?"
 msgstr ""
 
-#: AliasDelete.php:40 AliasDelete.php:43
+#: AliasDelete.php:39 AliasDelete.php:42
 msgid "Delete Alias"
 msgstr "Alias Löschen"
 
@@ -132,7 +132,7 @@ msgstr "Zertifikat anfordern / HTTPS-Zertifikat eintragen"
 msgid "The following names are not covered by the certificate: %s."
 msgstr ""
 
-#: HttpsDetails.php:243
+#: HttpsDetails.php:244 SiteDetails.php:135
 msgid "Add intermediate certificates"
 msgstr "Zwischenzertifikate hinzufügen"
 
@@ -148,8 +148,8 @@ msgstr "Hinzufügen"
 #, php-format
 msgid "Added one intermediate certificate."
 msgid_plural "Added %s intermediate certificates."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ein Zwischenzertifikat hinzugefügt."
+msgstr[1] "%s Zwischenzertifikate hinzugefügt."
 
 #: Module.php:148
 msgid "Web"
@@ -163,21 +163,25 @@ msgstr ""
 msgid "New Site"
 msgstr "Neue Site"
 
-#: Overview.php:58
+#: Overview.php:50
+msgid "You do not own a website."
+msgstr "Sie besitzen keine Website."
+
+#: Overview.php:66
 msgid "HTTPS enabled"
 msgstr "HTTPS aktiviert"
 
-#: Overview.php:66
+#: Overview.php:74
 #, php-format
 msgid "Port: %s"
 msgstr ""
 
-#: Overview.php:69
+#: Overview.php:77
 #, php-format
 msgid "User: %s"
 msgstr "Benutzer: %s"
 
-#: Overview.php:71 SiteCreate.php:78
+#: Overview.php:79 SiteCreate.php:78
 #, php-format
 msgid "Host: %s"
 msgstr ""
@@ -188,7 +192,7 @@ msgstr "Wähle Serverzugang"
 
 #: SiteCreate.php:50
 msgid "You need to create a server access first."
-msgstr ""
+msgstr "Sie müssen zuerst einen Serverzugang erstellen."
 
 #: SiteCreate.php:65
 msgid "Select a server access under which to construct the new site"
@@ -220,67 +224,63 @@ msgstr "Website Löschen"
 msgid "Website"
 msgstr ""
 
-#: SiteDetails.php:44
+#: SiteDetails.php:46
 msgid "Site Details"
 msgstr ""
 
-#: SiteDetails.php:46
+#: SiteDetails.php:48
 msgid "Host"
 msgstr ""
 
-#: SiteDetails.php:47
+#: SiteDetails.php:49
 msgid "User"
 msgstr "Benutzer"
 
-#: SiteDetails.php:59 SiteDetails.php:61 SiteDetails.php:128
+#: SiteDetails.php:61 SiteDetails.php:63 SiteDetails.php:129
 msgid "HTTPS"
 msgstr ""
 
-#: SiteDetails.php:59
+#: SiteDetails.php:61
 msgid "disabled"
 msgstr "deaktiviert"
 
-#: SiteDetails.php:61
+#: SiteDetails.php:63
 msgid "enabled"
 msgstr "aktiviert"
 
-#: SiteDetails.php:64
+#: SiteDetails.php:66
 msgid "Port"
 msgstr ""
 
-#: SiteDetails.php:83
-msgid "Possible Actions"
-msgstr "Verfügbare Aktionen"
-
-#: SiteDetails.php:86
+#: SiteDetails.php:87
 msgid "Create alias"
 msgstr "Alias erstellen"
 
-#: SiteDetails.php:90
+#: SiteDetails.php:91
 msgid "Delete entire site"
 msgstr "Gesamte Webiste löschen"
 
-#: SiteDetails.php:98
+#: SiteDetails.php:99
 msgid "Aliases"
 msgstr ""
 
-#: SiteDetails.php:114
+#: SiteDetails.php:115
 msgid "Delete"
 msgstr "Löschen"
 
-#: SiteDetails.php:142
+#: SiteDetails.php:151
 msgid "Active Certificate"
 msgstr "Aktives Zertifikat"
 
-#: SiteDetails.php:149 SiteHttps.php:40
+#: SiteDetails.php:158 SiteHttps.php:40
 msgid "Change"
 msgstr "Ändern"
 
-#: SiteDetails.php:157
+#: SiteDetails.php:166
 msgid "Available HTTPS Configurations"
 msgstr "Verfügbare HTTPS-Konfigurationen"
 
-#: SiteDetails.php:163
+#: SiteDetails.php:172
 msgid "New configuration (new SSL key an certificate)"
 msgstr "Neue Konfiguration (neuer SSL-Schlüssel und neues Zertifikat)"
 
@@ -322,3 +322,6 @@ msgstr "Zertifikat is nur noch für %s Tage gültig"
 #, php-format
 msgid "Certificate is valid for another %s days"
 msgstr "Zertifikat ist weitere %s Tage gültig"
+
+#~ msgid "Possible Actions"
+#~ msgstr "Verfügbare Aktionen"

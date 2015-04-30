@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata email lists\n"
-"POT-Creation-Date: 2015-03-24 23:01+0100\n"
-"PO-Revision-Date: 2015-03-24 23:01+0100\n"
+"POT-Creation-Date: 2015-04-28 00:51+0100\n"
+"PO-Revision-Date: 2015-04-28 00:51+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -55,7 +55,7 @@ msgstr "Listeninhaber ändern"
 msgid "Delete list"
 msgstr "Liste löschen"
 
-#: ListDetails.php:71 SubscribersMove.php:75
+#: ListDetails.php:71 SubscribersMove.php:76
 msgid "Subscribers"
 msgstr "Abonnenten"
 
@@ -79,17 +79,17 @@ msgstr ""
 msgid "List not found."
 msgstr ""
 
-#: Module.php:35 Overview.php:33
+#: Module.php:35 Overview.php:34
 msgid "Mailing Lists"
 msgstr "Mailinglisten"
 
-#: Overview.php:38
+#: Overview.php:39
 msgid "New List"
 msgstr "Neue Liste"
 
-#: Overview.php:52
-msgid "You do not own any mailing lists."
-msgstr ""
+#: Overview.php:54
+msgid "You do not own a mailing lists."
+msgstr "Sie besitzen keine Mailingliste."
 
 #: SubscriberCreate.php:38
 msgid "Subscribe"
@@ -111,7 +111,7 @@ msgstr "Verschieben"
 msgid "Target Email List"
 msgstr "Ziel-Mailingliste"
 
-#: SubscribersMove.php:70
+#: SubscribersMove.php:71
 msgid "Source Email List"
 msgstr "Quell-Mailingliste"
 

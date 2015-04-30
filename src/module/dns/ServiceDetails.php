@@ -46,10 +46,14 @@ class ServiceDetails extends Window
         $delServices = [];
         $insServices = [];
         foreach ($services as $service) {
-            $srv    = $service['service'];
-            $switch = new gui\FieldSwitch($srv, strtoupper($srv));
+            $srv = $service['service'];
+
+            $fieldset = new gui\Fieldset(ucwords(str_replace('_', ' ', $srv)));
+            $window->getForm()->addChild($fieldset);
+
+            $switch = new gui\FieldSwitch($srv, 'Activate Service');
             $switch->getControlElement()->addCssClass('display_control');
-            $window->getForm()->addChild($switch);
+            $fieldset->addChild($switch);
 
             $names = $this->db->activatableServiceNameSelect($srv);
 
@@ -64,7 +68,7 @@ class ServiceDetails extends Window
                 $select->setDefaultValue($activeServices[$srv]);
             }
 
-            $window->getForm()->addChild($select);
+            $fieldset->addChild($select);
 
             if ($switch->getValueUser() && !isset($activeServices[$srv])) {
                 $insServices[$srv] = $select->getValueUser();

@@ -413,7 +413,8 @@ button.headerbar_menu::before {
   padding: 0 1em;
   color: inherit;
   text-decoration: inherit;
-  border-radius: 0.25em; }
+  border-radius: 0.25em;
+  white-space: nowrap; }
 
 .popover + *.popover li a:hover {
   background-color: lightgray; }

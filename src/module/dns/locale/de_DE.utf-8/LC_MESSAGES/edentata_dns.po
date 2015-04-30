@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata dns\n"
-"POT-Creation-Date: 2015-03-24 19:14+0100\n"
-"PO-Revision-Date: 2015-03-24 19:22+0100\n"
+"POT-Creation-Date: 2015-04-28 00:56+0100\n"
+"PO-Revision-Date: 2015-04-28 00:57+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: AdminC.php:34 AdminC.php:37 RegisteredCreate.php:44
+#: AdminC.php:34 AdminC.php:37 RegisteredCreate.php:47
 #: RegisteredDetails.php:82
 msgid "Admin Contact"
 msgstr "Admin Kontakt"
@@ -73,47 +73,47 @@ msgstr ""
 msgid "Unkown record type"
 msgstr ""
 
-#: CustomCreate.php:155
+#: CustomCreate.php:154
 msgid "Address (IPv4)"
 msgstr ""
 
-#: CustomCreate.php:163
+#: CustomCreate.php:162
 msgid "Address (IPv6)"
 msgstr ""
 
-#: CustomCreate.php:171
+#: CustomCreate.php:170
 msgid "Cname"
 msgstr ""
 
-#: CustomCreate.php:182
+#: CustomCreate.php:181
 msgid "Exchange (Mailserver Domain Name)"
 msgstr ""
 
-#: CustomCreate.php:185 CustomCreate.php:207
+#: CustomCreate.php:184 CustomCreate.php:206
 msgid "Priority/Preference"
 msgstr ""
 
-#: CustomCreate.php:188
+#: CustomCreate.php:187
 msgid "Lower priority values represent preferred records"
 msgstr ""
 
-#: CustomCreate.php:201
+#: CustomCreate.php:200
 msgid "Service"
 msgstr "Dienst"
 
-#: CustomCreate.php:204
+#: CustomCreate.php:203
 msgid "Protocoll"
 msgstr ""
 
-#: CustomCreate.php:210
+#: CustomCreate.php:209
 msgid "Weight"
 msgstr ""
 
-#: CustomCreate.php:213
+#: CustomCreate.php:212
 msgid "Port"
 msgstr ""
 
-#: CustomCreate.php:215
+#: CustomCreate.php:214
 msgid "Target (Domain Name)"
 msgstr ""
 
@@ -210,7 +210,7 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: Module.php:155 RegisteredCreate.php:38 RegisteredDetails.php:35
+#: Module.php:155 RegisteredCreate.php:41 RegisteredDetails.php:35
 msgid "Domain"
 msgstr ""
 
@@ -218,41 +218,41 @@ msgstr ""
 msgid "Domains"
 msgstr ""
 
-#: Overview.php:39
+#: Overview.php:40
 msgid "Create new handle"
 msgstr "Neues Handle Erstellen"
 
-#: Overview.php:47
+#: Overview.php:46
 msgid "Register Domain"
 msgstr "Domain Registrieren"
 
-#: Overview.php:59
+#: Overview.php:58
 msgid "Registered Domains"
 msgstr "Registrierte Domains"
 
-#: Overview.php:76
-msgid "You do not have registered domains yet"
-msgstr ""
+#: Overview.php:75
+msgid "You do not own a registered domain."
+msgstr "Sie besitzen keine registrierte Domain."
 
-#: Overview.php:85
+#: Overview.php:84
 msgid "Handles"
 msgstr ""
 
-#: RegisteredCreate.php:34
+#: RegisteredCreate.php:36
 msgid "New Domain"
 msgstr "Neue Domain"
 
-#: RegisteredCreate.php:36
+#: RegisteredCreate.php:38
 msgid "Register"
 msgstr "Registrieren"
 
-#: RegisteredCreate.php:41 RegisteredDetails.php:79
+#: RegisteredCreate.php:44 RegisteredDetails.php:79
 msgid "Registrant (Owner)"
 msgstr "Besitzer (Owner)"
 
 #: RegisteredDetails.php:40
 msgid "Create custom DNS record"
-msgstr ""
+msgstr "Benutzerdefiniert DNS-Eintrag erstellen"
 
 #: RegisteredDetails.php:51
 msgid "Add Sub-Domain"
@@ -278,22 +278,22 @@ msgstr "Domain Dienst-Aktivierung"
 msgid "Create Sub-Domain"
 msgstr "Sub-Domain Erstellen"
 
-#: ServiceCreate.php:33
+#: ServiceCreate.php:35
 msgid "Continue …"
 msgstr "Weiter …"
 
-#: ServiceCreate.php:35
+#: ServiceCreate.php:37
 msgid "Sub-Domain"
 msgstr ""
 
-#: ServiceDetails.php:36
+#: ServiceDetails.php:35
 msgid "Service Activation"
 msgstr "Dienst-Aktivierung"
 
-#: ServiceDetails.php:37
+#: ServiceDetails.php:36
 msgid "Save"
 msgstr "Speichern"
 
-#: ServiceDetails.php:58
+#: ServiceDetails.php:61
 msgid "Host/Server"
 msgstr ""

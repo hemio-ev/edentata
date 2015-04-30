@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,17 +26,19 @@ use hemio\html\String;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Overview extends Window {
+class Overview extends Window
+{
 
-    public function content() {
+    public function content()
+    {
         $window = $this->newWindow(_('Mailing Lists'), null, false);
 
         $window->addButtonRight(
-                new gui\LinkButton(
-                $this->module->request->derive('list_create')
-                , _('New List')
-                )
-                , true);
+            new gui\LinkButton(
+            $this->module->request->derive('list_create')
+            , _('New List')
+            )
+            , true);
 
 
         $window->addChild($this->lists());
@@ -45,24 +46,24 @@ class Overview extends Window {
         return $window;
     }
 
-    protected function lists() {
+    protected function lists()
+    {
         $lists = $this->db->listSelect()->fetchAll();
 
         if (!count($lists)) {
-            return new gui\Hint(_('You do not own any mailing lists.'));
+            return new gui\Hint(_('You do not own a mailing lists.'));
         } else {
             $listbox = new gui\Listbox;
             foreach ($lists as $list) {
-                $addr = $list['localpart'] . '@' . $list['domain'];
+                $addr = $list['localpart'].'@'.$list['domain'];
                 $listbox->addLinkEntry(
-                        $this->module->request->derive('list_details', $addr)
-                        , new String($addr)
-                        , $list['backend_status']
+                    $this->module->request->derive('list_details', $addr)
+                    , new String($addr)
+                    , $list['backend_status']
                 );
             }
 
             return $listbox;
         }
     }
-
 }

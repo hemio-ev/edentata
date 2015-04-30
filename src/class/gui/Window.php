@@ -65,4 +65,16 @@ class Window extends html\Article
         if ($button instanceof LinkButton)
             $button->setSuggested($suggested);
     }
+
+    /**
+     *
+     * @return HeaderbarMenu
+     */
+    public function addHeaderbarMenu()
+    {
+        $menu = new HeaderbarMenu();
+        $this->addButtonRight($menu);
+
+        return $menu;
+    }
 }

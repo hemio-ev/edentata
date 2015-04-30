@@ -53,7 +53,7 @@ class Overview extends Window
 
         if (empty($users)) {
             return new gui\Hint(
-                _('You do not own a server access right now.')
+                _('You do not own a server access.')
             );
         } else {
             $list = new gui\Listbox();
