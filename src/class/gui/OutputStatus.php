@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -17,30 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\module\user;
+namespace hemio\edentata\gui;
 
-use hemio\edentata\gui;
+use hemio\form;
+use hemio\html;
 
-/**
- * Description of Overview
- *
- * @author Michael Herold <quabla@hemio.de>
- */
-class Overview extends Window {
+class OutputStatus extends form\Container
+{
 
-    public function content() {
-        $window = $this->newWindow(_('User Settings'), null, false);
+    public function __construct(array $data)
+    {
+        if ($data['backend_status'] !== null) {
+            $this['p'] = new html\P();
+            $this['p']->addCssClass('output');
 
-        $selecting = new gui\Selecting();
+            $this['p']['label'] = new html\Label();
+            $this['p']['label']->addChild(new html\String(_('Status')));
 
-        $selecting->addLink(
-                $this->request->derive('password')
-                , _('Change password')
-        );
-
-        $window->addChild($selecting);
-
-        return $window;
+            $this['p']['output']   = new html\Output();
+            $this['p']['output'][] = new Progress($data['backend_status']);
+        }
     }
-
 }

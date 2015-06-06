@@ -49,6 +49,9 @@ class I10n
         if (!setlocale(LC_ALL, $this->locale))
             echo 'failed to set locale';
 
+        if (!\Locale::setDefault($this->locale))
+            echo 'failed to set default locale';
+
         bindtextdomain('edentata', 'locale');
         $this->setDomainMain();
     }

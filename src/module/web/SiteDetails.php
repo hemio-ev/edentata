@@ -21,6 +21,7 @@ namespace hemio\edentata\module\web;
 use hemio\edentata\gui;
 use hemio\html;
 use hemio\form;
+use hemio\edentata\exception;
 
 /**
  * Description of SiteCreate
@@ -42,6 +43,9 @@ class SiteDetails extends Window
         $window->addButtonRight($this->actions($address));
 
         $data = $this->db->siteSelectSingle($domain, $port)->fetch();
+
+        if (!$data)
+            throw new exception\Error(_('Website does not exist.'));
 
         $details = new gui\Fieldset(_('Site Details'));
 

@@ -31,8 +31,13 @@ class ListDetails extends Window
 
     public function content($list)
     {
-        $window = $this->newFormWindow('select_subscribers', _('Email List'),
-                                                               $list);
+        $window = $this->newFormWindow(
+            'select_subscribers'
+            , _('Email List')
+            , $list
+        );
+
+        $this->addActions($window->addHeaderbarMenu());
 
         $window->addButtonRight(
             new gui\LinkButton(
@@ -41,27 +46,22 @@ class ListDetails extends Window
             )
             , true);
 
-        $window->addChild($this->details());
         $this->subscribers($window, $list);
 
         return $window;
     }
 
-    protected function details()
+    protected function addActions($menu)
     {
-        $selecting = new gui\Selecting(_('Email List'));
-
-        $selecting->addLink(
+        $menu->addEntry(
             $this->module->request->derive('list_update', true)
             , _('Change list owner')
         );
 
-        $selecting->addLink(
+        $menu->addEntry(
             $this->module->request->derive('list_delete', true)
             , _('Delete list')
         );
-
-        return $selecting;
     }
 
     protected function subscribers(gui\WindowModuleWithForm $window, $list)

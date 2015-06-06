@@ -19,7 +19,9 @@
 namespace hemio\edentata\module\email;
 
 use hemio\edentata\gui;
-use hemio\html\String;
+use hemio\html;
+use hemio\edentata\exception;
+use hemio\form;
 
 /**
  * Description of EditAccount
@@ -37,16 +39,43 @@ class MailboxDetails extends Window
             , $address
         );
 
+        $mailbox = $this->db->mailboxSelectSingle($address)->fetch();
+        if (!$mailbox)
+            throw new exception\Error(_('Mailbox does not exist.'));
+
+        $menu = $window->addHeaderbarMenu();
+        $this->addActions($menu, $address);
+
+        $window->addChild($this->details($mailbox));
+        $window->addChild($this->aliases($address));
+
+        return $window;
+    }
+
+    protected function details(array $mailbox)
+    {
+        $container = new form\Container();
+
+        $container[] = new gui\OutputStatus($mailbox);
+        if ($mailbox['quota'] !== null)
+            $container[] = new gui\OutputUnit(
+                _('Quota')
+                , $mailbox['quota']
+                , 'MB'
+            );
+
+        return $container;
+    }
+
+    protected function aliases($address)
+    {
         $resAliases = $this->db->aliasSelect(
             Utils::addrLocalpart($address)
             , Utils::addrDomain($address)
         );
 
-        $aliases = $resAliases->fetchAll();
-
         $list = new gui\Listbox();
-
-        foreach ($aliases as $alias) {
+        foreach ($resAliases as $alias) {
             $aliasAddr = $alias['localpart'].'@'.$alias['domain'];
             $button    = new gui\LinkButton(
                 $this->module->request->derive(
@@ -57,43 +86,37 @@ class MailboxDetails extends Window
                 , _('Delete')
             );
 
-
             $list->addEntry(
-                new String($aliasAddr)
+                new html\String($aliasAddr)
                 , $alias['backend_status']
                 , $button
             );
         }
 
-        if (count($aliases) > 0) {
-            $window
-                ->addChild(new gui\Fieldset(_('Aliases')))
-                ->addChild($list);
-        }
-        $window->addChild($this->actions($address));
+        if (!$list->count())
+            return new html\Nothing;
 
-        return $window;
+        $fieldset = new gui\Fieldset(_('Aliases'));
+        $fieldset->addChild($list);
+
+        return $fieldset;
     }
 
-    public function actions($address)
+    protected function addActions($menu, $address)
     {
-        $selecting = new gui\Selecting(_('Possible Actions'));
-
-        $selecting->addLink(
+        $menu->addEntry(
             $this->module->request->derive('mailbox_password', $address)
             , _('Change password')
         );
 
-        $selecting->addLink(
+        $menu->addEntry(
             $this->module->request->derive('alias_create', $address)
             , _('Create alias for this mailbox')
         );
 
-        $selecting->addLink(
+        $menu->addEntry(
             $this->module->request->derive('mailbox_delete', $address)
             , _('Delete entire mailbox')
         );
-
-        return $selecting;
     }
 }

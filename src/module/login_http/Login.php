@@ -49,7 +49,8 @@ class Login extends Window
 
         if ($this->request->get('auth') === 'logout') {
             $request->get['auth'] = 'http_logout';
-            $selecting->addLink($request, _('Perform Logout'));
+            $selecting->addLink($request, _('Perform Logout'))
+                ->setSuggested();
         } else {
             $request->get['auth'] = 'http';
             $selecting->addLink($request, _('Open Login Prompt'));

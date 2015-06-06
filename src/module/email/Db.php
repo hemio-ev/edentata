@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,23 +25,26 @@ use hemio\edentata\sql;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Db extends \hemio\edentata\ModuleDb {
+class Db extends \hemio\edentata\ModuleDb
+{
 
-    public static function emailAddressToArgs($address, $prefix = '') {
-        $arg = [];
-        $arg['p_' . $prefix . 'localpart'] = explode('@', $address)[0];
-        $arg['p_' . $prefix . 'domain'] = explode('@', $address)[1];
+    public static function emailAddressToArgs($address, $prefix = '')
+    {
+        $arg                           = [];
+        $arg['p_'.$prefix.'localpart'] = explode('@', $address)[0];
+        $arg['p_'.$prefix.'domain']    = explode('@', $address)[1];
 
         return $arg;
     }
 
     /**
-     * 
+     *
      * @return \PDOStatement
      */
-    public function mailboxSelect($activeOnly = true) {
+    public function mailboxSelect($activeOnly = true)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo, 'email.sel_mailbox'
+            $this->pdo, 'email.sel_mailbox'
         );
 
         $where = '';
@@ -50,116 +52,140 @@ class Db extends \hemio\edentata\ModuleDb {
             $where = 'WHERE backend_status IS NULL OR backend_status <> \'del\' ';
         }
 
-        $stmt->options($where . 'ORDER BY backend_status, localpart, domain');
+        $stmt->options($where.'ORDER BY backend_status, localpart, domain');
 
         return $stmt->execute();
     }
 
-    public function mailboxCreate(array $params) {
+    /**
+     *
+     * @return \PDOStatement
+     */
+    public function mailboxSelectSingle($address)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'email.ins_mailbox'
-                , $params
+            $this->pdo, 'email.sel_mailbox'
+        );
+
+        $stmt->options('WHERE localpart=:p_localpart AND domain=:p_domain');
+
+        return $stmt->execute(self::emailAddressToArgs($address));
+    }
+
+    public function mailboxCreate(array $params)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'email.ins_mailbox'
+            , $params
         );
 
         return $stmt->execute();
     }
 
-    public function mailboxPassword(array $params) {
+    public function mailboxPassword(array $params)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'email.upd_mailbox'
-                , $params
+            $this->pdo
+            , 'email.upd_mailbox'
+            , $params
         );
 
         return $stmt->execute();
     }
 
-    public function mailboxDelete(array $params) {
+    public function mailboxDelete(array $params)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'email.del_mailbox'
-                , $params
+            $this->pdo
+            , 'email.del_mailbox'
+            , $params
         );
 
         return $stmt->execute();
     }
 
-    public function aliasSelect($mailboxLocalpart, $mailboxDomain) {
+    public function aliasSelect($mailboxLocalpart, $mailboxDomain)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'email.sel_alias'
+            $this->pdo
+            , 'email.sel_alias'
         );
         $stmt->options(
-                'WHERE mailbox_localpart = :localpart AND mailbox_domain = :domain' .
-                ' ORDER BY localpart, domain'
+            'WHERE mailbox_localpart = :localpart AND mailbox_domain = :domain'.
+            ' ORDER BY localpart, domain'
         );
 
         return $stmt->execute(['localpart' => $mailboxLocalpart, 'domain' => $mailboxDomain]);
     }
 
-    public function aliasCreate(array $params) {
+    public function aliasCreate(array $params)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'email.ins_alias'
-                , $params
+            $this->pdo
+            , 'email.ins_alias'
+            , $params
         );
 
         return $stmt->execute();
     }
 
-    public function aliasDelete(array $params) {
+    public function aliasDelete(array $params)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'email.del_alias'
-                , $params
+            $this->pdo
+            , 'email.del_alias'
+            , $params
         );
 
         return $stmt->execute();
     }
 
-    public function redirectionCreate(array $params) {
+    public function redirectionCreate(array $params)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'email.ins_redirection'
-                , $params
+            $this->pdo
+            , 'email.ins_redirection'
+            , $params
         );
 
         return $stmt->execute();
     }
 
-    public function redirectionDelete(array $params) {
+    public function redirectionDelete(array $params)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'email.del_redirection'
-                , $params
+            $this->pdo
+            , 'email.del_redirection'
+            , $params
         );
 
         return $stmt->execute();
     }
 
-    public function redirectionSelect() {
+    public function redirectionSelect()
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'email.sel_redirection'
+            $this->pdo
+            , 'email.sel_redirection'
         );
-        
+
         $stmt->options('ORDER BY backend_status, localpart, domain');
 
         return $stmt->execute();
     }
 
     /**
-     * 
+     *
      * @return \PDOStatement
      */
-    public function getPossibleDomains() {
+    public function getPossibleDomains()
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo, 'dns.sel_available_service'
+            $this->pdo, 'dns.sel_available_service'
         );
         $stmt->options('WHERE service = :service');
 
         return $stmt->execute(['service' => 'email']);
     }
-
 }
