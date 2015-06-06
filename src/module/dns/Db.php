@@ -230,7 +230,7 @@ class Db extends \hemio\edentata\ModuleDb
             $this->pdo
             , 'dns.sel_activatable_service');
 
-        $stmt->select(['service_name']);
+        $stmt->select(['service_entity_name']);
         $stmt->options('WHERE service = :service');
 
         return $stmt->execute(['service' => $service]);

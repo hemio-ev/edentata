@@ -67,7 +67,7 @@ class UserDetails extends Window
         );
 
         $container->addChild(
-            new gui\Output(_('Host'), $userData['service_name'])
+            new gui\Output(_('Host'), $userData['service_entity_name'])
         );
 
         return $container;
@@ -100,7 +100,7 @@ class UserDetails extends Window
                 '%s://%s@%s'
                 , $proto
                 , $userData['user']
-                , $userData['service_name']
+                , $userData['service_entity_name']
             )
             )
         );

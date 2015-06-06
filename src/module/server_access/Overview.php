@@ -66,7 +66,7 @@ class Overview extends Window
                 $container->addChild($ul);
 
                 $ul->addLine(new html\String(
-                    sprintf(_('Host: %s'), $user['service_name'])));
+                    sprintf(_('Host: %s'), $user['service_entity_name'])));
 
                 $ul->addLine(new html\String(
                     sprintf(
@@ -80,7 +80,7 @@ class Overview extends Window
                     $this->request->derive(
                         'details'
                         , $user['user']
-                        , $user['service_name']
+                        , $user['service_entity_name']
                     )
                     , $container
                     , $user['backend_status']

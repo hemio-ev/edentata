@@ -53,7 +53,7 @@ class UserDelete extends Window {
         if ($form->correctSubmitted()) {
             $params = [
                 'p_user' => $user,
-                'p_service_name' => $serviceName
+                'p_service_entity_name' => $serviceName
             ];
 
             $this->db->userDelete($params);

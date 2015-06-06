@@ -76,7 +76,7 @@ class Overview extends Window
             $ul->addLine(new html\String(
                 sprintf(_('User: %s'), $site['user'])));
             $ul->addLine(new html\String(
-                sprintf(_('Host: %s'), $site['service_name'])));
+                sprintf(_('Host: %s'), $site['service_entity_name'])));
 
             $listbox->addLinkEntry(
                 $this->request->derive('site_details',

@@ -74,7 +74,7 @@ class UserPassword extends Window
             if (!$usePassword->getValueUser() || $password->dataValid()) {
                 $params = [
                     'p_user' => $user,
-                    'p_service_name' => $serviceName
+                    'p_service_entity_name' => $serviceName
                 ];
 
                 if ($usePassword->getValueUser())

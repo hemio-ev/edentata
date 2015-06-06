@@ -49,12 +49,12 @@ class SiteDetails extends Window
 
         $details = new gui\Fieldset(_('Site Details'));
 
-        $details->addChild(new gui\Output(_('Host'), $data['service_name']));
+        $details->addChild(new gui\Output(_('Host'), $data['service_entity_name']));
         $user = $details->addChild(new gui\Output(_('User'), ''));
 
         $serverAccessRequest = $this->request
             ->deriveModule('server_access')
-            ->derive('details', $data['user'], $data['service_name']);
+            ->derive('details', $data['user'], $data['service_entity_name']);
 
 
         $user['p']['output'][] = new gui\Link($serverAccessRequest,

@@ -44,11 +44,11 @@ class UserCreate extends Window {
         $password->getPassword()->setRequired(false);
         $password->getPasswordRepeat()->setRequired(false);
 
-        $serviceName = new form\FieldSelect('service_name', _('Host/Server'));
+        $serviceName = new form\FieldSelect('service_entity_name', _('Host/Server'));
 
         $activatableServices = $this->db->activatableServiceSelect($service)->fetchAll();
         foreach ($activatableServices as $serv) {
-            $serviceName->addOption($serv['service_name']);
+            $serviceName->addOption($serv['service_entity_name']);
         }
 
         $window->getForm()->addChild($serviceName);
@@ -82,7 +82,7 @@ class UserCreate extends Window {
                 $serviceName->dataValid()
         ) {
             if (!$usePassword->getValueUser() || $password->dataValid()) {
-                $params = $form->getVal(['user', 'service_name']);
+                $params = $form->getVal(['user', 'service_entity_name']);
                 $params['p_service'] = $service;
 
                 if ($usePassword->getValueUser())

@@ -66,7 +66,7 @@ class Db extends \hemio\edentata\ModuleDb {
                 , 'server_access.sel_user'
         );
 
-        $stmt->options('WHERE "user" = :user AND service_name = :name');
+        $stmt->options('WHERE "user" = :user AND service_entity_name = :name');
 
         return $stmt->execute(['user' => $user, 'name' => $serviceName]);
     }
@@ -77,7 +77,7 @@ class Db extends \hemio\edentata\ModuleDb {
                 , 'dns.sel_activatable_service')
         ;
 
-        $stmt->select(['service_name']);
+        $stmt->select(['service_entity_name']);
         $stmt->options('WHERE service = :service');
 
         return $stmt->execute(['service' => $service]);

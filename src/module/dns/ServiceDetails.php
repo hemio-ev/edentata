@@ -38,7 +38,7 @@ class ServiceDetails extends Window
         $activeServices = [];
         $dnsService     = $this->db->serviceSelect($domain)->fetchAll();
         foreach ($dnsService as $service) {
-            $activeServices[$service['service']] = $service['service_name'];
+            $activeServices[$service['service']] = $service['service_entity_name'];
         }
 
         $services = $this->db->activatableServiceSelect()->fetchAll();
@@ -57,10 +57,10 @@ class ServiceDetails extends Window
 
             $names = $this->db->activatableServiceNameSelect($srv);
 
-            $select = new form\FieldSelect('service_name_'.$srv,
+            $select = new form\FieldSelect('service_entity_name_'.$srv,
                                            _('Host/Server'));
             foreach ($names as $name) {
-                $select->addOption($name['service_name']);
+                $select->addOption($name['service_entity_name']);
             }
 
             if (isset($activeServices[$srv])) {
@@ -109,7 +109,7 @@ class ServiceDetails extends Window
                 $insParams = [
                     'p_registered' => $registered,
                     'p_domain' => $domain,
-                    'p_service_name' => $serviceName,
+                    'p_service_entity_name' => $serviceName,
                     'p_service' => $service
                 ];
                 $this->db->serviceInsert($insParams);

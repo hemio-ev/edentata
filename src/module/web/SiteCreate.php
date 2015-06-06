@@ -56,7 +56,7 @@ class SiteCreate extends Window
                 $this->request->derive(
                     true
                     , $data['user']
-                    , $data['service_name']
+                    , $data['service_entity_name']
                 )
             );
         } else {
@@ -75,13 +75,13 @@ class SiteCreate extends Window
                 $container->addChild($ul);
 
                 $ul->addLine(new html\String(
-                    sprintf(_('Host: %s'), $user['service_name'])));
+                    sprintf(_('Host: %s'), $user['service_entity_name'])));
 
                 $listbox->addLinkEntry(
                     $this->request->derive(
                         true
                         , $user['user']
-                        , $user['service_name']
+                        , $user['service_entity_name']
                     )
                     , $container
                 );
@@ -149,7 +149,7 @@ class SiteCreate extends Window
             $siteParams = [
                 'p_port' => $port,
                 'p_user' => $user,
-                'p_service_name' => $serviceName
+                'p_service_entity_name' => $serviceName
                 ] + $form->getVal(['domain']);
 
             $httpsParams      = ['p_port' => $port] + $form->getVal(['domain', 'identifier']);
