@@ -55,8 +55,11 @@ class Overview extends Window
         foreach ($sites as $site) {
             $container = new form\Container();
 
+            $subservice = $site['subservice'] == 'site' ? '' :
+                sprintf(' [%s]', $site['subservice']);
+
             $container->addChild(
-                new html\String($site['domain'])
+                new html\String($site['domain'].$subservice)
             );
 
             $ul = new html\Ul();

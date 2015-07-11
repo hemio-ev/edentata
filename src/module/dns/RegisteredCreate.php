@@ -41,6 +41,12 @@ class RegisteredCreate extends Window
         $domain = new \hemio\form\FieldText('domain', _('Domain'));
         $domain->setRequired();
 
+        $subservice = new form\FieldSelect('subservice',
+                                           _('Managed by this System'));
+
+        $nameserver = new form\FieldSelect('service_entity_name',
+                                           _('Nameserver'));
+
         $registrant = new form\FieldSelect('registrant', _('Registrant (Owner)'));
         $registrant->setRequired();
 
@@ -50,6 +56,12 @@ class RegisteredCreate extends Window
         $registrant->addOption('');
         $adminC->addOption('');
 
+        foreach ($this->db->registeredNameserverSelect() as $ns) {
+            $subservice->addOption($ns['subservice'], $ns['subservice']);
+            $nameserver->addOption($ns['service_entity_name'],
+                                   $ns['service_entity_name']);
+        }
+
         foreach ($this->db->handleSelect() as $handle) {
             $text = Utils::handleOut($handle);
 
@@ -58,6 +70,8 @@ class RegisteredCreate extends Window
         }
 
         $window->getForm()->addChild($domain);
+        $window->getForm()->addChild($subservice);
+        $window->getForm()->addChild($nameserver);
         $window->getForm()->addChild($registrant);
         $window->getForm()->addChild($adminC);
 
@@ -74,6 +88,7 @@ class RegisteredCreate extends Window
             $paramsDns                    = $form->getVal(['domain']);
             $split                        = explode('.', $paramsDns['p_domain']);
             $paramsDns['p_public_suffix'] = array_pop($split);
+            $paramsDns += $form->getVal(['subservice', 'service_entity_name']);
 
             $paramsReseller = $form->getVal(['domain', 'registrant', 'admin_c']);
 

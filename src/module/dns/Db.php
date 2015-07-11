@@ -161,6 +161,16 @@ class Db extends \hemio\edentata\ModuleDb
         return $stmt->execute(['domain' => $domain]);
     }
 
+    public function registeredNameserverSelect()
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'dns.sel_nameserver'
+        );
+
+        return $stmt->execute();
+    }
+
     public function resellerRegisteredCreate(array $params)
     {
         (new sql\QuerySelectFunction(

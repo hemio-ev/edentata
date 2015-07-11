@@ -49,7 +49,16 @@ class SiteDetails extends Window
 
         $details = new gui\Fieldset(_('Site Details'));
 
-        $details->addChild(new gui\Output(_('Host'), $data['service_entity_name']));
+        $details->addChild(new gui\Output(_('Host'),
+                                            $data['service_entity_name']));
+
+
+        if ($data['subservice'] == 'http_redirect') {
+            $option = (array) json_decode($data['option']);
+            $details->addChild(new gui\OutputUrl(_('Redirect URL'),
+                                                   $option['redirect_url']));
+        }
+
         $user = $details->addChild(new gui\Output(_('User'), ''));
 
         $serverAccessRequest = $this->request

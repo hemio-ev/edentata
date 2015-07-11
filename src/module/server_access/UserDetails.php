@@ -93,7 +93,7 @@ class UserDetails extends Window
         );
 
         $fieldset->addChild(
-            new gui\Output(
+            new gui\OutputUrl(
             _('Connection URI')
             ,
               sprintf(
