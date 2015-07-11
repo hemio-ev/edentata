@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,28 +26,30 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ListCreate extends Window {
+class ListCreate extends Window
+{
 
-    public function content() {
+    public function content()
+    {
         $window = $this->newFormWindow(
-                'list_create'
-                , _('New Mailing List')
-                , null
-                , _('Create')
+            'list_create'
+            , _('New Mailing List')
+            , null
+            , _('Create')
         );
 
         $address = new gui\FieldEmailWithSelect();
-        $admin = new form\FieldEmail('admin', _('List Owner'));
+        $admin   = new form\FieldEmail('admin', _('List Owner'));
         $admin->setRequired();
 
         $window->getForm()->addChild($address);
         $window->getForm()->addChild($admin);
 
-        $hint = _('The address of the list owner is used for unsubscriber requests.');
+        $hint = _('The address of the list owner is used for unsubscribe requests.');
         $window->getForm()->addChild(new gui\Hint($hint));
 
 
-        foreach ($this->db->availableDomains(['email__list']) as $domain) {
+        foreach ($this->db->getUsableDomains('email', 'list') as $domain) {
             $address->getDomain()->addOption($domain['domain']);
         }
 
@@ -57,7 +58,8 @@ class ListCreate extends Window {
         return $window;
     }
 
-    public function handleSubmit(gui\FormPost $form) {
+    public function handleSubmit(gui\FormPost $form)
+    {
         if ($form->correctSubmitted()) {
             $listParams = $form->getVal(['localpart', 'domain', 'admin']);
 
@@ -76,5 +78,4 @@ class ListCreate extends Window {
             throw new \hemio\edentata\exception\Successful;
         }
     }
-
 }

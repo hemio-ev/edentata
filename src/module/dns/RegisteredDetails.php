@@ -69,25 +69,37 @@ class RegisteredDetails extends Window
     {
         $fieldset = new gui\Fieldset(_('Domain Details'));
 
-        $list = new gui\Listbox();
-        $data = $this->db->resellerRegisteredSelectSingle($registered)->fetch();
+        $dataRegist = $this->db->resellerRegisteredSelectSingle($registered)->fetch();
+        $dataDomain = $this->db->registeredSelectSingle($registered)->fetch();
 
-        if ($data === false)
-            return new gui\Hint(_('No detailed domain information available'));
+        if ($dataDomain['subservice'] == 'unmanaged') {
+            $fieldset->addChild(
+                new gui\Hint(_('Domain not managed via this system.')));
+        } else {
+            $fieldset->addChild(
+                new gui\Output(_('Primary Nameserver')
+                , $dataDomain['service_entity_name']));
 
-        $list->addEntry(new gui\Fstr('%s: %s',
-                                     [_('Registrant (Owner)'),
-            $data['registrant']]));
-        $list->addEntry(
-            new gui\Fstr('%s: %s', [_('Admin Contact'), $data['admin_c']])
-            , $data['backend_status']
-            ,
-                                      new gui\LinkButton(
-            $this->request->derive('adminc', $registered)
-            , _('Change')
-        ));
+            $list = new gui\Listbox();
 
-        $fieldset->addChild($list);
+            if ($dataRegist === false)
+                return new gui\Hint(_('No detailed domain information available'));
+
+            $list->addEntry(new gui\Fstr('%s: %s',
+                                         [_('Registrant (Owner)'),
+                $dataRegist['registrant']]));
+            $list->addEntry(
+                new gui\Fstr('%s: %s',
+                             [_('Admin Contact'), $dataRegist['admin_c']])
+                , $dataRegist['backend_status']
+                ,
+                                new gui\LinkButton(
+                $this->request->derive('adminc', $registered)
+                , _('Change')
+            ));
+
+            $fieldset->addChild($list);
+        }
 
         return $fieldset;
     }
@@ -126,12 +138,12 @@ class RegisteredDetails extends Window
             );
         }
 
-        if (empty($list))
+        if (!count($list))
             return new html\Nothing;
 
         $fieldset->addChild($list);
 
-        return $list;
+        return $fieldset;
     }
 
     protected function custom($registered)

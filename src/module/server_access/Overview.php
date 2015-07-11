@@ -70,9 +70,7 @@ class Overview extends Window
 
                 $ul->addLine(new html\String(
                     sprintf(
-                        _('Protocol: %s'),
-                          strtoupper(Utils::serviceToProto($user['service'])
-                        )
+                        _('Protocol: %s'), strtoupper($user['subservice'])
                     )
                 ));
 

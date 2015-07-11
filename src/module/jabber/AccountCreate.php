@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,23 +25,25 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class AccountCreate extends Window {
+class AccountCreate extends Window
+{
 
-    public function content() {
+    public function content()
+    {
         $window = $this->newFormWindow(
-                'account_create'
-                , _('New Account')
-                , null
-                , _('Create')
+            'account_create'
+            , _('New Account')
+            , null
+            , _('Create')
         );
 
-        $account = new gui\FieldEmailWithSelect('node', 'domain', _('Node'));
+        $account  = new gui\FieldEmailWithSelect('node', 'domain', _('Node'));
         $password = new gui\FieldNewPassword('password');
 
         $window->getForm()->addChild($account);
         $window->getForm()->addChild($password);
 
-        $domains = $this->db->availableDomains(['jabber'])->fetchAll();
+        $domains = $this->db->getUsableDomains('jabber', 'account')->fetchAll();
         foreach ($domains as $domain) {
             $account->getDomain()->addOption($domain['domain']);
         }
@@ -52,12 +53,12 @@ class AccountCreate extends Window {
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form) {
+    protected function handleSubmit(gui\FormPost $form)
+    {
         if ($form->correctSubmitted()) {
             $params = $form->getVal(['node', 'domain', 'password']);
             $this->db->accountCreate($params);
             throw new \hemio\edentata\exception\Successful;
         }
     }
-
 }

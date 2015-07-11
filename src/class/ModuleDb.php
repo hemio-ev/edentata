@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -24,36 +23,53 @@ namespace hemio\edentata;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ModuleDb {
-
+class ModuleDb
+{
     /**
      *
      * @var \PDO
      */
     public $pdo;
 
-    public function __construct(\PDO $pdo) {
+    public function __construct(\PDO $pdo)
+    {
         $this->pdo = $pdo;
     }
 
-    public function beginTransaction() {
+    public function beginTransaction()
+    {
         $this->pdo->beginTransaction();
     }
 
-    public function commit() {
+    public function commit()
+    {
         $this->pdo->commit();
     }
 
-    public function availableDomains(array $services) {
+    public function availableDomains(array $services)
+    {
         if (count($services) > 1)
             throw new exception\Error('Multiple services not implemented.');
 
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo, 'dns.sel_available_service'
+            $this->pdo, 'dns.sel_available_service'
         );
         $stmt->options('WHERE service = :service');
 
         return $stmt->execute(['service' => $services[0]]);
     }
 
+    /**
+     *
+     * @return \PDOStatement
+     */
+    public function getUsableDomains($service, $subservice)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo, 'dns.sel_usable_domain',
+            ['p_service' => $service, 'p_subservice' => $subservice]
+        );
+
+        return $stmt->execute();
+    }
 }

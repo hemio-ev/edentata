@@ -80,7 +80,7 @@ class UserDetails extends Window
         else
             $status = _('Disabled');
 
-        $proto = Utils::serviceToProto($userData['service']);
+        $proto = $userData['subservice'];
 
         $fieldset = new gui\Fieldset(_('Details'));
 

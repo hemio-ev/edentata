@@ -59,6 +59,8 @@ class Overview extends Window
 
         $list = new gui\Listbox();
         foreach ($this->db->registeredSelect() as $domain) {
+            $unmanaged = $domain['subservice'] == 'unmanaged' ?
+                ' ['._('unmanged').']' : '';
             $list->addLinkEntry(
                 $this->request->derive(
                     'registered_details'
@@ -66,7 +68,8 @@ class Overview extends Window
                 )
                 ,
                     new \hemio\html\String(
-                sprintf('%s (%s)', $domain['domain'], $domain['public_suffix']))
+                sprintf('%s (%s)%s', $domain['domain'],
+                        $domain['public_suffix'], $unmanaged))
                 , $domain['backend_status']
             );
         }

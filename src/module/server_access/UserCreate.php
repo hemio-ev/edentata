@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,15 +26,19 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class UserCreate extends Window {
+class UserCreate extends Window
+{
 
-    public function content($service) {
-        $window = $this->newFormWindow('user_create', _('New User'), $service, _('Create'));
+    public function content($service)
+    {
+        $window = $this->newFormWindow('user_create', _('New User'), $service,
+                                                        _('Create'));
 
         $user = new form\FieldText('user', _('User Name'));
         $user->setRequired();
 
-        $usePassword = new gui\FieldSwitch('use_password', _('Enable Password Login'));
+        $usePassword = new gui\FieldSwitch('use_password',
+                                           _('Enable Password Login'));
         $usePassword->getControlElement()->setAttribute('checked', true);
         $usePassword->getControlElement()->addCssClass('display_control');
         $usePassword->getControlElement()->addCssClass('display_control_2');
@@ -44,9 +47,11 @@ class UserCreate extends Window {
         $password->getPassword()->setRequired(false);
         $password->getPasswordRepeat()->setRequired(false);
 
-        $serviceName = new form\FieldSelect('service_entity_name', _('Host/Server'));
+        $serviceName = new form\FieldSelect('service_entity_name',
+                                            _('Host/Server'));
 
-        $activatableServices = $this->db->activatableServiceSelect($service)->fetchAll();
+        $activatableServices = $this->db->getUsableDomains(
+                'server_access', $service)->fetchAll();
         foreach ($activatableServices as $serv) {
             $serviceName->addOption($serv['service_entity_name']);
         }
@@ -57,12 +62,12 @@ class UserCreate extends Window {
         $window->getForm()->addChild($password);
 
         $this->handleSubmit(
-                $window->getForm()
-                , $serviceName
-                , $user
-                , $usePassword
-                , $password
-                , $service
+            $window->getForm()
+            , $serviceName
+            , $user
+            , $usePassword
+            , $password
+            , $service
         );
 
         return $window;
@@ -75,14 +80,15 @@ class UserCreate extends Window {
     , gui\FieldSwitch $usePassword
     , gui\FieldNewPassword $password
     , $service
-    ) {
+    )
+    {
         if (
-                $form->submitted() &&
-                $user->dataValid() &&
-                $serviceName->dataValid()
+            $form->submitted() &&
+            $user->dataValid() &&
+            $serviceName->dataValid()
         ) {
             if (!$usePassword->getValueUser() || $password->dataValid()) {
-                $params = $form->getVal(['user', 'service_entity_name']);
+                $params              = $form->getVal(['user', 'service_entity_name']);
                 $params['p_service'] = $service;
 
                 if ($usePassword->getValueUser())
@@ -94,5 +100,4 @@ class UserCreate extends Window {
             }
         }
     }
-
 }

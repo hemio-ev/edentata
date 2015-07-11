@@ -52,7 +52,7 @@ class RedirectionCreate extends Window
             ->addChild($fieldsetTo)
             ->addChild($to);
 
-        $domains = $this->db->getPossibleDomains();
+        $domains = $this->db->getUsableDomains('email', 'redirection');
         while ($domain  = $domains->fetch()) {
             $from->getDomain()->addOption($domain['domain'], $domain['domain']);
         }

@@ -52,7 +52,7 @@ class MailboxCreate extends Window
             ->addChild($fieldsetPassword)
             ->addChild($password);
 
-        $domains = $this->db->getPossibleDomains();
+        $domains = $this->db->getUsableDomains('email', 'mailbox');
         while ($domain  = $domains->fetch()) {
             $email->getDomain()->addOption(
                 $domain['domain']

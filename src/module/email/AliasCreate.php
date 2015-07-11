@@ -54,7 +54,7 @@ class AliasCreate extends Window
             ->addChild($fieldsetMailbox)
             ->addChild($mailbox);
 
-        $domains = $this->db->getPossibleDomains();
+        $domains = $this->db->getUsableDomains('email', 'alias');
         while ($domain  = $domains->fetch()) {
             $email->getDomain()->addOption($domain['domain'], $domain['domain']);
         }

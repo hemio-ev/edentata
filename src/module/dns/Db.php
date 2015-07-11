@@ -149,6 +149,18 @@ class Db extends \hemio\edentata\ModuleDb
             )->execute();
     }
 
+    public function registeredSelectSingle($domain)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'dns.sel_registered'
+        );
+
+        $stmt->options('WHERE domain = :domain');
+
+        return $stmt->execute(['domain' => $domain]);
+    }
+
     public function resellerRegisteredCreate(array $params)
     {
         (new sql\QuerySelectFunction(
