@@ -17,9 +17,10 @@ A toothless frontend for the hosting-service management carnivora.
 ### Requiremenets
 
 Required Debian packages
-- php5-pgsql
 - cracklib-runtime
+- gettext
 - php5 (>= 5.6)
+- php5-pgsql
 
 # Apache2 configuration
 
