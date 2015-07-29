@@ -46,6 +46,11 @@ class ListDetails extends Window
             )
             , true);
 
+        $listData = $this->db->listSelect($list)->fetch();
+
+        $window->getForm()->addChild(new gui\Output(_('List Admin'),
+                                                      $listData['admin']));
+
         $this->subscribers($window, $list);
 
         return $window;

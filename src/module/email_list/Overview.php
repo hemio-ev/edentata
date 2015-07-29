@@ -58,7 +58,8 @@ class Overview extends Window
                 $addr = $list['localpart'].'@'.$list['domain'];
                 $listbox->addLinkEntry(
                     $this->module->request->derive('list_details', $addr)
-                    , new String($addr)
+                    ,
+                                                   new String($addr.' ('.$list['num_subscribers'].')')
                     , $list['backend_status']
                 );
             }
