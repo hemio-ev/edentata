@@ -7,3 +7,4 @@ modules_nav:
  - server_access
  - web
 base_url: '/edentata/'
+support_url: 'mailto:support@domain.example'

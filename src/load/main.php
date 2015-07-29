@@ -177,7 +177,7 @@ try {
     }
 
     $span   = new html\Span;
-    $span[] = new html\String('Edentata – User: '.$_SERVER['PHP_AUTH_USER']);
+    $span[] = new html\String(_('User').': '.$_SERVER['PHP_AUTH_USER']);
     $header->addChild($span);
 
     $header[] = new gui\Link(
@@ -213,6 +213,10 @@ try {
         $header[] = $ul;
     }
 
+    $aSupport   = new html\A;
+    $aSupport->setAttribute('href', $config['support_url']);
+    $aSupport[] = new html\String(_('Support'));
+    $header[]   = $aSupport;
 
     $aLogout   = new html\A;
     $aLogout->setAttribute('href', '?auth=logout');
@@ -236,7 +240,7 @@ try {
 
 # modules
     if ($request->role === 'settings') {
-        $title->setValue(_('Edentata – Settings'));
+        $title->setValue(sprintf($config['title'], _('Settings')));
 
         $nav   = new gui\Window(_('Settings'));
         $list  = new gui\Sidebar();
@@ -266,7 +270,7 @@ try {
 
         $loadedModule = new LoadModule($activeModuleName, $pdo);
 
-        $title->setValue(sprintf(_('Edentata – %s'), $loadedModule->getName()));
+        $title->setValue(sprintf($config['title'], $loadedModule->getName()));
 
 # generate content
         $content = $loadedModule->getContent($request, $i10n);

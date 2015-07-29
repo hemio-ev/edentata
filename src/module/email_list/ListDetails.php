@@ -20,6 +20,7 @@ namespace hemio\edentata\module\email_list;
 
 use hemio\edentata\gui;
 use hemio\form;
+use hemio\edentata\exception;
 
 /**
  * Description of ListDetails
@@ -47,9 +48,11 @@ class ListDetails extends Window
             , true);
 
         $listData = $this->db->listSelect($list)->fetch();
+        if (!$listData)
+            throw new exception\Error(_('Email list does not exist.'));
 
-        $window->getForm()->addChild(new gui\Output(_('List Admin'),
-                                                      $listData['admin']));
+        $window->getForm()->addChild(
+            new gui\Output(_('List Owner'), $listData['admin']));
 
         $this->subscribers($window, $list);
 

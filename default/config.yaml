@@ -27,3 +27,9 @@ locales:
 # base URL: can be relative or absolute
 base_url: '/'
 
+# document title, must contain one %s
+title: 'Edentata – %s'
+
+# support URL, disabled if set to off
+support_url: 'https://git.hemio.de/hemio/edentata'
+
