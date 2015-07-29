@@ -123,7 +123,7 @@ class SiteCreate extends Window
         $window->getForm()->addChild($https);
 
 
-        $domains = $this->db->availableDomainsNewSite()->fetchAll();
+        $domains = $this->db->getUsableDomains('web', 'site')->fetchAll();
         foreach ($domains as $data) {
             $domain->addOption($data['domain']);
         }

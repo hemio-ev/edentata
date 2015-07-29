@@ -50,7 +50,7 @@ class UserCreate extends Window
         $serviceName = new form\FieldSelect('service_entity_name',
                                             _('Host/Server'));
 
-        $activatableServices = $this->db->getUsableDomains(
+        $activatableServices = $this->db->hostSelect(
                 'server_access', $service)->fetchAll();
         foreach ($activatableServices as $serv) {
             $serviceName->addOption($serv['service_entity_name']);
@@ -88,8 +88,8 @@ class UserCreate extends Window
             $serviceName->dataValid()
         ) {
             if (!$usePassword->getValueUser() || $password->dataValid()) {
-                $params              = $form->getVal(['user', 'service_entity_name']);
-                $params['p_service'] = $service;
+                $params                 = $form->getVal(['user', 'service_entity_name']);
+                $params['p_subservice'] = $service;
 
                 if ($usePassword->getValueUser())
                     $params += $form->getVal(['password']);

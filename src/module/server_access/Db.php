@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,9 +25,11 @@ use hemio\edentata\sql;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Db extends \hemio\edentata\ModuleDb {
+class Db extends \hemio\edentata\ModuleDb
+{
 
-    public function userDelete($params) {
+    public function userDelete($params)
+    {
         (new sql\QuerySelectFunction(
         $this->pdo
         , 'server_access.del_user'
@@ -36,7 +37,8 @@ class Db extends \hemio\edentata\ModuleDb {
         ))->execute();
     }
 
-    public function userCreate($params) {
+    public function userCreate($params)
+    {
         (new sql\QuerySelectFunction(
         $this->pdo
         , 'server_access.ins_user'
@@ -44,7 +46,8 @@ class Db extends \hemio\edentata\ModuleDb {
         ))->execute();
     }
 
-    public function userPassword($params) {
+    public function userPassword($params)
+    {
         (new sql\QuerySelectFunction(
         $this->pdo
         , 'server_access.upd_user'
@@ -52,18 +55,20 @@ class Db extends \hemio\edentata\ModuleDb {
         ))->execute();
     }
 
-    public function userSelect() {
+    public function userSelect()
+    {
         return
-                (new sql\QuerySelectFunction(
-                $this->pdo
-                , 'server_access.sel_user'
-                ))->execute();
+            (new sql\QuerySelectFunction(
+            $this->pdo
+            , 'server_access.sel_user'
+            ))->execute();
     }
 
-    public function userSelectSingle($user, $serviceName) {
+    public function userSelectSingle($user, $serviceName)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'server_access.sel_user'
+            $this->pdo
+            , 'server_access.sel_user'
         );
 
         $stmt->options('WHERE "user" = :user AND service_entity_name = :name');
@@ -71,10 +76,11 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute(['user' => $user, 'name' => $serviceName]);
     }
 
-    public function activatableServiceSelect($service) {
+    public function activatableServiceSelect($service)
+    {
         $stmt = new sql\QuerySelectFunction(
-                $this->pdo
-                , 'dns.sel_activatable_service')
+            $this->pdo
+            , 'dns.sel_activatable_service')
         ;
 
         $stmt->select(['service_entity_name']);
@@ -83,4 +89,21 @@ class Db extends \hemio\edentata\ModuleDb {
         return $stmt->execute(['service' => $service]);
     }
 
+    public function hostSelect($service, $subservice = null)
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'system.sel_usable_host'
+            , ['p_service' => $service])
+        ;
+
+        $params = [];
+
+        if ($subservice !== null) {
+            $stmt->options('WHERE subservice = :subservice');
+            $params['subservice'] = $subservice;
+        }
+
+        return $stmt->execute($params);
+    }
 }

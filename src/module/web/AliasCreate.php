@@ -44,7 +44,7 @@ class AliasCreate extends Window
 
         $window->getForm()->addChild($domain);
 
-        $domains = $this->db->availableDomainsWeb($sitePort)->fetchAll();
+        $domains = $this->db->getUsableDomains('web', 'alias');
         foreach ($domains as $data) {
             $domain->addOption($data['domain']);
         }
