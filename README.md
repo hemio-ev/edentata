@@ -23,7 +23,7 @@ Required Debian packages
 - php5 (>= 5.6)
 - php5-pgsql
 
-# Installation
+### Installation
 
 - Run `make` to build localizations
 - Based on the *examples/config.yaml* create a config at */etc/edentata/config.yaml*
