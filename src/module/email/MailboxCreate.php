@@ -67,16 +67,12 @@ class MailboxCreate extends Window
 
     protected function handleSubmit(gui\FormPost $form)
     {
-        if ($form->submitted()) {
-            if ($form->dataValid()) {
-                $this->db->mailboxCreate(
-                    $form->getVal(['localpart', 'domain', 'password'])
-                );
+        if ($form->correctSubmitted()) {
+            $this->db->mailboxCreate(
+                $form->getVal(['localpart', 'domain', 'password'])
+            );
 
-                throw new exception\Successful();
-            } else {
-                // find error?
-            }
+            throw new exception\Successful();
         }
     }
 }

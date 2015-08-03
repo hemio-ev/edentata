@@ -39,6 +39,10 @@ class RegisteredDetails extends Window
             $this->request->derive('custom_create', true)
             , _('Create custom DNS record')
         );
+        $menu->addEntry(
+            $this->request->derive('registered_delete', true)
+            , _('Delete registered domain')
+        );
 
         $window->addButtonRight($menu);
 

@@ -116,6 +116,14 @@ class Module extends \hemio\edentata\Module
                 }
                 break;
 
+            case 'registered_delete':
+                try {
+                    $content = (new RegisteredDelete($this))->content($this->request->subject);
+                } catch (exception\Successful $e) {
+                    edentata\Utils::htmlRedirect($this->request->derive());
+                }
+                break;
+
             case 'registered_details':
                 $content = (new RegisteredDetails($this))->content($this->request->subject);
                 break;

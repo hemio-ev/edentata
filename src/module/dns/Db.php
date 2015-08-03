@@ -141,6 +141,15 @@ class Db extends \hemio\edentata\ModuleDb
             )->execute();
     }
 
+    public function registeredDelete($domain)
+    {
+        return (new sql\QuerySelectFunction(
+            $this->pdo
+            , 'dns.del_registered'
+            , ['p_domain' => $domain])
+            )->execute();
+    }
+
     public function registeredSelect()
     {
         return (new sql\QuerySelectFunction(

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata dns\n"
-"POT-Creation-Date: 2015-04-28 00:56+0100\n"
-"PO-Revision-Date: 2015-04-28 00:57+0100\n"
+"POT-Creation-Date: 2015-08-03 15:27+0100\n"
+"PO-Revision-Date: 2015-08-03 15:33+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -15,12 +15,12 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: AdminC.php:34 AdminC.php:37 RegisteredCreate.php:47
-#: RegisteredDetails.php:82
+#: AdminC.php:34 AdminC.php:37 RegisteredCreate.php:53
+#: RegisteredDetails.php:97
 msgid "Admin Contact"
 msgstr "Admin Kontakt"
 
-#: AdminC.php:35 RegisteredDetails.php:87
+#: AdminC.php:35 RegisteredDetails.php:102
 msgid "Change"
 msgstr "Ändern"
 
@@ -210,7 +210,7 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: Module.php:155 RegisteredCreate.php:41 RegisteredDetails.php:35
+#: Module.php:159 RegisteredCreate.php:41 RegisteredDetails.php:35
 msgid "Domain"
 msgstr ""
 
@@ -230,11 +230,15 @@ msgstr "Domain Registrieren"
 msgid "Registered Domains"
 msgstr "Registrierte Domains"
 
-#: Overview.php:75
+#: Overview.php:63
+msgid "unmanged"
+msgstr ""
+
+#: Overview.php:78
 msgid "You do not own a registered domain."
 msgstr "Sie besitzen keine registrierte Domain."
 
-#: Overview.php:84
+#: Overview.php:87
 msgid "Handles"
 msgstr ""
 
@@ -244,33 +248,64 @@ msgstr "Neue Domain"
 
 #: RegisteredCreate.php:38
 msgid "Register"
-msgstr "Registrieren"
+msgstr "Kostenpflichtig Registrieren"
 
-#: RegisteredCreate.php:44 RegisteredDetails.php:79
+#: RegisteredCreate.php:45
+msgid "Managed by this System"
+msgstr "Durch dieses System verwaltet"
+
+#: RegisteredCreate.php:48
+msgid "Nameserver"
+msgstr ""
+
+#: RegisteredCreate.php:50 RegisteredDetails.php:93
 msgid "Registrant (Owner)"
 msgstr "Besitzer (Owner)"
+
+#: RegisteredDelete.php:33
+#, php-format
+msgid ""
+"Irrevokably delete the registered domain \"%s\". This operation cannot be "
+"made undone."
+msgstr "Möchten Sie die registrierte Domain \"%s\" unwiderruflich löschen?"
+
+#: RegisteredDelete.php:38 RegisteredDelete.php:41
+msgid "Delete Registered Domain"
+msgstr "Registrierte Domain Löschen"
 
 #: RegisteredDetails.php:40
 msgid "Create custom DNS record"
 msgstr "Benutzerdefiniert DNS-Eintrag erstellen"
 
-#: RegisteredDetails.php:51
+#: RegisteredDetails.php:44
+msgid "Delete registered domain"
+msgstr "Registrierte Domain löschen"
+
+#: RegisteredDetails.php:55
 msgid "Add Sub-Domain"
 msgstr "Neue Sub-Domain"
 
-#: RegisteredDetails.php:62
+#: RegisteredDetails.php:66
 msgid "Custom DNS Entries"
 msgstr "Selbsterstellte DNS-Einträge"
 
-#: RegisteredDetails.php:70
+#: RegisteredDetails.php:74
 msgid "Domain Details"
 msgstr ""
 
-#: RegisteredDetails.php:76
-msgid "No detailed domain information available"
-msgstr ""
+#: RegisteredDetails.php:81
+msgid "Domain not managed via this system."
+msgstr "Diese Domain wird nicht durch dieses System verwaltet."
 
-#: RegisteredDetails.php:97
+#: RegisteredDetails.php:84
+msgid "Primary Nameserver"
+msgstr "Primärer Nameserver"
+
+#: RegisteredDetails.php:90
+msgid "No detailed domain information available"
+msgstr "Keine detaillierten Informationen verfügbar"
+
+#: RegisteredDetails.php:113
 msgid "Domain Service Activation"
 msgstr "Domain Dienst-Aktivierung"
 
