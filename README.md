@@ -19,21 +19,13 @@ A toothless frontend for the hosting-service management carnivora.
 Required Debian packages
 - cracklib-runtime
 - gettext
+- make
 - php5 (>= 5.6)
 - php5-pgsql
 
-# Apache2 configuration
+# Installation
 
-```
-AliasMatch ^<BASE_URL>(?!static).*/(.*)$ /usr/share/edentata/src/htdocs/index.php`
-Alias <BASE_URL>/static/ /usr/share/edentata/src/htdocs/static/
-```
+- Run `make` to build localizations
+- Based on the *examples/config.yaml* create a config at */etc/edentata/config.yaml*
+- Configure your webserver to serve *src/htdocs/index.php* as default (see *examples/apache2.conf*)
 
-Where the edentata `base_url` option is set to `<BASE_URL>`
-
-Example:
-
-```
-AliasMatch ^/edentata/(?!static).*/(.*)$ /usr/share/edentata/src/htdocs/index.php
-Alias /edentata/static/ /usr/share/edentata/src/htdocs/static/
-```
