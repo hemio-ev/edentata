@@ -32,7 +32,7 @@ $document->getHtml()->getHead()->addCssFile('static/design/style.css');
 
 $pdo = new sql\Connection($config['database_dsn']);
 
-$loadedModule = new LoadModule('login_http', $pdo);
+$loadedModule = new LoadModule('login_http', $pdo, $i10n);
 $i10n->setDomainModule($loadedModule);
 
 $document->getHtml()->getBody()->addChild(
