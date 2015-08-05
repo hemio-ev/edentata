@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata jabber\n"
-"POT-Creation-Date: 2015-08-05 18:06+0100\n"
-"PO-Revision-Date: 2015-08-05 18:11+0100\n"
+"POT-Creation-Date: 2015-08-05 18:52+0100\n"
+"PO-Revision-Date: 2015-08-05 18:52+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -54,15 +54,15 @@ msgstr "Passwort ändern"
 msgid "Delete account"
 msgstr "Konto löschen"
 
-#: AccountPassword.php:34
+#: AccountPassword.php:35
 msgid "Account Password"
 msgstr "Konto-Passwort"
 
-#: AccountPassword.php:36
-msgid "Change"
-msgstr "Ändern"
+#: AccountPassword.php:37
+msgid "Change Password"
+msgstr "Passwort ändern"
 
-#: AccountPassword.php:56
+#: AccountPassword.php:58
 msgid "Your password has been changed successfully."
 msgstr "Ihr Passwort wurde erfolgreich geändert."
 
@@ -81,6 +81,9 @@ msgstr "Konto Erstellen"
 #: Overview.php:54
 msgid "You do not own a jabber account."
 msgstr "Sie besitzen kein Jabber-Konto."
+
+#~ msgid "Change"
+#~ msgstr "Ändern"
 
 #~ msgid "Possible Actions"
 #~ msgstr "Verfügbare Aktionen"

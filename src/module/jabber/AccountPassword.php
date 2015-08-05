@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,14 +25,16 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class AccountPassword extends Window {
+class AccountPassword extends Window
+{
 
-    public function content($account) {
+    public function content($account)
+    {
         $window = $this->newFormWindow(
-                'account_password'
-                , _('Account Password')
-                , $account
-                , _('Change')
+            'account_password'
+            , _('Account Password')
+            , $account
+            , _('Change Password')
         );
 
         $password = new gui\FieldNewPassword('password');
@@ -45,20 +46,20 @@ class AccountPassword extends Window {
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $account) {
+    protected function handleSubmit(gui\FormPost $form, $account)
+    {
         if ($form->correctSubmitted()) {
             $params = Db::accountToArgs($account);
             $params+= $form->getVal(['password']);
 
             $this->db->accountPassword($params);
 
-            $e = new \hemio\edentata\exception\Successful(
-                    _('Your password has been changed successfully.')
+            $e         = new \hemio\edentata\exception\Successful(
+                _('Your password has been changed successfully.')
             );
             $e->backTo = $this->request->derive('details', $account);
 
             throw $e;
         }
     }
-
 }
