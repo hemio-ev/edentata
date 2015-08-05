@@ -68,14 +68,14 @@ class IntermediateCreate extends Window
             }
             $this->db->commit();
 
-            $e = new exception\Successful(sprintf(
+            $e = new exception\Successful(_msg(
                     ngettext(
                         'Added one intermediate certificate.'
                         ,
-                        'Added %s intermediate certificates.'
+                        'Added {number} intermediate certificates.'
                         , count($certs)
                     )
-                    , count($certs))
+                    , ['number' => count($certs)])
             );
 
             $e->backTo = $this->request->derive('site_details', $domain);

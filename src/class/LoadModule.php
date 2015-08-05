@@ -44,6 +44,12 @@ class LoadModule
     protected $pdo;
 
     /**
+     *
+     * @var I10n
+     */
+    protected $i10n;
+
+    /**
      * Returns true if the given string is a valid module name. Module names
      * must start with a lowercase letter and continue with at least one other
      * lowercase letter, number or underscore. It must not contain more then
@@ -70,10 +76,12 @@ class LoadModule
      *
      * @param string $moduleId
      */
-    public function __construct($moduleId, sql\Connection $pdo = null)
+    public function __construct($moduleId, sql\Connection $pdo = null,
+                                I10n $i10n = null)
     {
         $this->moduleId = $moduleId;
         $this->pdo      = $pdo;
+        $this->i10n     = $i10n;
 
         if (!self::validName($moduleId)) {
             $msg = sprintf(
@@ -121,7 +129,7 @@ class LoadModule
     public function getInstance(Request $request)
     {
         $moduleClass = $this->moduleClass;
-        return new $moduleClass($request, $this->pdo);
+        return new $moduleClass($request, $this->pdo, $this->i10n);
     }
 
     public function getContent(Request $request, I10n $i10n)

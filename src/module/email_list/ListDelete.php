@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,18 +26,21 @@ use hemio\edentata\module\email;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ListDelete extends Window {
+class ListDelete extends Window
+{
 
-    public function content($list) {
-        $message = _('Do you really want to delete this list?');
+    public function content($list)
+    {
+        $message = _msg(_('Are you sure you want to permanently delete the list "{address}"?')
+            , ['address' => $list]);
 
         $window = $this->newDeleteWindow(
-                'list_delete'
-                , _('Delete List')
-                , $list
-                , $message
-                , _('Delete List')
-                , true
+            'list_delete'
+            , _('Delete List')
+            , $list
+            , $message
+            , _('Delete List')
+            , true
         );
 
         $this->handleSubmit($window->getForm(), $list);
@@ -46,7 +48,8 @@ class ListDelete extends Window {
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $list) {
+    protected function handleSubmit(gui\FormPost $form, $list)
+    {
         if ($form->correctSubmitted()) {
             $params = email\Db::emailAddressToArgs($list);
 
@@ -55,5 +58,4 @@ class ListDelete extends Window {
             throw new \hemio\edentata\exception\Successful;
         }
     }
-
 }

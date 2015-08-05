@@ -30,8 +30,9 @@ class RegisteredDelete extends Window
 
     public function content($domain)
     {
-        $message = sprintf(_('Irrevokably delete the   registered domain "%s". '
-                .'This operation cannot be made undone.'), $domain);
+        $message = _msg(_('Are you sure you want to irrevokably delete the registered domain "{domain}"? '
+                .'This operation cannot be made undone.')
+            , ['domain' => $domain]);
 
         $window = $this->newDeleteWindow(
             'registered_delete'

@@ -21,6 +21,7 @@ Required Debian packages
 - gettext
 - make
 - php5 (>= 5.6)
+- php5-intl
 - php5-pgsql
 
 ### Installation

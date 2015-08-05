@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata jabber\n"
-"POT-Creation-Date: 2015-04-28 00:52+0100\n"
-"PO-Revision-Date: 2015-04-28 00:52+0100\n"
+"POT-Creation-Date: 2015-08-05 18:06+0100\n"
+"PO-Revision-Date: 2015-08-05 18:11+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -15,23 +15,26 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: AccountCreate.php:34
+#: AccountCreate.php:35
 msgid "New Account"
 msgstr "Neues Konto"
 
-#: AccountCreate.php:36
+#: AccountCreate.php:37
 msgid "Create"
 msgstr "Erstellen"
 
-#: AccountCreate.php:39
+#: AccountCreate.php:40
 msgid "Node"
 msgstr "Knoten (Node)"
 
-#: AccountDelete.php:32
-msgid "Do you really want to delete this jabber account?"
+#: AccountDelete.php:33
+msgid ""
+"Are you sure you want to permanently delete the jabber account \"{account}\"?"
 msgstr ""
+"Sind Sie sicher, dass Sie das Jabber-Konto \"{account}\" dauerhaft löschen "
+"wollen?"
 
-#: AccountDelete.php:36 AccountDelete.php:39
+#: AccountDelete.php:38 AccountDelete.php:41
 msgid "Delete Account"
 msgstr "Konto Löschen"
 
@@ -61,7 +64,7 @@ msgstr "Ändern"
 
 #: AccountPassword.php:56
 msgid "Your password has been changed successfully."
-msgstr ""
+msgstr "Ihr Passwort wurde erfolgreich geändert."
 
 #: Module.php:89
 msgid "Jabber"

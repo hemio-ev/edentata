@@ -21,6 +21,8 @@ namespace hemio\edentata;
 use hemio\html;
 use hemio\form;
 
+require 'src/load/functions.php';
+
 openlog('edentata', LOG_ODELAY, LOG_USER);
 ini_set('log_errors', true);
 ini_set('error_log', 'syslog');
@@ -185,7 +187,7 @@ try {
         , _('User Settings')
     );
 
-    $userModule = (new LoadModule('user', $pdo))->getInstance($request);
+    $userModule = (new LoadModule('user', $pdo, $i10n))->getInstance($request);
     $users      = $userModule->db->selectDeputy()->fetchAll();
 
     if (!empty($users)) {
@@ -249,7 +251,7 @@ try {
             $mainContent->addChild($nav);
 
         foreach ($config['modules_settings'] as $moduleId) {
-            $loadedModule = new LoadModule($moduleId, $pdo);
+            $loadedModule = new LoadModule($moduleId, $pdo, $i10n);
 
             $a = $list->addLinkEntry(
                 $request->deriveModule($moduleId)
@@ -260,7 +262,7 @@ try {
                 $a->addCssClass('selected');
         }
 
-        $loadedModule = new LoadModule($activeModuleName, $pdo);
+        $loadedModule = new LoadModule($activeModuleName, $pdo, $i10n);
 
         $content = $loadedModule->getContent($request, $i10n);
         $mainContent->addChild($content);
@@ -268,7 +270,7 @@ try {
         if (!in_array($activeModuleName, $modulesAllowed))
             throw new exception\Error(_('Tried to access unknown or disabled module'));
 
-        $loadedModule = new LoadModule($activeModuleName, $pdo);
+        $loadedModule = new LoadModule($activeModuleName, $pdo, $i10n);
 
         $title->setValue(sprintf($config['title'], $loadedModule->getName()));
 

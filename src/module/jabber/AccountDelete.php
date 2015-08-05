@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,17 +25,20 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class AccountDelete extends Window {
+class AccountDelete extends Window
+{
 
-    public function content($account) {
-        $message = _('Do you really want to delete this jabber account?');
+    public function content($account)
+    {
+        $message = _msg(_('Are you sure you want to permanently delete the jabber account "{account}"?')
+            , ['account' => $account]);
 
         $window = $this->newDeleteWindow(
-                'account_delete'
-                , _('Delete Account')
-                , $account
-                , $message
-                , _('Delete Account')
+            'account_delete'
+            , _('Delete Account')
+            , $account
+            , $message
+            , _('Delete Account')
         );
 
         $this->handleSubmit($window->getForm(), $account);
@@ -44,7 +46,8 @@ class AccountDelete extends Window {
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $account) {
+    protected function handleSubmit(gui\FormPost $form, $account)
+    {
         if ($form->correctSubmitted()) {
             $params = Db::accountToArgs($account);
 
@@ -53,5 +56,4 @@ class AccountDelete extends Window {
             throw new \hemio\edentata\exception\Successful;
         }
     }
-
 }

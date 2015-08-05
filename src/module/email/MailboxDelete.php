@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,23 +26,26 @@ use hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class MailboxDelete extends Window {
+class MailboxDelete extends Window
+{
 
-    public function content($address) {
-        $msg = _(
+    public function content($address)
+    {
+        $msg = _msg(
+            _(
                 'Are you sure you want to permanently delete the'
-                . ' mailbox "%1$s"? If you delete a mailbox, all stored '
-                . ' emails will be permanently lost and you will no'
-                . ' longer be reachable via "%1$s".'
-        );
+                .' mailbox "{address}"? If you delete a mailbox, all stored '
+                .' emails will be permanently lost and you will no'
+                .' longer be reachable via "{address}".'
+            ), ['address' => $address]);
 
         $window = $this->newDeleteWindow(
-                'mailbox_delete'
-                , 'Delete Mailbox'
-                , $address
-                , sprintf($msg, $address)
-                , _('Delete Mailbox')
-                , true
+            'mailbox_delete'
+            , _('Delete Mailbox')
+            , $address
+            , $msg
+            , _('Delete Mailbox')
+            , true
         );
 
         $this->handleSubmit($window->getForm(), $address);
@@ -51,7 +53,8 @@ class MailboxDelete extends Window {
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $address) {
+    protected function handleSubmit(gui\FormPost $form, $address)
+    {
 
         if ($form->submitted()) {
             if ($form->dataValid()) {
@@ -63,5 +66,4 @@ class MailboxDelete extends Window {
             }
         }
     }
-
 }

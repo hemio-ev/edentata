@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -18,38 +17,44 @@
  */
 
 namespace hemio\edentata\module\email;
+
 use hemio\edentata\gui;
+
 /**
  * Description of RedirectionDelete
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class RedirectionDelete extends Window {
+class RedirectionDelete extends Window
+{
 
-    public function content($redirection) {
-        $message = _('Do you really want to delete this redirection?');
+    public function content($redirection)
+    {
+        $message = _msg(_('Are you sure you want to permanently delete the redirection "{address}"?'
+                .'After deleting the redirection you will no longer be reachable via "{address}".')
+            , ['address' => $redirection]);
 
         $window = $this->newDeleteWindow(
-                'redirection_delete'
-                , _('Delete Redirection')
-                , $redirection
-                , $message
-                , _('Delete Redirection')
+            'redirection_delete'
+            , _('Delete Redirection')
+            , $redirection
+            , $message
+            , _('Delete Redirection')
         );
 
         $this->handleSubmit($window->getForm(), $redirection);
-        
+
         return $window;
     }
 
-    public function handleSubmit(gui\FormPost $form, $redirection ) {
+    public function handleSubmit(gui\FormPost $form, $redirection)
+    {
         if ($form->correctSubmitted()) {
             $params = Db::emailAddressToArgs($redirection);
-            
+
             $this->db->redirectionDelete($params);
-            
+
             throw new \hemio\edentata\exception\Successful;
         }
     }
-    
 }

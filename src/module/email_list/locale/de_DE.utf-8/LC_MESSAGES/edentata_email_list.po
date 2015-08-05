@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata email lists\n"
-"POT-Creation-Date: 2015-04-28 00:51+0100\n"
-"PO-Revision-Date: 2015-04-28 00:51+0100\n"
+"POT-Creation-Date: 2015-08-05 18:10+0100\n"
+"PO-Revision-Date: 2015-08-05 18:14+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -15,55 +15,63 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: ListCreate.php:35
+#: ListCreate.php:36
 msgid "New Mailing List"
 msgstr "Neue Mailingliste"
 
-#: ListCreate.php:37
+#: ListCreate.php:38
 msgid "Create"
 msgstr "Erstellen"
 
-#: ListCreate.php:41 ListUpdate.php:43
+#: ListCreate.php:42 ListDetails.php:55 ListUpdate.php:43
 msgid "List Owner"
 msgstr "Listeninhaber"
 
-#: ListCreate.php:47
-msgid "The address of the list owner is used for unsubscriber requests."
+#: ListCreate.php:48
+msgid "The address of the list owner is used for unsubscribe requests."
 msgstr ""
+"Die Adresse des Listeninhaber wir zur Information über unzustellbare E-Mails "
+"genutzt."
 
-#: ListDelete.php:33
-msgid "Do you really want to delete this list?"
+#: ListDelete.php:34
+msgid "Are you sure you want to permanently delete the list \"{address}\"?"
 msgstr ""
+"Sind Sie sicher, dass Sie die Mailingliste \"{address}\" dauerhaft löschen "
+"wollen?"
 
-#: ListDelete.php:37 ListDelete.php:40
+#: ListDelete.php:39 ListDelete.php:42
 msgid "Delete List"
 msgstr "Liste Löschen"
 
-#: ListDetails.php:34 ListDetails.php:52 ListUpdate.php:38
+#: ListDetails.php:37 ListUpdate.php:38
 msgid "Email List"
 msgstr "Mailingliste"
 
-#: ListDetails.php:40 SubscriberCreate.php:36
+#: ListDetails.php:46 SubscriberCreate.php:36
 msgid "Add Subscriber"
 msgstr "Neuer Abonnent"
 
-#: ListDetails.php:56
+#: ListDetails.php:52
+msgid "Email list does not exist."
+msgstr "Mailingliste existiert nicht."
+
+#: ListDetails.php:66
 msgid "Change list owner"
 msgstr "Listeninhaber ändern"
 
-#: ListDetails.php:61
+#: ListDetails.php:71
 msgid "Delete list"
 msgstr "Liste löschen"
 
-#: ListDetails.php:71 SubscribersMove.php:76
+#: ListDetails.php:79 SubscribersMove.php:76
 msgid "Subscribers"
 msgstr "Abonnenten"
 
-#: ListDetails.php:89
+#: ListDetails.php:97
 msgid "Move …"
 msgstr "Verschieben …"
 
-#: ListDetails.php:97 SubscribersUnsubscribe.php:43
+#: ListDetails.php:105 SubscribersUnsubscribe.php:43
 msgid "Unsubscribe"
 msgstr "Austragen"
 
@@ -73,11 +81,11 @@ msgstr "Speichern"
 
 #: ListUpdate.php:47
 msgid "The list owner is NOT automatically subscribed to the mailing list."
-msgstr ""
+msgstr "Der Listeninhaber ist NICHT automatisch Abonnent der Mailingliste."
 
 #: ListUpdate.php:51
 msgid "List not found."
-msgstr ""
+msgstr "Mailingliste nicht gefunden."
 
 #: Module.php:35 Overview.php:34
 msgid "Mailing Lists"

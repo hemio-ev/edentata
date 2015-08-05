@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata dns\n"
-"POT-Creation-Date: 2015-08-03 15:27+0100\n"
-"PO-Revision-Date: 2015-08-03 15:33+0100\n"
+"POT-Creation-Date: 2015-08-05 18:24+0100\n"
+"PO-Revision-Date: 2015-08-05 18:25+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -200,7 +200,7 @@ msgstr "Handle Löschen"
 
 #: HandleDelete.php:37
 msgid "Are you sure you want to delete this handle?"
-msgstr ""
+msgstr "Sind Sie sicher, dass Sie dieses Handle löschen möchten?"
 
 #: HandleDetails.php:35
 msgid "Handle"
@@ -210,7 +210,7 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: Module.php:159 RegisteredCreate.php:41 RegisteredDetails.php:35
+#: Module.php:163 RegisteredCreate.php:41 RegisteredDetails.php:35
 msgid "Domain"
 msgstr ""
 
@@ -263,13 +263,15 @@ msgid "Registrant (Owner)"
 msgstr "Besitzer (Owner)"
 
 #: RegisteredDelete.php:33
-#, php-format
 msgid ""
-"Irrevokably delete the registered domain \"%s\". This operation cannot be "
-"made undone."
-msgstr "Möchten Sie die registrierte Domain \"%s\" unwiderruflich löschen?"
+"Are you sure you want to irrevokably delete the registered domain "
+"\"{domain}\"? This operation cannot be made undone."
+msgstr ""
+"Sind Sie sicher, dass Sie die registrierte Domain \"{domain}\" "
+"unwiderruflich löschen möchten? Dieser Vorgang kann nicht rückgängig gemacht "
+"werden."
 
-#: RegisteredDelete.php:38 RegisteredDelete.php:41
+#: RegisteredDelete.php:39 RegisteredDelete.php:42
 msgid "Delete Registered Domain"
 msgstr "Registrierte Domain Löschen"
 

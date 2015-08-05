@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,22 +25,23 @@ use hemio\edentata\gui;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class UserDelete extends Window {
+class UserDelete extends Window
+{
 
-    public function content($user, $serviceName) {
-        $message = sprintf(
-                _('Are you sure you want to delete "%1$s" @ %2$s account?')
-                , $user
-                , $serviceName
+    public function content($user, $serviceName)
+    {
+        $message = _msg(
+            _('Are you sure you want to delete the server access "{user}" at host "{host}"?')
+            , ['user' => $user, 'host' => $serviceName]
         );
 
         $window = $this->newDeleteWindow(
-                'user_delete'
-                , _('Delete User')
-                , $user . ' @ ' . $serviceName
-                , $message
-                , _('Delete User')
-                , true
+            'user_delete'
+            , _('Delete User')
+            , $user.'@'.$serviceName
+            , $message
+            , _('Delete User')
+            , true
         );
 
         $this->handleSubmit($window->getForm(), $user, $serviceName);
@@ -49,7 +49,8 @@ class UserDelete extends Window {
         return $window;
     }
 
-    protected function handleSubmit(gui\FormPost $form, $user, $serviceName) {
+    protected function handleSubmit(gui\FormPost $form, $user, $serviceName)
+    {
         if ($form->correctSubmitted()) {
             $params = [
                 'p_user' => $user,
@@ -61,5 +62,4 @@ class UserDelete extends Window {
             throw new \hemio\edentata\exception\Successful;
         }
     }
-
 }

@@ -30,16 +30,17 @@ class AliasDelete extends Window
 
     public function content($mailbox, $alias)
     {
-        $message = _(
-            'Do you really want to delete the alias "%1$s"? After'.
-            ' deleting the alias you will no longer be reachable via "%1$s".'
+        $message = _msg(_(
+                'Are you sure you want to permanently delete the alias "{alias}"? After'.
+                ' deleting the alias you will no longer be reachable via "{alias}".')
+            , ['alias' => $alias]
         );
 
         $window = $this->newDeleteWindow(
             'alias_delete'
             , _('Delete Alias')
             , $alias
-            , sprintf($message, $alias)
+            , $message
             , _('Delete Alias')
         );
 

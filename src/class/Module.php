@@ -39,16 +39,24 @@ abstract class Module implements ModuleInterface
     public $pdo;
 
     /**
+     *
+     * @var I10n
+     */
+    public $i10n;
+
+    /**
      * @return \hemio\html\Interface_\HtmlCode HTML code for module
      */
     abstract public function getContent();
 
     abstract protected function constructHook();
 
-    public function __construct(Request $request, sql\Connection $pdo)
+    public function __construct(Request $request, sql\Connection $pdo,
+                                I10n $i10n)
     {
         $this->request = $request;
         $this->pdo     = $pdo;
+        $this->i10n    = $i10n;
         $this->constructHook();
     }
 }

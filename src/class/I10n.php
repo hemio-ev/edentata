@@ -33,9 +33,10 @@ class I10n
     {
         $guessedLocale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
-        $locales = array_filter(self::$supportedLocales
+        $locales = array_filter(
+            self::$supportedLocales
             ,
-                                function ($supportedLocale) use ($guessedLocale) {
+            function ($supportedLocale) use ($guessedLocale) {
             return substr($supportedLocale, 0, 2) == substr($guessedLocale, 0, 2);
         }
         );
@@ -76,5 +77,16 @@ class I10n
     public function getLang()
     {
         return substr($this->locale, 0, 2);
+    }
+
+    /**
+     *
+     * @param string $pattern
+     * @param array $args
+     * @return string
+     */
+    public function msg($pattern, array $args)
+    {
+        return \MessageFormatter::formatMessage($this->locale, $pattern, $args);
     }
 }

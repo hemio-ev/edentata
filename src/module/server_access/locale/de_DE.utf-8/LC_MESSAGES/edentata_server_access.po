@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata server access\n"
-"POT-Creation-Date: 2015-04-28 00:53+0100\n"
-"PO-Revision-Date: 2015-04-28 00:53+0100\n"
+"POT-Creation-Date: 2015-08-05 18:17+0100\n"
+"PO-Revision-Date: 2015-08-05 18:19+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -37,30 +37,33 @@ msgstr ""
 msgid "Protocol: %s"
 msgstr "Protokoll: %s"
 
-#: UserCreate.php:33
+#: UserCreate.php:34
 msgid "New User"
 msgstr "Neuer Benutzer"
 
-#: UserCreate.php:33
+#: UserCreate.php:35
 msgid "Create"
 msgstr "Erstellen"
 
-#: UserCreate.php:35
+#: UserCreate.php:37
 msgid "User Name"
 msgstr "Benutzername"
 
-#: UserCreate.php:38 UserPassword.php:42
+#: UserCreate.php:41 UserPassword.php:42
 msgid "Enable Password Login"
 msgstr "Passwort-Anmeldung Aktivieren"
 
-#: UserCreate.php:47
+#: UserCreate.php:51
 msgid "Host/Server"
 msgstr ""
 
-#: UserDelete.php:33
-#, php-format
-msgid "Are you sure you want to delete \"%1$s\" @ %2$s account?"
+#: UserDelete.php:34
+msgid ""
+"Are you sure you want to delete the server access \"{user}\" at host "
+"\"{host}\"?"
 msgstr ""
+"Sind Sie sicher, dass Sie den Serverzugang \"{user}\" auf \"{host}\" "
+"dauerhaft löschen möchten?"
 
 #: UserDelete.php:40 UserDelete.php:43
 msgid "Delete User"

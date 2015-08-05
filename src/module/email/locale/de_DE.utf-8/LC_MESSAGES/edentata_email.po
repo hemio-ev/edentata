@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata email\n"
-"POT-Creation-Date: 2015-04-28 00:51+0100\n"
-"PO-Revision-Date: 2015-04-28 00:51+0100\n"
+"POT-Creation-Date: 2015-08-05 17:58+0100\n"
+"PO-Revision-Date: 2015-08-05 18:11+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -55,13 +55,15 @@ msgid "Mailbox"
 msgstr "Postfach"
 
 #: AliasDelete.php:34
-#, php-format
 msgid ""
-"Do you really want to delete the alias \"%1$s\"? After deleting the alias "
-"you will no longer be reachable via \"%1$s\"."
+"Are you sure you want to permanently delete the alias \"{alias}\"? After "
+"deleting the alias you will no longer be reachable via \"{alias}\"."
 msgstr ""
+"Sind Sie sicher, dass Sie das Alias \"{alias}\" dauerhaft löschen wollen? "
+"Nach dem das Alias gelöscht wurde, werden Sie nicht mehr über \"{alias}\" "
+"erreichbar sein."
 
-#: AliasDelete.php:40 AliasDelete.php:43
+#: AliasDelete.php:41 AliasDelete.php:44
 msgid "Delete Alias"
 msgstr "Alias Löschen"
 
@@ -73,43 +75,50 @@ msgstr "Die gewählte E-Mail-Adresse wird bereits verwendet."
 msgid "Password"
 msgstr "Passwort"
 
-#: MailboxDelete.php:34
-#, php-format
+#: MailboxDelete.php:36
 msgid ""
-"Are you sure you want to permanently delete the mailbox \"%1$s\"? If you "
-"delete a mailbox, all stored  emails will be permanently lost and you will "
-"no longer be reachable via \"%1$s\"."
+"Are you sure you want to permanently delete the mailbox \"{address}\"? If "
+"you delete a mailbox, all stored  emails will be permanently lost and you "
+"will no longer be reachable via \"{address}\"."
 msgstr ""
+"Sind Sie sicher, dass Sie das Postfach \"{address}\" dauerhaft löschen "
+"wollen? Nach dem das Postfach gelöscht wurde, werden alle gespeicherten "
+"Nachrichten gelöscht und Sie werden nicht mehr über \"{address}\" erreichbar "
+"sein."
 
-#: MailboxDelete.php:45
+#: MailboxDelete.php:47
 msgid "Delete Mailbox"
 msgstr "Postfach Löschen"
 
-#: MailboxDetails.php:36
+#: MailboxDetails.php:38
 msgid "Email Mailbox"
 msgstr "E-Mail Postfach"
 
-#: MailboxDetails.php:57 Overview.php:117
+#: MailboxDetails.php:44
+msgid "Mailbox does not exist."
+msgstr "Das Postfach existiert nicht."
+
+#: MailboxDetails.php:62
+msgid "Quota"
+msgstr "Kontingent"
+
+#: MailboxDetails.php:86 Overview.php:117
 msgid "Delete"
 msgstr "Löschen"
 
-#: MailboxDetails.php:70
+#: MailboxDetails.php:99
 msgid "Aliases"
-msgstr ""
+msgstr "Aliasse"
 
-#: MailboxDetails.php:80
-msgid "Possible Actions"
-msgstr "Mögliche Aktionen"
-
-#: MailboxDetails.php:84
+#: MailboxDetails.php:109
 msgid "Change password"
 msgstr "Passwort ändern"
 
-#: MailboxDetails.php:89
+#: MailboxDetails.php:114
 msgid "Create alias for this mailbox"
 msgstr "Alias für dieses Postfach erstellen"
 
-#: MailboxDetails.php:94
+#: MailboxDetails.php:119
 msgid "Delete entire mailbox"
 msgstr "Gesamtes Postfach löschen"
 
@@ -157,10 +166,19 @@ msgstr "Umleitung nach"
 msgid "Email Address"
 msgstr "E-Mail-Adresse"
 
-#: RedirectionDelete.php:30
-msgid "Do you really want to delete this redirection?"
+#: RedirectionDelete.php:33
+msgid ""
+"Are you sure you want to permanently delete the redirection \"{address}\"?"
+"After deleting the redirection you will no longer be reachable via "
+"\"{address}\"."
 msgstr ""
+"Sind Sie sicher, dass Sie die Umleitung \"{address}\" dauerhaft löschen "
+"wollen? Nach dem die Umleitung gelöscht wurde, werden Sie nicht mehr über "
+"\"{address}\" erreichbar sein."
 
-#: RedirectionDelete.php:34 RedirectionDelete.php:37
+#: RedirectionDelete.php:39 RedirectionDelete.php:42
 msgid "Delete Redirection"
 msgstr "Umleitung Löschen"
+
+#~ msgid "Possible Actions"
+#~ msgstr "Mögliche Aktionen"
