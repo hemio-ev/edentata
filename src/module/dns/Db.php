@@ -209,7 +209,8 @@ class Db extends \hemio\edentata\ModuleDb
         ;
 
         $stmt->select(['domain']);
-        $stmt->options('WHERE registered = :registered GROUP BY domain');
+        $stmt->selectAs('t');
+        $stmt->options('WHERE registered = :registered GROUP BY domain ORDER BY dns._domain_order(t.domain)');
 
         return $stmt->execute(['registered' => $registered]);
     }
