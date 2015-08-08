@@ -45,7 +45,8 @@ class Login extends Window
 
         $selecting = new gui\Selecting();
 
-        $request = clone $this->request;
+        $request              = clone $this->request;
+        $request->get['role'] = '';
 
         if ($this->request->get('auth') === 'logout') {
             $request->get['auth'] = 'http_logout';

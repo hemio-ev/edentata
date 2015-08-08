@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata\n"
-"POT-Creation-Date: 2015-03-26 18:59+0100\n"
-"PO-Revision-Date: 2015-03-26 18:59+0100\n"
+"POT-Creation-Date: 2015-08-08 14:52+0100\n"
+"PO-Revision-Date: 2015-08-08 14:52+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -16,50 +16,39 @@ msgstr ""
 "X-Poedit-SearchPath-0: src/class\n"
 "X-Poedit-SearchPath-1: src/load\n"
 
+#: src/class/Config.php:58
+#, php-format
+msgid "Unknown setting \"%s\""
+msgstr "Unbekannte Einstellung \"%s\"."
+
 #: src/class/ContentNav.php:58
 msgid "Services"
 msgstr "Dienste"
 
-#: src/class/LoadModule.php:80
+#: src/class/LoadModule.php:88
 #, php-format
 msgid "Failed to load module \"%s\". The module id is invalid."
 msgstr ""
 
-#: src/class/LoadModule.php:91
+#: src/class/LoadModule.php:99
 #, php-format
 msgid "Failed to load module \"%s\". Module not found."
 msgstr ""
 
-#: src/class/LoadModule.php:148
-#, php-format
-msgid ""
-"There are elements in this view with status %s. These tasks should be "
-"processed by the system soon. If the status remains unchanged please contact "
-"the support. This view will NOT be refreshed automatically."
-msgstr ""
-"In dieser Ansicht existieren Elemente mit dem Status %s. Diese Aufträge "
-"sollten in Kürze abgewickelt werden. Falls der Status unverändert bleibt, "
-"kontaktieren Sie bitten den Support. Diese Ansicht wird sich NICHT "
-"automatisch aktualisieren."
-
-#: src/class/LoadModule.php:158
-msgid "Refresh View"
-msgstr "Ansicht Aktualisieren"
-
-#: src/class/Request.php:78
+#: src/class/Request.php:103
 #, php-format
 msgid "Invalid input with key \"%s\"."
 msgstr ""
 
-#: src/class/Window.php:112
+#: src/class/Window.php:116
 msgid "Permit Deletion"
 msgstr "Löschen zulassen"
 
-#: src/class/Window.php:120
+#: src/class/Window.php:124
 msgid "You must activate the switch before you can submit"
 msgstr "Sie müssen den Schalter vor dem Absenden aktivieren"
 
-#: src/class/Window.php:125
+#: src/class/Window.php:129
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -105,23 +94,43 @@ msgstr "Password Wiederholen"
 msgid "The repeated password does not match the original one."
 msgstr ""
 
-#: src/class/gui/Message.php:54 src/class/gui/StatusList.php:45
+#: src/class/gui/Message.php:55 src/class/gui/StatusList.php:45
 msgid "OK"
 msgstr ""
 
-#: src/class/gui/Progress.php:45
+#: src/class/gui/OutputStatus.php:34
+msgid "Status"
+msgstr "Status"
+
+#: src/class/gui/Progress.php:55
+#, php-format
+msgid ""
+"There are elements in this view with status %s. These tasks should be "
+"processed by the system soon. If the status remains unchanged please contact "
+"the support. This view will NOT be refreshed automatically."
+msgstr ""
+"In dieser Ansicht existieren Elemente mit dem Status %s. Diese Aufträge "
+"sollten in Kürze abgewickelt werden. Falls der Status unverändert bleibt, "
+"kontaktieren Sie bitten den Support. Diese Ansicht wird sich NICHT "
+"automatisch aktualisieren."
+
+#: src/class/gui/Progress.php:65
+msgid "Refresh View"
+msgstr "Ansicht Aktualisieren"
+
+#: src/class/gui/Progress.php:81
 msgid "Deletion Pending"
 msgstr "Ausstehende Löschung"
 
-#: src/class/gui/Progress.php:49
+#: src/class/gui/Progress.php:85
 msgid "Changes Pending"
 msgstr "Ausstehende Änderungen"
 
-#: src/class/gui/Progress.php:53
+#: src/class/gui/Progress.php:89
 msgid "Setup Pending"
 msgstr "Ausstehende Einrichtung"
 
-#: src/class/gui/Progress.php:57
+#: src/class/gui/Progress.php:93
 msgid "Unknown Status"
 msgstr "Unbekannter Status"
 
@@ -138,32 +147,65 @@ msgid ""
 "The operation you want to perform would exceed your current contingent. "
 "Please contact the support to extend your contingent."
 msgstr ""
+"Der von Ihnen gewünschte Vorgang würde Ihr derzeitiges Kontingent "
+"überschreiten. Bitte Kontaktieren Sie den Support um Ihr Kontingent zu "
+"erweitern."
 
 #: src/class/sql/ExceptionMapping.php:60
 msgid "The object you tried to change is inaccessible or missing."
 msgstr ""
 
-#: src/load/main.php:82 src/load/main.php:94 src/load/main.php:115
+#: src/load/login.php:24
+msgid "Edentata Login"
+msgstr ""
+
+#: src/load/main.php:40 src/load/main.php:69
+#, php-format
+msgid ""
+"An error has occured. We are sorry. You should contact the support and "
+"reference to error id \"%s\". You can use the back button of your browser "
+"and try again."
+msgstr ""
+"Ein Fehler ist aufgetreten. Das tut uns Leid. Sie sollten den Support "
+"kontaktieren und die Fehler-Nummer \"%s\" angeben. Sie können die \"Zurück\"-"
+"Funktion Ihres Browsers benutzen und es noch einmal versuchen."
+
+#: src/load/main.php:141
+msgid "Logout successfull"
+msgstr "Abmeldung Erfolgreich"
+
+#: src/load/main.php:153 src/load/main.php:174
 msgid "Login failed"
 msgstr "Anmeldung fehlgeschlagen"
 
-#: src/load/main.php:128
+#: src/load/main.php:182
+msgid "User"
+msgstr "Benutzer"
+
+#: src/load/main.php:187
 msgid "User Settings"
 msgstr "Benutzereinstellungen"
 
-#: src/load/main.php:142
+#: src/load/main.php:201
 msgid "Stop acting as deputy"
 msgstr "Stellvertretung aufgeben"
 
-#: src/load/main.php:152
+#: src/load/main.php:211
 msgid "Act as Deputy"
 msgstr "Stellvertretung Ausüben"
 
-#: src/load/main.php:162
+#: src/load/main.php:220
+msgid "Support"
+msgstr ""
+
+#: src/load/main.php:225
 msgid "Logout"
 msgstr "Abmelden"
 
-#: src/load/main.php:184
-#, php-format
-msgid "Edentata – %s"
+#: src/load/main.php:245 src/load/main.php:247
+msgid "Settings"
+msgstr "Optionen"
+
+#: src/load/main.php:271
+msgid "Tried to access unknown or disabled module"
 msgstr ""
