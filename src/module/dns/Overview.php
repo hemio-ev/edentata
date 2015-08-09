@@ -87,7 +87,7 @@ class Overview extends Window
         $fieldset = new gui\Fieldset(_('Handles'));
 
         $list = new gui\Listbox();
-        foreach ($this->db->handleSelect() as $value) {
+        foreach ($this->db->handleSelect(true) as $value) {
 
             $list->addLinkEntry(
                 $this->request->derive('handle_details', $value['alias'])

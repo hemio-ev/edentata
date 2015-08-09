@@ -29,6 +29,7 @@ use hemio\edentata\gui;
 class HandleCreate extends Window
 {
     const HANDLE_KEYS = [
+        'service_entity_name',
         'alias',
         'fname',
         'lname',
@@ -56,14 +57,15 @@ class HandleCreate extends Window
 
     public function handle($update = false)
     {
-        $required = new form\Container();
-
-        $required['alias'] = new form\FieldText('alias', _('Alias'));
-        $required['fname'] = new form\FieldText('fname', _('First Name'));
-        $required['lname'] = new form\FieldText('lname', _('Last Name'));
-        $required[]        = new form\FieldTextarea('address', _('Address'));
-        $required[]        = new form\FieldText('pcode', _('Zip Code'));
-        $required[]        = new form\FieldText('city', _('City'));
+        $required              = new form\Container();
+        $required['registrar'] = new form\FieldSelect('service_entity_name',
+                                                      _('Registar'));
+        $required['alias']     = new form\FieldText('alias', _('Alias'));
+        $required['fname']     = new form\FieldText('fname', _('First Name'));
+        $required['lname']     = new form\FieldText('lname', _('Last Name'));
+        $required[]            = new form\FieldTextarea('address', _('Address'));
+        $required[]            = new form\FieldText('pcode', _('Zip Code'));
+        $required[]            = new form\FieldText('city', _('City'));
 
         $required['country'] = new form\FieldSelect('country', _('Country'));
         $required['country']->addOption('');
@@ -78,7 +80,16 @@ class HandleCreate extends Window
         foreach ($required as $field)
             $field->setRequired();
 
+        $required['alias']->setPlaceholder(_('First Name-Last Name'));
+
+        foreach ($this->db->resellerResellerSelect() as $registar)
+            $required['registrar']->addOption($registar['service_entity_name']);
+
         if ($update) {
+            $required['registrar']->getControlElement()->setAttribute('readonly',
+                                                                      true);
+            $required['registrar']->getControlElement()->setAttribute('disabled',
+                                                                      true);
             $required['alias']->getControlElement()->setAttribute('readonly',
                                                                   true);
             $required['fname']->getControlElement()->setAttribute('readonly',

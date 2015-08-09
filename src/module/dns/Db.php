@@ -113,12 +113,13 @@ class Db extends \hemio\edentata\ModuleDb
         )->execute();
     }
 
-    public function handleSelect()
+    public function handleSelect($hideForeign = '0')
     {
         return (new sql\QuerySelectFunction(
             $this->pdo
-            , 'domain_reseller.sel_handle')
-            )->execute();
+            , 'domain_reseller.sel_handle'
+            , ['p_hide_foreign' => $hideForeign]
+            ))->execute();
     }
 
     public function handleSelectSingle($alias)
@@ -199,6 +200,16 @@ class Db extends \hemio\edentata\ModuleDb
         $stmt->options('WHERE domain = :domain');
 
         return $stmt->execute(['domain' => $domain]);
+    }
+
+    public function resellerResellerSelect()
+    {
+        $stmt = new sql\QuerySelectFunction(
+            $this->pdo
+            , 'domain_reseller.sel_reseller'
+        );
+
+        return $stmt->execute();
     }
 
     public function serviceDomainSelect($registered)

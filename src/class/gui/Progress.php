@@ -74,7 +74,10 @@ class Progress extends form\Container implements ProgressInterface
         if ($backendStatus !== null) {
 
             $this['span'] = new html\Span();
-            $this['span']->addCssClass('progress');
+            $this['span']->addCssClass('status');
+
+            if ($backendStatus != 'old')
+                $this['span']->addCssClass('progress');
 
             switch ($backendStatus) {
                 case 'del':
@@ -87,6 +90,10 @@ class Progress extends form\Container implements ProgressInterface
 
                 case 'ins':
                     $this->msg = _('Setup Pending');
+                    break;
+
+                case 'old':
+                    $this->msg = _('Deleted');
                     break;
 
                 default:

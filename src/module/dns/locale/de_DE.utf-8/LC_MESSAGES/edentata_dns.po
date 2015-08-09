@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata dns\n"
-"POT-Creation-Date: 2015-08-05 18:24+0100\n"
-"PO-Revision-Date: 2015-08-05 18:25+0100\n"
+"POT-Creation-Date: 2015-08-09 23:53+0100\n"
+"PO-Revision-Date: 2015-08-09 23:55+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 #: AdminC.php:34 AdminC.php:37 RegisteredCreate.php:53
-#: RegisteredDetails.php:97
+#: RegisteredDetails.php:117
 msgid "Admin Contact"
 msgstr "Admin Kontakt"
 
-#: AdminC.php:35 RegisteredDetails.php:102
+#: AdminC.php:35 RegisteredDetails.php:122
 msgid "Change"
 msgstr "Ändern"
 
@@ -28,7 +28,7 @@ msgstr "Ändern"
 msgid "New Custom DNS Record"
 msgstr "Neuer Selbsterstellter DNS-Eintrag"
 
-#: CustomCreate.php:53 CustomCreate.php:86 HandleCreate.php:49
+#: CustomCreate.php:53 CustomCreate.php:86 HandleCreate.php:50
 msgid "Create"
 msgstr "Erstellen"
 
@@ -142,55 +142,63 @@ msgstr "Aktualisieren"
 msgid "Type"
 msgstr "Typ"
 
-#: HandleCreate.php:48
+#: HandleCreate.php:49
 msgid "New Handle"
 msgstr "Neues Handle"
 
-#: HandleCreate.php:61
+#: HandleCreate.php:62
+msgid "Registar"
+msgstr "Registrar"
+
+#: HandleCreate.php:63
 msgid "Alias"
 msgstr ""
 
-#: HandleCreate.php:62
+#: HandleCreate.php:64
 msgid "First Name"
 msgstr "Vorname"
 
-#: HandleCreate.php:63
+#: HandleCreate.php:65
 msgid "Last Name"
 msgstr "Nachname"
 
-#: HandleCreate.php:64
+#: HandleCreate.php:66
 msgid "Address"
 msgstr "Adresse"
 
-#: HandleCreate.php:65
+#: HandleCreate.php:67
 msgid "Zip Code"
 msgstr "Postleitzahl"
 
-#: HandleCreate.php:66
+#: HandleCreate.php:68
 msgid "City"
 msgstr "Stadt"
 
-#: HandleCreate.php:68
+#: HandleCreate.php:70
 msgid "Country"
 msgstr "Staat"
 
-#: HandleCreate.php:73
+#: HandleCreate.php:75
 msgid "State"
 msgstr "Bundesland"
 
-#: HandleCreate.php:74
+#: HandleCreate.php:76
 msgid "Email"
 msgstr "E-Mail"
 
-#: HandleCreate.php:75
+#: HandleCreate.php:77
 msgid "Phone"
 msgstr "Telefon"
 
-#: HandleCreate.php:92
+#: HandleCreate.php:83
+msgid "First Name-Last Name"
+msgstr "Vorname-Nachname"
+
+#: HandleCreate.php:103
 msgid "Fax"
 msgstr ""
 
-#: HandleCreate.php:96
+#: HandleCreate.php:107
 msgid "Mobile Phone"
 msgstr "Handy"
 
@@ -258,7 +266,7 @@ msgstr "Durch dieses System verwaltet"
 msgid "Nameserver"
 msgstr ""
 
-#: RegisteredCreate.php:50 RegisteredDetails.php:93
+#: RegisteredCreate.php:50 RegisteredDetails.php:113
 msgid "Registrant (Owner)"
 msgstr "Besitzer (Owner)"
 
@@ -303,11 +311,31 @@ msgstr "Diese Domain wird nicht durch dieses System verwaltet."
 msgid "Primary Nameserver"
 msgstr "Primärer Nameserver"
 
-#: RegisteredDetails.php:90
+#: RegisteredDetails.php:88
+msgid "Payable"
+msgstr "Fällig"
+
+#: RegisteredDetails.php:92
+msgid "Booking Period (Years)"
+msgstr "Buchungsdauer"
+
+#: RegisteredDetails.php:96
+msgid "Registrar Status"
+msgstr ""
+
+#: RegisteredDetails.php:100
+msgid "Registry Status (Transfer Protection)"
+msgstr "Registry Status (Transfer-Schutz)"
+
+#: RegisteredDetails.php:104
+msgid "Last Update Status"
+msgstr "Letzter Aktualisierungsstatus"
+
+#: RegisteredDetails.php:110
 msgid "No detailed domain information available"
 msgstr "Keine detaillierten Informationen verfügbar"
 
-#: RegisteredDetails.php:113
+#: RegisteredDetails.php:133
 msgid "Domain Service Activation"
 msgstr "Domain Dienst-Aktivierung"
 

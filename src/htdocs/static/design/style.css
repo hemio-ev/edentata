@@ -1520,16 +1520,18 @@ ul.listbox li:last-child, .sidebar li:last-child, ul.selectbox li:last-child {
   list-style-type: square;
   font-weight: normal; }
 
-.listbox .progress, .selectbox .progress {
+.listbox .status, .selectbox .status {
   font-size: 0.9em;
+  color: gray;
+  padding-left: 0.5em;
+  white-space: nowrap; }
+
+.listbox .progress, .selectbox .progress {
+  padding-right: 2em;
   background-image: url("progress.gif");
   background-position: right;
   background-size: contain;
-  background-repeat: no-repeat;
-  color: gray;
-  padding-right: 2em;
-  padding-left: 0.5em;
-  white-space: nowrap; }
+  background-repeat: no-repeat; }
 
 /*
 Copyright (C) 2015 Michael Herold <quabla@hemio.de>

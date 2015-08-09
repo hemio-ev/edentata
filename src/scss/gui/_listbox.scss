@@ -104,16 +104,17 @@ ul.listbox li:last-child {
     font-weight: normal;
 }
 
-.listbox .progress {
+.listbox .status {
     font-size: 0.9em;
+    color: gray;
+    padding-left: 0.5em;
+    white-space: nowrap;
+}
+
+.listbox .progress {
+    padding-right: 2em;
     background-image: url('progress.gif');
     background-position: right;
     background-size: contain;
     background-repeat: no-repeat;
-    //float: right;
-    color: gray;
-    //font-weight: normal;
-    padding-right: 2em;
-    padding-left: 0.5em;
-    white-space: nowrap;
 }

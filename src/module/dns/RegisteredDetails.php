@@ -84,6 +84,26 @@ class RegisteredDetails extends Window
                 new gui\Output(_('Primary Nameserver')
                 , $dataDomain['service_entity_name']));
 
+            if ($dataRegist['payable'])
+                $fieldset[] = new gui\Output(_('Payable')
+                    , $dataRegist['payable']);
+
+            if ($dataRegist['period'])
+                $fieldset[] = new gui\Output(_('Booking Period (Years)')
+                    , $dataRegist['period']);
+
+            if ($dataRegist['registrar_status'])
+                $fieldset[] = new gui\Output(_('Registrar Status')
+                    , $dataRegist['registrar_status']);
+
+            if ($dataRegist['registry_status'])
+                $fieldset[] = new gui\Output(_('Registry Status (Transfer Protection)')
+                    , $dataRegist['registry_status']);
+
+            if ($dataRegist['last_status'])
+                $fieldset[] = new gui\Output(_('Last Update Status')
+                    , $dataRegist['last_status']);
+
             $list = new gui\Listbox();
 
             if ($dataRegist === false)

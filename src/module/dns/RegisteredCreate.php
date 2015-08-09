@@ -57,9 +57,8 @@ class RegisteredCreate extends Window
         $adminC->addOption('');
 
         foreach ($this->db->registeredNameserverSelect() as $ns) {
-            $subservice->addOption($ns['subservice'], $ns['subservice']);
-            $nameserver->addOption($ns['service_entity_name'],
-                                   $ns['service_entity_name']);
+            $subservice->addOption($ns['subservice']);
+            $nameserver->addOption($ns['service_entity_name']);
         }
 
         foreach ($this->db->handleSelect() as $handle) {
