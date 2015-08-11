@@ -21,6 +21,8 @@ namespace hemio\edentata\tests;
 use hemio\html;
 use hemio\form;
 
+require_once 'tests/Helpers.php';
+
 class FirstTest extends \Helpers
 {
 

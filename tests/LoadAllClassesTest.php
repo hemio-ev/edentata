@@ -1,6 +1,6 @@
 <?php
 
-class LoadAllClasses extends PHPUnit_Framework_TestCase
+class LoadAllClassesTest extends PHPUnit_Framework_TestCase
 {
 
     public function test()
