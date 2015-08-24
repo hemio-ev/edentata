@@ -52,7 +52,10 @@ class HandleDetails extends Window
 
         $helper = new HandleCreate($this->module);
 
-        $window->getForm()->addChild($helper->handle(true));
+        $formElements = $helper->handle(true);
+        $window->getForm()->addChild($formElements);
+        if (!$formElements['required']['organization']->getValueStored())
+            unset($formElements['required']['organization']);
 
         $this->handleSubmit($alias, $window->getForm());
 

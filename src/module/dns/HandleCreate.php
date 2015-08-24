@@ -84,7 +84,7 @@ class HandleCreate extends Window
         foreach ($required as $field)
             $field->setRequired();
 
-        $required['organization']->setRequired(false);
+        $required['organization']->setRequired($update);
 
         $required['alias']->setPlaceholder(_('First Name-Last Name'));
 
@@ -115,9 +115,9 @@ class HandleCreate extends Window
         $optional['mobile_phone']->setPlaceholder('+49-3-11');
 
 
-        $container   = new form\Container();
-        $container[] = $required;
-        $container[] = $optional;
+        $container             = new form\Container();
+        $container['required'] = $required;
+        $container['optional'] = $optional;
 
         return $container;
     }
