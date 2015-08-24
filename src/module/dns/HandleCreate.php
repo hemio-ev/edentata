@@ -33,6 +33,7 @@ class HandleCreate extends Window
         'alias',
         'fname',
         'lname',
+        'organization',
         'address',
         'pcode',
         'city',
@@ -57,15 +58,18 @@ class HandleCreate extends Window
 
     public function handle($update = false)
     {
-        $required              = new form\Container();
-        $required['registrar'] = new form\FieldSelect('service_entity_name',
-                                                      _('Registar'));
-        $required['alias']     = new form\FieldText('alias', _('Alias'));
-        $required['fname']     = new form\FieldText('fname', _('First Name'));
-        $required['lname']     = new form\FieldText('lname', _('Last Name'));
-        $required[]            = new form\FieldTextarea('address', _('Address'));
-        $required[]            = new form\FieldText('pcode', _('Zip Code'));
-        $required[]            = new form\FieldText('city', _('City'));
+        $required                 = new form\Container();
+        $required['registrar']    = new form\FieldSelect('service_entity_name',
+                                                         _('Registar'));
+        $required['alias']        = new form\FieldText('alias', _('Alias'));
+        $required['fname']        = new form\FieldText('fname', _('First Name'));
+        $required['lname']        = new form\FieldText('lname', _('Last Name'));
+        $required['organization'] = new form\FieldText('organization',
+                                                       _('Organization'));
+        $required[]               = new form\FieldTextarea('address',
+                                                           _('Address'));
+        $required[]               = new form\FieldText('pcode', _('Zip Code'));
+        $required[]               = new form\FieldText('city', _('City'));
 
         $required['country'] = new form\FieldSelect('country', _('Country'));
         $required['country']->addOption('');
@@ -79,6 +83,8 @@ class HandleCreate extends Window
 
         foreach ($required as $field)
             $field->setRequired();
+
+        $required['organization']->setRequired(false);
 
         $required['alias']->setPlaceholder(_('First Name-Last Name'));
 

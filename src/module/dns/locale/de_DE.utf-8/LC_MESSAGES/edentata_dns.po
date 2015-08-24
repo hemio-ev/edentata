@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata dns\n"
-"POT-Creation-Date: 2015-08-09 23:53+0100\n"
-"PO-Revision-Date: 2015-08-09 23:55+0100\n"
+"POT-Creation-Date: 2015-08-24 13:27+0100\n"
+"PO-Revision-Date: 2015-08-24 13:28+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -162,43 +162,47 @@ msgstr "Vorname"
 msgid "Last Name"
 msgstr "Nachname"
 
-#: HandleCreate.php:66
+#: HandleCreate.php:67
+msgid "Organization"
+msgstr "Organisation"
+
+#: HandleCreate.php:69
 msgid "Address"
 msgstr "Adresse"
 
-#: HandleCreate.php:67
+#: HandleCreate.php:70
 msgid "Zip Code"
 msgstr "Postleitzahl"
 
-#: HandleCreate.php:68
+#: HandleCreate.php:71
 msgid "City"
 msgstr "Stadt"
 
-#: HandleCreate.php:70
+#: HandleCreate.php:73
 msgid "Country"
 msgstr "Staat"
 
-#: HandleCreate.php:75
+#: HandleCreate.php:78
 msgid "State"
 msgstr "Bundesland"
 
-#: HandleCreate.php:76
+#: HandleCreate.php:79
 msgid "Email"
 msgstr "E-Mail"
 
-#: HandleCreate.php:77
+#: HandleCreate.php:80
 msgid "Phone"
 msgstr "Telefon"
 
-#: HandleCreate.php:83
+#: HandleCreate.php:88
 msgid "First Name-Last Name"
 msgstr "Vorname-Nachname"
 
-#: HandleCreate.php:103
+#: HandleCreate.php:109
 msgid "Fax"
 msgstr ""
 
-#: HandleCreate.php:107
+#: HandleCreate.php:113
 msgid "Mobile Phone"
 msgstr "Handy"
 
