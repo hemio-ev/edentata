@@ -65,6 +65,7 @@ class HandleDetails extends Window
             $params = $form->getVal(HandleCreate::HANDLE_KEYS);
 
             $params['p_alias'] = $alias;
+            unset($params['p_service_entity_name']);
             unset($params['p_fname']);
             unset($params['p_lname']);
 

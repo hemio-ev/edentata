@@ -90,6 +90,7 @@ class HandleCreate extends Window
                                                                       true);
             $required['registrar']->getControlElement()->setAttribute('disabled',
                                                                       true);
+            $required['registrar']->setRequired(false);
             $required['alias']->getControlElement()->setAttribute('readonly',
                                                                   true);
             $required['fname']->getControlElement()->setAttribute('readonly',
