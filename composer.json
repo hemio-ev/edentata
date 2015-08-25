@@ -1,6 +1,6 @@
 {
     "name": "hemio/edentata",
-    "type": "library",
+    "type": "project",
     "description": "Toothless web frontend for carnivora",
     "keywords": ["html"],
     "homepage": "http://github.com/qua-bla/edentata",
@@ -11,11 +11,10 @@
             "email": "quabla@hemio.de"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.6.0",
         "symfony/yaml": ">=2.6",
-        "hemio/form": "dev-master",
+        "hemio/form": "0.2.1",
         "phpunit/phpunit": ">=4.8"
     },
     "autoload": {
