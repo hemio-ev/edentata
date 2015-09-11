@@ -1,7 +1,7 @@
 {
     "name": "hemio/edentata",
     "type": "project",
-    "description": "Toothless web frontend for carnivora",
+    "description": "A toothless frontend for the hosting-service management carnivora.",
     "keywords": ["html"],
     "homepage": "http://github.com/qua-bla/edentata",
     "license": "GPL-3.0+",

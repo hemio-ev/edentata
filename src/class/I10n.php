@@ -31,7 +31,11 @@ class I10n
 
     public function __construct()
     {
-        $guessedLocale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+
+        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+            $guessedLocale = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        else
+            $guessedLocale = '';
 
         $locales = array_filter(
             self::$supportedLocales

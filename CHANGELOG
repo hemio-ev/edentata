@@ -1,3 +1,5 @@
+v0.4.3
+  - Fixes crash on missing 'Accept-Language' HTTP header.
 v0.4.2
   - First release used in production
   - Adds GPL LICENSE
