@@ -9,9 +9,10 @@ parser = argparse.ArgumentParser(
     prog = "gettextfmtall"
 )
 
-parser.add_argument("dir", metavar="<dir>", type=str)
-parser.add_argument("main_dir", metavar="<./locale>", type=str)
-parser.add_argument("main_domain", metavar="<edentata.po>", type=str)
+parser.add_argument("dir", metavar="<dir>", type=str, help="Search directory for .po files")
+parser.add_argument("main_dir", metavar="<./locale>", type=str, help="Base directory for global translation")
+parser.add_argument("main_domain", metavar="<edentata>", type=str, help="Global name of domain")
+parser.add_argument("-v", "--verbose", action="store_true")
 
 args = parser.parse_args()
 
@@ -37,4 +38,7 @@ for root,x,files in os.walk(args.dir):
                 if path != mainpath:
                     ps = subprocess.Popen(['msgcat','--use-first',path,mainpath], stdout=subprocess.PIPE)
                     output = subprocess.check_output(["msgfmt", "-o", newpath, "-"], stdin=ps.stdout)
+                else:
+                    subprocess.check_output(["msgfmt", "-o", newpath, mainpath])
+
 
