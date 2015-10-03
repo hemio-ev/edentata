@@ -31,6 +31,6 @@ class Pre extends \hemio\html\Pre
         $this->addCssClass('pre');
 
         if ($str !== null)
-            $this->addChild(new \hemio\html\String($str));
+            $this->addChild(new \hemio\html\Str($str));
     }
 }

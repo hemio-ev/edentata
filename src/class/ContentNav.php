@@ -55,7 +55,7 @@ class ContentNav
         $nav
             ->addChild(new html\Header())
             ->addChild(new html\H1())
-            ->addChild(new html\String(_('Services')));
+            ->addChild(new html\Str(_('Services')));
 
         $contentEvents = new ContentEvents($nav);
 

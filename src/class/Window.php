@@ -110,7 +110,7 @@ abstract class Window
 
         $msg = new html\P();
         $msg->addCssClass('text');
-        $msg->addChild(new html\String($message));
+        $msg->addChild(new html\Str($message));
 
         if ($protectedDelete) {
             $switch = new gui\FieldSwitch('enable_delete', _('Permit Deletion'));
@@ -121,7 +121,7 @@ abstract class Window
 
             $hint = new html\P;
             $hint->addCssClass('hint');
-            $hint->addChild(new html\String(_('You must activate the switch before you can submit')));
+            $hint->addChild(new html\Str(_('You must activate the switch before you can submit')));
         }
 
         $cancelButton = new gui\LinkButton(

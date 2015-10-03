@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,8 +26,8 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Selectbox extends html\Div {
-
+class Selectbox extends html\Div
+{
     /**
      *
      * @var html\Div
@@ -41,57 +40,62 @@ class Selectbox extends html\Div {
      */
     protected $items;
 
-    public function __construct() {
-        $this->main = new html\Div;
+    public function __construct()
+    {
+        $this->main     = new html\Div;
         $this['scroll'] = $this->main;
 
-        $this->items = new form\Container();
+        $this->items         = new form\Container();
         $this->main['items'] = $this->items;
 
         $this->addCssClass('selectbox');
         $this->main->addCssClass('scroll');
 
         $this->addInheritableAppendage(
-                form\FormPost::FORM_FIELD_TEMPLATE, new form\template\FormPlainControl()
+            form\FormPost::FORM_FIELD_TEMPLATE,
+            new form\template\FormPlainControl()
         );
     }
 
     /**
-     * 
+     *
      * @param string $name
      * @param string $title
      */
-    public function addItem($name, $title, $backendStatus = null) {
+    public function addItem($name, $title, $backendStatus = null)
+    {
         $item = new form\Container;
         $this->items->addChild($item);
 
         $item['checkbox'] = new form\FieldCheckbox($name, $title);
         $item['checkbox']->setDefaultValue($name);
 
-        $item['p'] = new html\P();
-        $item['p']['label'] = new html\Label();
-        $item['p']['label']['span'] = new html\Span();
+        $item['p']                    = new html\P();
+        $item['p']['label']           = new html\Label();
+        $item['p']['label']['span']   = new html\Span();
         $item['p']['label']['span']->addCssClass('checkbox');
-        $item['p']['label']['span'][] = new html\String($title);
+        $item['p']['label']['span'][] = new html\Str($title);
 
         $item['p']['label']->setAttribute(
-                'for', $item['checkbox']->getHtmlName()
+            'for', $item['checkbox']->getHtmlName()
         );
 
         $item['p']['label'][] = new Progress($backendStatus);
     }
 
-    public function setOptions(html\Interface_\HtmlCode $options) {
+    public function setOptions(html\Interface_\HtmlCode $options)
+    {
         $this->main['options'] = new html\P();
         $this->main['options']->addCssClass('options');
         $this->main['options']->addChild($options);
     }
 
     /**
-     * 
+     *
      * @return array
      */
-    public function getItemCheckboxFields() {
+    public function getItemCheckboxFields()
+    {
         $fields = [];
         foreach ($this->items as $item) {
             $fields[] = $item['checkbox'];
@@ -99,5 +103,4 @@ class Selectbox extends html\Div {
 
         return $fields;
     }
-
 }

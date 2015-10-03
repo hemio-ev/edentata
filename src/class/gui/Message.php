@@ -42,10 +42,10 @@ class Message extends form\Container
             $this['article']->addCssClass('warning');
 
         $this['article']['h2']   = new html\H2();
-        $this['article']['h2'][] = new html\String($event::title());
+        $this['article']['h2'][] = new html\Str($event::title());
 
         $this['article']['p']   = new html\P();
-        $this['article']['p'][] = new html\String($event->getMessage());
+        $this['article']['p'][] = new html\Str($event->getMessage());
 
         if ($event->backTo !== null)
             $backUrl = $event->backTo;
@@ -62,7 +62,7 @@ class Message extends form\Container
 
     /**
      *
-     * @return html\String
+     * @return html\Str
      */
     public function getButtonString()
     {

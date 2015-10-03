@@ -31,7 +31,7 @@ class OutputStatus extends form\Container
             $this['p']->addCssClass('output');
 
             $this['p']['label'] = new html\Label();
-            $this['p']['label']->addChild(new html\String(_('Status')));
+            $this['p']['label']->addChild(new html\Str(_('Status')));
 
             $this['p']['output']   = new html\Output();
             $this['p']['output'][] = new Progress($data['backend_status']);

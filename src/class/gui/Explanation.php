@@ -39,9 +39,9 @@ class Explanation extends \hemio\form\Container
         }
 
         $this['div']['h2']   = new html\H2();
-        $this['div']['h2'][] = new html\String($event::title());
+        $this['div']['h2'][] = new html\Str($event::title());
 
         $this['div']['p']   = new html\P();
-        $this['div']['p'][] = new html\String($event->getMessage());
+        $this['div']['p'][] = new html\Str($event->getMessage());
     }
 }

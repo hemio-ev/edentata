@@ -101,7 +101,7 @@ class Progress extends form\Container implements ProgressInterface
                     $this->status = '?';
             }
 
-            $this['span']->addChild(new html\String($this->msg));
+            $this['span']->addChild(new html\Str($this->msg));
         }
     }
 

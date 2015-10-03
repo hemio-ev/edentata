@@ -36,7 +36,7 @@ class Window extends html\Article
             $this['header']['button_right'] = new html\Div();
             $this['header']['button_left']  = new html\Div();
             $this['header']['title']        = new html\H1();
-            $this['header']['title'][]      = new html\String($title);
+            $this['header']['title'][]      = new html\Str($title);
             $this['header']->addInheritableAppendage(
                 form\FormPost::FORM_FIELD_TEMPLATE,
                 new form\template\FormPlainControl
@@ -45,7 +45,7 @@ class Window extends html\Article
         if ($title && $subtitle) {
             $this['header']['title']['br']         = new html\Br();
             $this['header']['title']['subtitle']   = new html\Span();
-            $this['header']['title']['subtitle'][] = new html\String($subtitle);
+            $this['header']['title']['subtitle'][] = new html\Str($subtitle);
         }
     }
 

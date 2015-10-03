@@ -69,7 +69,7 @@ class FieldEmailWithSelect extends \hemio\form\Container
 
         $p['at'] = new html\Span();
         $p['at']->addCssClass('between');
-        $p['at']->addChild(new html\String('@'));
+        $p['at']->addChild(new html\Str('@'));
 
         $p['select']           = new html\Span();
         $p['select']->addCssClass('select');

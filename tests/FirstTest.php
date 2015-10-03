@@ -33,7 +33,7 @@ class FirstTest extends \Helpers
 
     public function test2()
     {
-        $doc = new html\Document(new html\String('Test'));
+        $doc = new html\Document(new html\Str('Test'));
         $doc->getHtml()->getHead()->addCssFile('style.css');
 
         $form = new form\FormPost('test');
@@ -58,7 +58,7 @@ class FirstTest extends \Helpers
         $window->addChild($listbox);
 
         for ($i = 1; $i < 20; $i++) {
-            $str = new html\String(sprintf(_('Test Nr. %d'), $i));
+            $str = new html\Str(sprintf(_('Test Nr. %d'), $i));
             $a   = new html\A();
             $a[] = $str;
             $listbox->addLine($a);

@@ -16,28 +16,33 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace hemio\edentata\gui;
-
-use \hemio\form;
-use \hemio\html;
+namespace hemio\edentata;
 
 /**
- * Description of Output
+ * Description of System
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Output extends form\Container
+class System
 {
+    static public $requestTime;
+    static public $startTime;
+    static public $endTime;
 
-    public function __construct($title, $value)
+    static public function init()
     {
-        $this['p'] = new html\P();
-        $this['p']->addCssClass('output');
+        self::$startTime   = microtime(true);
+        self::$requestTime = filter_input(
+            INPUT_SERVER, 'REQUEST_TIME_FLOAT', FILTER_VALIDATE_FLOAT,
+            [ 'options' => ['default' => self::$startTime]]
+        );
+    }
 
-        $this['p']['label'] = new html\Label();
-        $this['p']['label']->addChild(new html\Str($title));
-
-        $this['p']['output'] = new html\Output();
-        $this['p']['output']->addChild(new html\Str($value));
+    static public function reportString()
+    {
+        return sprintf("body_time: %s\nbody_time_request: %s"
+            , round(microtime(true) - self::$startTime, 4)
+            , round(microtime(true) - self::$requestTime, 4)
+        );
     }
 }

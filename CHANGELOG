@@ -1,6 +1,8 @@
 v0.5.0
   - Fixes missing generation of global gettext .mo-files.
     This fixes missing l10n in top bar also.
+  - Removes static css files and adds generation to Makefile
+  - Updates to new version of hemio\html and hemio\form
 v0.4.3
   - Fixes crash on missing 'Accept-Language' HTTP header.
 v0.4.2

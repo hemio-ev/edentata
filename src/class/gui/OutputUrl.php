@@ -30,14 +30,14 @@ class OutputUrl extends form\Container
         $this['p']->addCssClass('output');
 
         $this['p']['label'] = new html\Label();
-        $this['p']['label']->addChild(new html\String($title));
+        $this['p']['label']->addChild(new html\Str($title));
 
         $this['p']['output'] = new html\Output();
         $this['p']['output']->setCssProperty('font-family', 'monospace');
 
         $a = new html\A();
         $a->setAttribute('href', $url);
-        $a->addChild(new html\String($url));
+        $a->addChild(new html\Str($url));
 
         $this['p']['output'][] = $a;
     }

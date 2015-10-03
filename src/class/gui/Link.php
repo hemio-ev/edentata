@@ -31,6 +31,6 @@ class Link extends \hemio\html\A
         $this->setAttribute('href', $request->getUrl());
 
         if ($text !== null)
-            $this['text'] = new \hemio\html\String($text);
+            $this['text'] = new \hemio\html\Str($text);
     }
 }

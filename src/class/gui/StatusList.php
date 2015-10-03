@@ -49,7 +49,7 @@ class StatusList extends html\Ul
 
 
         $li = $this->addLine();
-        $li->addChild(new html\String('['.$prefix[$status].'] '.$text));
+        $li->addChild(new html\Str('['.$prefix[$status].'] '.$text));
 
         $li->addCssClass($status);
 

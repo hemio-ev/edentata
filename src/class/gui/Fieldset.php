@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,13 +25,14 @@ use hemio\html;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Fieldset extends html\Fieldset {
+class Fieldset extends html\Fieldset
+{
 
-    public function __construct($legend = null) {
+    public function __construct($legend = null)
+    {
         if ($legend) {
             $this['legend'] = new html\Legend();
-            $this['legend']->addChild(new html\String($legend));
+            $this['legend']->addChild(new html\Str($legend));
         }
     }
-
 }

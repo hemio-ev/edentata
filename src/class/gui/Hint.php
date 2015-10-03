@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -27,12 +26,13 @@ use hemio\html;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Hint extends form\Container {
+class Hint extends form\Container
+{
 
-    public function __construct($text) {
-        $this['p'] = new html\P();
+    public function __construct($text)
+    {
+        $this['p']   = new html\P();
         $this['p']->addCssClass('hint');
-        $this['p'][] = new html\String($text);
+        $this['p'][] = new html\Str($text);
     }
-
 }
