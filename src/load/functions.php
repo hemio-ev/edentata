@@ -17,12 +17,12 @@
  */
 
 /**
- * @var \hemio\edentata\I10n
+ *
+ * @param string $pattern
+ * @param array $args
+ * @return string
  */
-$i10n = null;
-
 function _msg($pattern, array $args)
 {
-    global $i10n;
-    return \MessageFormatter::formatMessage($i10n->locale, $pattern, $args);
+    return \MessageFormatter::formatMessage(getenv('LC_ALL'), $pattern, $args);
 }

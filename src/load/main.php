@@ -76,6 +76,8 @@ set_exception_handler(
 }
 );
 
+System::init();
+
 # external data
 if (isset($_SERVER['EDENTATA_CONFIG_FILE']))
     $config = Config::load($_SERVER['EDENTATA_CONFIG_FILE']);
@@ -286,3 +288,4 @@ try {
 }
 
 echo $doc->__toString();
+echo System::reportString();
