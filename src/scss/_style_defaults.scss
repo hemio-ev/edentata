@@ -1,0 +1,59 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Sep 14, 2015, 2:56:17 PM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+$label-width: 40%;
+$control-width: 60%;
+
+$text-color: #2e3436;
+
+$button-color: rgb(224, 224, 224);
+
+$button-suggested-color: rgb(54, 131, 213);
+$button-suggested-border-color: rgb(28, 81, 135);
+
+$button-delete-color: rgb(195, 15, 15);
+$button-delete-border-color: rgb(143, 0, 0);
+
+$article-color: rgb(237,237,237);
+$article-border-color: rgb(142, 142, 142);
+$article-radius-top: 0.5em;
+
+
+$article-radius-bottom: 0;
+
+$control-color: rgb(217,217,217);
+$control-border-color: rgb(161,161,161);
+$control-height: 2.4em;
+
+$switch-color-checked: rgb(74,144,217);
+$switch-color-notchecked: rgb(206,206,206);
+
+$select-focus-color: rgb(255, 255, 255);
+
+$header-color: $article-color;
+$header-border-color: rgb(217,217,217);
+
+$sidebar-selected-color: #4A90D9;
+$sidebar-hover-color: #F4F4F4;
+
+$outer-color: #333;
+
+$list-entry-height: 3.5em;

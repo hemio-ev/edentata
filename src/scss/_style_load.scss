@@ -1,0 +1,70 @@
+/*
+Copyright (C) 2015 Michael Herold <quabla@hemio.de>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : Sep 14, 2015, 2:55:16 PM
+    Author     : Michael Herold <quabla@hemio.de>
+*/
+
+
+@import "_functions.scss";
+@import "_basics.scss";
+@import "_header.scss";
+@import "_content_transition.scss";
+
+@import "gui/_window.scss";
+@import "gui/_headerbar.scss";
+@import "gui/_message.scss";
+@import "gui/_statuslist.scss";
+@import "gui/_pack.scss";
+@import "gui/_sidebar.scss";
+
+@import "gui/_pre.scss";
+
+@import "_pile.scss";
+@import "gui/_multiple_controls.scss";
+@import "_scroll.scss";
+
+// Form
+@import "gui/_button.scss";
+@import "gui/_button_back.scss";
+@import "gui/_select.scss";
+@import "gui/_switch.scss";
+@import "gui/_textarea.scss";
+@import "gui/_checkbox.scss";
+
+@import "gui/_fieldset.scss";
+@import "gui/_output.scss";
+
+
+@import "gui/_listbox.scss";
+@import "gui/_selectbox.scss";
+
+@import "gui/_selecting.scss";
+
+@import '_l10n.scss';
+
+article p.text {
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+}
+
+article p.hint {
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+    color: gray;
+    text-align: center;
+}
