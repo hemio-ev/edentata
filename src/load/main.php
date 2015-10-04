@@ -102,7 +102,7 @@ if (!$activeModuleName)
 
 try {
 # doc
-    $title = new html\String('Edentata');
+    $title = new html\Str('Edentata');
     $doc   = new form\Document($title);
     $doc->getHtml()->getHead()->addCssFile('static/design/style.css');
     $doc->getHtml()->setAttribute('lang', $i10n->getLang());
@@ -181,7 +181,7 @@ try {
     }
 
     $span   = new html\Span;
-    $span[] = new html\String(_('User').': '.$_SERVER['PHP_AUTH_USER']);
+    $span[] = new html\Str(_('User').': '.$_SERVER['PHP_AUTH_USER']);
     $header->addChild($span);
 
     $header[] = new gui\Link(
@@ -210,7 +210,7 @@ try {
 
         $aSettings   = new html\A;
         $aSettings->addCssClass('popover');
-        $aSettings[] = new html\String(_('Act as Deputy'));
+        $aSettings[] = new html\Str(_('Act as Deputy'));
         $aSettings->setAttribute('href', $request->getUrl().'#');
         $header[]    = $aSettings;
 
@@ -219,12 +219,12 @@ try {
 
     $aSupport   = new html\A;
     $aSupport->setAttribute('href', $config['support_url']);
-    $aSupport[] = new html\String(_('Support'));
+    $aSupport[] = new html\Str(_('Support'));
     $header[]   = $aSupport;
 
     $aLogout   = new html\A;
     $aLogout->setAttribute('href', '?auth=logout');
-    $aLogout[] = new html\String(_('Logout'));
+    $aLogout[] = new html\Str(_('Logout'));
     $header[]  = $aLogout;
 
     if ($request->get('deputy'))
@@ -257,7 +257,7 @@ try {
 
             $a = $list->addLinkEntry(
                 $request->deriveModule($moduleId)
-                , new html\String($loadedModule->getName())
+                , new html\Str($loadedModule->getName())
             );
 
             if ($moduleId === $request->module)

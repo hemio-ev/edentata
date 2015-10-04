@@ -21,7 +21,7 @@ namespace hemio\edentata;
 use hemio\form;
 use hemio\html;
 
-$document = new form\Document(new html\String(_('Edentata Login')));
+$document = new form\Document(new html\Str(_('Edentata Login')));
 
 $document->getHtml()->getHead()->setBaseUrl($config['base_url']);
 $document->getHtml()->getHead()->addJsFile('static/js/login.js');
