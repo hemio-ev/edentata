@@ -38,7 +38,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 .multiple .between {
     @extend .input_style;
-    color: #555;
+    color: $text-color-hint;
     background: transparent;
     width: auto;
     order: 2;
