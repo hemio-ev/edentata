@@ -19,7 +19,7 @@
 namespace hemio\edentata\module\email_list;
 
 use hemio\edentata\gui;
-use hemio\html\String;
+use hemio\html\Str as String;
 
 /**
  * Description of Overview

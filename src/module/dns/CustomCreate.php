@@ -66,7 +66,7 @@ class CustomCreate extends Window
         foreach ($types as $type => $desc)
             $list->addLinkEntry(
                 $this->request->derive(true, true, $type)
-                , new html\String(sprintf('%s: %s', $type, $desc))
+                , new html\Str(sprintf('%s: %s', $type, $desc))
             );
 
         $fieldset = new gui\Fieldset(_('Record Type'));

@@ -105,7 +105,7 @@ class HttpsDetails extends Window
 
             foreach ($chain as $data) {
                 $cert = new Cert($data['x509_certificate']);
-                $list->addEntry(new html\String(
+                $list->addEntry(new html\Str(
                     sprintf('%d. %s', $data['order'] + 1, $cert->commonName())));
             }
         }
@@ -126,7 +126,7 @@ class HttpsDetails extends Window
 
         $listNames = new gui\Listbox();
         foreach ($cert->altNames() as $name)
-            $listNames->addEntry(new html\String($name));
+            $listNames->addEntry(new html\Str($name));
 
         $o                  = $fieldset->addChild(new gui\Output(
             _('Alternative Names')

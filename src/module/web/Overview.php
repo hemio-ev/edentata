@@ -59,26 +59,26 @@ class Overview extends Window
                 sprintf(' [%s]', $site['subservice']);
 
             $container->addChild(
-                new html\String($site['domain'].$subservice)
+                new html\Str($site['domain'].$subservice)
             );
 
             $ul = new html\Ul();
             $container->addChild($ul);
 
             if ($site['https'] !== null) {
-                $s = $ul->addLine(new html\String(_('HTTPS enabled')));
+                $s = $ul->addLine(new html\Str(_('HTTPS enabled')));
                 $s->addChild(Utils::certSummary($site['domain'], $site['port'],
                                                 $site['https'], $this->db));
             }
 
             // display port if it is not the default (80/443)
             if (!Utils::defaultPort($site['port'], $site['https']))
-                $ul->addLine(new html\String(
+                $ul->addLine(new html\Str(
                     sprintf(_('Port: %s'), $site['port'])));
 
-            $ul->addLine(new html\String(
+            $ul->addLine(new html\Str(
                 sprintf(_('User: %s'), $site['user'])));
-            $ul->addLine(new html\String(
+            $ul->addLine(new html\Str(
                 sprintf(_('Host: %s'), $site['service_entity_name'])));
 
             $listbox->addLinkEntry(

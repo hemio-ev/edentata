@@ -69,12 +69,12 @@ class SiteCreate extends Window
             foreach ($users as $user) {
                 $container = new form\Container();
 
-                $container->addChild(new html\String($user['user']));
+                $container->addChild(new html\Str($user['user']));
 
                 $ul = new html\Ul();
                 $container->addChild($ul);
 
-                $ul->addLine(new html\String(
+                $ul->addLine(new html\Str(
                     sprintf(_('Host: %s'), $user['service_entity_name'])));
 
                 $listbox->addLinkEntry(

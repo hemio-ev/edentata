@@ -67,7 +67,7 @@ class Overview extends Window
                     , $domain['domain']
                 )
                 ,
-                    new \hemio\html\String(
+                    new \hemio\html\Str(
                 sprintf('%s (%s)%s', $domain['domain'],
                         $domain['public_suffix'], $unmanaged))
                 , $domain['backend_status']
@@ -92,7 +92,7 @@ class Overview extends Window
             $list->addLinkEntry(
                 $this->request->derive('handle_details', $value['alias'])
                 ,
-                                       new html\String(
+                                       new html\Str(
                 sprintf(
                     '%s %s (%s, ID: %s)'
                     , $value['fname']

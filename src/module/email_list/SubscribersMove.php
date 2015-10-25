@@ -53,7 +53,7 @@ class SubscribersMove extends Window
             $address = $subscr->getValueUser();
 
             if ($address !== null)
-                $ul->addLine(new html\String($address));
+                $ul->addLine(new html\Str($address));
 
             $inputs[] = $window->getForm()->addChild(
                 new \hemio\form\InputHidden($subscr->getName(), $address)

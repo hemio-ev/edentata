@@ -137,7 +137,7 @@ class RegisteredDetails extends Window
             $dom       = $domain['domain'];
             $container = new form\Container;
 
-            $container->addChild(new html\String($dom));
+            $container->addChild(new html\Str($dom));
 
             $servicesActive = $this->db->serviceSelect($dom)->fetchAll();
             if (!empty($servicesActive)) {
@@ -146,7 +146,7 @@ class RegisteredDetails extends Window
 
                 foreach ($servicesActive as $act) {
                     $li = $ul->addLine();
-                    $li->addChild(new html\String($act['service']));
+                    $li->addChild(new html\Str($act['service']));
                     $li->addChild(new gui\Progress($act['backend_status']));
                 }
             }
@@ -186,10 +186,10 @@ class RegisteredDetails extends Window
             $rdata = (array) json_decode($record['rdata']);
             ksort($rdata);
             foreach ($rdata as $key => $value) {
-                $ul->addLine(new html\String(sprintf('%s = %s', $key, $value)));
+                $ul->addLine(new html\Str(sprintf('%s = %s', $key, $value)));
             }
 
-            $span->addChild(new html\String($domain.' '.$record['type']));
+            $span->addChild(new html\Str($domain.' '.$record['type']));
             $span->addChild($ul);
 
             $list->addLinkEntry(

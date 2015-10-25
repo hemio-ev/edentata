@@ -87,7 +87,7 @@ class MailboxDetails extends Window
             );
 
             $list->addEntry(
-                new html\String($aliasAddr)
+                new html\Str($aliasAddr)
                 , $alias['backend_status']
                 , $button
             );

@@ -119,7 +119,7 @@ class SiteDetails extends Window
 
         foreach ($aliases as $alias) {
             $listbox->addEntry(
-                new html\String($alias['domain'])
+                new html\Str($alias['domain'])
                 , $alias['backend_status']
                 ,
                                 new gui\LinkButton(
@@ -167,7 +167,7 @@ class SiteDetails extends Window
         $fieldset->addChild($list);
 
         $url = $this->request->derive('site_https', true);
-        $list->addEntry(new html\String($site['https']), null,
+        $list->addEntry(new html\Str($site['https']), null,
                                         new gui\LinkButton($url, _('Change')));
 
         return $fieldset;
@@ -193,7 +193,7 @@ class SiteDetails extends Window
                                           $cert['identifier']);
 
             $container   = new form\Container;
-            $container[] = new html\String($cert['identifier']);
+            $container[] = new html\Str($cert['identifier']);
             $container[] = Utils::certSummary($domain, $port,
                                               $cert['identifier'], $this->db);
 

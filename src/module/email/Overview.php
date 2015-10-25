@@ -19,7 +19,7 @@
 namespace hemio\edentata\module\email;
 
 use hemio\edentata\gui;
-use hemio\html\String;
+use hemio\html\Str;
 use hemio\html;
 use hemio\form;
 
@@ -80,7 +80,7 @@ class Overview extends Window
 
                 $mailboxEntry = $accounts->addLinkEntry(
                     $url
-                    , new String($address)
+                    , new Str($address)
                     , $mailbox['backend_status']
                 );
 
@@ -90,7 +90,7 @@ class Overview extends Window
 
                 $ul    = $mailboxEntry->addChild(new html\Ul);
                 while ($alias = $aliases->fetch()) {
-                    $li = $ul->addLine(new String($alias['localpart'].'@'.$alias['domain']));
+                    $li = $ul->addLine(new Str($alias['localpart'].'@'.$alias['domain']));
                     $li->addChild(new gui\Progress($alias['backend_status']));
                 }
             }
@@ -117,10 +117,10 @@ class Overview extends Window
                 $button  = new gui\LinkButton($url, _('Delete'));
 
                 $span = new form\Container;
-                $span->addChild(new String($address));
+                $span->addChild(new Str($address));
                 $span
                     ->addChild(new html\Ul)
-                    ->addLine(new String($redirection['destination']));
+                    ->addLine(new Str($redirection['destination']));
 
                 $redirections->addEntry(
                     $span

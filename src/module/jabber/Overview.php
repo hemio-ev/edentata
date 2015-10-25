@@ -59,7 +59,7 @@ class Overview extends Window
             $addr = $account['node'].'@'.$account['domain'];
             $list->addLinkEntry(
                 $this->request->derive('details', $addr)
-                , new \hemio\html\String($addr)
+                , new \hemio\html\Str($addr)
                 , $account['backend_status']
             );
         }
