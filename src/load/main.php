@@ -86,8 +86,8 @@ else
 
 $loader->addPsr4('hemio\\edentata\\module\\', $config['module_load_dirs']);
 
-$request = new Request($_GET, Utils::getPost(), $_SERVER['REQUEST_URI'],
-                       $config['base_url']);
+$request = new Request($_GET, Utils::getPost(),
+                       urldecode($_SERVER['REQUEST_URI']), $config['base_url']);
 
 $modulesNavi    = $config['modules_nav'];
 $modulesAllowed = $config->getAllowedModules();
