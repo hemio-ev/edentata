@@ -35,7 +35,10 @@ class CustomCreate extends Window
         'AAAA' => ['address'],
         'CNAME' => ['cname'],
         'MX' => ['priority', 'exchange'],
-        'SRV' => ['service', 'proto', 'priority', 'weight', 'port', 'target']
+        'NS' => ['nsdname'],
+        'SRV' => ['service', 'proto', 'priority', 'weight', 'port', 'target'],
+        'SSHFP' => ['algorithm', 'fptype', 'fingerprint'],
+        'TXT' => ['txtdata']
     ];
 
     public function content($domain, $type)
@@ -46,6 +49,20 @@ class CustomCreate extends Window
             return $this->details($domain, $type);
     }
 
+    public static function types()
+    {
+        return [
+            'A' => _('Host Address (IPv4)'),
+            'AAAA' => _('Host Address (IPv6)'),
+            'CNAME' => _('Canonical Name for an Alias'),
+            'MX' => _('Mail Exchange'),
+            'NS' => _('Authoritative Name Server'),
+            'SRV' => _('Service Locator'),
+            'SSHFP' => _('SSH Fingerprint'),
+            'TXT' => _('Text String')
+        ];
+    }
+
     protected function type($domain)
     {
         $window = $this->newWindow(
@@ -53,17 +70,9 @@ class CustomCreate extends Window
             , $domain, _('Create')
         );
 
-        $types = [
-            'A' => _('Host Address (IPv4)'),
-            'AAAA' => _('Host Address (IPv6)'),
-            'CNAME' => _('Canonical Name for an Alias'),
-            'MX' => _('Mail Exchange'),
-            'SRV' => _('Service Locator')
-        ];
-
         $list = new gui\Listbox();
 
-        foreach ($types as $type => $desc)
+        foreach (self::types() as $type => $desc)
             $list->addLinkEntry(
                 $this->request->derive(true, true, $type)
                 , new html\Str(sprintf('%s: %s', $type, $desc))
@@ -124,8 +133,17 @@ class CustomCreate extends Window
             case 'MX':
                 return $this->formMx($domain);
 
+            case 'NS':
+                return $this->formNs();
+
             case 'SRV':
                 return $this->formSrv($domain);
+
+            case 'SSHFP':
+                return $this->formSshfp();
+
+            case 'TXT':
+                return $this->formTxt();
 
             default:
                 throw new exception\Error(_('Unkown record type'));
@@ -193,6 +211,14 @@ class CustomCreate extends Window
         return $container;
     }
 
+    protected function formNs()
+    {
+        $cname = new form\FieldText('nsdname', _('Authoritive Nameserver'));
+        $cname->setPlaceholder('ns1.example.com.');
+
+        return $cname;
+    }
+
     protected function formSrv($domain)
     {
         $container = new form\Container();
@@ -222,5 +248,37 @@ class CustomCreate extends Window
         $container[] = $target;
 
         return $container;
+    }
+
+    protected function formSshfp()
+    {
+        $container = new form\Container();
+
+        $algorithm = new form\FieldSelect('algorithm', _('Algorithm'));
+        $algorithm->addOption('', '');
+        $algorithm->addOption('1', 'RSA');
+        $algorithm->addOption('2', 'DSS');
+
+        $fptype = new form\FieldSelect('fptype', _('Fingerprint Type'));
+        $fptype->addOption('', '');
+        $fptype->addOption('1', 'SHA-1');
+        $fptype->addOption('2', 'SHA-256');
+        $fptype->addOption('3', 'ECDSA');
+
+        $fingerprint = new form\FieldText('fingerprint', _('Fingerprint'));
+
+        $container[] = $algorithm;
+        $container[] = $fptype;
+        $container[] = $fingerprint;
+
+        return $container;
+    }
+
+    protected function formTxt()
+    {
+        $cname = new form\FieldText('txtdata', _('Text String'));
+        $cname->setPlaceholder('');
+
+        return $cname;
     }
 }

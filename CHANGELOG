@@ -1,5 +1,6 @@
 v0.6.0-unreleased
   - Fixes missing unicode support for requests.
+  - [dns] Adds support for NS, SSHFP and TXT resource records
 v0.5.0
   - Fixes missing generation of global gettext .mo-files.
     This fixes missing l10n in top bar also.
