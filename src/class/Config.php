@@ -22,7 +22,7 @@ use Symfony\Component\Yaml;
 
 class Config implements \ArrayAccess
 {
-    const DEFAULT_CONFIG = 'default/config.yaml';
+    const DEFAULT_CONFIG = __DIR__.'/../../default/config.yaml';
 
     public static function load($file)
     {

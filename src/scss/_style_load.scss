@@ -45,10 +45,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 @import "gui/_switch.scss";
 @import "gui/_textarea.scss";
 @import "gui/_checkbox.scss";
+@import "gui/_radio.scss";
 
 @import "gui/_fieldset.scss";
 @import "gui/_output.scss";
-
+@import "gui/_hint.scss";
 
 @import "gui/_listbox.scss";
 @import "gui/_selectbox.scss";
@@ -62,9 +63,3 @@ article p.text {
     padding: 0.5em 1em;
 }
 
-article p.hint {
-    font-size: 1.1em;
-    padding: 0.5em 1em;
-    color: $text-color-hint;
-    text-align: center;
-}
