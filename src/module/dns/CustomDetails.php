@@ -50,6 +50,9 @@ class CustomDetails extends Window
 
         $data = $raw + (array) json_decode($raw['rdata']);
 
+        if (isset($data['txtdata']))
+            $data['txtdata'] = implode('', $data['txtdata']);
+
         $window->getForm()->setStoredValues($data);
 
         $x = (new CustomCreate($this->module))->formType($domain, $data['type']);
@@ -73,8 +76,7 @@ class CustomDetails extends Window
     protected function handleSubmit($recordId, $type, gui\FormPost $form)
     {
         if ($form->correctSubmitted()) {
-            $keys  = CustomCreate::TYPE_KEYS;
-            $rdata = json_encode($form->getVal($keys[$type], ''));
+            $rdata = CustomCreate::getRdata($type, $form);
 
             $params = ['p_id' => $recordId, 'p_rdata' => $rdata] + $form->getVal(['ttl']);
 

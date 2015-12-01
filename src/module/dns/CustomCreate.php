@@ -150,11 +150,27 @@ class CustomCreate extends Window
         }
     }
 
+    public static function getRdata($type, gui\FormPost $form)
+    {
+        $keys = self::TYPE_KEYS;
+
+        // without '_p' prefix
+        $jsonData = $form->getVal($keys[$type], '');
+
+        // manual adjustemnts for some types
+        if ($type == 'TXT')
+        // TODO: support strings > 255, currently carnivora will barf
+            $jsonData['txtdata'] = [$jsonData['txtdata']];
+
+        // convert to json
+        return json_encode($jsonData);
+    }
+
     protected function handleSubmit($domain, $type, gui\FormPost $form)
     {
         if ($form->correctSubmitted()) {
-            $keys   = self::TYPE_KEYS;
-            $rdata  = json_encode($form->getVal($keys[$type], ''));
+            $rdata = self::getRdata($type, $form);
+
             $params = ['p_registered' => $domain, 'p_type' => $type, 'p_rdata' => $rdata]
                 + $form->getVal(['domain', 'ttl']);
 
@@ -277,9 +293,9 @@ class CustomCreate extends Window
 
     protected function formTxt()
     {
-        $cname = new form\FieldText('txtdata', _('Text String'));
-        $cname->setPlaceholder('');
+        $txt = new form\FieldText('txtdata', _('Text String'));
+        $txt->setPlaceholder('');
 
-        return $cname;
+        return $txt;
     }
 }

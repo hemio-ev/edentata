@@ -186,7 +186,8 @@ class RegisteredDetails extends Window
             $rdata = (array) json_decode($record['rdata']);
             ksort($rdata);
             foreach ($rdata as $key => $value) {
-                $ul->addLine(new html\Str(sprintf('%s = %s', $key, $value)));
+                $ul->addLine(new html\Str(sprintf('%s = %s', $key,
+                                                  print_r($value, true))));
             }
 
             $span->addChild(new html\Str($domain.' '.$record['type']));
