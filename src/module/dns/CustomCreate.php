@@ -256,14 +256,15 @@ class CustomCreate extends Window
 
         $algorithm = new form\FieldSelect('algorithm', _('Algorithm'));
         $algorithm->addOption('', '');
-        $algorithm->addOption('1', 'RSA');
-        $algorithm->addOption('2', 'DSS');
+        $algorithm->addOption('1', '1: RSA');
+        $algorithm->addOption('2', '2: DSS');
 
         $fptype = new form\FieldSelect('fptype', _('Fingerprint Type'));
         $fptype->addOption('', '');
-        $fptype->addOption('1', 'SHA-1');
-        $fptype->addOption('2', 'SHA-256');
-        $fptype->addOption('3', 'ECDSA');
+        $fptype->addOption('1', '1: SHA-1');
+        $fptype->addOption('2', '2: SHA-256');
+        $fptype->addOption('3', '3: ECDSA');
+        $fptype->addOption('4', '4: Ed25519');
 
         $fingerprint = new form\FieldText('fingerprint', _('Fingerprint'));
 
