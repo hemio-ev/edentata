@@ -21,7 +21,8 @@ namespace hemio\edentata;
 use hemio\form;
 use hemio\html;
 
-$document = new form\Document(new html\Str(_('Edentata Login')));
+$title    = new html\Str('Edentata Login');
+$document = new form\Document($title);
 
 $document->getHtml()->getHead()->setBaseUrl($config['base_url']);
 $document->getHtml()->getHead()->addJsFile('static/js/login.js');
@@ -34,6 +35,7 @@ $pdo = new sql\Connection($config['database_dsn']);
 
 $loadedModule = new LoadModule('login_http', $pdo, $i10n);
 $i10n->setDomainModule($loadedModule);
+$title->setValue(module\login_http\Login::loginTitle());
 
 $document->getHtml()->getBody()->addChild(
     $loadedModule->getContent(
