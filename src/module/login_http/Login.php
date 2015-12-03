@@ -37,10 +37,17 @@ class Login extends Window
         return $container;
     }
 
+    public static function loginTitle()
+    {
+        global $config;
+
+        return sprintf($config['title'], _('User Login'));
+    }
+
     protected function nojsLogin()
     {
         $noscript = new html\Noscript();
-        $window   = $this->newWindow(_('Edentata Userlogin'), null, false);
+        $window   = $this->newWindow(self::loginTitle(), null, false);
         $window->addCssClass('login_window');
 
         $selecting = new gui\Selecting();
@@ -68,7 +75,7 @@ class Login extends Window
     {
         $window = $this->newFormWindow(
             'login'
-            , _('Edentata Userlogin')
+            , self::loginTitle()
             , null
             , _('Login')
             , false
@@ -78,7 +85,8 @@ class Login extends Window
         $window->setId('js_window');
         $window->addCssClass('login_window');
 
-        $user = new form\FieldText('username', _('Username'));
+        $user = new form\FieldText('username', _('User Account'));
+        $user->setPlaceholder(_('Username or Email Address'));
         $user->setRequired();
 
         $password = new form\FieldPassword('password', _('Password'));

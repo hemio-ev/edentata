@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata\n"
-"POT-Creation-Date: 2015-08-08 14:52+0100\n"
-"PO-Revision-Date: 2015-08-08 14:52+0100\n"
+"POT-Creation-Date: 2015-11-07 17:01+0100\n"
+"PO-Revision-Date: 2015-11-07 17:02+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -38,6 +38,62 @@ msgstr ""
 #: src/class/Request.php:103
 #, php-format
 msgid "Invalid input with key \"%s\"."
+msgstr ""
+
+#: src/class/Utils.php:33
+msgid "IDNA_ERROR_EMPTY_LABEL"
+msgstr ""
+
+#: src/class/Utils.php:36
+msgid "IDNA_ERROR_LABEL_TOO_LONG"
+msgstr ""
+
+#: src/class/Utils.php:39
+msgid "IDNA_ERROR_DOMAIN_NAME_TOO_LONG"
+msgstr ""
+
+#: src/class/Utils.php:42
+msgid "IDNA_ERROR_LEADING_HYPHEN"
+msgstr ""
+
+#: src/class/Utils.php:45
+msgid "IDNA_ERROR_TRAILING_HYPHEN"
+msgstr ""
+
+#: src/class/Utils.php:48
+msgid "IDNA_ERROR_HYPHEN_3_4"
+msgstr ""
+
+#: src/class/Utils.php:51
+msgid "IDNA_ERROR_LEADING_COMBINING_MARK"
+msgstr ""
+
+#: src/class/Utils.php:54
+msgid "IDNA_ERROR_DISALLOWED"
+msgstr "The domain contains disallowed characters."
+
+#: src/class/Utils.php:57
+msgid "IDNA_ERROR_PUNYCODE"
+msgstr ""
+
+#: src/class/Utils.php:60
+msgid "IDNA_ERROR_LABEL_HAS_DOT"
+msgstr ""
+
+#: src/class/Utils.php:63
+msgid "IDNA_ERROR_INVALID_ACE_LABEL"
+msgstr ""
+
+#: src/class/Utils.php:66
+msgid "IDNA_ERROR_BIDI"
+msgstr ""
+
+#: src/class/Utils.php:69
+msgid "IDNA_ERROR_CONTEXTJ"
+msgstr ""
+
+#: src/class/Utils.php:72
+msgid "Unkown IDNA Error"
 msgstr ""
 
 #: src/class/Window.php:116
@@ -118,19 +174,23 @@ msgstr ""
 msgid "Refresh View"
 msgstr "Ansicht Aktualisieren"
 
-#: src/class/gui/Progress.php:81
+#: src/class/gui/Progress.php:84
 msgid "Deletion Pending"
 msgstr "Ausstehende Löschung"
 
-#: src/class/gui/Progress.php:85
+#: src/class/gui/Progress.php:88
 msgid "Changes Pending"
 msgstr "Ausstehende Änderungen"
 
-#: src/class/gui/Progress.php:89
+#: src/class/gui/Progress.php:92
 msgid "Setup Pending"
 msgstr "Ausstehende Einrichtung"
 
-#: src/class/gui/Progress.php:93
+#: src/class/gui/Progress.php:96
+msgid "Deleted"
+msgstr "Gelöscht"
+
+#: src/class/gui/Progress.php:100
 msgid "Unknown Status"
 msgstr "Unbekannter Status"
 
@@ -170,42 +230,42 @@ msgstr ""
 "kontaktieren und die Fehler-Nummer \"%s\" angeben. Sie können die \"Zurück\"-"
 "Funktion Ihres Browsers benutzen und es noch einmal versuchen."
 
-#: src/load/main.php:141
+#: src/load/main.php:143
 msgid "Logout successfull"
 msgstr "Abmeldung Erfolgreich"
 
-#: src/load/main.php:153 src/load/main.php:174
+#: src/load/main.php:155 src/load/main.php:176
 msgid "Login failed"
 msgstr "Anmeldung fehlgeschlagen"
 
-#: src/load/main.php:182
+#: src/load/main.php:184
 msgid "User"
 msgstr "Benutzer"
 
-#: src/load/main.php:187
+#: src/load/main.php:189
 msgid "User Settings"
 msgstr "Benutzereinstellungen"
 
-#: src/load/main.php:201
+#: src/load/main.php:203
 msgid "Stop acting as deputy"
 msgstr "Stellvertretung aufgeben"
 
-#: src/load/main.php:211
+#: src/load/main.php:213
 msgid "Act as Deputy"
 msgstr "Stellvertretung Ausüben"
 
-#: src/load/main.php:220
+#: src/load/main.php:222
 msgid "Support"
 msgstr ""
 
-#: src/load/main.php:225
+#: src/load/main.php:227
 msgid "Logout"
 msgstr "Abmelden"
 
-#: src/load/main.php:245 src/load/main.php:247
+#: src/load/main.php:247 src/load/main.php:249
 msgid "Settings"
 msgstr "Optionen"
 
-#: src/load/main.php:271
+#: src/load/main.php:273
 msgid "Tried to access unknown or disabled module"
 msgstr ""

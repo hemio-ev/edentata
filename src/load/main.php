@@ -161,7 +161,7 @@ try {
     }
 
     $usrData = [
-        'p_owner' => $_SERVER['PHP_AUTH_USER'],
+        'p_login' => $_SERVER['PHP_AUTH_USER'],
         'p_password' => $_SERVER['PHP_AUTH_PW']
     ];
 
@@ -288,4 +288,4 @@ try {
 }
 
 echo $doc->__toString();
-echo System::reportString();
+//echo System::reportString();

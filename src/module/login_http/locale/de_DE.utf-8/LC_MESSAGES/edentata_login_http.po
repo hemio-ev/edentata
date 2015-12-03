@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edenetata login http\n"
-"POT-Creation-Date: 2015-03-25 21:31+0100\n"
-"PO-Revision-Date: 2015-03-25 21:31+0100\n"
+"POT-Creation-Date: 2015-12-03 14:53+0100\n"
+"PO-Revision-Date: 2015-12-03 14:53+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -15,32 +15,39 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Login.php:43 Login.php:69
-msgid "Edentata Userlogin"
-msgstr "Edentata Benutzerlogin"
+#: Login.php:44
+msgid "User Login"
+msgstr "Benutzeranmeldung"
 
-#: Login.php:52
+#: Login.php:60
 msgid "Perform Logout"
 msgstr "Abmelden durchführen"
 
-#: Login.php:55
+#: Login.php:64
 msgid "Open Login Prompt"
 msgstr "Anmeldefenster Öffnen"
 
-#: Login.php:71 Module.php:55
+#: Login.php:80 Module.php:52
 msgid "Login"
 msgstr "Anmelden"
 
-#: Login.php:79
-msgid "Username"
-msgstr "Benutzername"
+#: Login.php:88
+msgid "User Account"
+msgstr "Benutzerkonto"
 
-#: Login.php:82
+#: Login.php:89
+msgid "Username or Email Address"
+msgstr "Benutzername oder E-Mail-Adresse"
+
+#: Login.php:92
 msgid "Password"
 msgstr "Passwort"
 
-#: Login.php:95
+#: Login.php:105
 msgid "Login failed: Invalid username or password. Please try again."
 msgstr ""
-"Anmeldung fehlgeschlagen: Falscher Benutzername oder flasches Passwort. "
+"Anmeldung fehlgeschlagen: Falscher Benutzername oder falsches Passwort. "
 "Bitte erneut versuchen."
+
+#~ msgid "Username"
+#~ msgstr "Benutzername"
