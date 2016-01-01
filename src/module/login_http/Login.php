@@ -113,7 +113,7 @@ class Login extends Window
 
     protected function logout()
     {
-        $event   = new exception\Successful('Logout done.');
+        $event   = new exception\Successful(_('Logout successful.'));
         $message = new gui\Message($event);
         $message['article']->setAttribute('data-js-hidden', true);
         $message['article']->setId('message_logout_successful');
