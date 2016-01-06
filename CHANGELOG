@@ -1,4 +1,4 @@
-v0.6.0-unreleased
+v0.6.0
   - Fixes missing unicode support for requests.
   - Adds config fields 'site_information_url' and 'footer'
   - [dns] Adds support for NS, SSHFP and TXT resource records

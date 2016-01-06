@@ -139,7 +139,7 @@ class RegisteredDetails extends Window
             $domUtf8   = Utils::idnToUtf8Bijection($dom);
             $container = new form\Container;
 
-            $container->addChild(new html\Str($dom));
+            $container->addChild(new html\Str($domUtf8));
 
             $servicesActive = $this->db->serviceSelect($dom)->fetchAll();
             if (!empty($servicesActive)) {
