@@ -2,6 +2,8 @@ v0.6.0-unreleased
   - Fixes missing unicode support for requests.
   - Adds config fields 'site_information_url' and 'footer'
   - [dns] Adds support for NS, SSHFP and TXT resource records
+  - [dns] Adds support for entering IDNs as UTF-8
+  - [dns] IDNs are displayed as UTF-8 if bijection exists
   - [login_http] Adds support for login via email address as user account
 v0.5.0
   - Fixes missing generation of global gettext .mo-files.

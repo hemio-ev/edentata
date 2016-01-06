@@ -21,6 +21,7 @@ namespace hemio\edentata\module\dns;
 use hemio\form;
 use hemio\edentata\gui;
 use hemio\edentata\exception;
+use hemio\edentata\Utils;
 
 /**
  * Description of CustomDetails
@@ -57,7 +58,8 @@ class CustomDetails extends Window
 
         $x = (new CustomCreate($this->module))->formType($domain, $data['type']);
 
-        $name = new gui\Output(_('Name (Domain)'), $data['domain']);
+        $name = new gui\Output(_('Name (Domain)'),
+                                 Utils::idnToUtf8Bijection($data['domain']));
         $window->getForm()->addChild($name);
 
         $type = new gui\Output(_('Type'), $data['type']);

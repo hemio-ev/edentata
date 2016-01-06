@@ -20,6 +20,7 @@ namespace hemio\edentata\module\dns;
 
 use hemio\edentata\gui;
 use hemio\form;
+use hemio\edentata\Utils;
 
 /**
  * Description of ServiceDetails
@@ -31,30 +32,15 @@ class ServiceDetails extends Window
 
     public function content($registered, $domain)
     {
+        $domainAscii    = Utils::idnToAscii($domain);
+        $domainReadable = Utils::idnKeepUtf8Bijection($domain);
+
         $window = $this->newFormWindow('service_details',
-                                       _('Service Activation'), $domain,
+                                       _('Service Activation'), $domainReadable,
                                          _('Save'));
 
-        var_dump($domain);
-
-        \hemio\edentata\Utils::idnToAscii($domain);
-
-        $idnaInfo = [];
-        $x        = idn_to_ascii($domain,
-                                 IDNA_CHECK_BIDI | IDNA_CHECK_CONTEXTJ | IDNA_NONTRANSITIONAL_TO_ASCII
-            | IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46, $idnaInfo);
-        var_dump($x);
-        var_dump($idnaInfo);
-
-        $idnaInfo = [];
-        $x        = idn_to_utf8($x,
-                                IDNA_CHECK_BIDI | IDNA_CHECK_CONTEXTJ | IDNA_NONTRANSITIONAL_TO_UNICODE,
-                                INTL_IDNA_VARIANT_UTS46, $idnaInfo);
-        var_dump($x);
-        var_dump($idnaInfo);
-
         $activeServices = [];
-        $dnsService     = $this->db->serviceSelect($domain)->fetchAll();
+        $dnsService     = $this->db->serviceSelect($domainAscii)->fetchAll();
         foreach ($dnsService as $service) {
             $activeServices[$service['service']] = $service['service_entity_name'];
         }
@@ -98,7 +84,7 @@ class ServiceDetails extends Window
         }
 
         $this->handleSubmit($window->getForm(), $insServices, $delServices,
-                            $registered, $domain);
+                            $registered, $domainAscii);
 
         return $window;
     }

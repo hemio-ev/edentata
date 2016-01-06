@@ -20,6 +20,7 @@ namespace hemio\edentata\module\dns;
 
 use hemio\edentata\gui;
 use hemio\html;
+use hemio\edentata\Utils;
 
 /**
  * Description of Overview
@@ -59,17 +60,19 @@ class Overview extends Window
 
         $list = new gui\Listbox();
         foreach ($this->db->registeredSelect() as $domain) {
+            $idn       = Utils::idnToUtf8Bijection($domain['domain']);
             $unmanaged = $domain['subservice'] == 'unmanaged' ?
                 ' ['._('unmanged').']' : '';
             $list->addLinkEntry(
                 $this->request->derive(
                     'registered_details'
-                    , $domain['domain']
+                    , $idn
                 )
                 ,
                     new \hemio\html\Str(
-                sprintf('%s (%s)%s', $domain['domain'],
-                        $domain['public_suffix'], $unmanaged))
+                sprintf('%s (%s)%s', $idn,
+                        Utils::idnToUtf8Bijection($domain['public_suffix']),
+                                                  $unmanaged))
                 , $domain['backend_status']
             );
         }

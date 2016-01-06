@@ -22,6 +22,7 @@ use hemio\edentata\gui;
 use hemio\form;
 use hemio\html;
 use hemio\edentata\exception;
+use hemio\edentata\Utils;
 
 /**
  * Description of CustomCreate
@@ -171,8 +172,13 @@ class CustomCreate extends Window
         if ($form->correctSubmitted()) {
             $rdata = self::getRdata($type, $form);
 
-            $params = ['p_registered' => $domain, 'p_type' => $type, 'p_rdata' => $rdata]
-                + $form->getVal(['domain', 'ttl']);
+            $params = [
+                'p_registered' => Utils::idnToAscii($domain)
+                , 'p_type' => $type
+                , 'p_rdata' => $rdata
+                ] + $form->getVal(['domain', 'ttl']);
+
+            $params['p_domain'] = Utils::idnToAscii($params['p_domain']);
 
             if (!$params['p_ttl'])
                 $params['p_ttl'] = null;

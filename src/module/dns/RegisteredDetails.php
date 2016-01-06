@@ -21,6 +21,7 @@ namespace hemio\edentata\module\dns;
 use hemio\edentata\gui;
 use hemio\form;
 use hemio\html;
+use hemio\edentata\Utils;
 
 /**
  * Description of RegisteredDetails
@@ -73,8 +74,8 @@ class RegisteredDetails extends Window
     {
         $fieldset = new gui\Fieldset(_('Domain Details'));
 
-        $dataRegist = $this->db->resellerRegisteredSelectSingle($registered)->fetch();
-        $dataDomain = $this->db->registeredSelectSingle($registered)->fetch();
+        $dataRegist = $this->db->resellerRegisteredSelectSingle(Utils::idnToAscii($registered))->fetch();
+        $dataDomain = $this->db->registeredSelectSingle(Utils::idnToAscii($registered))->fetch();
 
         if ($dataDomain['subservice'] == 'unmanaged') {
             $fieldset->addChild(
@@ -133,8 +134,9 @@ class RegisteredDetails extends Window
         $fieldset = new gui\Fieldset(_('Domain Service Activation'));
 
         $list = new gui\Listbox();
-        foreach ($this->db->serviceDomainSelect($registered) as $domain) {
+        foreach ($this->db->serviceDomainSelect(Utils::idnToAscii($registered)) as $domain) {
             $dom       = $domain['domain'];
+            $domUtf8   = Utils::idnToUtf8Bijection($dom);
             $container = new form\Container;
 
             $container->addChild(new html\Str($dom));
@@ -156,7 +158,7 @@ class RegisteredDetails extends Window
                 $this->request->derive(
                     'service_details'
                     , $registered
-                    , $dom
+                    , $domUtf8
                 )
                 , $container
             );
@@ -172,14 +174,14 @@ class RegisteredDetails extends Window
 
     protected function custom($registered)
     {
-        $service = $this->db->customSelect($registered)->fetchAll();
+        $service = $this->db->customSelect(Utils::idnToAscii($registered))->fetchAll();
 
         if (empty($service))
             return new html\Nothing;
 
         $list = new gui\Listbox();
         foreach ($service as $record) {
-            $domain = $record['domain'];
+            $domain = Utils::idnToUtf8Bijection($record['domain']);
             $span   = new html\Span;
             $ul     = new html\Ul();
 

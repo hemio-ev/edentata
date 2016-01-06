@@ -76,18 +76,48 @@ class Utils
     public static function idnToAscii($domain)
     {
         $idnaInfo = [];
-        $utf8     = idn_to_ascii($domain
+        $ascii    = idn_to_ascii($domain
             ,
                                  IDNA_CHECK_BIDI | IDNA_CHECK_CONTEXTJ | IDNA_NONTRANSITIONAL_TO_ASCII
             | IDNA_DEFAULT
             , INTL_IDNA_VARIANT_UTS46, $idnaInfo);
 
 
+        if ($ascii === false)
+            throw new exception\Error(self::getIdnaErrorMessage($idnaInfo['errors']),
+                                                                $idnaInfo['errors']);
+
+        return $ascii;
+    }
+
+    public static function idnToUtf8($domain)
+    {
+        $idnaInfo = [];
+        $utf8     = idn_to_utf8($domain,
+                                IDNA_CHECK_BIDI | IDNA_CHECK_CONTEXTJ | IDNA_NONTRANSITIONAL_TO_UNICODE,
+                                INTL_IDNA_VARIANT_UTS46, $idnaInfo);
+
         if ($utf8 === false)
             throw new exception\Error(self::getIdnaErrorMessage($idnaInfo['errors']),
                                                                 $idnaInfo['errors']);
 
         return $utf8;
+    }
+
+    public static function idnKeepUtf8Bijection($domain)
+    {
+        if (self::idnToUtf8(self::idnToAscii($domain)) === $domain)
+            return $domain;
+        else
+            return self::idnToAscii($domain);
+    }
+
+    public static function idnToUtf8Bijection($domain)
+    {
+        if (self::idnToAscii(self::idnToUtf8($domain)) === $domain)
+            return self::idnToUtf8($domain);
+        else
+            return $domain;
     }
 
     public static function getPost()
