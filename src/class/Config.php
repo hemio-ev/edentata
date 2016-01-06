@@ -45,6 +45,11 @@ class Config implements \ArrayAccess
         }
     }
 
+    public function enabled($key)
+    {
+        return $this[$key] !== false && $this[$key] !== null;
+    }
+
     public function offsetExists($offset)
     {
         return isset($this->values[$offset]);

@@ -27,9 +27,15 @@ locales:
 # base URL: can be relative or absolute
 base_url: '/'
 
-# document title, must contain one %s
-title: 'Edentata – %s'
+# document title
+title: 'Edentata – {module}'
+
+# footer
+footer: 'Powered by Edentata {version}'
 
 # support URL, disabled if set to off
-support_url: 'https://git.hemio.de/hemio/edentata'
+support_url: False
 
+# site information URL, disabled if set to off
+# with german l10n this link appears as 'Impressum'
+site_information_url: False

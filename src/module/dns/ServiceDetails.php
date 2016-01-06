@@ -35,6 +35,24 @@ class ServiceDetails extends Window
                                        _('Service Activation'), $domain,
                                          _('Save'));
 
+        var_dump($domain);
+
+        \hemio\edentata\Utils::idnToAscii($domain);
+
+        $idnaInfo = [];
+        $x        = idn_to_ascii($domain,
+                                 IDNA_CHECK_BIDI | IDNA_CHECK_CONTEXTJ | IDNA_NONTRANSITIONAL_TO_ASCII
+            | IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46, $idnaInfo);
+        var_dump($x);
+        var_dump($idnaInfo);
+
+        $idnaInfo = [];
+        $x        = idn_to_utf8($x,
+                                IDNA_CHECK_BIDI | IDNA_CHECK_CONTEXTJ | IDNA_NONTRANSITIONAL_TO_UNICODE,
+                                INTL_IDNA_VARIANT_UTS46, $idnaInfo);
+        var_dump($x);
+        var_dump($idnaInfo);
+
         $activeServices = [];
         $dnsService     = $this->db->serviceSelect($domain)->fetchAll();
         foreach ($dnsService as $service) {

@@ -1,7 +1,7 @@
 
-all: composer l10n css
+all: composer     l10n css version
 
-dev: composer-dev l10n css
+dev: composer-dev l10n css version
 
 l10n:
 	# generate l10n
@@ -15,4 +15,7 @@ composer:
 
 composer-dev:
 	composer install
+
+version:
+	git describe --tags > VERSION
 

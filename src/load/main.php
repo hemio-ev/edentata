@@ -217,10 +217,12 @@ try {
         $header[] = $ul;
     }
 
-    $aSupport   = new html\A;
-    $aSupport->setAttribute('href', $config['support_url']);
-    $aSupport[] = new html\Str(_('Support'));
-    $header[]   = $aSupport;
+    if ($config->enabled('support_url')) {
+        $aSupport   = new html\A;
+        $aSupport->setAttribute('href', $config['support_url']);
+        $aSupport[] = new html\Str(_('Support'));
+        $header[]   = $aSupport;
+    }
 
     $aLogout   = new html\A;
     $aLogout->setAttribute('href', '?auth=logout');
@@ -244,7 +246,8 @@ try {
 
 # modules
     if ($request->role === 'settings') {
-        $title->setValue(sprintf($config['title'], _('Settings')));
+
+        $title->setValue(_msg($config['title'], ['module' => _('Settings')]));
 
         $nav   = new gui\Window(_('Settings'));
         $list  = new gui\Sidebar();
@@ -274,7 +277,8 @@ try {
 
         $loadedModule = new LoadModule($activeModuleName, $pdo, $i10n);
 
-        $title->setValue(sprintf($config['title'], $loadedModule->getName()));
+        $title->setValue(_msg($config['title'],
+                              ['module' => $loadedModule->getName()]));
 
 # generate content
         $content = $loadedModule->getContent($request, $i10n);
@@ -286,6 +290,26 @@ try {
 } catch (exception\Printable $e) {
     $mainContent['messages']->addChild(new gui\Message($e));
 }
+
+$version = file_get_contents('VERSION');
+
+$body['footer'] = new html\Footer();
+
+if ($config->enabled('footer'))
+    $body['footer']['text'] = new html\Str(_msg($config['footer'],
+                                                ['version' => $version]));
+
+if ($config->enabled('site_information_url')) {
+    $siteInfo   = new html\A;
+    $siteInfo->setAttribute('href', $config['site_information_url']);
+    $siteInfo[] = new html\Str(_('Site Information'));
+
+    if (isset($body['footer']['text']))
+        $body['footer'][] = new html\Str(' – ');
+
+    $body['footer']['site_information'] = $siteInfo;
+}
+
 
 echo $doc->__toString();
 //echo System::reportString();

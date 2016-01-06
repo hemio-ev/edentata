@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "20a1754350d9f4b11ef9f6229f0c948b",
+    "content-hash": "d95cd60200cb24e8a02c10ff7b4f1a7f",
     "packages": [
         {
             "name": "hemio/form",

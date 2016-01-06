@@ -41,7 +41,7 @@ class Login extends Window
     {
         global $config;
 
-        return sprintf($config['title'], _('User Login'));
+        return _msg($config['title'], ['module' => _('User Login')]);
     }
 
     protected function nojsLogin()

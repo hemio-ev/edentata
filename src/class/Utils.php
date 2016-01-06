@@ -26,6 +26,70 @@ namespace hemio\edentata;
 class Utils
 {
 
+    public static function getIdnaErrorMessage($int)
+    {
+        switch ($int) {
+            case IDNA_ERROR_EMPTY_LABEL:
+                return _('IDNA_ERROR_EMPTY_LABEL');
+
+            case IDNA_ERROR_LABEL_TOO_LONG:
+                return _('IDNA_ERROR_LABEL_TOO_LONG');
+
+            case IDNA_ERROR_DOMAIN_NAME_TOO_LONG:
+                return _('IDNA_ERROR_DOMAIN_NAME_TOO_LONG');
+
+            case IDNA_ERROR_LEADING_HYPHEN:
+                return _('IDNA_ERROR_LEADING_HYPHEN');
+
+            case IDNA_ERROR_TRAILING_HYPHEN:
+                return _('IDNA_ERROR_TRAILING_HYPHEN');
+
+            case IDNA_ERROR_HYPHEN_3_4:
+                return _('IDNA_ERROR_HYPHEN_3_4');
+
+            case IDNA_ERROR_LEADING_COMBINING_MARK:
+                return _('IDNA_ERROR_LEADING_COMBINING_MARK');
+
+            case IDNA_ERROR_DISALLOWED:
+                return _('IDNA_ERROR_DISALLOWED');
+
+            case IDNA_ERROR_PUNYCODE:
+                return _('IDNA_ERROR_PUNYCODE');
+
+            case IDNA_ERROR_LABEL_HAS_DOT:
+                return _('IDNA_ERROR_LABEL_HAS_DOT');
+
+            case IDNA_ERROR_INVALID_ACE_LABEL:
+                return _('IDNA_ERROR_INVALID_ACE_LABEL');
+
+            case IDNA_ERROR_BIDI:
+                return _('IDNA_ERROR_BIDI');
+
+            case IDNA_ERROR_CONTEXTJ:
+                return _('IDNA_ERROR_CONTEXTJ');
+
+            default:
+                return _('Unkown IDNA Error');
+        }
+    }
+
+    public static function idnToAscii($domain)
+    {
+        $idnaInfo = [];
+        $utf8     = idn_to_ascii($domain
+            ,
+                                 IDNA_CHECK_BIDI | IDNA_CHECK_CONTEXTJ | IDNA_NONTRANSITIONAL_TO_ASCII
+            | IDNA_DEFAULT
+            , INTL_IDNA_VARIANT_UTS46, $idnaInfo);
+
+
+        if ($utf8 === false)
+            throw new exception\Error(self::getIdnaErrorMessage($idnaInfo['errors']),
+                                                                $idnaInfo['errors']);
+
+        return $utf8;
+    }
+
     public static function getPost()
     {
         $input = file_get_contents('php://input');
