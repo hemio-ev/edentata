@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata\n"
-"POT-Creation-Date: 2015-11-07 17:01+0100\n"
-"PO-Revision-Date: 2016-01-06 15:08+0100\n"
+"POT-Creation-Date: 2016-01-06 17:47+0100\n"
+"PO-Revision-Date: 2016-01-06 17:51+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: src/class\n"
 "X-Poedit-SearchPath-1: src/load\n"
 
-#: src/class/Config.php:58
+#: src/class/Config.php:63
 #, php-format
 msgid "Unknown setting \"%s\""
 msgstr "Unbekannte Einstellung \"%s\"."
@@ -148,7 +148,7 @@ msgstr "Password Wiederholen"
 
 #: src/class/gui/FieldNewPassword.php:55
 msgid "The repeated password does not match the original one."
-msgstr ""
+msgstr "Das wiederholte Passwort entspricht nicht dem eigentlichen Passwort."
 
 #: src/class/gui/Message.php:55 src/class/gui/StatusList.php:45
 msgid "OK"
@@ -214,10 +214,8 @@ msgstr ""
 #: src/class/sql/ExceptionMapping.php:60
 msgid "The object you tried to change is inaccessible or missing."
 msgstr ""
-
-#: src/load/login.php:24
-msgid "Edentata Login"
-msgstr ""
+"Das Objekt, welches Sie versucht haben zu ändern, ist für Sie nicht "
+"zugänglich oder existiert nicht."
 
 #: src/load/main.php:40 src/load/main.php:69
 #, php-format
@@ -254,18 +252,22 @@ msgstr "Stellvertretung aufgeben"
 msgid "Act as Deputy"
 msgstr "Stellvertretung Ausüben"
 
-#: src/load/main.php:222
+#: src/load/main.php:223
 msgid "Support"
 msgstr ""
 
-#: src/load/main.php:227
+#: src/load/main.php:229
 msgid "Logout"
 msgstr "Abmelden"
 
-#: src/load/main.php:247 src/load/main.php:249
+#: src/load/main.php:250 src/load/main.php:252
 msgid "Settings"
 msgstr "Optionen"
 
-#: src/load/main.php:273
+#: src/load/main.php:276
 msgid "Tried to access unknown or disabled module"
 msgstr ""
+
+#: src/load/main.php:305
+msgid "Site Information"
+msgstr "Impressum"
