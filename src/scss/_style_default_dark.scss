@@ -1,0 +1,23 @@
+@import "_style_defaults.scss";
+
+$text-color: #EEEEEE;
+$article-color: rgb(61, 65, 65);
+$article-border-color: rgba(45,45,45,0.9);
+$article-radius-top: 4px;
+$article-radius-bottom: 4px;
+
+$button-color: rgb(40, 40, 40);
+$select-focus-color: rgb(60, 60, 60);
+
+$header-color: $article-color;
+$header-border-color: rgb(45,45,45);
+
+$control-background-color: rgb(48, 48, 48);
+$control-background-color-lighten-1: 1%;
+$control-background-color-lighten-2: 2.5%;
+$control-border-color: rgb(42, 44, 46);
+$control-shadow-color: rgb(83, 86, 87);
+
+$select-button-image: "select_dark.svg";
+
+$list-background-color: rgb(54, 54, 54);

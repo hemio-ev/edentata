@@ -4,3 +4,4 @@ vendor/
 *.css
 *.css.map
 VERSION
+nbproject/private/

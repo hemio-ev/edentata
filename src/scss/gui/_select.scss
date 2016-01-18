@@ -37,7 +37,7 @@ select {
     width: calc(100% + 2.7em);
     padding-right: 3.5em;
 
-    background-image: url("select.svg");
+    background-image: url($select-button-image);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right 3.3em top 0;

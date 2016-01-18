@@ -64,7 +64,7 @@ button:disabled {
 button.suggested {
     border-color: $button-suggested-border-color;
     @include button-background($button-suggested-color);
-    color: white;
+    color: $button-suggested-text-color;
     text-shadow: 1px 1px rgb(50,50,50);
 }
 

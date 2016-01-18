@@ -29,6 +29,7 @@ $button-color: rgb(224, 224, 224);
 
 $button-suggested-color: rgb(54, 131, 213);
 $button-suggested-border-color: rgb(28, 81, 135);
+$button-suggested-text-color: white;
 
 $button-delete-color: rgb(195, 15, 15);
 $button-delete-border-color: rgb(143, 0, 0);
@@ -40,7 +41,12 @@ $article-radius-top: 0.5em;
 
 $article-radius-bottom: 0;
 
-$control-color: rgb(217,217,217);
+$control-background-color: rgb(217,217,217);
+$control-background-color-lighten-1: 12.5%;  
+$control-background-color-lighten-2: 30%;
+$control-shadow-color: white;
+$control-invalid-color: rgb(204, 0, 0);
+
 $control-border-color: rgb(161,161,161);
 $control-height: 2.4em;
 
@@ -48,6 +54,8 @@ $switch-color-checked: rgb(74,144,217);
 $switch-color-notchecked: rgb(206,206,206);
 
 $select-focus-color: rgb(255, 255, 255);
+
+$select-button-image: "select.svg";
 
 $header-color: $article-color;
 $header-border-color: rgb(217,217,217);
@@ -58,3 +66,4 @@ $sidebar-hover-color: #F4F4F4;
 $outer-color: #333;
 
 $list-entry-height: 3.5em;
+$list-background-color: white;

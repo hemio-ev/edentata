@@ -81,12 +81,14 @@ label {
 .input_style {
     @extend .input_text_style;
 
-    background-color: lighten($control-color, 12.5%);
+    background-color: lighten($control-background-color, $control-background-color-lighten-1);
     background: linear-gradient(
-        $control-color 0%, 
-        lighten($control-color, 12.5%) 0.25em,
-        lighten($control-color, 30%) 100%
+        $control-background-color 0%, 
+        lighten($control-background-color, $control-background-color-lighten-1) 0.25em,
+        lighten($control-background-color, $control-background-color-lighten-2) 100%
         );
+    
+    box-shadow: 0 1px $control-shadow-color;
 
     width: $control-width;
 
@@ -99,6 +101,12 @@ label {
 
 .input_style:focus {
     border-color: $button-suggested-color;
+    border-width: 2px;
+}
+
+.input_style:-moz-ui-invalid {
+    color: $control-invalid-color;
+    border-color: $control-invalid-color;
 }
 
 input, textarea {
