@@ -19,3 +19,10 @@ composer-dev:
 version:
 	git describe --tags > VERSION
 
+fonts:
+	cd src/htdocs/static/design && \
+	 cp /usr/share/doc/fonts-cantarell/copyright ./LICENSE-CANTARELL
+	 cp /usr/share/fonts/opentype/cantarell/*.otf ./ && \
+	 for f in *.otf; do sfnt2woff $$f; done && \
+	 rm *.otf
+

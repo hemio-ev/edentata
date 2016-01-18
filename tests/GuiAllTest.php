@@ -20,21 +20,18 @@ namespace hemio\edentata\tests;
 
 use hemio\html;
 use hemio\form;
+use hemio\edentata\gui;
 
 require_once 'tests/Helpers.php';
 
-class FirstTest extends \Helpers
+class GuiAllTest extends \Helpers
 {
 
-    public function test1()
-    {
-        $this->assertEquals('', '');
-    }
 
-    public function test2()
+    public function test_ensemble()
     {
         $doc = new html\Document(new html\Str('Test'));
-        $doc->getHtml()->getHead()->addCssFile('style.css');
+        $doc->getHtml()->getHead()->addCssFile('design/style.css');
 
         $form = new form\FormPost('test');
         $doc->getHtml()->getBody()->addChild($form);
@@ -43,6 +40,9 @@ class FirstTest extends \Helpers
         $form->addChild($window);
         $window->addButtonRight(new form\FieldSubmit('submit', _('Submit')));
 
+        $window[] = new gui\FieldEmailWithSelect();
+        
+        
         $selectbox = new \hemio\edentata\gui\Selectbox();
         $window->addChild($selectbox);
 
@@ -65,6 +65,9 @@ class FirstTest extends \Helpers
         }
 
 
-        $this->_assertEqualsXmlFile($doc, 'selectbox.html');
+        $this->_assertEqualsXmlFile($doc, 'ensemble.html');
+        
+        $doc->getHtml()->getHead()->addCssFile('design/style_dark.css');
+        $this->_assertEqualsXmlFile($doc, 'ensemble-black.html');
     }
 }
