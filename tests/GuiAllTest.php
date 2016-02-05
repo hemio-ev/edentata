@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -20,16 +21,16 @@ namespace hemio\edentata\tests;
 
 use hemio\html;
 use hemio\form;
+use hemio\edentata;
 use hemio\edentata\gui;
 
 require_once 'tests/Helpers.php';
 
-class GuiAllTest extends \Helpers
-{
+class GuiAllTest extends \Helpers {
 
+    public function test_ensemble() {
+        $num = 3;
 
-    public function test_ensemble()
-    {
         $doc = new html\Document(new html\Str('Test'));
         $doc->getHtml()->getHead()->addCssFile('design/style.css');
 
@@ -39,35 +40,45 @@ class GuiAllTest extends \Helpers
         $window = new \hemio\edentata\gui\Window('Abc', 'Subtitle');
         $form->addChild($window);
         $window->addButtonRight(new form\FieldSubmit('submit', _('Submit')));
+        $window->setCssProperty('max-width', '40em');
 
-        $window[] = new gui\FieldEmailWithSelect();
-        
-        
+        $window[] = new gui\FieldSwitch('switch', _('Switch'));
+
+        $emailWithSelect = new gui\FieldEmailWithSelect();
+        for ($i = 1; $i <= $num; $i++)
+            $emailWithSelect->getDomain()
+                    ->addOption('test' . $i, sprintf('Test Nr. %d', $i));
+        $window[] = $emailWithSelect;
+
+        $radioList = new gui\FieldRadioList('radio_list', _('Radio List'));
+        for ($i = 1; $i <= $num; $i++)
+            $radioList->addOption('test' . $i, sprintf('Test Nr. %d', $i));
+        $window[] = $radioList;
+
         $selectbox = new \hemio\edentata\gui\Selectbox();
         $window->addChild($selectbox);
 
-        $options   = new form\Container();
+        $options = new form\Container();
         $options[] = new form\FieldSubmit('submit', _('Submit'));
         $selectbox->setOptions($options);
 
-        for ($i = 1; $i < 20; $i++) {
-            $selectbox->addItem('test'.$i, sprintf('Test Nr. %d', $i));
-        }
+
+        for ($i = 1; $i <= $num; $i++)
+            $selectbox->addItem('test' . $i, sprintf('Test Nr. %d', $i));
 
         $listbox = new \hemio\edentata\gui\Listbox();
         $window->addChild($listbox);
 
-        for ($i = 1; $i < 20; $i++) {
+        for ($i = 1; $i <= $num; $i++) {
             $str = new html\Str(sprintf(_('Test Nr. %d'), $i));
-            $a   = new html\A();
-            $a[] = $str;
-            $listbox->addLine($a);
+            $listbox->addLinkEntry(new edentata\Request(), $str);
         }
 
 
         $this->_assertEqualsXmlFile($doc, 'ensemble.html');
-        
+
         $doc->getHtml()->getHead()->addCssFile('design/style_dark.css');
         $this->_assertEqualsXmlFile($doc, 'ensemble-black.html');
     }
+
 }

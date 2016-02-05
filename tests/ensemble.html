@@ -6,7 +6,7 @@
 </head>
 <body>
 <form name="form_test" id="form_test" method="post">
-<input type="hidden" name="form_test___form_identifier" id="form_test___form_identifier" /><article>
+<input type="hidden" name="form_test___form_identifier" id="form_test___form_identifier" /><article style="max-width: 40em;">
 <header>
 <div>
 <button accesskey="S" title="Submit" name="form_test_submit" id="form_test_submit"><u>S</u>ubmit</button>
@@ -19,10 +19,16 @@ Abc<br /><span>Subtitle</span>
 </h1>
 
 </header>
-<p class="multiple ">
-<input type="text" accesskey="L" required="required" title="Local Part" name="form_test_localpart" id="form_test_localpart" /><span class="between ">@</span><span class="select "><select accesskey="D" title="Domain" name="form_test_domain" id="form_test_domain"></select></span>
+<input type="checkbox" accesskey="S" name="form_test_switch" id="form_test_switch" class="switch " /><p>
+<label for="form_test_switch"><span><u>S</u>witch</span><span class="switch "></span></label>
 </p>
-<div class="selectbox ">
+<p class="multiple ">
+<input type="text" accesskey="L" required="required" title="Local Part" name="form_test_localpart" id="form_test_localpart" /><span class="between ">@</span><span class="select "><select accesskey="D" title="Domain" name="form_test_domain" id="form_test_domain"><option value="test1">Test Nr. 1</option><option value="test2">Test Nr. 2</option><option value="test3">Test Nr. 3</option></select></span>
+</p>
+<input type="radio" accesskey="R" title="Radio List" name="form_test_radio_list" id="form_test_radio_list_test1" value="test1" class="list " /><input type="radio" accesskey="R" title="Radio List" name="form_test_radio_list" id="form_test_radio_list_test2" value="test2" class="list " /><input type="radio" accesskey="R" title="Radio List" name="form_test_radio_list" id="form_test_radio_list_test3" value="test3" class="list " /><ul class="listbox radio ">
+<li class="listbox_link_color "><label for="form_test_radio_list_test1" class="listbox_link "><span>Test Nr. 1</span></label></li><li class="listbox_link_color "><label for="form_test_radio_list_test2" class="listbox_link "><span>Test Nr. 2</span></label></li><li class="listbox_link_color "><label for="form_test_radio_list_test3" class="listbox_link "><span>Test Nr. 3</span></label></li>
+</ul>
+<style scoped="scoped">input:not(:checked)[id=form_test_radio_list_test1] ~ * *[for=form_test_radio_list_test1] { color: inherit; background-color: inherit; }input:not(:checked)[id=form_test_radio_list_test2] ~ * *[for=form_test_radio_list_test2] { color: inherit; background-color: inherit; }input:not(:checked)[id=form_test_radio_list_test3] ~ * *[for=form_test_radio_list_test3] { color: inherit; background-color: inherit; }</style><div class="selectbox ">
 <div class="scroll ">
 <input type="checkbox" accesskey="T" title="Test Nr. 1" name="form_test_test1" id="form_test_test1" value="test1" /><p>
 <label for="form_test_test1"><span class="checkbox ">Test Nr. 1</span></label>
@@ -33,54 +39,6 @@ Abc<br /><span>Subtitle</span>
 <input type="checkbox" accesskey="T" title="Test Nr. 3" name="form_test_test3" id="form_test_test3" value="test3" /><p>
 <label for="form_test_test3"><span class="checkbox ">Test Nr. 3</span></label>
 </p>
-<input type="checkbox" accesskey="T" title="Test Nr. 4" name="form_test_test4" id="form_test_test4" value="test4" /><p>
-<label for="form_test_test4"><span class="checkbox ">Test Nr. 4</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 5" name="form_test_test5" id="form_test_test5" value="test5" /><p>
-<label for="form_test_test5"><span class="checkbox ">Test Nr. 5</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 6" name="form_test_test6" id="form_test_test6" value="test6" /><p>
-<label for="form_test_test6"><span class="checkbox ">Test Nr. 6</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 7" name="form_test_test7" id="form_test_test7" value="test7" /><p>
-<label for="form_test_test7"><span class="checkbox ">Test Nr. 7</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 8" name="form_test_test8" id="form_test_test8" value="test8" /><p>
-<label for="form_test_test8"><span class="checkbox ">Test Nr. 8</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 9" name="form_test_test9" id="form_test_test9" value="test9" /><p>
-<label for="form_test_test9"><span class="checkbox ">Test Nr. 9</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 10" name="form_test_test10" id="form_test_test10" value="test10" /><p>
-<label for="form_test_test10"><span class="checkbox ">Test Nr. 10</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 11" name="form_test_test11" id="form_test_test11" value="test11" /><p>
-<label for="form_test_test11"><span class="checkbox ">Test Nr. 11</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 12" name="form_test_test12" id="form_test_test12" value="test12" /><p>
-<label for="form_test_test12"><span class="checkbox ">Test Nr. 12</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 13" name="form_test_test13" id="form_test_test13" value="test13" /><p>
-<label for="form_test_test13"><span class="checkbox ">Test Nr. 13</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 14" name="form_test_test14" id="form_test_test14" value="test14" /><p>
-<label for="form_test_test14"><span class="checkbox ">Test Nr. 14</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 15" name="form_test_test15" id="form_test_test15" value="test15" /><p>
-<label for="form_test_test15"><span class="checkbox ">Test Nr. 15</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 16" name="form_test_test16" id="form_test_test16" value="test16" /><p>
-<label for="form_test_test16"><span class="checkbox ">Test Nr. 16</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 17" name="form_test_test17" id="form_test_test17" value="test17" /><p>
-<label for="form_test_test17"><span class="checkbox ">Test Nr. 17</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 18" name="form_test_test18" id="form_test_test18" value="test18" /><p>
-<label for="form_test_test18"><span class="checkbox ">Test Nr. 18</span></label>
-</p>
-<input type="checkbox" accesskey="T" title="Test Nr. 19" name="form_test_test19" id="form_test_test19" value="test19" /><p>
-<label for="form_test_test19"><span class="checkbox ">Test Nr. 19</span></label>
-</p>
 <p class="options ">
 <button accesskey="S" title="Submit" name="form_test_submit" id="form_test_submit"><u>S</u>ubmit</button>
 </p>
@@ -89,7 +47,7 @@ Abc<br /><span>Subtitle</span>
 
 </div>
 <ul class="listbox scroll ">
-<li><a>Test Nr. 1</a></li><li><a>Test Nr. 2</a></li><li><a>Test Nr. 3</a></li><li><a>Test Nr. 4</a></li><li><a>Test Nr. 5</a></li><li><a>Test Nr. 6</a></li><li><a>Test Nr. 7</a></li><li><a>Test Nr. 8</a></li><li><a>Test Nr. 9</a></li><li><a>Test Nr. 10</a></li><li><a>Test Nr. 11</a></li><li><a>Test Nr. 12</a></li><li><a>Test Nr. 13</a></li><li><a>Test Nr. 14</a></li><li><a>Test Nr. 15</a></li><li><a>Test Nr. 16</a></li><li><a>Test Nr. 17</a></li><li><a>Test Nr. 18</a></li><li><a>Test Nr. 19</a></li>
+<li><a href="service/"><span>Test Nr. 1</span></a></li><li><a href="service/"><span>Test Nr. 2</span></a></li><li><a href="service/"><span>Test Nr. 3</span></a></li>
 </ul>
 
 </article>
