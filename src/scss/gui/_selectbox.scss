@@ -62,12 +62,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // selected (clickable part)
 .selectbox input:checked + p label {
-    background: lighten($button-suggested-color, 20%);
+    background: lighten($button-suggested-color, 15%);
 }
 
 // selected and hover
 .selectbox input:checked + p label:hover {
-    background: lighten($button-suggested-color, 30%);
+    background: lighten($button-suggested-color, 25%);
 }
 
 // options (buttons below the scroll area)

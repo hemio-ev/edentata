@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,15 +27,14 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FieldRadioList extends form\Container
-{
+class FieldRadioList extends form\Container {
+
     protected $name;
     protected $template;
     protected $title;
 
-    public function __construct($name, $title = null)
-    {
-        $this->name  = $name;
+    public function __construct($name, $title = null) {
+        $this->name = $name;
         $this->title = $title;
 
         $this['controls'] = new form\Container();
@@ -48,19 +48,18 @@ class FieldRadioList extends form\Container
 
         $this->template = new form\template\FormPlainControl;
         $this->template->setPostInitHook(function ($template) {
-            $id              = $template->field->getHtmlId();
+            $id = $template->field->getHtmlId();
             $template->getControl()->addCssClass('list');
             $template->field->getInheritableAppendage('label')
-                ->setAttribute('for', $id);
+                    ->setAttribute('for', $id);
             $this['style'][] = new html\Str(
-                'input:not(:checked)[id='.$id.'] ~ * *[for='.$id.'] { '.
-                'color: inherit; background-color: inherit; }'
+                    'input:not(:checked)[id=' . $id . '] ~ * *[for=' . $id . '] { ' .
+                    'color: inherit; background-color: inherit; }'
             );
         });
     }
 
-    public function addOption($value, $content = null)
-    {
+    public function addOption($value, $content = null) {
         if ($content === null)
             $content = $value;
 
@@ -70,17 +69,18 @@ class FieldRadioList extends form\Container
 
         $radio = new form\FieldRadio($this->name, $title, $value);
         $radio->addInheritableAppendage(
-            FormPost::FORM_FIELD_TEMPLATE.'_RADIO', $this->template
+                FormPost::FORM_FIELD_TEMPLATE . '_RADIO', $this->template
         );
 
         $this['controls'][] = $radio;
 
         $li = new html\Li;
-        $li->addCssClass('listbox_link');
+        $li->addCssClass('listbox_link_color');
 
-        $label   = new html\Label;
-        $label[] = new html\Str($content);
-        $label->addCssClass('listbox_content');
+        $label = new html\Label;
+        $label->addChild(new html\Span())
+                ->addChild(new html\Str($content));
+        $label->addCssClass('listbox_link');
 
         $radio->addInheritableAppendage('label', $label);
         $li[] = $label;
@@ -90,8 +90,8 @@ class FieldRadioList extends form\Container
         return $radio;
     }
 
-    public function getValueUser()
-    {
+    public function getValueUser() {
         return $this['controls'][0]->getValueUser();
     }
+
 }

@@ -27,6 +27,11 @@ nav {
     @extend .window;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 /*** label and input basics ***/
 
 form p {

@@ -76,16 +76,20 @@ ul.listbox li:last-child {
     flex-basis: 100%;
 }
 
+.listbox_link_color {
+    color: inherit;
+}
+
 .listbox_link {
     @extend .listbox_content;
-    text-decoration: none;
-    color: inherit;
+    @extend .listbox_link_color;
 
     transition-property: background-color;
     transition-duration: 400ms;
 }
 
-.listbox_link:hover, .listbox_link:focus {
+.listbox_link_color:hover, .listbox_link_color:focus {
+    color: $text-color;
     background-color: darken($list-background-color, 9%);
 }
 

@@ -27,7 +27,9 @@ input[type=radio].list {
     opacity: 0;
 }
 
-ul.radio li label {
-    background-color: $sidebar-selected-color;
-    color: white;
+ul.radio li {
+    label, label:hover {
+        background-color: lighten($button-suggested-color, 15%);
+        color: $button-suggested-text-color;
+    }
 }

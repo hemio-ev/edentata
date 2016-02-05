@@ -1,13 +1,13 @@
 @font-face {
-font-family: 'Cantarell';
-font-style: normal;
-font-weight: 400;
-src: url('Cantarell-Bold.woff') format('woff');
-}
-@font-face {
-font-family: 'Cantarell';
-font-style: normal;
-font-weight: 700;
-src: url('Cantarell-Bold.woff') format('woff');
+    font-family: 'Cantarell-Woff';
+    font-style: normal;
+    font-weight: 400;
+    src: url('Cantarell-Regular.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'Cantarell-Woff';
+    font-style: normal;
+    font-weight: 700;
+    src: url('Cantarell-Bold.woff') format('woff');
+}
