@@ -53,6 +53,7 @@ class GuiAllTest extends \Helpers {
         $radioList = new gui\FieldRadioList('radio_list', _('Radio List'));
         for ($i = 1; $i <= $num; $i++)
             $radioList->addOption('test' . $i, sprintf('Test Nr. %d', $i));
+        $radioList->addOption('lorem', 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.');
         $window[] = $radioList;
 
         $selectbox = new \hemio\edentata\gui\Selectbox();
