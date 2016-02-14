@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     @extend .window;
     border-radius: $article-radius-top;
     padding: 0.5em 1em;
-    background-image: url('success.svg');
+    background-image: url($img-success);
     min-height: 10em;
     background-repeat: no-repeat;
     background-size: contain;
@@ -36,11 +36,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 }
 
 .message[role="alert"] {
-    background-image: url('error.svg');
+    background-image: url($img-error);
 }
 
 .message.warning {
-    background-image: url('warning.svg');
+    background-image: url($img-warning);
 }
 
 .message[role="alert"] h2 {

@@ -27,7 +27,7 @@ button.headerbar_menu::before {
     content: '.';
     width: 1em;
     display: block;
-    background-image: url('pack.svg');
+    background-image: url($img-pack);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Author     : Michael Herold <quabla@hemio.de>
 */
 
+@import '_svg.scss';
+
 $label-width: 40%;
 $control-width: 60%;
 
@@ -55,7 +57,7 @@ $switch-color-notchecked: rgb(206,206,206);
 
 $select-focus-color: rgb(255, 255, 255);
 
-$select-button-image: "select.svg";
+$select-button-image: $img-select;
 
 $header-color: $article-color;
 $header-border-color: rgb(217,217,217);
@@ -63,7 +65,8 @@ $header-border-color: rgb(217,217,217);
 $sidebar-selected-color: #4A90D9;
 $sidebar-hover-color: #F4F4F4;
 
-$outer-color: #333;
+$outer-text-color: #EDEDEB;
+$outer-background-color: #3D4141;
 
 $list-entry-height: 3.5em;
 $list-background-color: white;

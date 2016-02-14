@@ -20,51 +20,50 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 .header {
-    background-color: $outer-color;
-    padding: 0 1.5em;
+    background-color: $outer-background-color;
     line-height: 2em;
-    color: #EEE;
+    color: $outer-text-color;
     font-weight: bold;
     display: inline-flex;
+    flex-wrap: wrap;
+    align-content: center;
     margin: auto;
-    border-radius: 0 0 1em 1em;
-    box-shadow: $outer-color 0 0 3px;
+    border-radius: 0 0 0.25em 0.25em;
+    box-shadow: $outer-background-color 0 0 3px;
     margin-bottom: 1em;
 }
 
 .header > .link {
-    @include button-background(lighten($outer-color, 10%));
     display: inline-block;
-    padding: 0 1em;
-    text-decoration: none;
-    color: inherit;
-    border-right: 1px solid #222;
-    min-width: 4em;
+    padding: 0 0.7em;
+    border: 1px solid $outer-background-color;
+    flex-shrink: 0;
+    flex-grow: 1;
 }
 
 body > header {
     @extend .header;
 }
 
-body > header > span {
-   margin-right: 1em;
-}
-
 body > header > a {
     @extend .link;
 }
 
-body > header > a:first-of-type {
-    border-left: 1px solid #222;
-    margin-left: auto;
+body > header > :first-child {
+    border-bottom-left-radius: inherit;
 }
 
+body > header > :last-child {
+    border-bottom-right-radius: inherit;
+}
+
+
 .header .link:hover {
-    @include button-background-active(lighten($outer-color, 15%));
+    background-color: adjust-color(lighten($outer-background-color, 12%), $red: -5);
 }
 
 
 .header .link:focus {
-    @include button-background-active(lighten($outer-color, 10%));
+    background-color: adjust-color(darken($outer-background-color, 12%), $red: -5);
 }
 

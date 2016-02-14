@@ -27,16 +27,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 }
 
 button.back {
-    background-image: url('back.svg'), button-background-value($button-color);
+    background-image: url($img-back), button-background-value($button-color);
     @extend .back_attr;
 }
 
 button.back:hover {
-    background-image: url('back.svg'), button-background-hover-value($button-color);
+    background-image: url($img-back), button-background-hover-value($button-color);
     @extend .back_attr;
 }
 
 button.back:active {
-    background-image: url('back.svg'), button-background-active-value($button-color);
+    background-image: url($img-back), button-background-active-value($button-color);
     @extend .back_attr;
 }
