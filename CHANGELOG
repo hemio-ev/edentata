@@ -1,7 +1,10 @@
-v0.7.0-unpublished:
+v0.10.0-unpublished:
+  - Version number jump to get in sync with carnivora
   - Adds cantarell as web font
   - Updated dark theme
   - Style fixes for radio lists
+  - Shows current deputy role
+  - Updates header (always shows owner, not contact email)
 v0.6.0:
   - Fixes missing unicode support for requests.
   - Adds config fields 'site_information_url' and 'footer'

@@ -33,6 +33,7 @@ class HeaderbarMenu extends form\Container
 
         $this['ul'] = new html\Ul();
         $this['ul']->addCssClass('popover');
+        $this['ul']->addCssClass('popover_window');
     }
 
     public function addEntry(edentata\Request $request = null, $text = null)

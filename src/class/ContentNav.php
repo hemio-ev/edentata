@@ -56,6 +56,7 @@ class ContentNav
             ->addChild(new html\Header())
             ->addChild(new html\H1())
             ->addChild(new html\Str(_('Services')));
+        $nav->addCssClass('window');
 
         $contentEvents = new ContentEvents($nav);
 

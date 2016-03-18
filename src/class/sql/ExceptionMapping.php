@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -25,8 +26,7 @@ use hemio\edentata\exception;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ExceptionMapping extends ExceptionMapper
-{
+class ExceptionMapping extends ExceptionMapper {
 
     /**
      *
@@ -34,14 +34,20 @@ class ExceptionMapping extends ExceptionMapper
      * @throws exception\Error
      * @throws exception\SqlSpecific
      */
-    public function map(exception\SqlSpecific $e)
-    {
+    public function map(exception\SqlSpecific $e) {
         switch ($e->getMessage()) {
             case 'user:login_invalid':
                 return $this->error(
-                        _('Invalid unser login.')
-                        , 1001
-                        , $e
+                                _('Invalid unser login.')
+                                , 1001
+                                , $e
+                );
+
+            case 'user:deputy_failed':
+                return $this->error(
+                                _('Acting as deputy failed.')
+                                , 1004
+                                , $e
                 );
 
             case 'system:no_contingent':
@@ -49,21 +55,22 @@ class ExceptionMapping extends ExceptionMapper
             case 'system:contingent_total_exceeded':
             case 'system:contingent_domain_exceeded':
                 return $this->error(
-                        _('The operation you want to perform would exceed your current contingent.'
-                            .' Please contact the support to extend your contingent.')
-                        , 1002
-                        , $e
+                                _('The operation you want to perform would exceed your current contingent.'
+                                        . ' Please contact the support to extend your contingent.')
+                                , 1002
+                                , $e
                 );
 
             case 'commons:inaccessible_or_missing':
                 return $this->error(
-                        _('The object you tried to change is inaccessible or missing.')
-                        , 1003
-                        , $e
+                                _('The object you tried to change is inaccessible or missing.')
+                                , 1003
+                                , $e
                 );
 
             default:
                 return $e;
         }
     }
+
 }

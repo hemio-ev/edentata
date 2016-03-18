@@ -16,8 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+chdir(__DIR__);
+
+if (preg_match('/PHP .* Development Server/', @$_SERVER['SERVER_SOFTWARE']))
+    if (file_exists(substr($_SERVER['REQUEST_URI'], 1)))
+        return false;
+
 chdir(__DIR__.'/../../');
 
 $loader = require_once 'vendor/autoload.php';
 
 require 'src/load/main.php';
+

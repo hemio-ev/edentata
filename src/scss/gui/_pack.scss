@@ -33,34 +33,45 @@ button.headerbar_menu::before {
     background-size: contain;
 }
 
-.popover + *.popover {
+.popover_window {
     @extend .window;
     box-shadow: 0 0 0.25em lighten($article-border-color, 10%);
     border-radius: $article-radius-top/2;
     list-style: none;
     
-    display: none;
-    position: absolute;
-    padding: 0.75em 1em;
-    min-width: 17em;
+    position: relative;
+    top: 2em;
+
+    padding: 0.75em 0;    
 }
 
-.popover + *.popover li a {
+.popover + *.popover {
+    display: none;
+    position: absolute;
+    //min-width: 14em;
+}
+
+.popover_window a {
     display: block;
     text-align: left;
     line-height: 2.2em;
     padding: 0 1em;
     color: inherit;
     text-decoration: inherit;
-    border-radius: $article-radius-top/2;
     white-space: nowrap;
 }
 
-.popover + *.popover li a:hover {
+.popover_window a:hover {
     background-color: darken($article-color, 10%);
 }
 
 .popover:focus + *.popover, .popover + *.popover:hover {
     display: block;
     z-index: 10;
+}
+
+.popover_window hr {
+    border: none;
+    border-top: 1px solid gray;
+    margin: 0.3em;
 }

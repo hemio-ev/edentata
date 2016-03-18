@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata\n"
-"POT-Creation-Date: 2016-01-06 17:47+0100\n"
-"PO-Revision-Date: 2016-01-06 17:51+0100\n"
+"POT-Creation-Date: 2016-03-18 19:23+0100\n"
+"PO-Revision-Date: 2016-03-18 19:23+0100\n"
 "Last-Translator: Michael Herold <quabla@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -198,11 +198,15 @@ msgstr "Unbekannter Status"
 msgid "Overview"
 msgstr "Übersicht"
 
-#: src/class/sql/ExceptionMapping.php:42
+#: src/class/sql/ExceptionMapping.php:41
 msgid "Invalid unser login."
 msgstr "Ungültige Benutzerdaten."
 
-#: src/class/sql/ExceptionMapping.php:52
+#: src/class/sql/ExceptionMapping.php:48
+msgid "Acting as deputy failed."
+msgstr "Das Ausüben der Stellvertretung ist fehlgeschlagen."
+
+#: src/class/sql/ExceptionMapping.php:58
 msgid ""
 "The operation you want to perform would exceed your current contingent. "
 "Please contact the support to extend your contingent."
@@ -211,13 +215,13 @@ msgstr ""
 "überschreiten. Bitte Kontaktieren Sie den Support um Ihr Kontingent zu "
 "erweitern."
 
-#: src/class/sql/ExceptionMapping.php:60
+#: src/class/sql/ExceptionMapping.php:66
 msgid "The object you tried to change is inaccessible or missing."
 msgstr ""
 "Das Objekt, welches Sie versucht haben zu ändern, ist für Sie nicht "
 "zugänglich oder existiert nicht."
 
-#: src/load/main.php:40 src/load/main.php:69
+#: src/load/main.php:39 src/load/main.php:67
 #, php-format
 msgid ""
 "An error has occured. We are sorry. You should contact the support and "
@@ -228,46 +232,49 @@ msgstr ""
 "kontaktieren und die Fehler-Nummer \"%s\" angeben. Sie können die \"Zurück\"-"
 "Funktion Ihres Browsers benutzen und es noch einmal versuchen."
 
-#: src/load/main.php:143
+#: src/load/main.php:140
 msgid "Logout successfull"
 msgstr "Abmeldung Erfolgreich"
 
-#: src/load/main.php:155 src/load/main.php:176
+#: src/load/main.php:152 src/load/main.php:173
 msgid "Login failed"
 msgstr "Anmeldung fehlgeschlagen"
 
 #: src/load/main.php:184
 msgid "User"
-msgstr "Benutzer"
+msgstr "Benutzer*in"
 
-#: src/load/main.php:189
-msgid "User Settings"
-msgstr "Benutzereinstellungen"
-
-#: src/load/main.php:203
-msgid "Stop acting as deputy"
-msgstr "Stellvertretung aufgeben"
-
-#: src/load/main.php:213
+#: src/load/main.php:198
 msgid "Act as Deputy"
 msgstr "Stellvertretung Ausüben"
 
-#: src/load/main.php:223
+#: src/load/main.php:200
+msgid "In Place of"
+msgstr "In Stellvertretung für"
+
+#: src/load/main.php:213
+msgid "Stop acting as deputy"
+msgstr "Stellvertretung aufgeben"
+
+#: src/load/main.php:230
 msgid "Support"
 msgstr ""
 
-#: src/load/main.php:229
+#: src/load/main.php:236
 msgid "Logout"
 msgstr "Abmelden"
 
-#: src/load/main.php:250 src/load/main.php:252
+#: src/load/main.php:257 src/load/main.php:259
 msgid "Settings"
 msgstr "Optionen"
 
-#: src/load/main.php:276
+#: src/load/main.php:283
 msgid "Tried to access unknown or disabled module"
 msgstr ""
 
-#: src/load/main.php:305
+#: src/load/main.php:310
 msgid "Site Information"
 msgstr "Impressum"
+
+#~ msgid "User Settings"
+#~ msgstr "Benutzereinstellungen"

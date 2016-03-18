@@ -33,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     margin-bottom: 1em;
 }
 
-.header > .link {
+.header .link {
     display: inline-block;
     padding: 0 0.7em;
     border: 1px solid $outer-background-color;
@@ -41,29 +41,60 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     flex-grow: 1;
 }
 
-body > header {
-    @extend .header;
-}
-
-body > header > a {
-    @extend .link;
-}
-
-body > header > :first-child {
-    border-bottom-left-radius: inherit;
-}
-
-body > header > :last-child {
-    border-bottom-right-radius: inherit;
-}
-
-
 .header .link:hover {
     background-color: adjust-color(lighten($outer-background-color, 12%), $red: -5);
 }
-
 
 .header .link:focus {
     background-color: adjust-color(darken($outer-background-color, 12%), $red: -5);
 }
 
+.header a {
+    @extend .link;
+}
+
+.header ul {
+    margin: 0;
+    padding: 0;
+}
+
+.header li {
+    display: inline-block;
+}
+
+.header li li, .header li li a {
+    display: block;
+    text-align: left;
+}
+
+.header hr {
+    border: none;
+    border-top: 1px solid darken($outer-background-color, 6%);
+    margin: 1em 3em;
+}
+
+.header :first-child {
+    border-bottom-left-radius: inherit;
+}
+
+.header :last-child {
+    border-bottom-right-radius: inherit;
+}
+
+.header li ul:nth-child(n) {
+    background-color: $outer-background-color;
+    padding: 1em 0;
+    margin-top: 1em;
+    border-radius: 0.25em;
+}
+
+.header li ul .link {
+    padding: 0.1em 2em;
+    font-weight: normal;
+}
+
+.header ul ul :last-child {
+    border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+
+}

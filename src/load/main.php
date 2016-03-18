@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -28,28 +29,26 @@ ini_set('log_errors', true);
 ini_set('error_log', 'syslog');
 
 set_error_handler(
-    function ($errno, $errstr, $errfile, $errline, array $errcontext) {
+        function ($errno, $errstr, $errfile, $errline, array $errcontext) {
     $id = uniqid();
     syslog(LOG_ERR, sprintf('PHP error[%s] message: %s', $id, $errstr));
-    syslog(LOG_ERR,
-           sprintf('PHP error[%s] details: (%s) %s:%s', $id, $errno, $errfile,
-                   $errline));
+    syslog(LOG_ERR, sprintf('PHP error[%s] details: (%s) %s:%s', $id, $errno, $errfile, $errline));
 
     echo sprintf(
-        _(
-            'An error has occured. We are sorry. '
-            .'You should contact the support and reference to error id "%s". '
-            .'You can use the back button of your browser and try again.'
-        ), $id
+            _(
+                    'An error has occured. We are sorry. '
+                    . 'You should contact the support and reference to error id "%s". '
+                    . 'You can use the back button of your browser and try again.'
+            ), $id
     );
 
     trigger_error(
-        sprintf(
-            'Made non fatal error fatal. (%s:%s %s)'
-            , $errfile
-            , $errline
-            , $errstr
-        ), E_USER_ERROR
+            sprintf(
+                    'Made non fatal error fatal. (%s:%s %s)'
+                    , $errfile
+                    , $errline
+                    , $errstr
+            ), E_USER_ERROR
     );
 
     exit(1);
@@ -57,19 +56,18 @@ set_error_handler(
 );
 
 set_exception_handler(
-    function (\Exception $e) {
+        function (\Exception $e) {
     $id = uniqid();
 
     syslog(LOG_ERR, sprintf('PHP exception[%s] class: %s', $id, get_class($e)));
-    syslog(LOG_ERR,
-           sprintf('PHP exception[%s] message: %s', $id, $e->getMessage()));
+    syslog(LOG_ERR, sprintf('PHP exception[%s] message: %s', $id, $e->getMessage()));
 
     echo sprintf(
-        _(
-            'An error has occured. We are sorry. '
-            .'You should contact the support and reference to error id "%s". '
-            .'You can use the back button of your browser and try again.'
-        ), $id
+            _(
+                    'An error has occured. We are sorry. '
+                    . 'You should contact the support and reference to error id "%s". '
+                    . 'You can use the back button of your browser and try again.'
+            ), $id
     );
 
     throw $e;
@@ -86,10 +84,9 @@ else
 
 $loader->addPsr4('hemio\\edentata\\module\\', $config['module_load_dirs']);
 
-$request = new Request($_GET, Utils::getPost(),
-                       urldecode($_SERVER['REQUEST_URI']), $config['base_url']);
+$request = new Request($_GET, Utils::getPost(), urldecode($_SERVER['REQUEST_URI']), $config['base_url']);
 
-$modulesNavi    = $config['modules_nav'];
+$modulesNavi = $config['modules_nav'];
 $modulesAllowed = $config->getAllowedModules();
 
 I10n::$supportedLocales = $config['locales'];
@@ -103,37 +100,37 @@ if (!$activeModuleName)
 try {
 # doc
     $title = new html\Str('Edentata');
-    $doc   = new form\Document($title);
+    $doc = new form\Document($title);
     $doc->getHtml()->getHead()->addCssFile('static/design/style.css');
     $doc->getHtml()->setAttribute('lang', $i10n->getLang());
     $doc->getHtml()->getHead()->setBaseUrl($config['base_url']);
 
     $body = $doc->getHtml()->getBody();
 
-    $header         = new html\Header();
+    $header = new html\Header();
     $body['header'] = $header;
 
     $body['main'] = new html\Div();
     $body['main']->addCssClass('main');
 
-    $mainNav                  = new html\Div();
+    $mainNav = new html\Div();
     $body['main']['main_nav'] = $mainNav;
     $mainNav->setId('main_nav');
 
-    $mainContent                  = new html\Div();
+    $mainContent = new html\Div();
     $body['main']['main_content'] = $mainContent;
     $mainContent->setId('main_content');
-    $mainContent['messages']      = new \hemio\form\Container;
+    $mainContent['messages'] = new \hemio\form\Container;
 
 # db connect
     $pdo = new sql\Connection($config['database_dsn']);
 
     $pdo->addExceptionMapper(
-        new sql\ExceptionMapping($request->derive())
+            new sql\ExceptionMapping($request->derive())
     );
 
-    $httpAuth         = isset($_GET['auth']) && $_GET['auth'] === 'http';
-    $authMethod       = isset($_GET['auth']) ? $_GET['auth'] : null;
+    $httpAuth = isset($_GET['auth']) && $_GET['auth'] === 'http';
+    $authMethod = isset($_GET['auth']) ? $_GET['auth'] : null;
     $httpAuthSupplied = isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']);
 
 # db auth
@@ -167,7 +164,7 @@ try {
 
     try {
         $qryAuth = new sql\QuerySelectFunction($pdo, 'user.ins_login', $usrData);
-        $qryAuth->execute();
+        $loginData = $qryAuth->execute()->fetch();
     } catch (\Exception $e) {
         if ($httpAuth) {
             usleep(100 * 1000);
@@ -180,54 +177,64 @@ try {
         }
     }
 
-    $span   = new html\Span;
-    $span[] = new html\Str(_('User').': '.$_SERVER['PHP_AUTH_USER']);
-    $header->addChild($span);
+    $header->addCssClass('header');
+    $headerNav = new html\Ul();
+    $header->addChild(new html\Nav())->addChild($headerNav);
 
-    $header[] = new gui\Link(
-        $request->deriveRole('settings')->deriveModule($config['modules_settings'][0])
-        , _('User Settings')
-    );
+    $userStr = new html\Str(_('User') . ': ' . $loginData['user']);
+
+    $headerNav->addLine(new gui\Link(
+            $request->deriveRole('settings')->deriveModule($config['modules_settings'][0])
+            , $userStr
+    ));
 
     $userModule = (new LoadModule('user', $pdo, $i10n))->getInstance($request);
-    $users      = $userModule->db->selectDeputy()->fetchAll();
+    $users = $userModule->db->selectDeputy()->fetchAll();
 
     if (!empty($users)) {
-        $ul = new html\Ul;
+        $aSettings = new html\A;
+        $aSettings->addCssClass('popover');
+        if (!$request->get('deputy'))
+            $aSettings[] = new html\Str(_('Act as Deputy'));
+        else
+            $aSettings[] = new html\Str(_('In Place of') .': ' . $request->get('deputy'));
+
+        $aSettings->setAttribute('href', $request->getUrl() . '#');
+        //$header[]    = $aSettings;
+
+        $ul = $headerNav->addSubUl($aSettings);
         $ul->addCssClass('popover');
 
         $req = $request->deriveModule($request->module);
 
         $req->get['deputy'] = null;
 
-        $ul->addLine(new gui\Link($req, _('Stop acting as deputy')));
-        $ul->addLine(new html\Hr());
+        if ($request->get('deputy')) {
+            $ul->addLine(new gui\Link($req, _('Stop acting as deputy')));
+            $ul->addLine(new html\Hr());
+        }
 
         foreach ($users as $represented) {
             $req->get['deputy'] = $represented['represented'];
             $ul->addLine(new gui\Link($req, $represented['represented']));
         }
 
-        $aSettings   = new html\A;
-        $aSettings->addCssClass('popover');
-        $aSettings[] = new html\Str(_('Act as Deputy'));
-        $aSettings->setAttribute('href', $request->getUrl().'#');
-        $header[]    = $aSettings;
 
-        $header[] = $ul;
+
+        //$header[] = $ul;
     }
 
     if ($config->enabled('support_url')) {
-        $aSupport   = new html\A;
+        $aSupport = new html\A;
         $aSupport->setAttribute('href', $config['support_url']);
         $aSupport[] = new html\Str(_('Support'));
-        $header[]   = $aSupport;
+        $headerNav->addLine($aSupport);
     }
 
-    $aLogout   = new html\A;
+    $aLogout = new html\A;
     $aLogout->setAttribute('href', '?auth=logout');
     $aLogout[] = new html\Str(_('Logout'));
-    $header[]  = $aLogout;
+    $headerNav->addLine($aLogout);
 
     if ($request->get('deputy'))
         $userModule->db->actAsDeputy($request->get('deputy'));
@@ -249,8 +256,8 @@ try {
 
         $title->setValue(_msg($config['title'], ['module' => _('Settings')]));
 
-        $nav   = new gui\Window(_('Settings'));
-        $list  = new gui\Sidebar();
+        $nav = new gui\Window(_('Settings'));
+        $list = new gui\Sidebar();
         $nav[] = $list;
         if (count($config['modules_settings']) > 1)
             $mainContent->addChild($nav);
@@ -259,8 +266,8 @@ try {
             $loadedModule = new LoadModule($moduleId, $pdo, $i10n);
 
             $a = $list->addLinkEntry(
-                $request->deriveModule($moduleId)
-                , new html\Str($loadedModule->getName())
+                    $request->deriveModule($moduleId)
+                    , new html\Str($loadedModule->getName())
             );
 
             if ($moduleId === $request->module)
@@ -277,8 +284,7 @@ try {
 
         $loadedModule = new LoadModule($activeModuleName, $pdo, $i10n);
 
-        $title->setValue(_msg($config['title'],
-                              ['module' => $loadedModule->getName()]));
+        $title->setValue(_msg($config['title'], ['module' => $loadedModule->getName()]));
 
 # generate content
         $content = $loadedModule->getContent($request, $i10n);
@@ -286,7 +292,7 @@ try {
     }
 } catch (\PDOException $e) {
     $mainContent['messages']
-        ->addChild(new gui\Message(new exception\Error('*DB operation failed* '.$e->getMessage())));
+            ->addChild(new gui\Message(new exception\Error('*DB operation failed* ' . $e->getMessage())));
 } catch (exception\Printable $e) {
     $mainContent['messages']->addChild(new gui\Message($e));
 }
@@ -296,11 +302,10 @@ $version = file_get_contents('VERSION');
 $body['footer'] = new html\Footer();
 
 if ($config->enabled('footer'))
-    $body['footer']['text'] = new html\Str(_msg($config['footer'],
-                                                ['version' => $version]));
+    $body['footer']['text'] = new html\Str(_msg($config['footer'], ['version' => $version]));
 
 if ($config->enabled('site_information_url')) {
-    $siteInfo   = new html\A;
+    $siteInfo = new html\A;
     $siteInfo->setAttribute('href', $config['site_information_url']);
     $siteInfo[] = new html\Str(_('Site Information'));
 
