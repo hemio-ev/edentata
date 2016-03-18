@@ -297,24 +297,7 @@ try {
     $mainContent['messages']->addChild(new gui\Message($e));
 }
 
-$version = file_get_contents('VERSION');
-
-$body['footer'] = new html\Footer();
-
-if ($config->enabled('footer'))
-    $body['footer']['text'] = new html\Str(_msg($config['footer'], ['version' => $version]));
-
-if ($config->enabled('site_information_url')) {
-    $siteInfo = new html\A;
-    $siteInfo->setAttribute('href', $config['site_information_url']);
-    $siteInfo[] = new html\Str(_('Site Information'));
-
-    if (isset($body['footer']['text']))
-        $body['footer'][] = new html\Str(' – ');
-
-    $body['footer']['site_information'] = $siteInfo;
-}
-
+$body['footer'] = new ContentFooter($config);
 
 echo $doc->__toString();
 //echo System::reportString();

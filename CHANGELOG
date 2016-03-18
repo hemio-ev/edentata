@@ -5,6 +5,7 @@ v0.10.0-unpublished:
   - Style fixes for radio lists
   - Shows current deputy role
   - Updates header (always shows owner, not contact email)
+  - Adds footer to login page
 v0.6.0:
   - Fixes missing unicode support for requests.
   - Adds config fields 'site_information_url' and 'footer'

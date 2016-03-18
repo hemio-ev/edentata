@@ -48,4 +48,6 @@ $document->getHtml()->getBody()->addChild(
     )
 );
 
+$document->getHtml()->getBody()->addChild(new ContentFooter($config));
+
 echo $document->__toString();
