@@ -1,4 +1,4 @@
-v0.10.0-unpublished:
+v0.10.0:
   - Version number jump to get in sync with carnivora
   - Adds cantarell as web font
   - Updated dark theme
