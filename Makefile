@@ -32,4 +32,4 @@ dev-fonts:
 	 rm *.otf
 
 dev-serve:
-	php -S localhost:8080 -t src/htdocs src/htdocs/index.php
+	php5 -S localhost:8080 -t src/htdocs src/htdocs/index.php

@@ -122,7 +122,7 @@ input, textarea {
     order: 2;
 }
 
-input, textarea {
+input:not([type="button"]), textarea {
     @extend .input_position;
 }
 

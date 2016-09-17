@@ -39,7 +39,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     font-weight: bold;
     display: inline-block;
     text-align: center;
-    flex-shrink: 0;
 }
 
 .window header h1 span {
@@ -51,17 +50,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 .window header > div {
     order: -1;
-    margin-right: auto;
-    padding: 0 0.3em;
 
-    width: 40%;
-    flex-shrink: 5;
+    flex-basis: 20%;
+    flex-grow: 1;
+    display: flex;
 }
 
 .window header > div:first-of-type {
     order: 1;
     margin: 0;
-    margin-left: auto;
+    justify-content: flex-end;
+}
 
-    text-align: right;
+.window header {
+    button {
+        margin: 0 0.3em;
+    }
 }

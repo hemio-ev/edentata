@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -19,26 +20,24 @@
 namespace hemio\edentata\module\email_list;
 
 use hemio\edentata\gui;
-use hemio\html\Str as String;
+use hemio\html\Str;
 
 /**
  * Description of Overview
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class Overview extends Window
-{
+class Overview extends Window {
 
-    public function content()
-    {
+    public function content() {
         $window = $this->newWindow(_('Mailing Lists'), null, false);
 
         $window->addButtonRight(
-            new gui\LinkButton(
-            $this->module->request->derive('list_create')
-            , _('New List')
-            )
-            , true);
+                new gui\LinkButton(
+                $this->module->request->derive('list_create')
+                , _('New List')
+                )
+                , true);
 
 
         $window->addChild($this->lists());
@@ -46,8 +45,7 @@ class Overview extends Window
         return $window;
     }
 
-    protected function lists()
-    {
+    protected function lists() {
         $lists = $this->db->listSelect()->fetchAll();
 
         if (!count($lists)) {
@@ -55,16 +53,16 @@ class Overview extends Window
         } else {
             $listbox = new gui\Listbox;
             foreach ($lists as $list) {
-                $addr = $list['localpart'].'@'.$list['domain'];
+                $addr = $list['localpart'] . '@' . $list['domain'];
                 $listbox->addLinkEntry(
-                    $this->module->request->derive('list_details', $addr)
-                    ,
-                                                   new String($addr.' ('.$list['num_subscribers'].')')
-                    , $list['backend_status']
+                        $this->module->request->derive('list_details', $addr)
+                        , new Str($addr . ' (' . $list['num_subscribers'] . ')')
+                        , $list['backend_status']
                 );
             }
 
             return $listbox;
         }
     }
+
 }

@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 .button {
     @extend .input_style;
-    @extend .input_position;
+    //@extend .input_position;
 
     width: auto;
     @include button-background($button-color);
@@ -39,6 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     min-width: 7.5em;
     transition-property: opacity;
     transition-duration: 400ms;
+    white-space: nowrap;
 }
 
 button * {
