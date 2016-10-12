@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fae4fdf857c7e7a31a7e546750cc7955",
-    "content-hash": "a499249ef1bfb6eb7cbbd51ccf2533f9",
+    "hash": "f1019b9e3a2d98c497ff80452e2feedc",
+    "content-hash": "703d5162d2d9ad77c937ab76dfafc376",
     "packages": [
         {
             "name": "hemio/form",
-            "version": "v0.4.2",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/qua-bla/form.git",
-                "reference": "190dd9053c4dc2cce566eed7d347220cc4859cbf"
+                "reference": "a4bb7c0f35506910216a8bbc0460c8bd7e6f4c17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/qua-bla/form/zipball/190dd9053c4dc2cce566eed7d347220cc4859cbf",
-                "reference": "190dd9053c4dc2cce566eed7d347220cc4859cbf",
+                "url": "https://api.github.com/repos/qua-bla/form/zipball/a4bb7c0f35506910216a8bbc0460c8bd7e6f4c17",
+                "reference": "a4bb7c0f35506910216a8bbc0460c8bd7e6f4c17",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2016-10-12 16:16:31"
+            "time": "2016-10-12 17:42:56"
         },
         {
             "name": "hemio/html",
