@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2015 Michael Herold <quabla@hemio.de>
  *
@@ -26,15 +27,13 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class FieldEmailWithSelect extends \hemio\form\Container
-{
+class FieldEmailWithSelect extends \hemio\form\Container {
 
     /**
      *
      * @return form\FieldSelect
      */
-    public function getDomain()
-    {
+    public function getDomain() {
         return $this['p']['select']['select'];
     }
 
@@ -42,41 +41,42 @@ class FieldEmailWithSelect extends \hemio\form\Container
      *
      * @return form\FieldText
      */
-    public function getLocalPart()
-    {
+    public function getLocalPart() {
         return $this['p']['text'];
     }
 
-    public function __construct($name1 = 'localpart', $name2 = 'domain',
-                                $title1 = null, $title2 = null)
-    {
+    public function __construct($name1 = 'localpart', $name2 = 'domain', $title1 = null, $title2 = null) {
         if ($title1 === null)
             $title1 = _('Local Part');
 
         if ($title2 === null)
             $title2 = _('Domain');
 
-        $p         = new html\P();
+        $p = new html\P();
         $p->addCssClass('multiple');
         $this['p'] = $p;
 
         $p['text'] = new form\FieldText($name1, $title1);
         $p['text']->setRequired(true);
         $p['text']->addInheritableAppendage(
-            form\FormPost::FORM_FIELD_TEMPLATE,
-            new form\template\FormPlainControl
+                form\FormPost::FORM_FIELD_TEMPLATE, new form\template\FormPlainControl
         );
+        $p['text']->setPattern(
+                '[a-zA-Z0-9.-]+'
+                , _('Local part: May only contain letters "a-z", numbers "0-9", dashes "-" and dots "."')
+        );
+
 
         $p['at'] = new html\Span();
         $p['at']->addCssClass('between');
         $p['at']->addChild(new html\Str('@'));
 
-        $p['select']           = new html\Span();
+        $p['select'] = new html\Span();
         $p['select']->addCssClass('select');
         $p['select']['select'] = new form\FieldSelect($name2, $title2);
         $p['select']['select']->addInheritableAppendage(
-            form\FormPost::FORM_FIELD_TEMPLATE.'_SELECT',
-            new form\template\FormPlainControl
+                form\FormPost::FORM_FIELD_TEMPLATE . '_SELECT', new form\template\FormPlainControl
         );
     }
+
 }
