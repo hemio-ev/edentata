@@ -38,7 +38,7 @@ class ExceptionMapping extends ExceptionMapper {
         switch ($e->getMessage()) {
             case 'user:login_invalid':
                 return $this->error(
-                                _('Invalid unser login.')
+                                _('Invalid user login.')
                                 , 1001
                                 , $e
                 );

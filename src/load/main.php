@@ -137,7 +137,7 @@ try {
     if ($authMethod === 'http_logout') {
         header('WWW-Authenticate: Basic realm="Edentata"');
         header('HTTP/1.1 401 Unauthorized');
-        throw new exception\Successful(_('Logout successfull'));
+        throw new exception\Successful(_('Logout successful'));
     }
 
     if ($authMethod === 'logout') {
@@ -195,7 +195,7 @@ try {
         $aSettings = new html\A;
         $aSettings->addCssClass('popover');
         if (!$request->get('deputy'))
-            $aSettings[] = new html\Str(_('Act as Deputy'));
+            $aSettings[] = new html\Str(_('Act as deputy'));
         else
             $aSettings[] = new html\Str(_('In Place of') .': ' . $request->get('deputy'));
 
