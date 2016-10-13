@@ -65,7 +65,7 @@ class FieldEmailWithSelect extends \hemio\form\Container {
                 '[a-zA-Z0-9.-]+'
                 , _('Local part: May only contain letters "a-z", numbers "0-9", dashes "-" and dots "."')
         );
-
+        $p['text']->setValueTransformation('localpart_tolower', 'strtolower');
 
         $p['at'] = new html\Span();
         $p['at']->addCssClass('between');
