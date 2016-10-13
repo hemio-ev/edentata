@@ -30,7 +30,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 .button {
     @extend .input_style;
-    //@extend .input_position;
 
     width: auto;
     @include button-background($button-color);
