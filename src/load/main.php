@@ -107,7 +107,7 @@ try {
 
     $body = $doc->getHtml()->getBody();
 
-    $header = new html\Header();
+    $header = new gui\TopBar();
     $body['header'] = $header;
 
     $body['main'] = new html\Div();
@@ -177,9 +177,7 @@ try {
         }
     }
 
-    $header->addCssClass('header');
-    $headerNav = new html\Ul();
-    $header->addChild(new html\Nav())->addChild($headerNav);
+    $headerNav = $header->getNavUl();
 
     $userStr = new html\Str(_('User') . ': ' . $loginData['user']);
 
@@ -192,7 +190,7 @@ try {
     $users = $userModule->db->selectDeputy()->fetchAll();
 
     if (!empty($users)) {
-        $aSettings = new html\A;
+        $aSettings = new html\Button;
         $aSettings->addCssClass('popover');
         if (!$request->get('deputy'))
             $aSettings[] = new html\Str(_('Act as deputy'));

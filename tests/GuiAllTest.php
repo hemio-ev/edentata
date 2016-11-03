@@ -34,6 +34,11 @@ class GuiAllTest extends \Helpers {
         $doc = new html\Document(new html\Str('Test'));
         $doc->getHtml()->getHead()->addCssFile('design/style.css');
 
+        $topbar = new gui\TopBar();
+        $doc->getHtml()->getBody()->addChild($topbar);
+        for ($i = 1; $i <= 6; $i++)
+            $topbar->getNavUl()->addLine(new gui\Link(new edentata\Request(), _('Link Text '.$i)));
+
         $form = new form\FormPost('test');
         $doc->getHtml()->getBody()->addChild($form);
 

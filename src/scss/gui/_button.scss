@@ -27,7 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     display: block;
 }
 
-
 .button {
     @extend .input_style;
 
@@ -98,4 +97,14 @@ form[method="post"] button:default, button[form]:default {
 
 .delete_dialog .delete_perimition:not(:checked) ~ fieldset button.suggested {
     opacity: 0.3;
+}
+
+.plain-button {
+    background: none;
+    color: inherit;
+    border-radius: 0;
+    font-weight: inherit;
+    box-shadow: none;
+    height: auto;
+    line-height: inherit;
 }
