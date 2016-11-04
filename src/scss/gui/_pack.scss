@@ -48,10 +48,9 @@ button.headerbar_menu::before {
 .popover + *.popover {
     display: none;
     position: absolute;
-    //min-width: 14em;
 }
 
-.popover_window a {
+.popover_window a, .popover_window span {
     display: block;
     text-align: left;
     line-height: 2.2em;

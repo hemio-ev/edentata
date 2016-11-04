@@ -30,6 +30,7 @@ class GuiAllTest extends \Helpers {
 
     public function test_ensemble() {
         $num = 3;
+        $req = new edentata\Request();
 
         $doc = new html\Document(new html\Str('Test'));
         $doc->getHtml()->getHead()->addCssFile('design/style.css');
@@ -37,13 +38,21 @@ class GuiAllTest extends \Helpers {
         $topbar = new gui\TopBar();
         $doc->getHtml()->getBody()->addChild($topbar);
         for ($i = 1; $i <= 6; $i++)
-            $topbar->getNavUl()->addLine(new gui\Link(new edentata\Request(), _('Link Text '.$i)));
+            $topbar->getNavUl()->addLine(new gui\Link($req, _('Link Text ' . $i)));
 
         $form = new form\FormPost('test');
         $doc->getHtml()->getBody()->addChild($form);
 
         $window = new \hemio\edentata\gui\Window('Abc', 'Subtitle');
         $form->addChild($window);
+
+        $menu = $window->addHeaderbarMenu();
+        $spanEntry = new html\Span();
+        $spanEntry->addChild(new html\Str('Span Above'));
+        $menu->addEntry()->addChild($spanEntry);
+        for ($i = 1; $i <= 6; $i++)
+            $menu->addEntry($req, _('Menu Entry ' . $i));
+
         $window->addButtonRight(new form\FieldSubmit('submit', _('Submit')));
         $window->setCssProperty('max-width', '40em');
 
