@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: edentata server access\n"
 "POT-Creation-Date: 2015-08-05 18:17+0100\n"
-"PO-Revision-Date: 2015-08-05 18:19+0100\n"
-"Last-Translator: Michael Herold <quabla@hemio.de>\n"
+"PO-Revision-Date: 2017-01-14 18:32+0100\n"
+"Last-Translator: Sophie Herold <sophie@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -21,7 +21,7 @@ msgstr "Serverzugang"
 
 #: Overview.php:40 UserService.php:30
 msgid "Create User"
-msgstr "Benutzer Erstellen"
+msgstr "Benutzer*in Erstellen"
 
 #: Overview.php:56
 msgid "You do not own a server access."
@@ -39,7 +39,7 @@ msgstr "Protokoll: %s"
 
 #: UserCreate.php:34
 msgid "New User"
-msgstr "Neuer Benutzer"
+msgstr "Neue*r Benutzer*in"
 
 #: UserCreate.php:35
 msgid "Create"
@@ -47,7 +47,7 @@ msgstr "Erstellen"
 
 #: UserCreate.php:37
 msgid "User Name"
-msgstr "Benutzername"
+msgstr "Benutzer*innenname"
 
 #: UserCreate.php:41 UserPassword.php:42
 msgid "Enable Password Login"
@@ -67,7 +67,7 @@ msgstr ""
 
 #: UserDelete.php:40 UserDelete.php:43
 msgid "Delete User"
-msgstr "Benutzer Löschen"
+msgstr "Benutzer*in Löschen"
 
 #: UserDetails.php:45
 msgid "Change password authentication"
@@ -79,7 +79,7 @@ msgstr "Serverzugang löschen"
 
 #: UserDetails.php:66
 msgid "User"
-msgstr "Benutzer"
+msgstr "Benutzer*in"
 
 #: UserDetails.php:70
 msgid "Host"
@@ -111,7 +111,7 @@ msgstr "Verbindungs-URI"
 
 #: UserPassword.php:36
 msgid "User Password"
-msgstr "Benutzerpasswort"
+msgstr "Benutzer*innenpasswort"
 
 #: UserPassword.php:38
 msgid "Save"

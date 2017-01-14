@@ -44,7 +44,7 @@ class ListUpdate extends Window
         $window->getForm()->addChild($admin);
 
         $window->getForm()->addChild(
-            new gui\Hint(_('The list owner is NOT automatically subscribed to the mailing list.')));
+            new gui\Hint(_('This address is NOT automatically subscribed to the mailing list.')));
 
         $listData = $this->db->listSelect($list)->fetch();
         if (!$listData) {

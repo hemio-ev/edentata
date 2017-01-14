@@ -45,10 +45,6 @@ class ListCreate extends Window
         $window->getForm()->addChild($address);
         $window->getForm()->addChild($admin);
 
-        $hint = _('The address of the list owner is used for unsubscribe requests.');
-        $window->getForm()->addChild(new gui\Hint($hint));
-
-
         foreach ($this->db->getUsableDomains('email', 'list') as $domain) {
             $address->getDomain()->addOption($domain['domain']);
         }

@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edenetata login http\n"
-"POT-Creation-Date: 2016-01-01 15:58+0100\n"
-"PO-Revision-Date: 2016-01-01 15:58+0100\n"
-"Last-Translator: Michael Herold <quabla@hemio.de>\n"
+"POT-Creation-Date: 2017-01-14 18:29+0100\n"
+"PO-Revision-Date: 2017-01-14 18:30+0100\n"
+"Last-Translator: Sophie Herold <sophie@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: Login.php:44
 msgid "User Login"
-msgstr "Benutzeranmeldung"
+msgstr "Benutzer*innenanmeldung"
 
 #: Login.php:60
 msgid "Perform Logout"
@@ -33,11 +33,11 @@ msgstr "Anmelden"
 
 #: Login.php:88
 msgid "User Account"
-msgstr "Benutzerkonto"
+msgstr "Benutzer*innenkonto"
 
 #: Login.php:89
 msgid "Username or Email Address"
-msgstr "Benutzername oder E-Mail-Adresse"
+msgstr "Benutzer*innenname oder E-Mail"
 
 #: Login.php:92
 msgid "Password"
@@ -46,8 +46,8 @@ msgstr "Passwort"
 #: Login.php:105
 msgid "Login failed: Invalid username or password. Please try again."
 msgstr ""
-"Anmeldung fehlgeschlagen: Falscher Benutzername oder falsches Passwort. "
-"Bitte erneut versuchen."
+"Anmeldung fehlgeschlagen: Falscher Benutzer*innenname oder falsches "
+"Passwort. Bitte erneut versuchen."
 
 #: Login.php:116
 msgid "Logout successful."

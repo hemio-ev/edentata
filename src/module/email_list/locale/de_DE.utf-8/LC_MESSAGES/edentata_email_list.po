@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata email lists\n"
-"POT-Creation-Date: 2015-08-05 18:10+0100\n"
-"PO-Revision-Date: 2015-08-05 18:14+0100\n"
-"Last-Translator: Michael Herold <quabla@hemio.de>\n"
+"POT-Creation-Date: 2017-01-14 18:21+0100\n"
+"PO-Revision-Date: 2017-01-14 18:21+0100\n"
+"Last-Translator: Sophie Herold <sophie@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -25,13 +25,7 @@ msgstr "Erstellen"
 
 #: ListCreate.php:42 ListDetails.php:55 ListUpdate.php:43
 msgid "List Owner"
-msgstr "Listeninhaber"
-
-#: ListCreate.php:48
-msgid "The address of the list owner is used for unsubscribe requests."
-msgstr ""
-"Die Adresse des Listeninhaber wir zur Information über unzustellbare E-Mails "
-"genutzt."
+msgstr "Listeninhaber*in"
 
 #: ListDelete.php:34
 msgid "Are you sure you want to permanently delete the list \"{address}\"?"
@@ -49,7 +43,7 @@ msgstr "Mailingliste"
 
 #: ListDetails.php:46 SubscriberCreate.php:36
 msgid "Add Subscriber"
-msgstr "Neuer Abonnent"
+msgstr "Neue*r Abonnent*in"
 
 #: ListDetails.php:52
 msgid "Email list does not exist."
@@ -57,7 +51,7 @@ msgstr "Mailingliste existiert nicht."
 
 #: ListDetails.php:66
 msgid "Change list owner"
-msgstr "Listeninhaber ändern"
+msgstr "Listeninhaber*in ändern"
 
 #: ListDetails.php:71
 msgid "Delete list"
@@ -65,7 +59,7 @@ msgstr "Liste löschen"
 
 #: ListDetails.php:79 SubscribersMove.php:76
 msgid "Subscribers"
-msgstr "Abonnenten"
+msgstr "Abonnent*innen"
 
 #: ListDetails.php:97
 msgid "Move …"
@@ -80,22 +74,22 @@ msgid "Save"
 msgstr "Speichern"
 
 #: ListUpdate.php:47
-msgid "The list owner is NOT automatically subscribed to the mailing list."
-msgstr "Der Listeninhaber ist NICHT automatisch Abonnent der Mailingliste."
+msgid "This address is NOT automatically subscribed to the mailing list."
+msgstr "Diese Adresse ist NICHT automatisch Abonnent*in der Mailingliste."
 
 #: ListUpdate.php:51
 msgid "List not found."
 msgstr "Mailingliste nicht gefunden."
 
-#: Module.php:35 Overview.php:34
+#: Module.php:35 Overview.php:33
 msgid "Mailing Lists"
 msgstr "Mailinglisten"
 
-#: Overview.php:39
+#: Overview.php:38
 msgid "New List"
 msgstr "Neue Liste"
 
-#: Overview.php:54
+#: Overview.php:52
 msgid "You do not own a mailing lists."
 msgstr "Sie besitzen keine Mailingliste."
 
@@ -105,11 +99,11 @@ msgstr "Eintragen"
 
 #: SubscriberCreate.php:41
 msgid "Subscriber"
-msgstr "Abonnent"
+msgstr "Abonnent*in"
 
 #: SubscribersMove.php:38
 msgid "Move Email List Subscribers"
-msgstr "Mailinglisten-Abonnenten Verschieben"
+msgstr "Mailinglisten-Abonnent*innen Verschieben"
 
 #: SubscribersMove.php:40
 msgid "Move"
@@ -127,8 +121,3 @@ msgstr "Quell-Mailingliste"
 msgid "Unsubscribe from List"
 msgstr "Abonnement beenden"
 
-#~ msgid "Email"
-#~ msgstr "Mailinglistes"
-
-#~ msgid "Services"
-#~ msgstr "bla"

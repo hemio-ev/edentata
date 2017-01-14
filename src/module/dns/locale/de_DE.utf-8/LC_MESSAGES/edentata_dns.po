@@ -1,120 +1,148 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata dns\n"
-"POT-Creation-Date: 2015-08-24 13:27+0100\n"
-"PO-Revision-Date: 2015-08-24 13:28+0100\n"
-"Last-Translator: Michael Herold <quabla@hemio.de>\n"
+"POT-Creation-Date: 2017-01-14 18:37+0100\n"
+"PO-Revision-Date: 2017-01-14 18:37+0100\n"
+"Last-Translator: Sophie Herold <sophie@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.10\n"
+"X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: AdminC.php:34 AdminC.php:37 RegisteredCreate.php:53
-#: RegisteredDetails.php:117
+#: RegisteredDetails.php:118
 msgid "Admin Contact"
 msgstr "Admin Kontakt"
 
-#: AdminC.php:35 RegisteredDetails.php:122
+#: AdminC.php:35 RegisteredDetails.php:123
 msgid "Change"
 msgstr "Ändern"
 
-#: CustomCreate.php:52
-msgid "New Custom DNS Record"
-msgstr "Neuer Selbsterstellter DNS-Eintrag"
-
-#: CustomCreate.php:53 CustomCreate.php:86 HandleCreate.php:50
-msgid "Create"
-msgstr "Erstellen"
+#: CustomCreate.php:56
+msgid "Host Address (IPv4)"
+msgstr "Host Addresse (IPv4)"
 
 #: CustomCreate.php:57
-msgid "Host Address (IPv4)"
-msgstr ""
+msgid "Host Address (IPv6)"
+msgstr "Host Addresse (IPv6)"
 
 #: CustomCreate.php:58
-msgid "Host Address (IPv6)"
-msgstr ""
-
-#: CustomCreate.php:59
 msgid "Canonical Name for an Alias"
 msgstr ""
 
-#: CustomCreate.php:60
+#: CustomCreate.php:59
 msgid "Mail Exchange"
+msgstr ""
+
+#: CustomCreate.php:60
+msgid "Authoritative Name Server"
 msgstr ""
 
 #: CustomCreate.php:61
 msgid "Service Locator"
 msgstr ""
 
-#: CustomCreate.php:72
+#: CustomCreate.php:62
+msgid "SSH Fingerprint"
+msgstr ""
+
+#: CustomCreate.php:63 CustomCreate.php:302
+msgid "Text String"
+msgstr ""
+
+#: CustomCreate.php:70
+msgid "New Custom DNS Record"
+msgstr "Neuer Selbsterstellter DNS-Eintrag"
+
+#: CustomCreate.php:71 CustomCreate.php:96 HandleCreate.php:51
+msgid "Create"
+msgstr "Erstellen"
+
+#: CustomCreate.php:82
 msgid "Record Type"
 msgstr ""
 
-#: CustomCreate.php:84
+#: CustomCreate.php:94
 #, php-format
 msgid "New DNS %s-Record"
 msgstr ""
 
-#: CustomCreate.php:89 CustomDetails.php:57
+#: CustomCreate.php:99 CustomDetails.php:61
 msgid "Name (Domain)"
 msgstr ""
 
-#: CustomCreate.php:104 CustomDetails.php:65
+#: CustomCreate.php:114 CustomDetails.php:70
 msgid "Time to Live"
 msgstr ""
 
-#: CustomCreate.php:131
+#: CustomCreate.php:150
 msgid "Unkown record type"
 msgstr ""
 
-#: CustomCreate.php:154
+#: CustomCreate.php:194
 msgid "Address (IPv4)"
-msgstr ""
+msgstr "Addresse (IPv4)"
 
-#: CustomCreate.php:162
+#: CustomCreate.php:202
 msgid "Address (IPv6)"
-msgstr ""
+msgstr "Addresse (IPv6)"
 
-#: CustomCreate.php:170
+#: CustomCreate.php:210
 msgid "Cname"
 msgstr ""
 
-#: CustomCreate.php:181
+#: CustomCreate.php:221
 msgid "Exchange (Mailserver Domain Name)"
 msgstr ""
 
-#: CustomCreate.php:184 CustomCreate.php:206
+#: CustomCreate.php:224 CustomCreate.php:254
 msgid "Priority/Preference"
 msgstr ""
 
-#: CustomCreate.php:187
+#: CustomCreate.php:227
 msgid "Lower priority values represent preferred records"
 msgstr ""
 
-#: CustomCreate.php:200
+#: CustomCreate.php:238
+msgid "Authoritive Nameserver"
+msgstr ""
+
+#: CustomCreate.php:248
 msgid "Service"
 msgstr "Dienst"
 
-#: CustomCreate.php:203
+#: CustomCreate.php:251
 msgid "Protocoll"
 msgstr ""
 
-#: CustomCreate.php:209
+#: CustomCreate.php:257
 msgid "Weight"
 msgstr ""
 
-#: CustomCreate.php:212
+#: CustomCreate.php:260
 msgid "Port"
 msgstr ""
 
-#: CustomCreate.php:214
+#: CustomCreate.php:262
 msgid "Target (Domain Name)"
+msgstr ""
+
+#: CustomCreate.php:279
+msgid "Algorithm"
+msgstr ""
+
+#: CustomCreate.php:284
+msgid "Fingerprint Type"
+msgstr ""
+
+#: CustomCreate.php:291
+msgid "Fingerprint"
 msgstr ""
 
 #: CustomDelete.php:37
@@ -126,83 +154,83 @@ msgstr "Selbsterstellten Eintragen Löschen"
 msgid "Are you sure you want to delete the %s-record for \"%s\"?"
 msgstr ""
 
-#: CustomDelete.php:45 CustomDetails.php:45
+#: CustomDelete.php:45 CustomDetails.php:46
 msgid "Delete Record"
 msgstr "Eintrag Löschen"
 
-#: CustomDetails.php:37
+#: CustomDetails.php:38
 msgid "Custom DNS Record"
 msgstr "Selbsterstellter DNS-Eintrag"
 
-#: CustomDetails.php:39 HandleDetails.php:37
+#: CustomDetails.php:40 HandleDetails.php:37
 msgid "Update"
 msgstr "Aktualisieren"
 
-#: CustomDetails.php:60
+#: CustomDetails.php:65
 msgid "Type"
 msgstr "Typ"
 
-#: HandleCreate.php:49
+#: HandleCreate.php:50
 msgid "New Handle"
 msgstr "Neues Handle"
 
-#: HandleCreate.php:62
+#: HandleCreate.php:63
 msgid "Registar"
 msgstr "Registrar"
 
-#: HandleCreate.php:63
+#: HandleCreate.php:64
 msgid "Alias"
 msgstr ""
 
-#: HandleCreate.php:64
+#: HandleCreate.php:65
 msgid "First Name"
 msgstr "Vorname"
 
-#: HandleCreate.php:65
+#: HandleCreate.php:66
 msgid "Last Name"
 msgstr "Nachname"
 
-#: HandleCreate.php:67
+#: HandleCreate.php:68
 msgid "Organization"
 msgstr "Organisation"
 
-#: HandleCreate.php:69
+#: HandleCreate.php:70
 msgid "Address"
 msgstr "Adresse"
 
-#: HandleCreate.php:70
+#: HandleCreate.php:71
 msgid "Zip Code"
 msgstr "Postleitzahl"
 
-#: HandleCreate.php:71
+#: HandleCreate.php:72
 msgid "City"
 msgstr "Stadt"
 
-#: HandleCreate.php:73
+#: HandleCreate.php:74
 msgid "Country"
 msgstr "Staat"
 
-#: HandleCreate.php:78
+#: HandleCreate.php:79
 msgid "State"
 msgstr "Bundesland"
 
-#: HandleCreate.php:79
+#: HandleCreate.php:80
 msgid "Email"
 msgstr "E-Mail"
 
-#: HandleCreate.php:80
+#: HandleCreate.php:81
 msgid "Phone"
 msgstr "Telefon"
 
-#: HandleCreate.php:88
+#: HandleCreate.php:89
 msgid "First Name-Last Name"
 msgstr "Vorname-Nachname"
 
-#: HandleCreate.php:109
+#: HandleCreate.php:110
 msgid "Fax"
 msgstr ""
 
-#: HandleCreate.php:113
+#: HandleCreate.php:114
 msgid "Mobile Phone"
 msgstr "Handy"
 
@@ -222,35 +250,35 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: Module.php:163 RegisteredCreate.php:41 RegisteredDetails.php:35
+#: Module.php:163 RegisteredCreate.php:41 RegisteredDetails.php:36
 msgid "Domain"
 msgstr ""
 
-#: Overview.php:34
+#: Overview.php:35
 msgid "Domains"
 msgstr ""
 
-#: Overview.php:40
+#: Overview.php:41
 msgid "Create new handle"
 msgstr "Neues Handle Erstellen"
 
-#: Overview.php:46
+#: Overview.php:47
 msgid "Register Domain"
 msgstr "Domain Registrieren"
 
-#: Overview.php:58
+#: Overview.php:59
 msgid "Registered Domains"
 msgstr "Registrierte Domains"
 
-#: Overview.php:63
+#: Overview.php:65
 msgid "unmanged"
 msgstr ""
 
-#: Overview.php:78
+#: Overview.php:81
 msgid "You do not own a registered domain."
 msgstr "Sie besitzen keine registrierte Domain."
 
-#: Overview.php:87
+#: Overview.php:90
 msgid "Handles"
 msgstr ""
 
@@ -270,9 +298,9 @@ msgstr "Durch dieses System verwaltet"
 msgid "Nameserver"
 msgstr ""
 
-#: RegisteredCreate.php:50 RegisteredDetails.php:113
+#: RegisteredCreate.php:50 RegisteredDetails.php:114
 msgid "Registrant (Owner)"
-msgstr "Besitzer (Owner)"
+msgstr "Besitzer*in (Owner)"
 
 #: RegisteredDelete.php:33
 msgid ""
@@ -287,59 +315,59 @@ msgstr ""
 msgid "Delete Registered Domain"
 msgstr "Registrierte Domain Löschen"
 
-#: RegisteredDetails.php:40
+#: RegisteredDetails.php:41
 msgid "Create custom DNS record"
-msgstr "Benutzerdefiniert DNS-Eintrag erstellen"
+msgstr "Individuellen DNS-Eintrag erstellen"
 
-#: RegisteredDetails.php:44
+#: RegisteredDetails.php:45
 msgid "Delete registered domain"
 msgstr "Registrierte Domain löschen"
 
-#: RegisteredDetails.php:55
+#: RegisteredDetails.php:56
 msgid "Add Sub-Domain"
 msgstr "Neue Sub-Domain"
 
-#: RegisteredDetails.php:66
+#: RegisteredDetails.php:67
 msgid "Custom DNS Entries"
-msgstr "Selbsterstellte DNS-Einträge"
+msgstr "Individuelle DNS-Einträge"
 
-#: RegisteredDetails.php:74
+#: RegisteredDetails.php:75
 msgid "Domain Details"
 msgstr ""
 
-#: RegisteredDetails.php:81
+#: RegisteredDetails.php:82
 msgid "Domain not managed via this system."
 msgstr "Diese Domain wird nicht durch dieses System verwaltet."
 
-#: RegisteredDetails.php:84
+#: RegisteredDetails.php:85
 msgid "Primary Nameserver"
 msgstr "Primärer Nameserver"
 
-#: RegisteredDetails.php:88
+#: RegisteredDetails.php:89
 msgid "Payable"
 msgstr "Fällig"
 
-#: RegisteredDetails.php:92
+#: RegisteredDetails.php:93
 msgid "Booking Period (Years)"
 msgstr "Buchungsdauer"
 
-#: RegisteredDetails.php:96
+#: RegisteredDetails.php:97
 msgid "Registrar Status"
 msgstr ""
 
-#: RegisteredDetails.php:100
+#: RegisteredDetails.php:101
 msgid "Registry Status (Transfer Protection)"
 msgstr "Registry Status (Transfer-Schutz)"
 
-#: RegisteredDetails.php:104
+#: RegisteredDetails.php:105
 msgid "Last Update Status"
 msgstr "Letzter Aktualisierungsstatus"
 
-#: RegisteredDetails.php:110
+#: RegisteredDetails.php:111
 msgid "No detailed domain information available"
 msgstr "Keine detaillierten Informationen verfügbar"
 
-#: RegisteredDetails.php:133
+#: RegisteredDetails.php:134
 msgid "Domain Service Activation"
 msgstr "Domain Dienst-Aktivierung"
 
@@ -355,14 +383,14 @@ msgstr "Weiter …"
 msgid "Sub-Domain"
 msgstr ""
 
-#: ServiceDetails.php:35
+#: ServiceDetails.php:39
 msgid "Service Activation"
 msgstr "Dienst-Aktivierung"
 
-#: ServiceDetails.php:36
+#: ServiceDetails.php:40
 msgid "Save"
 msgstr "Speichern"
 
-#: ServiceDetails.php:61
+#: ServiceDetails.php:65
 msgid "Host/Server"
 msgstr ""
