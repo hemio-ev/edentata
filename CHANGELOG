@@ -5,7 +5,7 @@ v0.11.0
   - Fixes some small bugs
   - [dns] Changes service activation to be a bit simpler
   - [web] Fixes handling of x.509 certs with empty subjectKeyIdentifier
-v0.10.0:
+v0.10.0
   - Version number jump to get in sync with carnivora
   - Adds cantarell as web font
   - Updated dark theme
@@ -13,21 +13,21 @@ v0.10.0:
   - Shows current deputy role
   - Updates header (always shows owner, not contact email)
   - Adds footer to login page
-v0.6.0:
+v0.6.0
   - Fixes missing unicode support for requests.
   - Adds config fields 'site_information_url' and 'footer'
   - [dns] Adds support for NS, SSHFP and TXT resource records
   - [dns] Adds support for entering IDNs as UTF-8
   - [dns] IDNs are displayed as UTF-8 if bijection exists
   - [login_http] Adds support for login via email address as user account
-v0.5.0:
+v0.5.0
   - Fixes missing generation of global gettext .mo-files.
     This fixes missing l10n in top bar also.
   - Removes static css files and adds generation to Makefile
   - Updates to new version of hemio\html and hemio\form
-v0.4.3:
+v0.4.3
   - Fixes crash on missing 'Accept-Language' HTTP header.
-v0.4.2:
+v0.4.2
   - First release used in production
   - Adds GPL LICENSE
   - Fixes dependencies to versions
