@@ -117,6 +117,6 @@ class Progress extends form\Container implements ProgressInterface
 
     public function isPending()
     {
-        return $this->status !== null;
+        return $this->status !== null && $this->status !== 'old';
     }
 }

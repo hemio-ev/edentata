@@ -47,12 +47,8 @@ class Db extends \hemio\edentata\ModuleDb
             $this->pdo, 'email.sel_mailbox'
         );
 
-        $where = '';
-        if ($activeOnly) {
-            $where = 'WHERE backend_status IS NULL OR backend_status <> \'del\' ';
-        }
-
-        $stmt->options($where.'ORDER BY backend_status, localpart, domain');
+        if ($activeOnly)
+            $stmt->options('WHERE backend_status IS NULL OR backend_status <> \'del\'');
 
         return $stmt->execute();
     }
@@ -112,8 +108,7 @@ class Db extends \hemio\edentata\ModuleDb
             , 'email.sel_alias'
         );
         $stmt->options(
-            'WHERE mailbox_localpart = :localpart AND mailbox_domain = :domain'.
-            ' ORDER BY localpart, domain'
+            'WHERE mailbox_localpart = :localpart AND mailbox_domain = :domain'
         );
 
         return $stmt->execute(['localpart' => $mailboxLocalpart, 'domain' => $mailboxDomain]);
@@ -169,8 +164,6 @@ class Db extends \hemio\edentata\ModuleDb
             $this->pdo
             , 'email.sel_redirection'
         );
-
-        $stmt->options('ORDER BY backend_status, localpart, domain');
 
         return $stmt->execute();
     }
