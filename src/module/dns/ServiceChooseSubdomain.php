@@ -25,18 +25,21 @@ use hemio\form;
  *
  * @author Michael Herold <quabla@hemio.de>
  */
-class ServiceCreate extends Window
+class ServiceChooseSubdomain extends Window
 {
 
     public function content($registered)
     {
-        $window = $this->newFormWindow('service_create', _('Create Sub-Domain'),
-                                                           $registered,
-                                                           _('Continue …'));
+        $window = $this->newFormWindow(
+                'service_create'
+                , _('Activate Service for Subdomain')
+                , $registered
+                , _('Continue …')
+        );
 
-        $domain = new form\FieldText('domain', _('Sub-Domain'));
+        $domain = new form\FieldText('domain', _('Subdomain'));
         $domain->getControlElement()->setAttribute('placeholder',
-                                                   'sub-domain.'.$registered);
+                                                   'subdomain.' . $registered);
         $domain->setRequired();
 
         $window->getForm()->addChild($domain);

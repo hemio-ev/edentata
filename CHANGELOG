@@ -1,6 +1,9 @@
 v0.11.0
   - Adds proper checks for localparts in gui
+  - Changes de_DE l10n to be more gender inclusive
   - Changes headerbar to use available space by not centering the title if needed
+  - Fixes some small bugs
+  - [dns] Changes service activation to be a bit simpler
   - [web] Fixes handling of x.509 certs with empty subjectKeyIdentifier
 v0.10.0:
   - Version number jump to get in sync with carnivora

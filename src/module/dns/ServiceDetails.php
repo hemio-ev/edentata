@@ -55,7 +55,7 @@ class ServiceDetails extends Window
             $fieldset = new gui\Fieldset(ucwords(str_replace('_', ' ', $srv)));
             $window->getForm()->addChild($fieldset);
 
-            $switch = new gui\FieldSwitch($srv, 'Activate Service');
+            $switch = new gui\FieldSwitch($srv, _('Service Active'));
             $switch->getControlElement()->addCssClass('display_control');
             $fieldset->addChild($switch);
 

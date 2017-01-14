@@ -50,10 +50,10 @@ class RegisteredDetails extends Window
         $window->addButtonRight(
             new gui\LinkButton(
             $this->request->derive(
-                'service_create'
-                , $registered
+                'service_choose_domain'
+                        , $registered
             )
-            , _('Add Sub-Domain')
+            , _('Activate Service')
             )
         );
 
@@ -131,7 +131,7 @@ class RegisteredDetails extends Window
 
     protected function service($registered)
     {
-        $fieldset = new gui\Fieldset(_('Domain Service Activation'));
+        $fieldset = new gui\Fieldset(_('Activated Services'));
 
         $list = new gui\Listbox();
         foreach ($this->db->serviceDomainSelect(Utils::idnToAscii($registered)) as $domain) {

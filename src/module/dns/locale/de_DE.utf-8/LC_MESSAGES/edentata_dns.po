@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: edentata dns\n"
-"POT-Creation-Date: 2017-01-14 18:37+0100\n"
-"PO-Revision-Date: 2017-01-14 18:37+0100\n"
+"POT-Creation-Date: 2017-01-14 19:25+0100\n"
+"PO-Revision-Date: 2017-01-14 19:25+0100\n"
 "Last-Translator: Sophie Herold <sophie@hemio.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -18,7 +18,7 @@ msgstr ""
 #: AdminC.php:34 AdminC.php:37 RegisteredCreate.php:53
 #: RegisteredDetails.php:118
 msgid "Admin Contact"
-msgstr "Admin Kontakt"
+msgstr "Adminstrator*innen Kontakt"
 
 #: AdminC.php:35 RegisteredDetails.php:123
 msgid "Change"
@@ -250,7 +250,7 @@ msgstr ""
 msgid "ID"
 msgstr ""
 
-#: Module.php:163 RegisteredCreate.php:41 RegisteredDetails.php:36
+#: Module.php:167 RegisteredCreate.php:41 RegisteredDetails.php:36
 msgid "Domain"
 msgstr ""
 
@@ -323,9 +323,9 @@ msgstr "Individuellen DNS-Eintrag erstellen"
 msgid "Delete registered domain"
 msgstr "Registrierte Domain löschen"
 
-#: RegisteredDetails.php:56
-msgid "Add Sub-Domain"
-msgstr "Neue Sub-Domain"
+#: RegisteredDetails.php:56 ServiceChooseDomain.php:32
+msgid "Activate Service"
+msgstr "Dienst Aktivieren"
 
 #: RegisteredDetails.php:67
 msgid "Custom DNS Entries"
@@ -368,19 +368,31 @@ msgid "No detailed domain information available"
 msgstr "Keine detaillierten Informationen verfügbar"
 
 #: RegisteredDetails.php:134
-msgid "Domain Service Activation"
-msgstr "Domain Dienst-Aktivierung"
+msgid "Activated Services"
+msgstr "Aktivierte Dienste"
 
-#: ServiceCreate.php:33
-msgid "Create Sub-Domain"
-msgstr "Sub-Domain Erstellen"
+#: ServiceChooseDomain.php:34
+msgid "Activate Service for"
+msgstr "Dienst Aktivieren für"
 
-#: ServiceCreate.php:35
+#: ServiceChooseDomain.php:39
+msgid "Domain: {domain}"
+msgstr ""
+
+#: ServiceChooseDomain.php:44
+msgid "Subdomain: <custom>.{domain}"
+msgstr "Subdomain: <individuell>.{domain}"
+
+#: ServiceChooseSubdomain.php:35
+msgid "Activate Service for Subdomain"
+msgstr "Dienst für Subdomain Aktivieren"
+
+#: ServiceChooseSubdomain.php:37
 msgid "Continue …"
 msgstr "Weiter …"
 
-#: ServiceCreate.php:37
-msgid "Sub-Domain"
+#: ServiceChooseSubdomain.php:40
+msgid "Subdomain"
 msgstr ""
 
 #: ServiceDetails.php:39
@@ -391,6 +403,22 @@ msgstr "Dienst-Aktivierung"
 msgid "Save"
 msgstr "Speichern"
 
+#: ServiceDetails.php:58
+msgid "Service Active"
+msgstr "Dienst Aktiv"
+
 #: ServiceDetails.php:65
 msgid "Host/Server"
 msgstr ""
+
+#~ msgid "Domain Service Activation"
+#~ msgstr "Domain Dienst-Aktivierung"
+
+#~ msgid "Subdomain: <something>.{domain}"
+#~ msgstr "Subdomain: <irgendetwas>.{domain}"
+
+#~ msgid "Add Sub-Domain"
+#~ msgstr "Neue Sub-Domain"
+
+#~ msgid "Create Sub-Domain"
+#~ msgstr "Sub-Domain Erstellen"

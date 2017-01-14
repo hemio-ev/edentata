@@ -138,9 +138,13 @@ class Module extends \hemio\edentata\Module
                 }
                 break;
 
-            case 'service_create':
+            case 'service_choose_domain':
+                $content = (new ServiceChooseDomain($this))->content($this->request->subject);
+                break;
+
+            case 'service_choose_subdomain':
                 try {
-                    $content = (new ServiceCreate($this))->content($this->request->subject);
+                    $content = (new ServiceChooseSubdomain($this))->content($this->request->subject);
                 } catch (exception\Successful $e) {
                     edentata\Utils::htmlRedirect($e->backTo);
                 }
