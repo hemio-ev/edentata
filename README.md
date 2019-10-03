@@ -1,7 +1,7 @@
 Edentata
 ========
 
-A toothless frontend for the hosting-service management carnivora.
+A toothless frontend for the hosting-service management backend [carnivora](https://git.hemio.de/hemio/edentata).
 
 ### Available on Packagist
 
@@ -14,13 +14,10 @@ Status](https://www.versioneye.com/php/hemio:edentata/reference_badge.svg?style=
 
 ### Tests and Code Quality
 
-[![Scrutinizer Code
-Quality](https://scrutinizer-ci.com/g/qua-bla/edentata/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/qua-bla/edentata/?branch=master)
 [![Build
 Status](https://travis-ci.org/qua-bla/edentata.svg?branch=master)](https://travis-ci.org/qua-bla/edentata)
 [![Dependency
 Status](https://www.versioneye.com/php/hemio:edentata/badge.svg)](https://www.versioneye.com/php/hemio:edentata/)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/beba6c45-ba42-42e5-bd99-b9cfadc0bd00/mini.png)](https://insight.sensiolabs.com/projects/beba6c45-ba42-42e5-bd99-b9cfadc0bd00)
 
 ### Requiremenets
 
@@ -29,9 +26,10 @@ Required Debian packages
 -   cracklib-runtime
 -   gettext
 -   make
--   php5 (>= 5.6)
--   php5-intl
--   php5-pgsql
+-   php (>= 5.6)
+-   php-intl
+-   php-mbstring
+-   php-pgsql
 
 Further dependencies are managed via
 [composer](https://getcomposer.org/) (only packaged starting with

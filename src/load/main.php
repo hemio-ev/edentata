@@ -56,7 +56,7 @@ set_error_handler(
 );
 
 set_exception_handler(
-        function (\Exception $e) {
+        function ($e) {
     $id = uniqid();
 
     syslog(LOG_ERR, sprintf('PHP exception[%s] class: %s', $id, get_class($e)));
