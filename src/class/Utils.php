@@ -142,7 +142,6 @@ class Utils
     public static function htmlRedirect(Request $request)
     {
         global $config;
-        usleep(100 * 1000);
         header(
             sprintf('Location: %s', $config['base_url'].$request->getUrl())
             , true

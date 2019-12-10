@@ -146,7 +146,6 @@ try {
     }
 
     if ($authMethod === 'http' && !$httpAuthSupplied) {
-        usleep(100 * 1000);
         header('WWW-Authenticate: Basic realm="Edentata"');
         header('HTTP/1.1 401 Unauthorized');
         throw new exception\Error(_('Login failed'));
@@ -167,7 +166,6 @@ try {
         $loginData = $qryAuth->execute()->fetch();
     } catch (\Exception $e) {
         if ($httpAuth) {
-            usleep(100 * 1000);
             header('WWW-Authenticate: Basic realm="Edentata"');
             header('HTTP/1.1 401 Unauthorized');
             throw new exception\Error(_('Login failed'));

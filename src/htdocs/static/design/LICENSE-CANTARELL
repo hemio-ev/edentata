@@ -1,7 +1,7 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Cantarell
-Upstream-Contact: Dave Crossland <dave@understandinglimited.com>
 Source: http://git.gnome.org/browse/cantarell-fonts
+Files-Excluded: prebuilt
 
 Files: *
 Copyright:
@@ -15,6 +15,10 @@ Copyright:
   © 2011-2014, Christian Perrier <bubulle@debian.org>
   © 2012-2015, Fabian Greffrath <fabian@debian.org>
 License: OFL-1.1
+
+Files: appstream/*
+Copyright: 2018 Nikolaus Waxweiler
+License: CC0-1.0
 
 License: OFL-1.1
  This Font Software is licensed under the SIL Open Font License, Version 1.1.
@@ -107,3 +111,14 @@ License: OFL-1.1
  DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
  OTHER DEALINGS IN THE FONT SOFTWARE.
+
+License:  CC0-1.0
+ To the extent possible under law, the author(s) have dedicated all copyright
+ and related and neighboring rights to this software to the public domain
+ worldwide. This software is distributed without any warranty.
+ .
+ You should have received a copy of the CC0 Public Domain Dedication along with
+ this software. If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+ .
+ On Debian systems, the complete text of the CC0 1.0 Universal license can be
+ found in "/usr/share/common-licenses/CC0-1.0".

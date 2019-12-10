@@ -65,10 +65,8 @@ class Overview extends Window
             $ul = new html\Ul();
             $container->addChild($ul);
 
-            if ($site['https'] !== null) {
+            if ($site['https']) {
                 $s = $ul->addLine(new html\Str(_('HTTPS enabled')));
-                $s->addChild(Utils::certSummary($site['domain'], $site['port'],
-                                                $site['https'], $this->db));
             }
 
             // display port if it is not the default (80/443)

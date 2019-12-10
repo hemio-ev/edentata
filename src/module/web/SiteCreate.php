@@ -103,25 +103,11 @@ class SiteCreate extends Window
 
         $domain = new \hemio\form\FieldSelect('domain', _('Domain'));
 
-        $httpsSwitch = new gui\FieldSwitch('https-enabled', _('Enable HTTPS'));
-        $httpsSwitch->getControlElement()->addCssClass('display_control');
-
-        $identifier = new form\FieldText('identifier',
-                                         _('Certificate Identifier'));
-        $identifier->setDefaultValue((new \DateTime)->format('Y'));
-
-        $hint = new gui\Hint(_('The certificate identifier helps you to mange your certificates. It can be chosen arbitrarily.'));
-
-        $https = new html\Div();
+        $https = new gui\FieldSwitch('https', _('Enable HTTPS'));
+        $https->getControlElement()->setAttribute("checked", true);
 
         $window->getForm()->addChild($domain);
-        $window->getForm()->addChild($httpsSwitch);
-
-        $https->addChild($identifier);
-        $https->addChild($hint);
-
         $window->getForm()->addChild($https);
-
 
         $domains = $this->db->getUsableDomains('web', 'site')->fetchAll();
         foreach ($domains as $data) {
@@ -129,7 +115,7 @@ class SiteCreate extends Window
         }
 
         $this->handleSubmit($window->getForm(), $user, $serviceName,
-                            $httpsSwitch);
+                            $https);
 
         return $window;
     }
@@ -148,23 +134,12 @@ class SiteCreate extends Window
 
             $siteParams = [
                 'p_port' => $port,
+                'p_https' => (int) $httpsSwitch->getValueUser(),
                 'p_user' => $user,
-                'p_service_entity_name' => $serviceName
-                ] + $form->getVal(['domain']);
-
-            $httpsParams      = ['p_port' => $port] + $form->getVal(['domain', 'identifier']);
-            $siteUpdateParams = ['p_port' => $port] + $form->getVal(['domain', 'identifier']);
-
-            $this->db->beginTransaction();
+                'p_service_entity_name' => $serviceName,
+                    ] + $form->getVal(['domain']);
 
             $this->db->siteCreate($siteParams);
-
-            if ($httpsSwitch->getValueUser()) {
-                $this->db->httpsCreate($httpsParams);
-                $this->db->siteUpdate($siteUpdateParams);
-            }
-
-            $this->db->commit();
 
             throw new \hemio\edentata\exception\Successful;
         }

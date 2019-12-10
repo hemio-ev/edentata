@@ -47,19 +47,10 @@ class SiteDetails extends Window
         if (!$data)
             throw new exception\Error(_('Website does not exist.'));
 
-        $details = new gui\Fieldset(_('Site Details'));
-
-        $details->addChild(new gui\Output(_('Host'),
-                                            $data['service_entity_name']));
+        $window->addChild(new gui\Output(_('Host'), $data['service_entity_name']));
 
 
-        if ($data['subservice'] == 'http_redirect') {
-            $option = (array) json_decode($data['option']);
-            $details->addChild(new gui\OutputUrl(_('Redirect URL'),
-                                                   $option['redirect_url']));
-        }
-
-        $user = $details->addChild(new gui\Output(_('User'), ''));
+        $user = $window->addChild(new gui\Output(_('User'), ''));
 
         $serverAccessRequest = $this->request
             ->deriveModule('server_access')
@@ -70,24 +61,17 @@ class SiteDetails extends Window
                                               $data['user']);
 
 
-        if ($data['https'] === null)
-            $details->addChild(new gui\Output(_('HTTPS'), _('disabled')));
+        if ($data['https'])
+            $window->addChild(new gui\Output(_('HTTPS'), _('enabled')));
         else
-            $details->addChild(new gui\Output(_('HTTPS'), _('enabled')));
+            $window->addChild(new gui\Output(_('HTTPS'), _('disabled')));
 
         if (!Utils::defaultPort($port, $data['https']))
-            $details->addChild(new gui\Output(_('Port'), $data['port']));
+            $window->addChild(new gui\Output(_('Port'), $data['port']));
 
-        if ($data['https'] === null)
-            $windowHttps = new html\Nothing;
-        else
-            $windowHttps = $this->httpsWindow($data);
-
-        $window->addChild($details);
         $window->addChild($this->aliases($domain, $port));
 
         $container->addChild($window);
-        $container->addChild($windowHttps);
 
         return $container;
     }
@@ -134,75 +118,4 @@ class SiteDetails extends Window
         return $fieldset;
     }
 
-    protected function httpsWindow(array $site)
-    {
-        $domain = $site['domain'];
-        $port   = $site['port'];
-
-        $window = $this->newWindow(_('HTTPS'), null, false);
-
-        $menu = new gui\HeaderbarMenu();
-        $menu->addEntry(
-            $this->request->derive(
-                'intermediate_create', $domain.':'.$port, $site['https'])
-            , _('Add intermediate certificates')
-        );
-        $window->addButtonRight($menu);
-
-        $httpsDetails  = new HttpsDetails($this->module);
-        $httpsCertInfo = $httpsDetails->https($domain, $port, $site['https']);
-
-        $window->addChild($this->httpsActiveCert($site));
-        $window->addChild($httpsCertInfo);
-        $window->addChild($this->httpsAvailableCerts($domain, $port));
-
-        return $window;
-    }
-
-    protected function httpsActiveCert(array $site)
-    {
-        $fieldset = new gui\Fieldset(_('Active Certificate'));
-
-        $list = new gui\Listbox();
-        $fieldset->addChild($list);
-
-        $url = $this->request->derive('site_https', true);
-        $list->addEntry(new html\Str($site['https']), null,
-                                        new gui\LinkButton($url, _('Change')));
-
-        return $fieldset;
-    }
-
-    protected function httpsAvailableCerts($domain, $port)
-    {
-        $address  = $domain.':'.$port;
-        $fieldset = new gui\Fieldset(_('Available HTTPS Configurations'));
-
-        $selecting = new gui\Selecting();
-
-        $selecting->addLink(
-            $this->request->derive('https_create', $address)
-            , _('New configuration (new SSL key an certificate)')
-        );
-
-        $certs = $this->db->httpsSelect($domain, $port)->fetchAll();
-
-        $list = new gui\Listbox();
-        foreach ($certs as $cert) {
-            $url = $this->request->derive('https_details', $address,
-                                          $cert['identifier']);
-
-            $container   = new form\Container;
-            $container[] = new html\Str($cert['identifier']);
-            $container[] = Utils::certSummary($domain, $port,
-                                              $cert['identifier'], $this->db);
-
-            $list->addLinkEntry($url, $container, $cert['backend_status']);
-        }
-
-        $fieldset->addChild($selecting);
-        $fieldset->addChild($list);
-
-        return $fieldset;
-    }
 }
