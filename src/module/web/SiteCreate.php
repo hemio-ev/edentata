@@ -134,7 +134,7 @@ class SiteCreate extends Window
 
             $siteParams = [
                 'p_port' => $port,
-                'p_https' => (int) $httpsSwitch->getValueUser(),
+                'p_https' => $httpsSwitch->getValueUser() ? 't' : 'f',
                 'p_user' => $user,
                 'p_service_entity_name' => $serviceName,
                     ] + $form->getVal(['domain']);
