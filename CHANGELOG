@@ -1,3 +1,5 @@
+v0.12.0
+  - [web] Remove X.509 support, use ACME server side instead
 v0.11.0
   - Adds proper checks for localparts in gui
   - Changes de_DE l10n to be more gender inclusive
