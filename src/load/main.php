@@ -29,7 +29,7 @@ ini_set('log_errors', true);
 ini_set('error_log', 'syslog');
 
 set_error_handler(
-        function ($errno, $errstr, $errfile, $errline, array $errcontext) {
+        function ($errno, $errstr, $errfile, $errline) {
     $id = uniqid();
     syslog(LOG_ERR, sprintf('PHP error[%s] message: %s', $id, $errstr));
     syslog(LOG_ERR, sprintf('PHP error[%s] details: (%s) %s:%s', $id, $errno, $errfile, $errline));
