@@ -33,25 +33,6 @@ set_error_handler(
     $id = uniqid();
     syslog(LOG_ERR, sprintf('PHP error[%s] message: %s', $id, $errstr));
     syslog(LOG_ERR, sprintf('PHP error[%s] details: (%s) %s:%s', $id, $errno, $errfile, $errline));
-
-    echo sprintf(
-            _(
-                    'An error has occured. We are sorry. '
-                    . 'You should contact the support and reference to error id "%s". '
-                    . 'You can use the back button of your browser and try again.'
-            ), $id
-    );
-
-    trigger_error(
-            sprintf(
-                    'Made non fatal error fatal. (%s:%s %s)'
-                    , $errfile
-                    , $errline
-                    , $errstr
-            ), E_USER_ERROR
-    );
-
-    exit(1);
 }
 );
 
