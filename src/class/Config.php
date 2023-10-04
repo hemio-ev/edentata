@@ -50,12 +50,12 @@ class Config implements \ArrayAccess
         return $this[$key] !== false && $this[$key] !== null;
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->values[$offset]);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         if ($this->offsetExists($offset))
             return $this->values[$offset];
@@ -63,12 +63,12 @@ class Config implements \ArrayAccess
             throw new exception\Error(sprintf(_('Unknown setting "%s"'), $offset));
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         throw new \Exception('Configs cannot be changed');
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         throw new \Exception('Configs cannot be changed');
     }

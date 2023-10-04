@@ -99,7 +99,7 @@ class Request
 
     public static function filter($key, $value)
     {
-        if (strlen($value) > 255) {
+        if (!is_null($value) && strlen($value) > 255) {
             $msg = sprintf(_('Invalid input with key "%s".'), $key);
             new exception\Error($msg);
         }
