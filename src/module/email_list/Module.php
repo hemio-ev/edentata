@@ -29,6 +29,11 @@ use hemio\edentata\exception\UnknownOperation;
  */
 class Module extends \hemio\edentata\Module
 {
+    /**
+     *
+     * @var Db
+     */
+    public $db;
 
     public static function getName()
     {

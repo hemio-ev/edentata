@@ -29,6 +29,11 @@ use hemio\edentata;
  */
 class Module extends \hemio\edentata\Module
 {
+    /**
+     *
+     * @var Db
+     */
+    public $db;
 
     protected function constructHook()
     {
