@@ -4,29 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c721f26a9dee07dae1040c76e06a857f",
+    "content-hash": "3d756f7479eaf49404cf3254bb37661f",
     "packages": [
         {
             "name": "hemio/form",
-            "version": "v0.5.0",
+            "version": "v0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hemio-ev/form.git",
-                "reference": "b4de29c90ca6ec0c58e8e2a1a7db79926b38831d"
+                "reference": "4a4cbbee5ee271da06b70f718431d97857b5fd46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hemio-ev/form/zipball/b4de29c90ca6ec0c58e8e2a1a7db79926b38831d",
-                "reference": "b4de29c90ca6ec0c58e8e2a1a7db79926b38831d",
+                "url": "https://api.github.com/repos/hemio-ev/form/zipball/4a4cbbee5ee271da06b70f718431d97857b5fd46",
+                "reference": "4a4cbbee5ee271da06b70f718431d97857b5fd46",
                 "shasum": ""
             },
             "require": {
-                "hemio/html": "v0.2.0",
-                "php": ">=5.6.0"
+                "hemio/html": "v0.3.0",
+                "php": ">=8.2.0"
             },
             "require-dev": {
-                "apigen/apigen": "~2.8",
-                "phpunit/phpunit": "4.4.*"
+                "phpunit/phpunit": "^10"
             },
             "type": "library",
             "autoload": {
@@ -40,41 +39,40 @@
             ],
             "authors": [
                 {
-                    "name": "Michael Herold",
-                    "email": "quabla@hemio.de"
+                    "name": "Sophie Herold",
+                    "email": "sophie@hemio.de"
                 }
             ],
             "description": "Object oriented HTML5 forms library",
-            "homepage": "http://github.com/qua-bla/form",
+            "homepage": "http://github.com/hemio-ev/form",
             "keywords": [
                 "html"
             ],
             "support": {
                 "issues": "https://github.com/hemio-ev/form/issues",
-                "source": "https://github.com/hemio-ev/form/tree/v0.5.0"
+                "source": "https://github.com/hemio-ev/form/tree/v0.6.0"
             },
-            "time": "2016-10-13T09:47:07+00:00"
+            "time": "2023-10-04T19:07:48+00:00"
         },
         {
             "name": "hemio/html",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hemio-ev/html.git",
-                "reference": "8df47f6efb198c8422d0c9c5b6e0a87de4d4ccfd"
+                "reference": "15c5ca7bd2ce6ee9d8464c785ee6cb7a8821e31c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hemio-ev/html/zipball/8df47f6efb198c8422d0c9c5b6e0a87de4d4ccfd",
-                "reference": "8df47f6efb198c8422d0c9c5b6e0a87de4d4ccfd",
+                "url": "https://api.github.com/repos/hemio-ev/html/zipball/15c5ca7bd2ce6ee9d8464c785ee6cb7a8821e31c",
+                "reference": "15c5ca7bd2ce6ee9d8464c785ee6cb7a8821e31c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0"
+                "php": ">=8.2.0"
             },
             "require-dev": {
-                "apigen/apigen": "~2.8",
-                "phpunit/phpunit": "4.4.*"
+                "phpunit/phpunit": "^10"
             },
             "type": "library",
             "autoload": {
@@ -88,20 +86,20 @@
             ],
             "authors": [
                 {
-                    "name": "Michael Herold",
-                    "email": "quabla@hemio.de"
+                    "name": "Sophie Herold",
+                    "email": "sophie@hemio.de"
                 }
             ],
             "description": "Object oriented HTML5 library",
-            "homepage": "http://github.com/qua-bla/html",
+            "homepage": "http://github.com/hemio-ev/html",
             "keywords": [
                 "html"
             ],
             "support": {
                 "issues": "https://github.com/hemio-ev/html/issues",
-                "source": "https://github.com/hemio-ev/html/tree/v0.2.0"
+                "source": "https://github.com/hemio-ev/html/tree/v0.3.0"
             },
-            "time": "2015-10-03T11:16:17+00:00"
+            "time": "2023-10-04T17:23:03+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -554,16 +552,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "10.1.6",
+            "version": "10.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "56f33548fe522c8d82da7ff3824b42829d324364"
+                "reference": "355324ca4980b8916c18b9db29f3ef484078f26e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/56f33548fe522c8d82da7ff3824b42829d324364",
-                "reference": "56f33548fe522c8d82da7ff3824b42829d324364",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/355324ca4980b8916c18b9db29f3ef484078f26e",
+                "reference": "355324ca4980b8916c18b9db29f3ef484078f26e",
                 "shasum": ""
             },
             "require": {
@@ -620,7 +618,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.6"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.7"
             },
             "funding": [
                 {
@@ -628,7 +626,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-19T04:59:03+00:00"
+            "time": "2023-10-04T15:34:17+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

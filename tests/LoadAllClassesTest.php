@@ -1,8 +1,10 @@
 <?php
 
-class LoadAllClassesTest extends PHPUnit_Framework_TestCase
+class LoadAllClassesTest extends \PHPUnit\Framework\TestCase
 {
-
+    /**
+    * @doesNotPerformAssertions
+    */
     public function test()
     {
         foreach (
