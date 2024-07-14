@@ -73,8 +73,7 @@ class Request
         $this->post = $post;
 
         if ($uri !== null) {
-            $i = 0;
-            $s = self::SPECIAL_GET_KEYS;
+            $s = (new \ArrayObject(self::SPECIAL_GET_KEYS))->getIterator();
 
             $uriSplit = explode('/', $uri);
             array_pop($uriSplit);
@@ -83,8 +82,13 @@ class Request
 
             $special = array_slice($uriSplit, $count);
 
-            foreach ($special as $val)
-                $this->get[$s[$i++]] = $val;
+            foreach ($special as $val) {
+                if (!$s->valid())
+                    break;
+
+                $this->get[$s->current()] = $val;
+                $s->next();
+            }
         }
 
         if (!$this->get('role'))
